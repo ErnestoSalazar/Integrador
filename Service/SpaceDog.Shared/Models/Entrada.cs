@@ -20,6 +20,6 @@ namespace SpaceDog.Shared.Models
         public DateTime Hora { get; set; }
         public Turno Turno { get; set; }
         public Usuario Usuario { get; set; }
-        public ICollection<Carga> Cargas { get; set; }
+        
     }
 }

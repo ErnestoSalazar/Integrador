@@ -144,8 +144,10 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\BarcosController.cs" />
     <Compile Include="Controllers\CargasController.cs" />
+    <Compile Include="Controllers\EntradasController.cs" />
     <Compile Include="Controllers\PasswordRecoverController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Dto\EntradaDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

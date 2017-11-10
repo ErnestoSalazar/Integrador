@@ -57,6 +57,7 @@
     <Compile Include="Data\CargasRepository.cs" />
     <Compile Include="Data\Context.cs" />
     <Compile Include="Data\DatabaseInitializer.cs" />
+    <Compile Include="Data\EntradasRepository.cs" />
     <Compile Include="Data\UsuariosRepository.cs" />
     <Compile Include="Models\Barco.cs" />
     <Compile Include="Models\Carga.cs" />

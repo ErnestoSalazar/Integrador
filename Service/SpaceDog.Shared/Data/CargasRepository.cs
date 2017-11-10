@@ -35,7 +35,16 @@ namespace SpaceDog.Shared.Data
             return Context.Cargas
                 .Include(c => c.Barco)
                 .Include(c => c.Barco.Usuario)
+                .Include(c => c.Entrada)
                 .ToList();
         }
+
+        public IList<Carga> GetListOfCargasOfBarco(int BarcoId)
+        {
+            return Context.Cargas
+                .Where(c => c.BarcoId == BarcoId)
+                .ToList();
+        }
+
     }
 }

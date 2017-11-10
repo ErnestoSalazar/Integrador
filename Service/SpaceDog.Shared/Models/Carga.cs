@@ -21,5 +21,10 @@ namespace SpaceDog.Shared.Models
 
         public int BarcoId { get; set; }
         public Barco Barco { get; set; }
+
+        public int? EntradaId { get; set; }
+        public Entrada Entrada { get; set; }
+
+
     }
 }

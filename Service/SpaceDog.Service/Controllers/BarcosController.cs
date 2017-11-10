@@ -36,7 +36,6 @@ namespace SpaceDog.Service.Controllers
 
             var usuario = _usuariosRepository.Get(barco.UsuarioId);
 
-            barco.Usuario = usuario;
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -45,7 +44,7 @@ namespace SpaceDog.Service.Controllers
             {
                 Nombre = barco.Nombre,
                 Descripcion = barco.Descripcion,
-                Usuario = barco.Usuario
+                Usuario = usuario
             };
 
             _barcosRepository.Add(barcoModel);
