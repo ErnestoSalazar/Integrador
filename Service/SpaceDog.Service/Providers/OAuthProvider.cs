@@ -26,7 +26,7 @@ namespace SpaceDog.Service.Providers
                         new Claim(ClaimTypes.Sid, Convert.ToString(user.Id)),
                         new Claim(ClaimTypes.Name, user.Nombre),
                         new Claim(ClaimTypes.Email, user.Correo),
-                        new Claim(ClaimTypes.Role, user.Role.ToString())
+                        new Claim(ClaimTypes.Role, user.Rol.ToString())
                     };
                     ClaimsIdentity oAuthIdentity = new ClaimsIdentity(claims,
                                 Startup.OAuthOptions.AuthenticationType);

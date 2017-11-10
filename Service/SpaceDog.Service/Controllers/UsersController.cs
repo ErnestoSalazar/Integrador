@@ -56,7 +56,7 @@ namespace SpaceDog.Service.Controllers
                 Rfc = user.Rfc,
                 Correo = user.Correo,
                 Password = PasswordEncryptService.passwordEncrypt(user.Password),
-                Role = user.Role
+                Rol = user.Rol
             };
 
             _usersRepository.Add(userModel);
@@ -90,7 +90,7 @@ namespace SpaceDog.Service.Controllers
                 Rfc = user.Rfc,
                 Correo = user.Correo,
                 Password = PasswordEncryptService.passwordEncrypt(user.Password),
-                Role = user.Role
+                Rol = user.Rol
             };
 
             _usersRepository.Update(_user);

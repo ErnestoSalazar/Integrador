@@ -16,6 +16,9 @@ namespace SpaceDog.Shared.Data
             Database.SetInitializer(new DatabaseInitializer());
         }
 
-        public DbSet<Usuario> Users { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Barco>   Barcos   { get; set; }
+        public DbSet<Carga>   Cargas   { get; set; }
+        public DbSet<Entrada> Entradas { get; set; }
     }
 }

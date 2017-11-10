@@ -10,10 +10,11 @@ using System.Threading.Tasks;
 namespace SpaceDog.Shared.Models
 {
     [JsonConverter(typeof(StringEnumConverter))]
-    public enum Role
+    public enum Rol
     {
         Admin,
-        Supervisor
+        Supervisor,
+        Pescador
     }
 
     public class Usuario
@@ -24,6 +25,6 @@ namespace SpaceDog.Shared.Models
         public string Rfc { get; set; }
         public string Correo { get; set; }
         public string Password { get; set; }
-        public Role Role { get; set; }
+        public Rol Rol { get; set; }
     }
 }

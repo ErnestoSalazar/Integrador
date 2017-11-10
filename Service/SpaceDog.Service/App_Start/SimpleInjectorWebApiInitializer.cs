@@ -33,6 +33,7 @@ namespace SpaceDog.Service.App_Start
             // container.Register<IUserRepository, SqlUserRepository>(Lifestyle.Scoped);
             container.Register<Context>(Lifestyle.Scoped);
             container.Register<UsuariosRepository>(Lifestyle.Scoped);
+            container.Register<BarcosRepository>(Lifestyle.Scoped);
         }
     }
 }

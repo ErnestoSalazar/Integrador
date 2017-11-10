@@ -16,7 +16,7 @@ namespace SpaceDog.Shared.Data
 
         public override Usuario Get(int id, bool includeRelatedEntities = true)
         {
-            var user = Context.Users.AsQueryable();
+            var user = Context.Usuarios.AsQueryable();
 
             return user
                 .Where(u => u.Id == id)
@@ -25,14 +25,14 @@ namespace SpaceDog.Shared.Data
 
         public override IList<Usuario> GetList()
         {
-            return Context.Users
+            return Context.Usuarios
                 .OrderBy(u => u.Nombre)
                 .ToList();
         }
 
         public Usuario ValidateUser(string name, string password)
         {
-            var user = Context.Users.AsQueryable();
+            var user = Context.Usuarios.AsQueryable();
 
             return user.FirstOrDefault(u => u.Nombre == name && u.Password == password);
         }
