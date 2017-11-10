@@ -20,7 +20,7 @@ namespace SpaceDog.Service.Services
             var _password = PasswordEncryptService.passwordEncrypt(password);
             using (var context = new Context())
             {
-                User user = context.Users.FirstOrDefault(u => u.Name == name && u.Password == _password);
+                User user = context.Users.FirstOrDefault(u => u.Nombre == name && u.Password == _password);
                 return user;
             }
         }
@@ -32,7 +32,7 @@ namespace SpaceDog.Service.Services
         {
             using (var context = new Context())
             {
-                return context.Users.FirstOrDefault(u => u.Email == mail);
+                return context.Users.FirstOrDefault(u => u.Correo == mail);
             }
         }
 
@@ -40,7 +40,7 @@ namespace SpaceDog.Service.Services
         {
             using (var context = new Context())
             {
-                return context.Users.Any(u => u.Id != id && u.Email == mail);
+                return context.Users.Any(u => u.Id != id && u.Correo == mail);
             }
         }
 

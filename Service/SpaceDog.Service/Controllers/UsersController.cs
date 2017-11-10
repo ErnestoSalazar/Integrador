@@ -40,7 +40,7 @@ namespace SpaceDog.Service.Controllers
 
         public IHttpActionResult Post(User user)
         {
-            if (UserService.ValidateEmail(user.Email) != null)
+            if (UserService.ValidateEmail(user.Correo) != null)
             {
                 return BadRequest("Esta email ya esta registrado");
             }
@@ -51,8 +51,8 @@ namespace SpaceDog.Service.Controllers
 
             var userModel = new User() // can be Dto
             {
-                Name = user.Name,
-                Email = user.Email,
+                Nombre = user.Nombre,
+                Correo = user.Correo,
                 Password = PasswordEncryptService.passwordEncrypt(user.Password),
                 Role = user.Role
             };
@@ -68,9 +68,9 @@ namespace SpaceDog.Service.Controllers
 
         public IHttpActionResult Put(int id, User user)
         {
-            if (UserService.ValidateEmail(user.Email) != null) // if email exists
+            if (UserService.ValidateEmail(user.Correo) != null) // if email exists
             {
-                if (UserService.OtherUserHaveSameEmail(id, user.Email))
+                if (UserService.OtherUserHaveSameEmail(id, user.Correo))
                 {
                     return BadRequest("Email already in use");
                 }
@@ -83,8 +83,8 @@ namespace SpaceDog.Service.Controllers
             var _user = new User() // can be Dto
             {
                 Id = id,
-                Name = user.Name,
-                Email = user.Email,
+                Nombre = user.Nombre,
+                Correo = user.Correo,
                 Password = PasswordEncryptService.passwordEncrypt(user.Password),
                 Role = user.Role
             };

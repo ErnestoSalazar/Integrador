@@ -24,14 +24,14 @@ namespace SpaceDog.Service.Providers
                     var claims = new List<Claim>()
                     {
                         new Claim(ClaimTypes.Sid, Convert.ToString(user.Id)),
-                        new Claim(ClaimTypes.Name, user.Name),
-                        new Claim(ClaimTypes.Email, user.Email),
-                        new Claim(ClaimTypes.Role, user.Role)
+                        new Claim(ClaimTypes.Name, user.Nombre),
+                        new Claim(ClaimTypes.Email, user.Correo),
+                        new Claim(ClaimTypes.Role, user.Role.ToString())
                     };
                     ClaimsIdentity oAuthIdentity = new ClaimsIdentity(claims,
                                 Startup.OAuthOptions.AuthenticationType);
 
-                    var properties = CreateProperties(user.Name);
+                    var properties = CreateProperties(user.Correo);
                     var ticket = new AuthenticationTicket(oAuthIdentity, properties);
                     context.Validated(ticket);
                 }
