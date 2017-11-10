@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace SpaceDog.Shared.Data
 {
-    public class UsersRepository : BaseRepository<User>
+    public class UsuariosRepository : BaseRepository<Usuario>
     {
 
-        public UsersRepository(Context context) : base(context)
+        public UsuariosRepository(Context context) : base(context)
         {
         }
 
-        public override User Get(int id, bool includeRelatedEntities = true)
+        public override Usuario Get(int id, bool includeRelatedEntities = true)
         {
             var user = Context.Users.AsQueryable();
 
@@ -23,18 +23,18 @@ namespace SpaceDog.Shared.Data
                 .SingleOrDefault();
         }
 
-        public override IList<User> GetList()
+        public override IList<Usuario> GetList()
         {
             return Context.Users
-                .OrderBy(u => u.Name)
+                .OrderBy(u => u.Nombre)
                 .ToList();
         }
 
-        public User ValidateUser(string name, string password)
+        public Usuario ValidateUser(string name, string password)
         {
             var user = Context.Users.AsQueryable();
 
-            return user.FirstOrDefault(u => u.Name == name && u.Password == password);
+            return user.FirstOrDefault(u => u.Nombre == name && u.Password == password);
         }
 
 

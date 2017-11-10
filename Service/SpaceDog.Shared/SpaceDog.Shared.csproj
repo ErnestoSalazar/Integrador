@@ -55,8 +55,11 @@
     <Compile Include="Data\BaseRepository.cs" />
     <Compile Include="Data\Context.cs" />
     <Compile Include="Data\DatabaseInitializer.cs" />
-    <Compile Include="Data\UsersRepository.cs" />
-    <Compile Include="Models\User.cs" />
+    <Compile Include="Data\UsuariosRepository.cs" />
+    <Compile Include="Models\Barco.cs" />
+    <Compile Include="Models\Carga.cs" />
+    <Compile Include="Models\Entrada.cs" />
+    <Compile Include="Models\Usuario.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\PasswordEncryptService.cs" />

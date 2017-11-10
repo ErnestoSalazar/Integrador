@@ -13,10 +13,10 @@ namespace SpaceDog.Service.Controllers
 
     public class UsersController : ApiController
     {
-        private UsersRepository _usersRepository = null;
+        private UsuariosRepository _usersRepository = null;
 
 
-        public UsersController(UsersRepository usersRepository)
+        public UsersController(UsuariosRepository usersRepository)
         {
             _usersRepository = usersRepository;
         }
@@ -38,7 +38,7 @@ namespace SpaceDog.Service.Controllers
             return Ok(user);
         }
 
-        public IHttpActionResult Post(User user)
+        public IHttpActionResult Post(Usuario user)
         {
             if (UserService.ValidateEmail(user.Correo) != null)
             {
@@ -49,9 +49,11 @@ namespace SpaceDog.Service.Controllers
                 return BadRequest(ModelState);
             }
 
-            var userModel = new User() // can be Dto
+            var userModel = new Usuario() // can be Dto
             {
                 Nombre = user.Nombre,
+                Apellido = user.Apellido,
+                Rfc = user.Rfc,
                 Correo = user.Correo,
                 Password = PasswordEncryptService.passwordEncrypt(user.Password),
                 Role = user.Role
@@ -66,7 +68,7 @@ namespace SpaceDog.Service.Controllers
                 ); // 201
         }
 
-        public IHttpActionResult Put(int id, User user)
+        public IHttpActionResult Put(int id, Usuario user)
         {
             if (UserService.ValidateEmail(user.Correo) != null) // if email exists
             {
@@ -80,10 +82,12 @@ namespace SpaceDog.Service.Controllers
                 return BadRequest(ModelState); // 400
             }
 
-            var _user = new User() // can be Dto
+            var _user = new Usuario() // can be Dto
             {
                 Id = id,
                 Nombre = user.Nombre,
+                Apellido = user.Apellido,
+                Rfc = user.Rfc,
                 Correo = user.Correo,
                 Password = PasswordEncryptService.passwordEncrypt(user.Password),
                 Role = user.Role

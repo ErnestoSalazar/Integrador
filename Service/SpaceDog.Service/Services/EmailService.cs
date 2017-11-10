@@ -25,7 +25,7 @@ namespace SpaceDog.Service.Services
             var apiKey = "";
             var client = new SendGridClient(apiKey);
             var from = new EmailAddress(_mailFrom, "");
-            var subject = "Tu contraseña ha cambiado";
+            var subject = reason;
             var to = new EmailAddress(mailTo, "");
             var plainTextContent = "";
             var htmlContent = content;

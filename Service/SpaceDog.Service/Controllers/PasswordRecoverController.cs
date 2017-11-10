@@ -13,8 +13,8 @@ namespace SpaceDog.Service.Controllers
 
     public class PasswordRecoverController : ApiController
     {
-        private UsersRepository _usersRepository = null;
-        public PasswordRecoverController(UsersRepository usersRepository)
+        private UsuariosRepository _usersRepository = null;
+        public PasswordRecoverController(UsuariosRepository usersRepository)
         {
             _usersRepository = usersRepository;
         }
@@ -23,7 +23,7 @@ namespace SpaceDog.Service.Controllers
         [Route("login/recover")]
         public IHttpActionResult Post(EmailService email)
         {
-            User user = UserService.ValidateEmail(email.mailTo);
+            Usuario user = UserService.ValidateEmail(email.mailTo);
             if (user != null)
             {
                 var password = new Random().Next(1000, 10000).ToString();

@@ -15,12 +15,12 @@ namespace SpaceDog.Service.Services
 
         }
 
-        public User ValidateUser(string name, string password)
+        public Usuario ValidateUser(string name, string password)
         {
             var _password = PasswordEncryptService.passwordEncrypt(password);
             using (var context = new Context())
             {
-                User user = context.Users.FirstOrDefault(u => u.Nombre == name && u.Password == _password);
+                Usuario user = context.Users.FirstOrDefault(u => u.Nombre == name && u.Password == _password);
                 return user;
             }
         }
@@ -28,7 +28,7 @@ namespace SpaceDog.Service.Services
         /*
          * return User if exists
          */
-        public static User ValidateEmail(string mail)
+        public static Usuario ValidateEmail(string mail)
         {
             using (var context = new Context())
             {

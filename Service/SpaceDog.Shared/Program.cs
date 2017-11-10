@@ -18,7 +18,7 @@ namespace SpaceDog.Shared
 
                 var user = context.Users.SingleOrDefault(u => u.Id == userId);
 
-                Console.WriteLine(user.Name);
+                Console.WriteLine(user.Nombre);
             }
 
             Console.ReadLine();
