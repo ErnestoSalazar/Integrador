@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="Data\BarcosRepository.cs" />
     <Compile Include="Data\BaseRepository.cs" />
+    <Compile Include="Data\CargasRepository.cs" />
     <Compile Include="Data\Context.cs" />
     <Compile Include="Data\DatabaseInitializer.cs" />
     <Compile Include="Data\UsuariosRepository.cs" />

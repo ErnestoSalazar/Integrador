@@ -13,10 +13,13 @@ namespace SpaceDog.Shared.Models
     public class Carga
     {
         public int Id { get; set; }
-        public Barco Barco { get; set; }
         public Double Cantidad { get; set; }
         public Especie Especie { get; set; }
+        public Talla Talla { get; set; }
         public Double Temperatura { get; set; }
         public Condicion Condicion { get; set; }
+
+        public int BarcoId { get; set; }
+        public Barco Barco { get; set; }
     }
 }
