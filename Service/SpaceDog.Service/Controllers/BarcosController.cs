@@ -56,8 +56,6 @@ namespace SpaceDog.Service.Controllers
         public IHttpActionResult Put(int id, BarcoDto barcoDto)
         {
 
-
-
             var _barco = barcoDto.ToModel();
             _barco.Id = id;
             _barco.UsuarioId = barcoDto.UsuarioId;

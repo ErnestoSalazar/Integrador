@@ -21,7 +21,7 @@ namespace SpaceDog.Shared.Data
 
             if (includeRelatedEntities)
             {
-                carga.Include(c => c.Barco);
+                carga = carga.Include(c => c.Barco);
             }
 
             return carga

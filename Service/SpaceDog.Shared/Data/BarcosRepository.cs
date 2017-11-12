@@ -20,7 +20,7 @@ namespace SpaceDog.Shared.Data
 
             if (includeRelatedEntities)
             {
-                barco.Include(b => b.Usuario);
+                barco = barco.Include(b => b.Usuario);
             }
 
             return barco

@@ -1,6 +1,7 @@
 ﻿using SpaceDog.Shared.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -11,10 +12,14 @@ namespace SpaceDog.Service.Dto
     {
 
         public int Id { get; set; }
+        [Required]
         public string Folio { get; set; }
+        [Required]
         public DateTime Fecha { get; set; }
+        [Required]
         public DateTime Hora { get; set; }
-        public Turno Turno { get; set; }
+        [Required]
+        public Turno? Turno { get; set; }
 
         public int UsuarioId { get; set; }
         public Usuario Usuario { get; set; }
@@ -33,7 +38,7 @@ namespace SpaceDog.Service.Dto
                 Folio   =  Folio,
                 Fecha   =  DateTime.Now,
                 Hora    =  DateTime.Now,
-                Turno   =  Turno,
+                Turno   =  Turno.Value,
                 Usuario =  Usuario,
                 Cargas = Cargas
             };

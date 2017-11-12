@@ -45,6 +45,10 @@ namespace SpaceDog.Service.Controllers
             {
                 return BadRequest("Esta email ya esta registrado");
             }
+            if(usuarioDto.Password != usuarioDto.PasswordConfirmation)
+            {
+                return BadRequest("Las contraseñas no coinciden");
+            }
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -65,7 +69,7 @@ namespace SpaceDog.Service.Controllers
         {
             if (UserService.ValidateEmail(usuarioDto.Correo) != null) // if email exists
             {
-                if (UserService.OtherUserHaveSameEmail(id, usuarioDto.Correo))
+                if (UserService.OtherUserHaveSameEmail(id, usuarioDto.Correo)) // if other user have same email
                 {
                     return BadRequest("Email already in use");
                 }

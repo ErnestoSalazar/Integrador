@@ -19,7 +19,7 @@ namespace SpaceDog.Shared.Data
             var entrada = Context.Entradas.AsQueryable();
             if (includeRelatedEntities)
             {
-                entrada.Include(e => e.Usuario)
+                entrada = entrada.Include(e => e.Usuario)
                     .Include(e => e.Cargas);
             }
 

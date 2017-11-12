@@ -64,7 +64,6 @@ namespace SpaceDog.Service.Controllers
             var cargas = _entradasRepository.GetListOfCargasInEntrada(entradaDto.CargasId);
             entradaDto.Cargas = cargas;
             
-
             var entradaModel = entradaDto.ToModel();
             entradaModel.Id = id;
             entradaModel.UsuarioId = entradaDto.UsuarioId;
