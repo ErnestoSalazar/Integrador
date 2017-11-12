@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,8 +8,11 @@ using System.Threading.Tasks;
 
 namespace SpaceDog.Shared.Models
 {
+    [JsonConverter(typeof(StringEnumConverter))]
     public enum Especie { Pez1, Pez2, Pez3 }
+    [JsonConverter(typeof(StringEnumConverter))]
     public enum Talla { s, m, x, xl }
+    [JsonConverter(typeof(StringEnumConverter))]
     public enum Condicion { Mala, Regular,Buena }
 
     public class Carga
@@ -21,10 +26,5 @@ namespace SpaceDog.Shared.Models
 
         public int BarcoId { get; set; }
         public Barco Barco { get; set; }
-
-        public int? EntradaId { get; set; }
-        public Entrada Entrada { get; set; }
-
-
     }
 }

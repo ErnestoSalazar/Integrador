@@ -1,4 +1,5 @@
-﻿using SpaceDog.Shared.Data;
+﻿using SpaceDog.Service.Dto;
+using SpaceDog.Shared.Data;
 using SpaceDog.Shared.Models;
 using System;
 using System.Collections.Generic;
@@ -31,45 +32,32 @@ namespace SpaceDog.Service.Controllers
         }
 
 
-        public IHttpActionResult Post(Carga carga)
+        public IHttpActionResult Post(CargaDto cargaDto)
         {
-            var barco = _barcosRepository.Get(carga.BarcoId);
-            carga.Barco = barco;
+            var barco = _barcosRepository.Get(cargaDto.BarcoId);
+            cargaDto.Barco = barco;
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var cargaModel = new Carga()
-            {
-                Cantidad = carga.Cantidad,
-                Especie = carga.Especie,
-                Temperatura = carga.Temperatura,
-                Condicion = carga.Condicion,
-                Barco = carga.Barco
-            };
+            var cargaModel = cargaDto.ToModel();
 
             _cargasRepository.Add(cargaModel);
 
-            carga.Id = cargaModel.Id;
+            cargaDto.Id = cargaModel.Id;
             return Created(
-                Url.Link("DefaultApi", new { controller = "Cargas", id = carga.Id }),
-                carga
+                Url.Link("DefaultApi", new { controller = "Cargas", id = cargaDto.Id }),
+                cargaDto
                 );
 
         }
 
-        public IHttpActionResult Put(int id, Carga carga)
+        public IHttpActionResult Put(int id, CargaDto cargaDto)
         {
-            var _carga = new Carga()
-            {
-                Id = id,
-                Cantidad = carga.Cantidad,
-                Especie = carga.Especie,
-                Temperatura = carga.Temperatura,
-                Condicion = carga.Condicion,
-                BarcoId = carga.BarcoId
-            };
+            var _carga = cargaDto.ToModel();
+            _carga.BarcoId = cargaDto.BarcoId;
+            _carga.Id = id;
 
             _cargasRepository.Update(_carga);
             return StatusCode(System.Net.HttpStatusCode.NoContent);

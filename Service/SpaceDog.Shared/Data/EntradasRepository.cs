@@ -19,7 +19,8 @@ namespace SpaceDog.Shared.Data
             var entrada = Context.Entradas.AsQueryable();
             if (includeRelatedEntities)
             {
-                entrada.Include(e => e.Usuario);
+                entrada.Include(e => e.Usuario)
+                    .Include(e => e.Cargas);
             }
 
             return entrada
@@ -31,8 +32,50 @@ namespace SpaceDog.Shared.Data
         {
             return Context.Entradas
                 .Include(e => e.Usuario)
+                .Include(e => e.Cargas)
                 .ToList();
         }
+
+        public List<Carga> GetListOfCargasInEntrada(ICollection<Carga> cargas)
+        {
+            List<Carga> _cargas = new List<Carga>();
+            foreach(var carga in cargas)
+            {
+                Context.Cargas.Attach(carga);
+                _cargas.Add(carga);
+            }
+
+            return _cargas.ToList();
+
+        }
+
+        public List<Carga> GetListOfCargasInEntrada(List<int> CargasId)
+        {
+            List<Carga> _cargas = new List<Carga>();
+            Carga carga;
+            foreach(var cargaId in CargasId)
+            {
+                carga = Context.Cargas.Find(cargaId);
+                _cargas.Add(carga);
+            }
+            return _cargas;
+        }
+
+        public void InsertListInContext(Entrada entrada)
+        {
+            List<Carga> cargas = new List<Carga>();
+            foreach(var carga in entrada.Cargas)
+            {
+                Context.Cargas.Attach(carga);
+                Context.Entry(carga).State = EntityState.Modified;
+                cargas.Add(carga);
+            }
+            entrada.Cargas = cargas;
+            Context.Entradas.Add(entrada);
+        }
+
+
+        
 
 
 

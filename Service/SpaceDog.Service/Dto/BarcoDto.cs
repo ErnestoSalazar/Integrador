@@ -1,0 +1,32 @@
+﻿using SpaceDog.Shared.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace SpaceDog.Service.Dto
+{
+    public class BarcoDto
+    {
+        public int Id { get; set; }
+        public string Nombre { get; set; }
+        public string Descripcion { get; set; }
+
+        public int UsuarioId { get; set; }
+        public Usuario Usuario { get; set; }
+
+
+
+        public Barco ToModel()
+        {
+            return new Barco()
+            {
+                Id = Id,
+                Nombre = Nombre,
+                Descripcion = Descripcion,
+                Usuario = Usuario
+            };
+        }
+
+    }
+}

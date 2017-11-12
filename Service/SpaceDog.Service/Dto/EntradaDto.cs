@@ -18,6 +18,9 @@ namespace SpaceDog.Service.Dto
 
         public int UsuarioId { get; set; }
         public Usuario Usuario { get; set; }
+        public ICollection<Carga> Cargas { get; set; }
+
+
 
         public List<int> CargasId { get; set; }
 
@@ -26,11 +29,13 @@ namespace SpaceDog.Service.Dto
         {
             return new Entrada()
             {
+                Id = Id,
                 Folio   =  Folio,
                 Fecha   =  DateTime.Now,
                 Hora    =  DateTime.Now,
                 Turno   =  Turno,
-                Usuario =  Usuario
+                Usuario =  Usuario,
+                Cargas = Cargas
             };
         }
 

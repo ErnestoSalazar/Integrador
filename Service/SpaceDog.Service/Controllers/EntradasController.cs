@@ -36,26 +36,51 @@ namespace SpaceDog.Service.Controllers
 
         public IHttpActionResult Post(EntradaDto entradaDto)
         {
+
             var usuario = _usuariosRepository.Get(entradaDto.UsuarioId);
+            var cargas = _entradasRepository.GetListOfCargasInEntrada(entradaDto.CargasId);
+            entradaDto.Cargas = cargas;
+            entradaDto.Usuario = usuario;
+
             var entradaModel = entradaDto.ToModel();
 
-            entradaModel.Usuario = usuario;
 
             _entradasRepository.Add(entradaModel);
 
-            foreach (int cargaId in entradaDto.CargasId)
-            {
-                var carga = _cargasRepository.Get(cargaId);
-                carga.Entrada = entradaModel;
-                _cargasRepository.Update(carga);
-            }
-
             entradaDto.Id = entradaModel.Id;
+
             return Created(
                 Url.Link("DefaultApi", new { controller = "Entradas", id = entradaDto.Id }),
                 entradaDto
                 );
+
             
+
+        }
+
+        public IHttpActionResult Put(int id, EntradaDto entradaDto)
+        {
+          
+            var cargas = _entradasRepository.GetListOfCargasInEntrada(entradaDto.CargasId);
+            entradaDto.Cargas = cargas;
+            
+
+            var entradaModel = entradaDto.ToModel();
+            entradaModel.Id = id;
+            entradaModel.UsuarioId = entradaDto.UsuarioId;
+
+            _entradasRepository.InsertListInContext(entradaModel);
+            _entradasRepository.Update(entradaModel);
+            
+
+            return StatusCode(System.Net.HttpStatusCode.NoContent);
+
+        }
+
+
+        public void Delete(int id)
+        {
+            _entradasRepository.Delete(id);
         }
 
 

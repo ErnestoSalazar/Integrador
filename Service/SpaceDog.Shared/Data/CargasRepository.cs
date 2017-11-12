@@ -35,7 +35,6 @@ namespace SpaceDog.Shared.Data
             return Context.Cargas
                 .Include(c => c.Barco)
                 .Include(c => c.Barco.Usuario)
-                .Include(c => c.Entrada)
                 .ToList();
         }
 

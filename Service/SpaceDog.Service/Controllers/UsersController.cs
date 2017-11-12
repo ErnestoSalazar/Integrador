@@ -1,4 +1,5 @@
-﻿using SpaceDog.Service.Services;
+﻿using SpaceDog.Service.Dto;
+using SpaceDog.Service.Services;
 using SpaceDog.Shared.Data;
 using SpaceDog.Shared.Models;
 using SpaceDog.Shared.Services;
@@ -38,9 +39,9 @@ namespace SpaceDog.Service.Controllers
             return Ok(user);
         }
 
-        public IHttpActionResult Post(Usuario user)
+        public IHttpActionResult Post(UsuarioDto usuarioDto)
         {
-            if (UserService.ValidateEmail(user.Correo) != null)
+            if (UserService.ValidateEmail(usuarioDto.Correo) != null)
             {
                 return BadRequest("Esta email ya esta registrado");
             }
@@ -49,30 +50,22 @@ namespace SpaceDog.Service.Controllers
                 return BadRequest(ModelState);
             }
 
-            var userModel = new Usuario() // can be Dto
-            {
-                Nombre = user.Nombre,
-                Apellido = user.Apellido,
-                Rfc = user.Rfc,
-                Correo = user.Correo,
-                Password = PasswordEncryptService.passwordEncrypt(user.Password),
-                Rol = user.Rol
-            };
+            var userModel = usuarioDto.ToModel();
 
             _usersRepository.Add(userModel);
 
-            user.Id = userModel.Id;
+            usuarioDto.Id = userModel.Id;
             return Created(
-                Url.Link("DefaultApi", new { controller = "Users", id = user.Id }),
-                user
+                Url.Link("DefaultApi", new { controller = "Users", id = usuarioDto.Id }),
+                usuarioDto
                 ); // 201
         }
 
-        public IHttpActionResult Put(int id, Usuario user)
+        public IHttpActionResult Put(int id, UsuarioDto usuarioDto)
         {
-            if (UserService.ValidateEmail(user.Correo) != null) // if email exists
+            if (UserService.ValidateEmail(usuarioDto.Correo) != null) // if email exists
             {
-                if (UserService.OtherUserHaveSameEmail(id, user.Correo))
+                if (UserService.OtherUserHaveSameEmail(id, usuarioDto.Correo))
                 {
                     return BadRequest("Email already in use");
                 }
@@ -82,18 +75,10 @@ namespace SpaceDog.Service.Controllers
                 return BadRequest(ModelState); // 400
             }
 
-            var _user = new Usuario() // can be Dto
-            {
-                Id = id,
-                Nombre = user.Nombre,
-                Apellido = user.Apellido,
-                Rfc = user.Rfc,
-                Correo = user.Correo,
-                Password = PasswordEncryptService.passwordEncrypt(user.Password),
-                Rol = user.Rol
-            };
+            var usuario = usuarioDto.ToModel();
+            usuario.Id = id;
 
-            _usersRepository.Update(_user);
+            _usersRepository.Update(usuario);
 
             return StatusCode(System.Net.HttpStatusCode.NoContent);
         }

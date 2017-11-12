@@ -21,9 +21,5 @@ namespace SpaceDog.Shared.Data
         public DbSet<Carga>   Cargas   { get; set; }
         public DbSet<Entrada> Entradas { get; set; }
 
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-        }
-
     }
 }

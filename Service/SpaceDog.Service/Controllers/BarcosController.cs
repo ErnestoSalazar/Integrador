@@ -1,4 +1,5 @@
-﻿using SpaceDog.Shared.Data;
+﻿using SpaceDog.Service.Dto;
+using SpaceDog.Shared.Data;
 using SpaceDog.Shared.Models;
 using System;
 using System.Collections.Generic;
@@ -31,41 +32,35 @@ namespace SpaceDog.Service.Controllers
             return Ok(_barcosRepository.Get(id));
         }
 
-        public IHttpActionResult Post(Barco barco)
+        public IHttpActionResult Post(BarcoDto barcoDto)
         {
 
-            var usuario = _usuariosRepository.Get(barco.UsuarioId);
+            var usuario = _usuariosRepository.Get(barcoDto.UsuarioId);
+            barcoDto.Usuario = usuario;
 
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var barcoModel = new Barco()
-            {
-                Nombre = barco.Nombre,
-                Descripcion = barco.Descripcion,
-                Usuario = usuario
-            };
+            var barcoModel = barcoDto.ToModel();
 
             _barcosRepository.Add(barcoModel);
 
-            barco.Id = barcoModel.Id;
+            barcoDto.Id = barcoModel.Id;
             return Created(
-                Url.Link("DefaultApi", new { controller = "Barcos", id = barco.Id }),
-                barco
+                Url.Link("DefaultApi", new { controller = "Barcos", id = barcoDto.Id }),
+                barcoDto
                 );
         }
 
-        public IHttpActionResult Put(int id, Barco barco)
+        public IHttpActionResult Put(int id, BarcoDto barcoDto)
         {
 
-            var _barco = new Barco()
-            {
-                Id = id,
-                Nombre = barco.Nombre,
-                Descripcion = barco.Descripcion,
-                UsuarioId = barco.UsuarioId
-            };
+
+
+            var _barco = barcoDto.ToModel();
+            _barco.Id = id;
+            _barco.UsuarioId = barcoDto.UsuarioId;
 
             _barcosRepository.Update(_barco);
 

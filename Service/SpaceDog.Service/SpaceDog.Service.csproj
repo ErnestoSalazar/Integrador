@@ -147,7 +147,10 @@
     <Compile Include="Controllers\EntradasController.cs" />
     <Compile Include="Controllers\PasswordRecoverController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Dto\BarcoDto.cs" />
+    <Compile Include="Dto\CargaDto.cs" />
     <Compile Include="Dto\EntradaDto.cs" />
+    <Compile Include="Dto\UsuarioDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
