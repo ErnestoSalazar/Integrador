@@ -18,9 +18,10 @@ namespace SpaceDog.Service.Dto
         public string Rfc { get; set; }
         [Required]
         public string Correo { get; set; }
-        [Required]
+        
         public string Password { get; set; }
         public string PasswordConfirmation { get; set; }
+
         [Required]
         public Rol? Rol { get; set; }
 
@@ -34,7 +35,7 @@ namespace SpaceDog.Service.Dto
                 Nombre = Nombre,
                 Apellido = Apellido,
                 Rfc = Rfc,
-                Correo = Correo,
+                Correo = Correo.ToLower(),
                 Password = Password,
                 Rol = Rol.Value
             };

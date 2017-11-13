@@ -18,9 +18,18 @@ namespace SpaceDog.Shared.Data
         {
             var user = Context.Usuarios.AsQueryable();
 
-            return user
+            var _user = user
                 .Where(u => u.Id == id)
                 .SingleOrDefault();
+
+            return new Usuario()
+            {
+                Nombre = _user.Nombre,
+                Apellido = _user.Apellido,
+                Rfc = _user.Rfc,
+                Rol = _user.Rol
+            };
+
         }
 
         public override IList<Usuario> GetList()

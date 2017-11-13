@@ -20,19 +20,17 @@ namespace SpaceDog.Service.Services
             var _password = PasswordEncryptService.passwordEncrypt(password);
             using (var context = new Context())
             {
-                Usuario user = context.Usuarios.FirstOrDefault(u => u.Nombre == name && u.Password == _password);
+                Usuario user = context.Usuarios.FirstOrDefault(u => u.Nombre.ToLower() == name.ToLower() && u.Password == _password);
                 return user;
             }
         }
 
-        /*
-         * return User if exists
-         */
+
         public static Usuario ValidateEmail(string mail)
         {
             using (var context = new Context())
             {
-                return context.Usuarios.FirstOrDefault(u => u.Correo == mail);
+                return context.Usuarios.FirstOrDefault(u => u.Correo == mail.ToLower());
             }
         }
 
@@ -40,8 +38,13 @@ namespace SpaceDog.Service.Services
         {
             using (var context = new Context())
             {
-                return context.Usuarios.Any(u => u.Id != id && u.Correo == mail);
+                return context.Usuarios.Any(u => u.Id != id && u.Correo == mail.ToLower());
             }
+        }
+
+        public static string GenerateRandomPassword()
+        {
+            return new Random().Next(1000, 10000).ToString();
         }
 
     }

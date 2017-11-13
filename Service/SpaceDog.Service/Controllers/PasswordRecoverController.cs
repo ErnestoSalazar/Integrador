@@ -26,7 +26,7 @@ namespace SpaceDog.Service.Controllers
             Usuario user = UserService.ValidateEmail(email.mailTo);
             if (user != null)
             {
-                var password = new Random().Next(1000, 10000).ToString();
+                var password = UserService.GenerateRandomPassword();
                 user.Password = PasswordEncryptService.passwordEncrypt(password);
                 _usersRepository.Update(user);
                 EmailService.SendPasswordRecoveryMail(email.mailTo, $"Se ha generado una nueva contraseña: {password} (recuerde cambiarla al ingresar!)");

@@ -9,6 +9,7 @@ using System.Web.Http;
 
 namespace SpaceDog.Service.Controllers
 {
+    [Authorize]
     public class BarcosController : ApiController
     {
 

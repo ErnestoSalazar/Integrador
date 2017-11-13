@@ -45,18 +45,18 @@ namespace SpaceDog.Service.Controllers
             {
                 return BadRequest("Esta email ya esta registrado");
             }
-            if(usuarioDto.Password != usuarioDto.PasswordConfirmation)
-            {
-                return BadRequest("Las contraseñas no coinciden");
-            }
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var userModel = usuarioDto.ToModel();
+            var password = UserService.GenerateRandomPassword();
+            usuarioDto.Password = PasswordEncryptService.passwordEncrypt(password);
 
+            var userModel = usuarioDto.ToModel();
             _usersRepository.Add(userModel);
+
+            EmailService.SendPasswordForNewUser(userModel.Correo, $"Bienvenido nuevo usuario, aquí tienes tu contraseña de acceso: {password}");
 
             usuarioDto.Id = userModel.Id;
             return Created(
@@ -74,10 +74,16 @@ namespace SpaceDog.Service.Controllers
                     return BadRequest("Email already in use");
                 }
             }
+            if(usuarioDto.Password != usuarioDto.PasswordConfirmation)
+            {
+                return BadRequest("Las contraseñas no coinciden");
+            }
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState); // 400
             }
+
+            usuarioDto.Password = PasswordEncryptService.passwordEncrypt(usuarioDto.Password);
 
             var usuario = usuarioDto.ToModel();
             usuario.Id = id;

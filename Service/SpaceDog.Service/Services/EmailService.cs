@@ -20,7 +20,12 @@ namespace SpaceDog.Service.Services
             SendEmail(mailTo, "Cambio de contraseña", content).GetAwaiter();
         }
 
-        public static async Task SendEmail(string mailTo, string reason, string content)
+        public static void SendPasswordForNewUser(string mailTo, string content)
+        {
+            SendEmail(mailTo, "Bienvenido", content).GetAwaiter();
+        }
+
+        private static async Task SendEmail(string mailTo, string reason, string content)
         {
             var apiKey = "";
             var client = new SendGridClient(apiKey);
