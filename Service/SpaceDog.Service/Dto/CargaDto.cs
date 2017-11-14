@@ -22,7 +22,6 @@ namespace SpaceDog.Service.Dto
         public Condicion? Condicion { get; set; }
 
         public int BarcoId { get; set; }
-        public Barco Barco { get; set; }
 
 
         public Carga ToModel()
@@ -35,7 +34,7 @@ namespace SpaceDog.Service.Dto
                 Talla = Talla.Value,
                 Temperatura = Temperatura,
                 Condicion = Condicion.Value,
-                Barco = Barco
+                BarcoId = BarcoId
             };
         }
 

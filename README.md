@@ -13,6 +13,7 @@ __/api/barcos/{id}__  | __GET/PUT/DELETE__      | __{nombre, descripcion, ususar
 __/api/cargas__       | __POST/GET__            | __{cantidad, especie, talla, temperatura, condicion, barcoId}__
 __/api/cargas/{id}__  | __GET/PUT/DELETE__      | __{cantidad, especie, talla, temperatura, condicion, barcoId}__
 __/api/entradas__     | __POST/GET__            | __{folio, turno, usuarioId, cargasId:[]}__
+__/api/entradas?__    | __GET__                 | __fechaInicio=dd/mm/yyyy&fechaFin=dd/mm/yyyy__
 __/api/entradas{id}__ | __GET/PUT/DELETE__      | __{folio, turno, usuarioId, cargasId:[]}__
 
 

@@ -14,9 +14,7 @@ namespace SpaceDog.Service.Dto
         public string Nombre { get; set; }
         [Required]
         public string Descripcion { get; set; }
-
         public int UsuarioId { get; set; }
-        public Usuario Usuario { get; set; }
 
 
 
@@ -27,7 +25,7 @@ namespace SpaceDog.Service.Dto
                 Id = Id,
                 Nombre = Nombre,
                 Descripcion = Descripcion,
-                Usuario = Usuario
+                UsuarioId = UsuarioId
             };
         }
 

@@ -36,6 +36,15 @@ namespace SpaceDog.Shared.Data
                 .ToList();
         }
 
+        public List<Entrada> GetListByDate(DateTime dateInicio, DateTime dateFin)
+        {
+            return Context.Entradas
+                .Include(e => e.Usuario)
+                .Include(e => e.Cargas)
+                .Where(e => e.Fecha >= dateInicio && e.Fecha <= dateFin)
+                .ToList();
+        }
+
         public List<Carga> GetListOfCargasInEntrada(ICollection<Carga> cargas)
         {
             List<Carga> _cargas = new List<Carga>();
@@ -49,6 +58,7 @@ namespace SpaceDog.Shared.Data
 
         }
 
+
         public List<Carga> GetListOfCargasInEntrada(List<int> CargasId)
         {
             List<Carga> _cargas = new List<Carga>();
@@ -60,6 +70,7 @@ namespace SpaceDog.Shared.Data
             }
             return _cargas;
         }
+
 
         public void InsertListInContext(Entrada entrada)
         {
@@ -73,7 +84,6 @@ namespace SpaceDog.Shared.Data
             entrada.Cargas = cargas;
             Context.Entradas.Add(entrada);
         }
-
 
         
 
