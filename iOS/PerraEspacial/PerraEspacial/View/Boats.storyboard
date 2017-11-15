@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="KLJ-gf-csK">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="VerdanaBold.ttf">
+            <string>Verdana-Bold</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Barcos-->
+        <scene sceneID="NdF-ZJ-vpK">
+            <objects>
+                <viewController id="nmt-9c-bdX" customClass="BoatsViewController" customModule="PerraEspacial" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6A9-WD-wIc">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Nombre" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ook-ON-7QK">
+                                <rect key="frame" x="17.5" y="77" width="340" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cfi-8c-tsL">
+                                <rect key="frame" x="0.0" y="622" width="375" height="45"/>
+                                <color key="backgroundColor" red="0.92549019610000005" green="0.1333333333" blue="0.1450980392" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="3ZL-pG-9It"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="15"/>
+                                <state key="normal" title="BUSCAR">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xME-b4-VtK">
+                                <rect key="frame" x="0.0" y="115" width="375" height="507"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ook-ON-7QK" firstAttribute="leading" secondItem="FoR-0I-4ge" secondAttribute="leading" constant="17.5" id="7ZQ-5e-4WQ"/>
+                            <constraint firstItem="xME-b4-VtK" firstAttribute="top" secondItem="ook-ON-7QK" secondAttribute="bottom" constant="8" id="Dh4-yP-Ver"/>
+                            <constraint firstItem="cfi-8c-tsL" firstAttribute="leading" secondItem="FoR-0I-4ge" secondAttribute="leading" id="Nd7-LX-f4p"/>
+                            <constraint firstItem="FoR-0I-4ge" firstAttribute="trailing" secondItem="ook-ON-7QK" secondAttribute="trailing" constant="17.5" id="PSd-LZ-h0N"/>
+                            <constraint firstItem="cfi-8c-tsL" firstAttribute="bottom" secondItem="FoR-0I-4ge" secondAttribute="bottom" id="QUF-BA-hID"/>
+                            <constraint firstItem="cfi-8c-tsL" firstAttribute="top" secondItem="xME-b4-VtK" secondAttribute="bottom" id="Zw1-2d-4rF"/>
+                            <constraint firstItem="xME-b4-VtK" firstAttribute="trailing" secondItem="FoR-0I-4ge" secondAttribute="trailing" id="cj9-Vd-6rc"/>
+                            <constraint firstItem="cfi-8c-tsL" firstAttribute="trailing" secondItem="FoR-0I-4ge" secondAttribute="trailing" id="iAC-LF-nQD"/>
+                            <constraint firstItem="xME-b4-VtK" firstAttribute="leading" secondItem="FoR-0I-4ge" secondAttribute="leading" id="x34-DM-X1h"/>
+                            <constraint firstItem="ook-ON-7QK" firstAttribute="top" secondItem="FoR-0I-4ge" secondAttribute="top" constant="13" id="yJj-v3-gww"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="FoR-0I-4ge"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Barcos" id="lqI-pO-aq2">
+                        <leftBarButtonItems>
+                            <barButtonItem id="BMl-qp-Xwe"/>
+                            <barButtonItem image="menu" id="9D3-5K-1JH">
+                                <connections>
+                                    <segue destination="p3m-JP-eOy" kind="presentation" modalTransitionStyle="crossDissolve" id="a9Z-j5-Cg2"/>
+                                </connections>
+                            </barButtonItem>
+                        </leftBarButtonItems>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="buttonSearch" destination="cfi-8c-tsL" id="bDb-KK-2ZS"/>
+                        <outlet property="tableView" destination="xME-b4-VtK" id="dNI-bd-tCI"/>
+                        <outlet property="textFieldName" destination="ook-ON-7QK" id="yYU-Xd-hvv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FAv-DG-hHZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="343.19999999999999" y="115.59220389805098"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="y2b-Zs-GsT">
+            <objects>
+                <navigationController restorationIdentifier="boatsView" storyboardIdentifier="boatsView" automaticallyAdjustsScrollViewInsets="NO" id="KLJ-gf-csK" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="wmT-4R-0t6">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="nmt-9c-bdX" kind="relationship" relationship="rootViewController" id="eQQ-XL-XnA"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jpK-Zc-kfo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-446" y="116"/>
+        </scene>
+        <!--menuView-->
+        <scene sceneID="Xoq-Xp-O8T">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Menu" referencedIdentifier="menuView" id="p3m-JP-eOy" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qpp-eL-n5F" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="886" y="115"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="menu" width="20" height="14"/>
+    </resources>
+</document>

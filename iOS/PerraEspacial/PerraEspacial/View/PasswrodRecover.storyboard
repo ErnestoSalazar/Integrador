@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="fTb-fu-Wlg">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="VerdanaBold.ttf">
+            <string>Verdana-Bold</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Recuperar Contraseña-->
+        <scene sceneID="QQB-qA-drm">
+            <objects>
+                <viewController modalTransitionStyle="crossDissolve" id="8Oz-JV-tAL" customClass="PasswordRecoverViewController" customModule="PerraEspacial" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bxI-dK-PAS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zIN-3V-Ywd">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Recuperar@ejemplo.com" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EF2-Zg-Nf1">
+                                        <rect key="frame" x="17.5" y="166" width="340" height="30"/>
+                                        <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" textContentType="email"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eAK-I4-4oe">
+                                        <rect key="frame" x="25" y="221" width="325" height="33"/>
+                                        <color key="backgroundColor" red="0.92549019610000005" green="0.1333333333" blue="0.1450980392" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="17"/>
+                                        <state key="normal" title="RECUPERAR">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="buttonRecoverPressed:" destination="8Oz-JV-tAL" eventType="touchUpInside" id="E4d-I7-bmQ"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Escriba su correo electrónico para iniciar la recuperación de su contraseña:" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Scs-yN-cIk">
+                                        <rect key="frame" x="18" y="100" width="340" height="41"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Si tiene problemas o consultas, escribanos a soporte@perraespacial.com" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aky-l1-XJL">
+                                        <rect key="frame" x="25" y="284" width="325" height="41"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="Scs-yN-cIk" firstAttribute="top" secondItem="zIN-3V-Ywd" secondAttribute="top" constant="100" id="ETn-or-ocW"/>
+                                    <constraint firstItem="EF2-Zg-Nf1" firstAttribute="top" secondItem="Scs-yN-cIk" secondAttribute="bottom" constant="25" id="Jb7-hK-2Xy"/>
+                                    <constraint firstItem="EF2-Zg-Nf1" firstAttribute="leading" secondItem="zIN-3V-Ywd" secondAttribute="leading" constant="17.5" id="K4V-fU-4fo"/>
+                                    <constraint firstItem="aky-l1-XJL" firstAttribute="top" secondItem="eAK-I4-4oe" secondAttribute="bottom" constant="30" id="Npp-DJ-GBD"/>
+                                    <constraint firstAttribute="trailing" secondItem="aky-l1-XJL" secondAttribute="trailing" constant="25" id="Plc-OI-n3O"/>
+                                    <constraint firstItem="eAK-I4-4oe" firstAttribute="leading" secondItem="zIN-3V-Ywd" secondAttribute="leading" constant="25" id="bll-k3-1wu"/>
+                                    <constraint firstAttribute="trailing" secondItem="eAK-I4-4oe" secondAttribute="trailing" constant="25" id="c3e-Tt-gaC"/>
+                                    <constraint firstAttribute="trailing" secondItem="Scs-yN-cIk" secondAttribute="trailing" constant="17.5" id="fm9-oB-nhL"/>
+                                    <constraint firstAttribute="trailing" secondItem="EF2-Zg-Nf1" secondAttribute="trailing" constant="17.5" id="i3y-zx-dy0"/>
+                                    <constraint firstItem="Scs-yN-cIk" firstAttribute="leading" secondItem="zIN-3V-Ywd" secondAttribute="leading" constant="17.5" id="tDd-Ds-Rcq"/>
+                                    <constraint firstItem="eAK-I4-4oe" firstAttribute="top" secondItem="EF2-Zg-Nf1" secondAttribute="bottom" constant="25" id="uMJ-VE-kjK"/>
+                                    <constraint firstItem="aky-l1-XJL" firstAttribute="leading" secondItem="zIN-3V-Ywd" secondAttribute="leading" constant="25" id="xS2-W9-2sX"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="zIN-3V-Ywd" firstAttribute="bottom" secondItem="QaY-b5-eof" secondAttribute="bottom" id="33h-Zp-1tc"/>
+                            <constraint firstItem="zIN-3V-Ywd" firstAttribute="top" secondItem="QaY-b5-eof" secondAttribute="top" id="PHI-2J-cUF"/>
+                            <constraint firstItem="zIN-3V-Ywd" firstAttribute="trailing" secondItem="QaY-b5-eof" secondAttribute="trailing" id="U1q-zg-tXH"/>
+                            <constraint firstItem="zIN-3V-Ywd" firstAttribute="leading" secondItem="QaY-b5-eof" secondAttribute="leading" id="f63-5s-CrE"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="QaY-b5-eof"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Recuperar Contraseña" id="7dy-lo-Ux3">
+                        <barButtonItem key="leftBarButtonItem" title="Login" style="done" id="AJo-9V-Mbg">
+                            <connections>
+                                <segue destination="1Pr-1W-Joq" kind="presentation" modalTransitionStyle="crossDissolve" id="gzy-Vb-lUc"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="textFieldEmail" destination="EF2-Zg-Nf1" id="hAZ-Df-sud"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ff5-Ac-9o6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="801" y="152"/>
+        </scene>
+        <!--loginView-->
+        <scene sceneID="hqU-62-KXA">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Login" referencedIdentifier="loginView" id="1Pr-1W-Joq" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6jz-6E-LRs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1583" y="151"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="lKq-gX-9bP">
+            <objects>
+                <navigationController restorationIdentifier="passwordRecoverView" storyboardIdentifier="passwordRecoverView" automaticallyAdjustsScrollViewInsets="NO" id="fTb-fu-Wlg" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="BkJ-vm-QC6">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="8Oz-JV-tAL" kind="relationship" relationship="rootViewController" id="Pka-Wd-oEv"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Vdu-UW-KDv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-108" y="152"/>
+        </scene>
+    </scenes>
+</document>

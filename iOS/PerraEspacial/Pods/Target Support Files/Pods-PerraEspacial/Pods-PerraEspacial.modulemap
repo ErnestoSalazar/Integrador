@@ -1,0 +1,6 @@
+framework module Pods_PerraEspacial {
+  umbrella header "Pods-PerraEspacial-umbrella.h"
+
+  export *
+  module * { export * }
+}

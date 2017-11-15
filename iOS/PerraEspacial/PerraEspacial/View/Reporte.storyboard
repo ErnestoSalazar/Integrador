@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="0aT-Gi-qTf">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="VerdanaBold.ttf">
+            <string>Verdana-Bold</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Reporte-->
+        <scene sceneID="4Zj-SS-1En">
+            <objects>
+                <viewController id="wWY-Dw-ABH" customClass="ReporteViewController" customModule="PerraEspacial" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="PlL-kW-EVk">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Fecha inicio" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="S6f-X2-tvq">
+                                <rect key="frame" x="18" y="77" width="140" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="140" id="Anz-Su-JAK"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Fecha cierre" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zjN-K9-s45">
+                                <rect key="frame" x="217" y="77" width="140" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="140" id="lVq-Zo-3io"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sYz-nS-DRD">
+                                <rect key="frame" x="0.0" y="622" width="375" height="45"/>
+                                <color key="backgroundColor" red="0.92549019610000005" green="0.1333333333" blue="0.1450980392" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="Pr3-8M-CUf"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="15"/>
+                                <state key="normal" title="BUSCAR">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="buttonSearchPressed:" destination="wWY-Dw-ABH" eventType="touchUpInside" id="w5k-kN-SPP"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="W14-Jl-RBb">
+                                <rect key="frame" x="0.0" y="124" width="375" height="498"/>
+                                <color key="backgroundColor" red="0.8462313414" green="0.83144730330000005" blue="0.83544796710000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="iRD-KY-Nti" firstAttribute="trailing" secondItem="zjN-K9-s45" secondAttribute="trailing" constant="17.5" id="P4j-sk-f8D"/>
+                            <constraint firstItem="W14-Jl-RBb" firstAttribute="leading" secondItem="iRD-KY-Nti" secondAttribute="leading" id="Ryv-DE-um4"/>
+                            <constraint firstItem="S6f-X2-tvq" firstAttribute="top" secondItem="iRD-KY-Nti" secondAttribute="top" constant="13" id="Uhe-w2-2wO"/>
+                            <constraint firstItem="W14-Jl-RBb" firstAttribute="trailing" secondItem="iRD-KY-Nti" secondAttribute="trailing" id="XeW-78-FHV"/>
+                            <constraint firstItem="sYz-nS-DRD" firstAttribute="leading" secondItem="iRD-KY-Nti" secondAttribute="leading" id="dy2-XJ-8IL"/>
+                            <constraint firstItem="zjN-K9-s45" firstAttribute="top" secondItem="iRD-KY-Nti" secondAttribute="top" constant="13" id="ftS-2a-jol"/>
+                            <constraint firstItem="sYz-nS-DRD" firstAttribute="bottom" secondItem="iRD-KY-Nti" secondAttribute="bottom" id="giy-Zn-TRp"/>
+                            <constraint firstItem="S6f-X2-tvq" firstAttribute="leading" secondItem="iRD-KY-Nti" secondAttribute="leading" constant="17.5" id="nxI-jI-w37"/>
+                            <constraint firstItem="iRD-KY-Nti" firstAttribute="trailing" secondItem="sYz-nS-DRD" secondAttribute="trailing" id="qQT-AQ-B2E"/>
+                            <constraint firstItem="sYz-nS-DRD" firstAttribute="top" secondItem="W14-Jl-RBb" secondAttribute="bottom" id="sZM-Hn-Kv4"/>
+                            <constraint firstItem="W14-Jl-RBb" firstAttribute="top" secondItem="S6f-X2-tvq" secondAttribute="bottom" constant="17" id="yji-tD-9lX"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="iRD-KY-Nti"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Reporte" id="qVx-Kp-wJ9"/>
+                    <connections>
+                        <outlet property="buttonSearch" destination="sYz-nS-DRD" id="7K9-IN-5b0"/>
+                        <outlet property="tableView" destination="W14-Jl-RBb" id="URn-Qc-i0R"/>
+                        <outlet property="textFieldDateBegin" destination="S6f-X2-tvq" id="5Ax-MU-1D7"/>
+                        <outlet property="textFieldDateEnd" destination="zjN-K9-s45" id="MNE-9D-J4B"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Pu7-BB-nSH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="708" y="-162.3688155922039"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="wqu-qN-TLD">
+            <objects>
+                <navigationController restorationIdentifier="reporteView" storyboardIdentifier="reporteView" automaticallyAdjustsScrollViewInsets="NO" id="0aT-Gi-qTf" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Xs5-ur-6sa">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="wWY-Dw-ABH" kind="relationship" relationship="rootViewController" id="kia-ck-NSG"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="05G-yU-IGa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-60" y="-162"/>
+        </scene>
+    </scenes>
+</document>
