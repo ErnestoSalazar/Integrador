@@ -13,14 +13,10 @@ namespace SpaceDog.Service.Controllers
     public class EntradasController : ApiController
     {
         private EntradasRepository _entradasRepository = null;
-        private UsuariosRepository _usuariosRepository = null;
-        private CargasRepository _cargasRepository = null;
 
         public EntradasController(EntradasRepository entradasRepository, UsuariosRepository usuariosRepository, CargasRepository cargasRepository)
         {
             _entradasRepository = entradasRepository;
-            _usuariosRepository = usuariosRepository;
-            _cargasRepository = cargasRepository;
         }
 
 
@@ -37,14 +33,13 @@ namespace SpaceDog.Service.Controllers
 
         public IHttpActionResult Post(EntradaDto entradaDto)
         {
-
-            var usuario = _usuariosRepository.Get(entradaDto.UsuarioId);
+            
             var cargas = _entradasRepository.GetListOfCargasInEntrada(entradaDto.CargasId);
             entradaDto.Cargas = cargas;
-            entradaDto.Usuario = usuario;
 
+
+            entradaDto.Fecha = DateTime.Now.ToShortDateString();
             var entradaModel = entradaDto.ToModel();
-
 
             _entradasRepository.Add(entradaModel);
 
@@ -52,7 +47,7 @@ namespace SpaceDog.Service.Controllers
 
             return Created(
                 Url.Link("DefaultApi", new { controller = "Entradas", id = entradaDto.Id }),
-                entradaDto
+                entradaModel
                 );
 
             
@@ -61,16 +56,16 @@ namespace SpaceDog.Service.Controllers
 
         public IHttpActionResult Put(int id, EntradaDto entradaDto)
         {
-          
+            var entrada = _entradasRepository.Get(id);
             var cargas = _entradasRepository.GetListOfCargasInEntrada(entradaDto.CargasId);
-            entradaDto.Cargas = cargas;
-            
-            var entradaModel = entradaDto.ToModel();
-            entradaModel.Id = id;
-            entradaModel.UsuarioId = entradaDto.UsuarioId;
 
-            _entradasRepository.InsertListInContext(entradaModel);
-            _entradasRepository.Update(entradaModel);
+            entrada.Folio = entrada.Folio;
+            entrada.Turno = entradaDto.Turno.Value;
+            entrada.Cargas = cargas;
+            entrada.UsuarioId = entradaDto.UsuarioId;
+
+            
+            _entradasRepository.Update(entrada);
             
 
             return StatusCode(System.Net.HttpStatusCode.NoContent);
@@ -81,6 +76,21 @@ namespace SpaceDog.Service.Controllers
         public void Delete(int id)
         {
             _entradasRepository.Delete(id);
+        }
+
+        
+        public IHttpActionResult Get(string fechaInicio, string fechaFin, string especie)
+        {
+            DateTime dateInicio;
+            DateTime dateFin;
+            if (DateTime.TryParse(fechaInicio, out dateInicio) && DateTime.TryParse(fechaFin, out dateFin))
+            {
+                return Ok(_entradasRepository.GetListByDate(dateInicio, dateFin, especie));
+            }
+            else
+            {
+                return BadRequest("ingresa una fecha valida yyyy/MM/dd");
+            }
         }
 
 

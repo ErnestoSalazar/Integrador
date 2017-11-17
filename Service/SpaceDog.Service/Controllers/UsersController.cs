@@ -67,6 +67,11 @@ namespace SpaceDog.Service.Controllers
 
         public IHttpActionResult Put(int id, UsuarioDto usuarioDto)
         {
+            var usuario = _usersRepository.Get(id);
+            if(usuario == null)
+            {
+                return BadRequest("Usuario inexistente");
+            }
             if (UserService.ValidateEmail(usuarioDto.Correo) != null) // if email exists
             {
                 if (UserService.OtherUserHaveSameEmail(id, usuarioDto.Correo)) // if other user have same email
@@ -74,19 +79,15 @@ namespace SpaceDog.Service.Controllers
                     return BadRequest("Email already in use");
                 }
             }
-            if(usuarioDto.Password != usuarioDto.PasswordConfirmation)
-            {
-                return BadRequest("Las contraseñas no coinciden");
-            }
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState); // 400
-            }
 
-            usuarioDto.Password = PasswordEncryptService.passwordEncrypt(usuarioDto.Password);
 
-            var usuario = usuarioDto.ToModel();
-            usuario.Id = id;
+            usuario.Nombre      = (usuarioDto.Nombre != null)   ? usuarioDto.Nombre     :  usuario.Nombre;
+            usuario.Apellido    = (usuarioDto.Apellido != null) ? usuarioDto.Apellido   : usuario.Apellido;
+            usuario.Rfc         = (usuarioDto.Rfc != null)      ? usuarioDto.Rfc        : usuario.Rfc;
+            usuario.Correo      = (usuarioDto.Correo != null)   ? usuarioDto.Correo     : usuario.Correo;
+            usuario.Password    = (usuarioDto.Password != null) ? PasswordEncryptService.passwordEncrypt(usuarioDto.Password) : usuario.Password;
+            usuario.Rol         = (usuarioDto.Rol != null)      ? usuarioDto.Rol.Value  : usuario.Rol;
+            
 
             _usersRepository.Update(usuario);
 

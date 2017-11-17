@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace SpaceDog.Shared.Models
 {
     [JsonConverter(typeof(StringEnumConverter))]
-    public enum Especie { Pez1, Pez2, Pez3 }
+    public enum Especie { Macarela, Japonesa, Monterrey, Rayadillo, Bocona, Anchoveta, Crinuda }
     [JsonConverter(typeof(StringEnumConverter))]
     public enum Talla { s, m, x, xl }
     [JsonConverter(typeof(StringEnumConverter))]
@@ -26,5 +26,8 @@ namespace SpaceDog.Shared.Models
 
         public int BarcoId { get; set; }
         public Barco Barco { get; set; }
+
+        public int? EntradaId { get; set; }
+        public Entrada Entrada { get; set; }
     }
 }

@@ -1,4 +1,7 @@
-﻿using SpaceDog.Shared.Models;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using SpaceDog.Shared.Dto;
+using SpaceDog.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -36,6 +39,60 @@ namespace SpaceDog.Shared.Data
                 .ToList();
         }
 
+        public dynamic GetListByDate(DateTime dateInicio, DateTime dateFin, string especie)
+        {
+            
+            var entradas = Context.Entradas
+                .Select(en => new EntradaDto
+                {
+                    Id = en.Id,
+                    Folio = en.Folio,
+                    Fecha = en.Fecha,
+                    Hora = en.Hora,
+                    Turno = en.Turno,
+                    UsuarioId = en.UsuarioId,
+                    Cargas = en.Cargas.Where(c=> c.Especie.ToString() == especie).ToList()
+                })
+                .Where(e => e.Fecha >= dateInicio && e.Fecha <= dateFin && e.Cargas.Any(c => c.Especie.ToString() == especie))
+                .ToList();
+
+            var totalPesaje = 0.0;
+
+            foreach(var entrada in entradas)
+            {
+                totalPesaje += entrada.Cargas.Sum(c=> c.Cantidad);
+                entrada.TotalPesaje = totalPesaje;
+                totalPesaje = 0.0;
+            }
+            return entradas;
+        }
+
+        /*
+         
+
+            SELECT * ,
+            (SELECT SUM(cantidad) FROM Cargas c RIGHT JOIN Entradas e
+            ON c.Entrada_Id = 1 
+            WHERE c.Especie = 1 AND e.Fecha BETWEEN 
+            CONVERT(datetime,'14/11/2017 12:00:00 am',103)
+            AND 
+            CONVERT(datetime,'14/11/2017 12:00:00 am',103)) as total
+            FROM Cargas c INNER JOIN Entradas e
+            ON c.Entrada_Id = 1 
+            WHERE c.Especie = 1
+
+         */
+        public List<double> GetTotalDePesoDePescados(DateTime dateInicio, DateTime dateFin)
+        {
+            var sql = Context.Database.SqlQuery<double>(
+                "SELECT SUM(cantidad) FROM Cargas c INNER JOIN Entradas e " +
+                "ON c.Entrada_Id = 1 " +
+                "WHERE c.Especie = 1 AND e.Fecha BETWEEN  CONVERT(datetime,'"+dateInicio+"',103)  AND CONVERT(datetime,'"+dateFin+"',103) ;").ToList();
+            return sql;
+
+            
+        }
+
         public List<Carga> GetListOfCargasInEntrada(ICollection<Carga> cargas)
         {
             List<Carga> _cargas = new List<Carga>();
@@ -49,6 +106,7 @@ namespace SpaceDog.Shared.Data
 
         }
 
+
         public List<Carga> GetListOfCargasInEntrada(List<int> CargasId)
         {
             List<Carga> _cargas = new List<Carga>();
@@ -60,6 +118,7 @@ namespace SpaceDog.Shared.Data
             }
             return _cargas;
         }
+
 
         public void InsertListInContext(Entrada entrada)
         {
@@ -73,11 +132,6 @@ namespace SpaceDog.Shared.Data
             entrada.Cargas = cargas;
             Context.Entradas.Add(entrada);
         }
-
-
         
-
-
-
     }
 }

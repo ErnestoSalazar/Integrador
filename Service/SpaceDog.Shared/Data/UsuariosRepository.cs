@@ -18,17 +18,11 @@ namespace SpaceDog.Shared.Data
         {
             var user = Context.Usuarios.AsQueryable();
 
-            var _user = user
+            return user
                 .Where(u => u.Id == id)
                 .SingleOrDefault();
 
-            return new Usuario()
-            {
-                Nombre = _user.Nombre,
-                Apellido = _user.Apellido,
-                Rfc = _user.Rfc,
-                Rol = _user.Rol
-            };
+            
 
         }
 

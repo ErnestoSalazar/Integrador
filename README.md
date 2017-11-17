@@ -7,12 +7,13 @@ Endpoints    | HTTP verbs   | Examples
 __/login__            | __POST__                | form: __grant_type: password, username: myUsername, password: myPassword__
 __/login/recover__    | __POST__                | __{mailTo: myEmail}__
 __/api/users__        | __POST/GET__            | __{nombre, apellido, correo, rfc, rol}__
-__/api/users/{id}__   | __GET/PUT/DELETE__      | __{nombre, apellido, correo, rfc, rol, password}__
+__/api/users/{id}__   | __GET/PUT/DELETE__      | __{nombre, apellido, correo, rfc, rol, password, PasswordConfirmation}__
 __/api/barcos__       | __POST/GET__            | __{nombre, descripcion, ususarioId}__
 __/api/barcos/{id}__  | __GET/PUT/DELETE__      | __{nombre, descripcion, ususarioId}__
 __/api/cargas__       | __POST/GET__            | __{cantidad, especie, talla, temperatura, condicion, barcoId}__
 __/api/cargas/{id}__  | __GET/PUT/DELETE__      | __{cantidad, especie, talla, temperatura, condicion, barcoId}__
 __/api/entradas__     | __POST/GET__            | __{folio, turno, usuarioId, cargasId:[]}__
+__/api/entradas?__    | __GET__                 | __fechaInicio=dd/mm/yyyy&fechaFin=dd/mm/yyyy&especie=Rayadillo__
 __/api/entradas{id}__ | __GET/PUT/DELETE__      | __{folio, turno, usuarioId, cargasId:[]}__
 
 
@@ -23,7 +24,7 @@ after Login you will recieve a response like this :
     "access_token": "ZUot4VTE13rKUagahglxVBCPlTnEAR5g82lMbHHlAeS1wPPSbaRtjBqMmA0V00AVtoFku6fKZmMcCyF8fyPztAumSN3Rzxay_G8F5eo4OtHTQ2npEm-ha4qeTqm_CwSyO6LzJF-IgAP2j9hsPfyttiwpBjd6GgYuZq0sBSKXvKvqW4CGQfjCaw2NHdIFqlkvo5fxvaJS8oqNks4dxiMOJ3Xf0Rlj6t2jiLkoO5X1xHPn34NsoLOqqwUe-ZIlq-VsTrUZtadLKk3PRIcezoWcq9nGX3pLmrR-Wi-Kex_6QC55WXVK8beCtC8GPyUS3zykM2GpR04gvfEN84OCCnsS11KodPOOQSugt1mP-KRUVvqcNDGZqvlTZxmP_F8d118Gd02R1-v2tiGshC6B1EEVDg",
     "token_type": "bearer",
     "expires_in": 86399,
-    "userName": "email@example",
+    "userName": "name",
     ".issued": "Mon, 13 Nov 2017 15:40:00 GMT",
     ".expires": "Tue, 14 Nov 2017 15:40:00 GMT"
 }
@@ -31,4 +32,4 @@ after Login you will recieve a response like this :
 you will need to keep the *access_token*, this one needs to be sended on the header of every request made to __/api/*__
 with the key/value:
 
-__Authorization : bearer access_token__
+__Authorization : bearer *access_token*__
