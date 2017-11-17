@@ -22,7 +22,7 @@ namespace SpaceDog.Service.Dto
         public Condicion? Condicion { get; set; }
 
         public int BarcoId { get; set; }
-
+        public int EntradaId { get; set; }
 
         public Carga ToModel()
         {

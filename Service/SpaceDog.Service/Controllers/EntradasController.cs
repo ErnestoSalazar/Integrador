@@ -64,7 +64,7 @@ namespace SpaceDog.Service.Controllers
             entrada.Cargas = cargas;
             entrada.UsuarioId = entradaDto.UsuarioId;
 
-            _entradasRepository.InsertListInContext(entrada);
+            
             _entradasRepository.Update(entrada);
             
 
@@ -79,19 +79,20 @@ namespace SpaceDog.Service.Controllers
         }
 
         
-        public IHttpActionResult Get(string fechaInicio, string fechaFin)
+        public IHttpActionResult Get(string fechaInicio, string fechaFin, string especie)
         {
             DateTime dateInicio;
             DateTime dateFin;
             if (DateTime.TryParse(fechaInicio, out dateInicio) && DateTime.TryParse(fechaFin, out dateFin))
             {
-                return Ok(_entradasRepository.GetListByDate(dateInicio, dateFin));
+                return Ok(_entradasRepository.GetListByDate(dateInicio, dateFin, especie));
             }
             else
             {
                 return BadRequest("ingresa una fecha valida yyyy/MM/dd");
             }
         }
+
 
 
     }
