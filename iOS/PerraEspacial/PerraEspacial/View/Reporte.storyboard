@@ -75,7 +75,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="iRD-KY-Nti"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Reporte" id="qVx-Kp-wJ9"/>
+                    <navigationItem key="navigationItem" title="Reporte" id="qVx-Kp-wJ9">
+                        <barButtonItem key="leftBarButtonItem" image="menu" id="QUx-V0-nvS">
+                            <connections>
+                                <segue destination="S4v-1Y-rjz" kind="presentation" modalTransitionStyle="crossDissolve" id="R6a-Eh-rjS"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="buttonSearch" destination="sYz-nS-DRD" id="7K9-IN-5b0"/>
                         <outlet property="tableView" destination="W14-Jl-RBb" id="URn-Qc-i0R"/>
@@ -105,5 +111,16 @@
             </objects>
             <point key="canvasLocation" x="-60" y="-162"/>
         </scene>
+        <!--menuView-->
+        <scene sceneID="k3M-2A-nY8">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Menu" referencedIdentifier="menuView" id="S4v-1Y-rjz" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x4V-nx-hG5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1228" y="-163"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="menu" width="20" height="14"/>
+    </resources>
 </document>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="frP-dn-8V4">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Verdana.ttf">
+            <string>Verdana</string>
+        </array>
+        <array key="VerdanaBold.ttf">
+            <string>Verdana-Bold</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Agregar barco-->
+        <scene sceneID="L6T-eF-eg4">
+            <objects>
+                <viewController restorationIdentifier="addBoatView" storyboardIdentifier="addBoatView" id="fCL-rM-h0o" customClass="AddBoatViewController" customModule="PerraEspacial" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="CV5-Cj-qdi">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Nombre" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iiF-By-0Mr">
+                                <rect key="frame" x="114" y="76" width="244" height="30"/>
+                                <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="17"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Seleccione" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="StU-DF-Yhq">
+                                <rect key="frame" x="114.5" y="129.5" width="243" height="30"/>
+                                <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="17"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nombre :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4jd-vj-Uct">
+                                <rect key="frame" x="17.5" y="81.5" width="78" height="19"/>
+                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pescador :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rxm-nv-VZx">
+                                <rect key="frame" x="17.5" y="135" width="89" height="19"/>
+                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Descripción : " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G3T-2w-599">
+                                <rect key="frame" x="17.5" y="194.5" width="115" height="18.5"/>
+                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="onDrag" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="tEq-Aw-B0z">
+                                <rect key="frame" x="18" y="230.5" width="340" height="179"/>
+                                <color key="backgroundColor" red="0.96978381295411564" green="0.96978381295411564" blue="0.96978381295411564" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="179" id="DH9-ID-GZh"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tDt-5u-Lhc">
+                                <rect key="frame" x="0.0" y="622" width="375" height="45"/>
+                                <color key="backgroundColor" red="0.92549019610000005" green="0.1333333333" blue="0.1450980392" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="9ZA-Ox-aYi"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="15"/>
+                                <state key="normal" title="CREAR">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="createButtonPressed:" destination="fCL-rM-h0o" eventType="touchUpInside" id="AkB-Bu-3ya"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="4jd-vj-Uct" firstAttribute="leading" secondItem="dUj-LQ-1bQ" secondAttribute="leading" constant="17.5" id="0c9-Iy-Qg7"/>
+                            <constraint firstItem="dUj-LQ-1bQ" firstAttribute="trailing" secondItem="tEq-Aw-B0z" secondAttribute="trailing" constant="17.5" id="5Uv-SE-zyI"/>
+                            <constraint firstItem="4jd-vj-Uct" firstAttribute="top" secondItem="dUj-LQ-1bQ" secondAttribute="top" constant="17.5" id="Db7-sI-rQH"/>
+                            <constraint firstItem="tEq-Aw-B0z" firstAttribute="leading" secondItem="dUj-LQ-1bQ" secondAttribute="leading" constant="17.5" id="K7d-w4-plM"/>
+                            <constraint firstItem="Rxm-nv-VZx" firstAttribute="leading" secondItem="dUj-LQ-1bQ" secondAttribute="leading" constant="17.5" id="Nf1-hf-qd7"/>
+                            <constraint firstItem="Rxm-nv-VZx" firstAttribute="top" secondItem="4jd-vj-Uct" secondAttribute="bottom" constant="35" id="O0z-6M-oOy"/>
+                            <constraint firstItem="iiF-By-0Mr" firstAttribute="leading" secondItem="4jd-vj-Uct" secondAttribute="trailing" constant="18.5" id="PB2-qi-0y5"/>
+                            <constraint firstItem="G3T-2w-599" firstAttribute="leading" secondItem="dUj-LQ-1bQ" secondAttribute="leading" constant="17.5" id="UxZ-eu-sdF"/>
+                            <constraint firstItem="G3T-2w-599" firstAttribute="top" secondItem="StU-DF-Yhq" secondAttribute="bottom" constant="35" id="Xta-AW-Eku"/>
+                            <constraint firstItem="tDt-5u-Lhc" firstAttribute="bottom" secondItem="dUj-LQ-1bQ" secondAttribute="bottom" id="ZMP-mJ-LIa"/>
+                            <constraint firstItem="dUj-LQ-1bQ" firstAttribute="trailing" secondItem="StU-DF-Yhq" secondAttribute="trailing" constant="17.5" id="bDA-ON-SDo"/>
+                            <constraint firstItem="tDt-5u-Lhc" firstAttribute="leading" secondItem="dUj-LQ-1bQ" secondAttribute="leading" id="d4w-pK-v2g"/>
+                            <constraint firstItem="tEq-Aw-B0z" firstAttribute="top" secondItem="G3T-2w-599" secondAttribute="bottom" constant="17.5" id="f5Y-xh-U6t"/>
+                            <constraint firstItem="dUj-LQ-1bQ" firstAttribute="trailing" secondItem="iiF-By-0Mr" secondAttribute="trailing" constant="17.5" id="hbN-hA-ar9"/>
+                            <constraint firstItem="iiF-By-0Mr" firstAttribute="centerY" secondItem="4jd-vj-Uct" secondAttribute="centerY" id="o9D-fT-q1M"/>
+                            <constraint firstItem="StU-DF-Yhq" firstAttribute="centerY" secondItem="Rxm-nv-VZx" secondAttribute="centerY" id="qj2-zc-8ps"/>
+                            <constraint firstAttribute="trailing" secondItem="tDt-5u-Lhc" secondAttribute="trailing" id="rhK-nk-WbH"/>
+                            <constraint firstItem="StU-DF-Yhq" firstAttribute="leading" secondItem="Rxm-nv-VZx" secondAttribute="trailing" constant="8" id="ylJ-bV-ztX"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="dUj-LQ-1bQ"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Agregar barco" id="4i2-EW-7fH"/>
+                    <connections>
+                        <outlet property="textFieldFisher" destination="StU-DF-Yhq" id="4eY-uk-bsQ"/>
+                        <outlet property="textFieldName" destination="iiF-By-0Mr" id="gzA-Iv-WK5"/>
+                        <outlet property="textViewDescription" destination="tEq-Aw-B0z" id="xUd-ok-zPq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ej5-5y-gTl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1424.8" y="-107.49625187406298"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="irU-mw-WGv">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="frP-dn-8V4" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="o6d-Yg-7vB">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="fCL-rM-h0o" kind="relationship" relationship="rootViewController" id="hZV-Ml-3WB"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9uh-EP-vim" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="633.60000000000002" y="-107.0464767616192"/>
+        </scene>
+    </scenes>
+</document>

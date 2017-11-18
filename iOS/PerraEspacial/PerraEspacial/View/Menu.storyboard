@@ -37,6 +37,7 @@
                         <segue destination="Klg-gO-Gc8" kind="show" identifier="segueToUsers" id="7jG-sg-yco"/>
                         <segue destination="qfS-OO-rTV" kind="show" identifier="segueToDeliveries" id="d8a-UI-Tie"/>
                         <segue destination="xad-Li-DkH" kind="show" identifier="segueToBoats" id="EIk-as-7yB"/>
+                        <segue destination="2jP-S1-liM" kind="show" identifier="segueToReports" id="f67-d7-8V8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3m0-Gk-BgT" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -92,6 +93,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AK6-tZ-jGA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="511" y="-1518"/>
+        </scene>
+        <!--reporteView-->
+        <scene sceneID="pGu-q7-5Ap">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Reporte" referencedIdentifier="reporteView" id="2jP-S1-liM" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DF0-Aw-a9T" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="520" y="-1469"/>
         </scene>
     </scenes>
 </document>

@@ -19,7 +19,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
     let segueToUsers = "segueToUsers"
     let segueToDeliveries = "segueToDeliveries"
     let segueToBoats = "segueToBoats"
-    
+    let segueToReports = "segueToReports"
     //MARK: - View Life
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +38,9 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            self.performSegue(withIdentifier: self.segueToReports, sender: self)
+        }
         if indexPath.row == 1 {
             self.performSegue(withIdentifier: self.segueToUsers, sender: self)
         }else if indexPath.row == 2 {

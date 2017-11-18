@@ -69,6 +69,11 @@
                                 </connections>
                             </barButtonItem>
                         </leftBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="OrY-hl-S69">
+                            <connections>
+                                <segue destination="KBO-JT-gNE" kind="show" id="z4Q-jj-7YL"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="buttonSearch" destination="cfi-8c-tsL" id="bDb-KK-2ZS"/>
@@ -97,6 +102,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jpK-Zc-kfo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-446" y="116"/>
+        </scene>
+        <!--addBoatView-->
+        <scene sceneID="mEQ-ph-Vlo">
+            <objects>
+                <viewControllerPlaceholder storyboardName="AddBoats" referencedIdentifier="addBoatView" id="KBO-JT-gNE" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WNz-i1-rfC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="942" y="-68"/>
         </scene>
         <!--menuView-->
         <scene sceneID="Xoq-Xp-O8T">

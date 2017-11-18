@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B40CB28B1FBFD0D600A88B0C /* AddBoats.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B40CB28A1FBFD0D600A88B0C /* AddBoats.storyboard */; };
+		B40CB28D1FBFD2FA00A88B0C /* AddBoatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40CB28C1FBFD2FA00A88B0C /* AddBoatViewController.swift */; };
 		B428F5071FAFD974005D5545 /* PasswrodRecover.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B428F5061FAFD974005D5545 /* PasswrodRecover.storyboard */; };
 		B428F5091FAFDBBE005D5545 /* PasswordRecoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B428F5081FAFDBBE005D5545 /* PasswordRecoverViewController.swift */; };
 		B442DB3B1FB12620001784A5 /* DataGlobal.swift in Sources */ = {isa = PBXBuildFile; fileRef = B442DB3A1FB12620001784A5 /* DataGlobal.swift */; };
@@ -44,6 +46,8 @@
 		486FDB84FF17DBDACA3DD9BD /* Pods_PerraEspacial.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PerraEspacial.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		671930950E05738F5613289C /* Pods-PerraEspacial.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PerraEspacial.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PerraEspacial/Pods-PerraEspacial.debug.xcconfig"; sourceTree = "<group>"; };
 		718C4CCB0E3690D210F77D12 /* Pods-PerraEspacial.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PerraEspacial.release.xcconfig"; path = "Pods/Target Support Files/Pods-PerraEspacial/Pods-PerraEspacial.release.xcconfig"; sourceTree = "<group>"; };
+		B40CB28A1FBFD0D600A88B0C /* AddBoats.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddBoats.storyboard; sourceTree = "<group>"; };
+		B40CB28C1FBFD2FA00A88B0C /* AddBoatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBoatViewController.swift; sourceTree = "<group>"; };
 		B428F5061FAFD974005D5545 /* PasswrodRecover.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PasswrodRecover.storyboard; sourceTree = "<group>"; };
 		B428F5081FAFDBBE005D5545 /* PasswordRecoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordRecoverViewController.swift; sourceTree = "<group>"; };
 		B442DB3A1FB12620001784A5 /* DataGlobal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataGlobal.swift; sourceTree = "<group>"; };
@@ -155,6 +159,7 @@
 				B4C378301FBC97D6008ADDD4 /* BoatTableViewCell.swift */,
 				B4C378441FBCA2D0008ADDD4 /* DeliveriesTableViewCell.swift */,
 				B4C378481FBCA2F1008ADDD4 /* DeliveriesViewController.swift */,
+				B40CB28C1FBFD2FA00A88B0C /* AddBoatViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -174,6 +179,7 @@
 				B4C378311FBC97D6008ADDD4 /* BoatTableViewCell.xib */,
 				B4C3784A1FBCA2FE008ADDD4 /* Deliveries.storyboard */,
 				B4C378451FBCA2D0008ADDD4 /* DeliveriesTableViewCell.xib */,
+				B40CB28A1FBFD0D600A88B0C /* AddBoats.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -253,6 +259,7 @@
 				B4D390D61FACCB7200466CA7 /* LaunchScreen.storyboard in Resources */,
 				B4C378371FBC9982008ADDD4 /* Boats.storyboard in Resources */,
 				B4D390D31FACCB7200466CA7 /* Assets.xcassets in Resources */,
+				B40CB28B1FBFD0D600A88B0C /* AddBoats.storyboard in Resources */,
 				B4C3784B1FBCA2FE008ADDD4 /* Deliveries.storyboard in Resources */,
 				B499DDF41FB9EEEA0058DBAA /* Reporte.storyboard in Resources */,
 				B499DDF81FB9F02E0058DBAA /* ReporteTableViewCell.xib in Resources */,
@@ -336,6 +343,7 @@
 				B4C378351FBC9978008ADDD4 /* BoatsViewController.swift in Sources */,
 				B499DE021FB9FD6F0058DBAA /* UsersViewController.swift in Sources */,
 				B499DDFA1FB9F0420058DBAA /* ReporteViewController.swift in Sources */,
+				B40CB28D1FBFD2FA00A88B0C /* AddBoatViewController.swift in Sources */,
 				B428F5091FAFDBBE005D5545 /* PasswordRecoverViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
