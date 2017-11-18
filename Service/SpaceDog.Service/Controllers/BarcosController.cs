@@ -35,10 +35,6 @@ namespace SpaceDog.Service.Controllers
 
         public IHttpActionResult Post(BarcoDto barcoDto)
         {
-
-            var usuario = _usuariosRepository.Get(barcoDto.UsuarioId);
-            barcoDto.Usuario = usuario;
-
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

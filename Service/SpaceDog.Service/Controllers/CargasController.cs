@@ -13,12 +13,10 @@ namespace SpaceDog.Service.Controllers
     public class CargasController : ApiController
     {
         private CargasRepository _cargasRepository = null;
-        private BarcosRepository _barcosRepository = null;
 
         public CargasController(CargasRepository cargasRepository, BarcosRepository barcosRepository)
         {
             _cargasRepository = cargasRepository;
-            _barcosRepository = barcosRepository;
         }
 
 
@@ -35,8 +33,6 @@ namespace SpaceDog.Service.Controllers
 
         public IHttpActionResult Post(CargaDto cargaDto)
         {
-            var barco = _barcosRepository.Get(cargaDto.BarcoId);
-            cargaDto.Barco = barco;
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -57,7 +53,6 @@ namespace SpaceDog.Service.Controllers
         public IHttpActionResult Put(int id, CargaDto cargaDto)
         {
             var _carga = cargaDto.ToModel();
-            _carga.BarcoId = cargaDto.BarcoId;
             _carga.Id = id;
 
             _cargasRepository.Update(_carga);
