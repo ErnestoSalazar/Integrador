@@ -68,6 +68,11 @@
                                 <segue destination="DJZ-IU-Zh9" kind="presentation" modalTransitionStyle="crossDissolve" id="WC7-zm-2cb"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="d1v-WF-hUu">
+                            <connections>
+                                <segue destination="91e-di-JFP" kind="show" id="nyW-Zp-6j3"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="buttonSearch" destination="wll-VK-Y0p" id="L2b-Dl-6k5"/>
@@ -78,6 +83,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yoV-OR-dGa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="343.19999999999999" y="115.59220389805098"/>
+        </scene>
+        <!--addUserView-->
+        <scene sceneID="znl-WU-iik">
+            <objects>
+                <viewControllerPlaceholder storyboardName="AddUsers" referencedIdentifier="addUserView" id="91e-di-JFP" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bYe-4h-fuh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="977" y="-65"/>
         </scene>
         <!--menuView-->
         <scene sceneID="9a2-rU-HZ9">

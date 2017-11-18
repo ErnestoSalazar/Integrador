@@ -73,7 +73,7 @@
                                     <constraint firstAttribute="height" constant="45" id="9ZA-Ox-aYi"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="15"/>
-                                <state key="normal" title="CREAR">
+                                <state key="normal" title="AGREGAR">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>

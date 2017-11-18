@@ -1,5 +1,5 @@
 //
-//  AddBoatViewController.swift
+//  AddUserViewController.swift
 //  PerraEspacial
 //
 //  Created by saul ulises urias guzmàn on 17/11/17.
@@ -8,15 +8,17 @@
 
 import UIKit
 
-class AddBoatViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+class AddUserViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     //MARK: - IBOutlets
     @IBOutlet weak var textFieldName: UITextField!
-    @IBOutlet weak var textFieldFisher: UITextField!
-    @IBOutlet weak var textViewDescription: UITextView!
+    @IBOutlet weak var textFieldLastName: UITextField!
+    @IBOutlet weak var textFieldRfc: UITextField!
+    @IBOutlet weak var textFieldRole: UITextField!
+    @IBOutlet weak var textFieldEmail: UITextField!
     
     //MARK: - Varailabels And Constants
     let picker = UIPickerView()
-    let fishers = ["Pescador 1", "Pescador 2", "Pescador 3", "Pescador 4", "Pescador 5"]
+    let fishers = ["Administrador", "Pescador"]
     
     
     //MARK: - View Life
@@ -26,14 +28,30 @@ class AddBoatViewController: UIViewController, UITextFieldDelegate, UIPickerView
         self.setPicker()
     }
     
+    //MARK: - TextField Delegate
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textFieldEmail.isEditing {
+            UIView.animate(withDuration: 0.5, animations: {
+                self.view.frame.origin.y = self.view.frame.origin.y-50
+            })
+        }
+    }
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        if textFieldEmail.isEditing {
+            UIView.animate(withDuration: 0.5, animations: {
+                self.view.frame.origin.y = self.view.frame.origin.y+50
+            })
+        }
+        return true
+    }
+    
+    
     //MARK: - Actions
-    @IBAction func createButtonPressed(_ sender: Any) {
+    @IBAction func addButtonPressed(_ sender: Any) {
         if self.verifyInputs() {
             self.navigationController?.popViewController(animated: true)
         }
     }
-    
-    
     
     //MARK: - PickerView Delegate And DataSource
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -47,28 +65,36 @@ class AddBoatViewController: UIViewController, UITextFieldDelegate, UIPickerView
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        textFieldFisher.text = fishers[row]
+        self.textFieldRole.text = fishers[row]
     }
     
     
     //MARK: - Functions
     func setDelegates(){
-        self.textFieldFisher.delegate = self
+        self.textFieldRole.delegate = self
+        self.textFieldEmail.delegate = self
         self.picker.delegate = self
         self.picker.dataSource = self
     }
     
     func verifyInputs() -> Bool {
         if textFieldName.text == "" {
-            self.alert(title: "Valor requerido", message: "Favor de ingresar el nombre del barco")
+            self.alert(title: "Valor requerido", message: "Favor de ingresar el nombre del usuario")
             return false
-        }else if textFieldFisher.text == "" {
-            self.alert(title: "Valor requerido", message: "Favor de seleccionar un pescador")
+        }else if textFieldLastName.text == "" {
+            self.alert(title: "Valor requerido", message: "Favor de ingresar el apellido del usuario")
             return false
-        }else if textViewDescription.text == "" {
-            self.alert(title: "Valor requerido", message: "Favor de añadir una descripción")
+        }else if textFieldRfc.text == "" {
+            self.alert(title: "Valor requerido", message: "Favor de ingresar el RFC del usuario")
+            return false
+        }else if textFieldRole.text == "" {
+            self.alert(title: "Valor requerido", message: "Favor de seleccionar el Rol de usuario")
+            return false
+        }else if textFieldEmail.text == "" {
+            self.alert(title: "Valor requerido", message: "Favor de ingresar el correo del usuario")
             return false
         }
+        
         return true
     }
     
@@ -85,10 +111,12 @@ class AddBoatViewController: UIViewController, UITextFieldDelegate, UIPickerView
         toolBar.isUserInteractionEnabled = true
         
         //Binding to textfield
-        textFieldFisher.inputView = picker
-        textFieldFisher.inputAccessoryView = toolBar
+        textFieldRole.inputView = picker
         textFieldName.inputAccessoryView = toolBar
-        textViewDescription.inputAccessoryView = toolBar
+        textFieldLastName.inputAccessoryView = toolBar
+        textFieldRfc.inputAccessoryView = toolBar
+        textFieldRole.inputAccessoryView = toolBar
+        textFieldEmail.inputAccessoryView = toolBar
     }
     
     @objc func doneClick() {

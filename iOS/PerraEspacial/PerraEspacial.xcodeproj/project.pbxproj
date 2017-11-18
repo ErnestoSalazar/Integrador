@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		B40CB28B1FBFD0D600A88B0C /* AddBoats.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B40CB28A1FBFD0D600A88B0C /* AddBoats.storyboard */; };
 		B40CB28D1FBFD2FA00A88B0C /* AddBoatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40CB28C1FBFD2FA00A88B0C /* AddBoatViewController.swift */; };
+		B40CB28F1FBFD7B400A88B0C /* AddUsers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B40CB28E1FBFD7B400A88B0C /* AddUsers.storyboard */; };
+		B40CB2911FBFDA5E00A88B0C /* AddUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40CB2901FBFDA5E00A88B0C /* AddUserViewController.swift */; };
 		B428F5071FAFD974005D5545 /* PasswrodRecover.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B428F5061FAFD974005D5545 /* PasswrodRecover.storyboard */; };
 		B428F5091FAFDBBE005D5545 /* PasswordRecoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B428F5081FAFDBBE005D5545 /* PasswordRecoverViewController.swift */; };
 		B442DB3B1FB12620001784A5 /* DataGlobal.swift in Sources */ = {isa = PBXBuildFile; fileRef = B442DB3A1FB12620001784A5 /* DataGlobal.swift */; };
@@ -48,6 +50,8 @@
 		718C4CCB0E3690D210F77D12 /* Pods-PerraEspacial.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PerraEspacial.release.xcconfig"; path = "Pods/Target Support Files/Pods-PerraEspacial/Pods-PerraEspacial.release.xcconfig"; sourceTree = "<group>"; };
 		B40CB28A1FBFD0D600A88B0C /* AddBoats.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddBoats.storyboard; sourceTree = "<group>"; };
 		B40CB28C1FBFD2FA00A88B0C /* AddBoatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBoatViewController.swift; sourceTree = "<group>"; };
+		B40CB28E1FBFD7B400A88B0C /* AddUsers.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddUsers.storyboard; sourceTree = "<group>"; };
+		B40CB2901FBFDA5E00A88B0C /* AddUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUserViewController.swift; sourceTree = "<group>"; };
 		B428F5061FAFD974005D5545 /* PasswrodRecover.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PasswrodRecover.storyboard; sourceTree = "<group>"; };
 		B428F5081FAFDBBE005D5545 /* PasswordRecoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordRecoverViewController.swift; sourceTree = "<group>"; };
 		B442DB3A1FB12620001784A5 /* DataGlobal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataGlobal.swift; sourceTree = "<group>"; };
@@ -160,6 +164,7 @@
 				B4C378441FBCA2D0008ADDD4 /* DeliveriesTableViewCell.swift */,
 				B4C378481FBCA2F1008ADDD4 /* DeliveriesViewController.swift */,
 				B40CB28C1FBFD2FA00A88B0C /* AddBoatViewController.swift */,
+				B40CB2901FBFDA5E00A88B0C /* AddUserViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -180,6 +185,7 @@
 				B4C3784A1FBCA2FE008ADDD4 /* Deliveries.storyboard */,
 				B4C378451FBCA2D0008ADDD4 /* DeliveriesTableViewCell.xib */,
 				B40CB28A1FBFD0D600A88B0C /* AddBoats.storyboard */,
+				B40CB28E1FBFD7B400A88B0C /* AddUsers.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -260,6 +266,7 @@
 				B4C378371FBC9982008ADDD4 /* Boats.storyboard in Resources */,
 				B4D390D31FACCB7200466CA7 /* Assets.xcassets in Resources */,
 				B40CB28B1FBFD0D600A88B0C /* AddBoats.storyboard in Resources */,
+				B40CB28F1FBFD7B400A88B0C /* AddUsers.storyboard in Resources */,
 				B4C3784B1FBCA2FE008ADDD4 /* Deliveries.storyboard in Resources */,
 				B499DDF41FB9EEEA0058DBAA /* Reporte.storyboard in Resources */,
 				B499DDF81FB9F02E0058DBAA /* ReporteTableViewCell.xib in Resources */,
@@ -329,6 +336,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B442DB3B1FB12620001784A5 /* DataGlobal.swift in Sources */,
+				B40CB2911FBFDA5E00A88B0C /* AddUserViewController.swift in Sources */,
 				B4943EAB1FB124B400BF29B8 /* WebLinks.swift in Sources */,
 				B4C378401FBC9CBB008ADDD4 /* MenuTableViewCell.swift in Sources */,
 				B4D390E61FACCE4D00466CA7 /* LoginViewController.swift in Sources */,
