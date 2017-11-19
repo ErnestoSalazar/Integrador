@@ -31,7 +31,7 @@ namespace SpaceDog.Service.Providers
                     ClaimsIdentity oAuthIdentity = new ClaimsIdentity(claims,
                                 Startup.OAuthOptions.AuthenticationType);
 
-                    var properties = CreateProperties(user.Correo);
+                    var properties = CreateProperties(user.Nombre);
                     var ticket = new AuthenticationTicket(oAuthIdentity, properties);
                     context.Validated(ticket);
                 }

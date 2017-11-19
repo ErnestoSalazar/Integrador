@@ -27,7 +27,7 @@ namespace SpaceDog.Shared.Data
             }
 
             return entrada
-                .Where(e => e.Id == id)
+                .Where(e => e.Id == id && e.IsDeleted != true)
                 .SingleOrDefault();
         }
 
@@ -36,12 +36,21 @@ namespace SpaceDog.Shared.Data
             return Context.Entradas
                 .Include(e => e.Usuario)
                 .Include(e => e.Cargas)
+                .Where(e => e.IsDeleted != true)
                 .ToList();
+        }
+
+        public void DeleteD(int id)
+        {
+            var entrada = Context.Entradas.Find(id);
+            entrada.IsDeleted = true;
+            Context.Entry(entrada).State = EntityState.Modified;
+            Context.SaveChanges();
         }
 
         public dynamic GetListByDate(DateTime dateInicio, DateTime dateFin, string especie)
         {
-            
+
             var entradas = Context.Entradas
                 .Select(en => new EntradaDto
                 {
@@ -51,9 +60,10 @@ namespace SpaceDog.Shared.Data
                     Hora = en.Hora,
                     Turno = en.Turno,
                     UsuarioId = en.UsuarioId,
-                    Cargas = en.Cargas.Where(c=> c.Especie.ToString() == especie).ToList()
+                    Cargas = en.Cargas.Where(c => c.Especie.ToString() == especie).ToList(),
+                    IsDeleted = en.IsDeleted
                 })
-                .Where(e => e.Fecha >= dateInicio && e.Fecha <= dateFin && e.Cargas.Any(c => c.Especie.ToString() == especie))
+                .Where(e => e.Fecha >= dateInicio && e.Fecha <= dateFin && e.Cargas.Any(c => c.Especie.ToString() == especie) && e.IsDeleted != true)
                 .ToList();
 
             var totalPesaje = 0.0;

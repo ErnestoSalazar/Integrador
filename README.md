@@ -1,13 +1,14 @@
 # Integrador
 Web service, Web, Desktop and mobile clients for a school project
 
+## Web service
 
 Endpoints    | HTTP verbs   | Examples
 ------------ | -------------|-------------
 __/login__            | __POST__                | form: __grant_type: password, username: myUsername, password: myPassword__
 __/login/recover__    | __POST__                | __{mailTo: myEmail}__
 __/api/users__        | __POST/GET__            | __{nombre, apellido, correo, rfc, rol}__
-__/api/users/{id}__   | __GET/PUT/DELETE__      | __{nombre, apellido, correo, rfc, rol, password, PasswordConfirmation}__
+__/api/users/{id}__   | __GET/PUT/DELETE__      | __{nombre, apellido, correo, rfc, rol, password}__
 __/api/barcos__       | __POST/GET__            | __{nombre, descripcion, ususarioId}__
 __/api/barcos/{id}__  | __GET/PUT/DELETE__      | __{nombre, descripcion, ususarioId}__
 __/api/cargas__       | __POST/GET__            | __{cantidad, especie, talla, temperatura, condicion, barcoId}__
@@ -33,3 +34,7 @@ you will need to keep the *access_token*, this one needs to be sended on the hea
 with the key/value:
 
 __Authorization : bearer *access_token*__
+
+
+### Users
+When creating a new user, a password will be created automatically by the server and will be send via email

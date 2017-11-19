@@ -19,18 +19,24 @@ namespace SpaceDog.Shared.Data
             var user = Context.Usuarios.AsQueryable();
 
             return user
-                .Where(u => u.Id == id)
+                .Where(u => u.Id == id && u.IsDeleted != true)
                 .SingleOrDefault();
-
-            
-
         }
 
         public override IList<Usuario> GetList()
         {
             return Context.Usuarios
                 .OrderBy(u => u.Nombre)
+                .Where(u => u.IsDeleted != true)
                 .ToList();
+        }
+
+        public void DeleteD(int id)
+        {
+            var user = Context.Usuarios.Find(id);
+            user.IsDeleted = true;
+            Context.Entry(user).State = System.Data.Entity.EntityState.Modified;
+            Context.SaveChanges();
         }
 
         public Usuario ValidateUser(string name, string password)

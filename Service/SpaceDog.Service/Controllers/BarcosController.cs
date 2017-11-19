@@ -64,7 +64,7 @@ namespace SpaceDog.Service.Controllers
 
         public void Delete(int id)
         {
-            _barcosRepository.Delete(id);
+            _barcosRepository.DeleteD(id);
         }
     }
 }

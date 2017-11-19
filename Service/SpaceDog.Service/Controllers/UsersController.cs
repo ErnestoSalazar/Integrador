@@ -96,7 +96,7 @@ namespace SpaceDog.Service.Controllers
 
         public void Delete(int id)
         {
-            _usersRepository.Delete(id);
+            _usersRepository.DeleteD(id);
         }
 
     }

@@ -23,5 +23,7 @@ namespace SpaceDog.Shared.Dto
 
         public double TotalPesaje { get; set; }
 
+        public bool IsDeleted { get; set; }
+
     }
 }

@@ -26,5 +26,7 @@ namespace SpaceDog.Shared.Models
         public string Correo { get; set; }
         public string Password { get; set; }
         public Rol Rol { get; set; }
+
+        public bool IsDeleted { get; set; }
     }
 }
