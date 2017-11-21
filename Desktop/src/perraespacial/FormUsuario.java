@@ -58,14 +58,18 @@ public class FormUsuario extends javax.swing.JFrame {
         jTextField4.setText("Correo");
 
         btnAceptarUsuario.setBackground(new java.awt.Color(55, 179, 68));
+        btnAceptarUsuario.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         btnAceptarUsuario.setForeground(new java.awt.Color(255, 255, 255));
-        btnAceptarUsuario.setText("Aceptar");
+        btnAceptarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/perraespacialimages/accept20x20White.png"))); // NOI18N
+        btnAceptarUsuario.setText("ACEPTAR");
         btnAceptarUsuario.setBorderPainted(false);
         btnAceptarUsuario.setOpaque(true);
 
         btnCancelarUsuario.setBackground(new java.awt.Color(237, 28, 36));
+        btnCancelarUsuario.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         btnCancelarUsuario.setForeground(new java.awt.Color(255, 255, 255));
-        btnCancelarUsuario.setText("Cancelar");
+        btnCancelarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/perraespacialimages/cancel20x20White.png"))); // NOI18N
+        btnCancelarUsuario.setText("CANCELAR");
         btnCancelarUsuario.setBorderPainted(false);
         btnCancelarUsuario.setOpaque(true);
 
@@ -92,7 +96,7 @@ public class FormUsuario extends javax.swing.JFrame {
                 .addComponent(btnAceptarUsuario)
                 .addGap(18, 18, 18)
                 .addComponent(btnCancelarUsuario)
-                .addGap(90, 90, 90))
+                .addGap(74, 74, 74))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,7 +113,7 @@ public class FormUsuario extends javax.swing.JFrame {
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAceptarUsuario)
                     .addComponent(btnCancelarUsuario))

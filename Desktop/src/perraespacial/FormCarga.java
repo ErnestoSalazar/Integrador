@@ -62,14 +62,18 @@ public class FormCarga extends javax.swing.JFrame {
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Buena", "Regular", "Mala" }));
 
         btnAceptarCarga.setBackground(new java.awt.Color(55, 179, 68));
+        btnAceptarCarga.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         btnAceptarCarga.setForeground(new java.awt.Color(255, 255, 255));
-        btnAceptarCarga.setText("Aceptar");
+        btnAceptarCarga.setIcon(new javax.swing.ImageIcon(getClass().getResource("/perraespacialimages/accept20x20White.png"))); // NOI18N
+        btnAceptarCarga.setText("ACEPTAR");
         btnAceptarCarga.setBorderPainted(false);
         btnAceptarCarga.setOpaque(true);
 
         btnCancelarCarga.setBackground(new java.awt.Color(237, 28, 36));
+        btnCancelarCarga.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         btnCancelarCarga.setForeground(new java.awt.Color(255, 255, 255));
-        btnCancelarCarga.setText("Cancelar");
+        btnCancelarCarga.setIcon(new javax.swing.ImageIcon(getClass().getResource("/perraespacialimages/cancel20x20White.png"))); // NOI18N
+        btnCancelarCarga.setText("CANCELAR");
         btnCancelarCarga.setBorderPainted(false);
         btnCancelarCarga.setOpaque(true);
 
@@ -89,17 +93,16 @@ public class FormCarga extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnAceptarCarga)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnCancelarCarga)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jComboBox3, 0, 165, Short.MAX_VALUE)))))
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jComboBox3, 0, 165, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnAceptarCarga)
+                .addGap(18, 18, 18)
+                .addComponent(btnCancelarCarga)
+                .addGap(64, 64, 64))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -117,11 +120,11 @@ public class FormCarga extends javax.swing.JFrame {
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAceptarCarga)
                     .addComponent(btnCancelarCarga))
-                .addGap(31, 31, 31))
+                .addGap(36, 36, 36))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

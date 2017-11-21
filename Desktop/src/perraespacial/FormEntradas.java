@@ -66,6 +66,7 @@ public class FormEntradas extends javax.swing.JFrame {
         btnAgregarCarga.setBackground(new java.awt.Color(55, 179, 68));
         btnAgregarCarga.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         btnAgregarCarga.setForeground(new java.awt.Color(255, 255, 255));
+        btnAgregarCarga.setIcon(new javax.swing.ImageIcon(getClass().getResource("/perraespacialimages/add20x20White.png"))); // NOI18N
         btnAgregarCarga.setText("AGREGAR");
         btnAgregarCarga.setBorderPainted(false);
         btnAgregarCarga.setOpaque(true);
@@ -89,14 +90,18 @@ public class FormEntradas extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tblCargasEntradas);
 
         btnAceptarEntrada.setBackground(new java.awt.Color(55, 179, 68));
+        btnAceptarEntrada.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         btnAceptarEntrada.setForeground(new java.awt.Color(255, 255, 255));
-        btnAceptarEntrada.setText("Aceptar");
+        btnAceptarEntrada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/perraespacialimages/accept20x20White.png"))); // NOI18N
+        btnAceptarEntrada.setText("ACEPTAR");
         btnAceptarEntrada.setBorderPainted(false);
         btnAceptarEntrada.setOpaque(true);
 
         btnCancelarEntrada.setBackground(new java.awt.Color(237, 28, 36));
+        btnCancelarEntrada.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         btnCancelarEntrada.setForeground(new java.awt.Color(255, 255, 255));
-        btnCancelarEntrada.setText("Cancelar");
+        btnCancelarEntrada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/perraespacialimages/cancel20x20White.png"))); // NOI18N
+        btnCancelarEntrada.setText("CANCELAR");
         btnCancelarEntrada.setBorderPainted(false);
         btnCancelarEntrada.setOpaque(true);
 
@@ -123,7 +128,7 @@ public class FormEntradas extends javax.swing.JFrame {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnAgregarCarga)))
                         .addGap(0, 11, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -149,13 +154,13 @@ public class FormEntradas extends javax.swing.JFrame {
                     .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5)
+                .addGap(2, 2, 2)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(btnAgregarCarga, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(btnAgregarCarga, javax.swing.GroupLayout.PREFERRED_SIZE, 22, Short.MAX_VALUE))
+                .addGap(15, 15, 15)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAceptarEntrada)
                     .addComponent(btnCancelarEntrada))

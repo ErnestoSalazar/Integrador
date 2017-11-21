@@ -124,14 +124,18 @@ public class AdminView extends javax.swing.JFrame {
         txtFechaFin.setText("Fin");
 
         btnBuscarReporte.setBackground(new java.awt.Color(249, 183, 72));
+        btnBuscarReporte.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         btnBuscarReporte.setForeground(new java.awt.Color(255, 255, 255));
-        btnBuscarReporte.setText("Buscar");
+        btnBuscarReporte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/perraespacialimages/search20x20White.png"))); // NOI18N
+        btnBuscarReporte.setText("BUSCAR");
         btnBuscarReporte.setBorderPainted(false);
         btnBuscarReporte.setOpaque(true);
 
         btnGenerarReporte.setBackground(new java.awt.Color(52, 150, 247));
+        btnGenerarReporte.setFont(new java.awt.Font("Lucida Grande", 1, 12)); // NOI18N
         btnGenerarReporte.setForeground(new java.awt.Color(255, 255, 255));
-        btnGenerarReporte.setText("Generar reporte");
+        btnGenerarReporte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/perraespacialimages/reports20x20White.png"))); // NOI18N
+        btnGenerarReporte.setText("GENERAR REPORTE");
         btnGenerarReporte.setBorderPainted(false);
         btnGenerarReporte.setOpaque(true);
 
@@ -151,7 +155,7 @@ public class AdminView extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnBuscarReporte)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnGenerarReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnGenerarReporte))
                     .addComponent(jLabel5)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 690, Short.MAX_VALUE)
                     .addComponent(jScrollPane1))
@@ -173,7 +177,7 @@ public class AdminView extends javax.swing.JFrame {
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(152, Short.MAX_VALUE))
+                .addContainerGap(150, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Reportes", jPanel2);
@@ -208,26 +212,34 @@ public class AdminView extends javax.swing.JFrame {
         txtBuscarFolio.setText("Folio");
 
         btnBuscarEntrada.setBackground(new java.awt.Color(249, 183, 72));
+        btnBuscarEntrada.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         btnBuscarEntrada.setForeground(new java.awt.Color(255, 255, 255));
-        btnBuscarEntrada.setText("Buscar");
+        btnBuscarEntrada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/perraespacialimages/search20x20White.png"))); // NOI18N
+        btnBuscarEntrada.setText("BUSCAR");
         btnBuscarEntrada.setBorderPainted(false);
         btnBuscarEntrada.setOpaque(true);
 
         btnAgregarEntrada.setBackground(new java.awt.Color(55, 179, 68));
+        btnAgregarEntrada.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         btnAgregarEntrada.setForeground(new java.awt.Color(255, 255, 255));
-        btnAgregarEntrada.setText("Agregar");
+        btnAgregarEntrada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/perraespacialimages/add20x20White.png"))); // NOI18N
+        btnAgregarEntrada.setText("AGREGAR");
         btnAgregarEntrada.setBorderPainted(false);
         btnAgregarEntrada.setOpaque(true);
 
         btnEditarEntrada.setBackground(new java.awt.Color(52, 150, 247));
+        btnEditarEntrada.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         btnEditarEntrada.setForeground(new java.awt.Color(255, 255, 255));
-        btnEditarEntrada.setText("Editar");
+        btnEditarEntrada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/perraespacialimages/edit20x20White.png"))); // NOI18N
+        btnEditarEntrada.setText("EDITAR");
         btnEditarEntrada.setBorderPainted(false);
         btnEditarEntrada.setOpaque(true);
 
         btnEliminarEntrada.setBackground(new java.awt.Color(237, 28, 36));
+        btnEliminarEntrada.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         btnEliminarEntrada.setForeground(new java.awt.Color(255, 255, 255));
-        btnEliminarEntrada.setText("Eliminar");
+        btnEliminarEntrada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/perraespacialimages/delete20x20White.png"))); // NOI18N
+        btnEliminarEntrada.setText("ELIMINAR");
         btnEliminarEntrada.setBorderPainted(false);
         btnEliminarEntrada.setOpaque(true);
 
@@ -268,7 +280,7 @@ public class AdminView extends javax.swing.JFrame {
                     .addComponent(btnAgregarEntrada))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 162, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 157, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEditarEntrada)
                     .addComponent(btnEliminarEntrada))
@@ -283,14 +295,18 @@ public class AdminView extends javax.swing.JFrame {
         jTextField1.setText("Nombre");
 
         btnBuscarBarco.setBackground(new java.awt.Color(249, 183, 72));
+        btnBuscarBarco.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         btnBuscarBarco.setForeground(new java.awt.Color(255, 255, 255));
-        btnBuscarBarco.setText("Buscar");
+        btnBuscarBarco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/perraespacialimages/search20x20White.png"))); // NOI18N
+        btnBuscarBarco.setText("BUSCAR");
         btnBuscarBarco.setBorderPainted(false);
         btnBuscarBarco.setOpaque(true);
 
         btnAgregarBarco.setBackground(new java.awt.Color(55, 179, 68));
+        btnAgregarBarco.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         btnAgregarBarco.setForeground(new java.awt.Color(255, 255, 255));
-        btnAgregarBarco.setText("Agregar");
+        btnAgregarBarco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/perraespacialimages/add20x20White.png"))); // NOI18N
+        btnAgregarBarco.setText("AGREGAR");
         btnAgregarBarco.setBorderPainted(false);
         btnAgregarBarco.setOpaque(true);
 
@@ -313,14 +329,18 @@ public class AdminView extends javax.swing.JFrame {
         jScrollPane3.setViewportView(jTable1);
 
         btnEditarBarco.setBackground(new java.awt.Color(52, 150, 247));
+        btnEditarBarco.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         btnEditarBarco.setForeground(new java.awt.Color(255, 255, 255));
-        btnEditarBarco.setText("Editar");
+        btnEditarBarco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/perraespacialimages/edit20x20White.png"))); // NOI18N
+        btnEditarBarco.setText("EDITAR");
         btnEditarBarco.setBorderPainted(false);
         btnEditarBarco.setOpaque(true);
 
         btnEliminarBarco.setBackground(new java.awt.Color(237, 28, 36));
+        btnEliminarBarco.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         btnEliminarBarco.setForeground(new java.awt.Color(255, 255, 255));
-        btnEliminarBarco.setText("Eliminar");
+        btnEliminarBarco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/perraespacialimages/delete20x20White.png"))); // NOI18N
+        btnEliminarBarco.setText("ELIMINAR");
         btnEliminarBarco.setBorderPainted(false);
         btnEliminarBarco.setOpaque(true);
 
@@ -329,7 +349,7 @@ public class AdminView extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(482, Short.MAX_VALUE)
+                .addContainerGap(462, Short.MAX_VALUE)
                 .addComponent(btnEditarBarco)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnEliminarBarco)
@@ -359,7 +379,7 @@ public class AdminView extends javax.swing.JFrame {
                     .addComponent(btnAgregarBarco))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 162, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 157, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEditarBarco)
                     .addComponent(btnEliminarBarco))
@@ -373,14 +393,18 @@ public class AdminView extends javax.swing.JFrame {
         jTextField2.setText("Nombre");
 
         jButton1.setBackground(new java.awt.Color(249, 183, 72));
+        jButton1.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Buscar");
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/perraespacialimages/search20x20White.png"))); // NOI18N
+        jButton1.setText("BUSCAR");
         jButton1.setBorderPainted(false);
         jButton1.setOpaque(true);
 
         jButton2.setBackground(new java.awt.Color(55, 179, 68));
+        jButton2.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Agregar");
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/perraespacialimages/add20x20White.png"))); // NOI18N
+        jButton2.setText("AGREGAR");
         jButton2.setBorderPainted(false);
         jButton2.setOpaque(true);
 
@@ -431,13 +455,13 @@ public class AdminView extends javax.swing.JFrame {
                     .addComponent(jButton2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(160, Short.MAX_VALUE))
+                .addContainerGap(158, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Usuarios", jPanel5);
 
-        btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/perraespacialimages/Power-Shutdown.png"))); // NOI18N
-        btnLogout.setBorder(null);
+        btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/perraespacialimages/exit50x50Black.png"))); // NOI18N
+        btnLogout.setBorderPainted(false);
 
         lblUsername.setText("Nombre User");
 
@@ -445,7 +469,6 @@ public class AdminView extends javax.swing.JFrame {
         lblIniciales.setText("NU");
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/perraespacialimages/SpaceDogLogo.png"))); // NOI18N
-        jLabel1.setPreferredSize(new java.awt.Dimension(50, 50));
         jLabel1.setSize(new java.awt.Dimension(50, 50));
 
         jLabel2.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N

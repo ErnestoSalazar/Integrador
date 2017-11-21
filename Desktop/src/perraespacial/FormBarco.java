@@ -40,14 +40,18 @@ public class FormBarco extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(250, 250, 250));
 
         btnAceptarBarco.setBackground(new java.awt.Color(55, 179, 68));
+        btnAceptarBarco.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         btnAceptarBarco.setForeground(new java.awt.Color(255, 255, 255));
-        btnAceptarBarco.setText("Aceptar");
+        btnAceptarBarco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/perraespacialimages/accept20x20White.png"))); // NOI18N
+        btnAceptarBarco.setText("ACEPTAR");
         btnAceptarBarco.setBorderPainted(false);
         btnAceptarBarco.setOpaque(true);
 
         btnCancelarBarco.setBackground(new java.awt.Color(237, 28, 36));
+        btnCancelarBarco.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         btnCancelarBarco.setForeground(new java.awt.Color(255, 255, 255));
-        btnCancelarBarco.setText("Cancelar");
+        btnCancelarBarco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/perraespacialimages/cancel20x20White.png"))); // NOI18N
+        btnCancelarBarco.setText("CANCELAR");
         btnCancelarBarco.setBorderPainted(false);
         btnCancelarBarco.setOpaque(true);
 
@@ -70,7 +74,7 @@ public class FormBarco extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(100, Short.MAX_VALUE)
+                .addContainerGap(74, Short.MAX_VALUE)
                 .addComponent(btnAceptarBarco)
                 .addGap(18, 18, 18)
                 .addComponent(btnCancelarBarco)
@@ -96,7 +100,7 @@ public class FormBarco extends javax.swing.JFrame {
                     .addComponent(txtNombreBarcoForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbResponsableBarcoForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtDescripcionBarcoForm, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                .addComponent(txtDescripcionBarcoForm, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAceptarBarco)
