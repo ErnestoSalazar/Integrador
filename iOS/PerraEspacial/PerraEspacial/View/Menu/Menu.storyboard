@@ -18,16 +18,26 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fLp-cc-ENK">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                                <color key="backgroundColor" red="0.84705882352941175" green="0.83137254901960778" blue="0.83529411764705885" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="0.0" y="248" width="375" height="419"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="separatorColor" red="1" green="0.016773771010000001" blue="0.017249187910000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </tableView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SpaceDogLogo" translatesAutoresizingMaskIntoConstraints="NO" id="xgn-eZ-PFX">
+                                <rect key="frame" x="67" y="83" width="240" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="HYW-H2-fmG"/>
+                                    <constraint firstAttribute="width" constant="240" id="Suq-e6-2s3"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="fLp-cc-ENK" firstAttribute="top" secondItem="YNb-r8-bgG" secondAttribute="top" id="FCB-Va-YXk"/>
+                            <constraint firstItem="xgn-eZ-PFX" firstAttribute="top" secondItem="YNb-r8-bgG" secondAttribute="top" constant="19" id="Cbe-ur-QMo"/>
                             <constraint firstItem="fLp-cc-ENK" firstAttribute="leading" secondItem="YNb-r8-bgG" secondAttribute="leading" id="faU-m7-bwm"/>
+                            <constraint firstItem="fLp-cc-ENK" firstAttribute="top" secondItem="xgn-eZ-PFX" secondAttribute="bottom" constant="15" id="iDg-rt-anQ"/>
                             <constraint firstItem="YNb-r8-bgG" firstAttribute="bottom" secondItem="fLp-cc-ENK" secondAttribute="bottom" id="nAx-Gq-Qgp"/>
                             <constraint firstItem="YNb-r8-bgG" firstAttribute="trailing" secondItem="fLp-cc-ENK" secondAttribute="trailing" id="nLp-Bo-R01"/>
+                            <constraint firstItem="xgn-eZ-PFX" firstAttribute="centerX" secondItem="YNb-r8-bgG" secondAttribute="centerX" id="xpR-Vn-D02"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="YNb-r8-bgG"/>
                     </view>
@@ -103,4 +113,7 @@
             <point key="canvasLocation" x="520" y="-1469"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="SpaceDogLogo" width="320" height="533"/>
+    </resources>
 </document>
