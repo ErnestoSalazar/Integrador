@@ -30,7 +30,7 @@ class DeliveriesViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = Bundle.main.loadNibNamed("DeliveriesTableViewCell", owner: self, options: nil)?.first as! DeliveriesTableViewCell
-        cell.labelTitle.text = boatNames[indexPath.row]
+        
         return cell
     }
     

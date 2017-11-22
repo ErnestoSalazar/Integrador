@@ -10,8 +10,12 @@ import UIKit
 
 class DeliveriesTableViewCell: UITableViewCell {
     //MARK: - IBOutlets
-    @IBOutlet weak var imageIcon: NSLayoutConstraint!
-    @IBOutlet weak var labelTitle: UILabel!
+    @IBOutlet weak var labelFolio: UILabel!
+    @IBOutlet weak var labelDate: UILabel!
+    @IBOutlet weak var labelTime: UILabel!
+    @IBOutlet weak var labelWorkShift: UILabel!
+    @IBOutlet weak var labelGeneratedBy: UILabel!
+    
     
     
     //MARK: - View Life

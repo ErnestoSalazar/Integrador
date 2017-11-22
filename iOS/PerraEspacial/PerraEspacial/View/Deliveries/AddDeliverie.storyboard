@@ -8,15 +8,44 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Verdana.ttf">
+            <string>Verdana</string>
+        </array>
+        <array key="VerdanaBold.ttf">
+            <string>Verdana-Bold</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Agregar Entrada-->
         <scene sceneID="N31-sC-nSx">
             <objects>
-                <viewController id="1YO-0V-WbW" sceneMemberID="viewController">
+                <viewController restorationIdentifier="addDeliverie" storyboardIdentifier="addDeliverie" id="1YO-0V-WbW" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XNR-Z7-d9Q">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bpm-vJ-gbV">
+                                <rect key="frame" x="0.0" y="622" width="375" height="45"/>
+                                <color key="backgroundColor" red="0.22544112801551819" green="0.59453314542770386" blue="0.13182488083839417" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="gH9-mJ-RSy"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="15"/>
+                                <state key="normal" title="AGREGAR CARGA">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="MLb-QX-2SP" kind="show" id="NpU-hE-X6e"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="bpm-vJ-gbV" firstAttribute="leading" secondItem="ZAq-FI-SiW" secondAttribute="leading" id="ST4-cF-fZB"/>
+                            <constraint firstItem="bpm-vJ-gbV" firstAttribute="trailing" secondItem="ZAq-FI-SiW" secondAttribute="trailing" id="fkN-cl-isP"/>
+                            <constraint firstItem="bpm-vJ-gbV" firstAttribute="bottom" secondItem="ZAq-FI-SiW" secondAttribute="bottom" id="yH5-I3-lzM"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="ZAq-FI-SiW"/>
                     </view>
                     <navigationItem key="navigationItem" title="Agregar Entrada" id="93l-ry-by7"/>
@@ -24,6 +53,93 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BQ1-gc-Vpg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="703.20000000000005" y="199.25037481259372"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="8pe-S5-Ikv">
+            <objects>
+                <viewController id="MLb-QX-2SP" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Zwi-Wz-c4Q">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WQC-tv-p5i">
+                                <rect key="frame" x="0.0" y="622" width="375" height="45"/>
+                                <color key="backgroundColor" red="0.22544112799999999" green="0.59453314540000002" blue="0.13182488079999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="MaM-GB-dTt"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="15"/>
+                                <state key="normal" title="GUARDAR">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Barco" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="T2q-Lq-hr5">
+                                <rect key="frame" x="17.5" y="89" width="340" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="17"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Toneladas" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AdE-e3-aaf">
+                                <rect key="frame" x="17.5" y="144" width="340" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Especie" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pLc-mx-GcT">
+                                <rect key="frame" x="17.5" y="199" width="340" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="17"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Talla" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="55p-yD-tRx">
+                                <rect key="frame" x="17.5" y="254" width="340" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="17"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Temperatura" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7Rr-kJ-7R4">
+                                <rect key="frame" x="17.5" y="309" width="340" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="17"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Condición" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="blC-ev-ovj">
+                                <rect key="frame" x="17.5" y="364" width="340" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="17"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Dpm-1W-RZV" firstAttribute="trailing" secondItem="55p-yD-tRx" secondAttribute="trailing" constant="17.5" id="1ZM-Hn-r8C"/>
+                            <constraint firstItem="AdE-e3-aaf" firstAttribute="top" secondItem="T2q-Lq-hr5" secondAttribute="bottom" constant="25" id="7fb-GT-WBp"/>
+                            <constraint firstItem="WQC-tv-p5i" firstAttribute="bottom" secondItem="Dpm-1W-RZV" secondAttribute="bottom" id="D49-A5-IIL"/>
+                            <constraint firstItem="7Rr-kJ-7R4" firstAttribute="top" secondItem="55p-yD-tRx" secondAttribute="bottom" constant="25" id="FuH-gD-w5t"/>
+                            <constraint firstItem="WQC-tv-p5i" firstAttribute="trailing" secondItem="Dpm-1W-RZV" secondAttribute="trailing" id="Qb5-Op-68Q"/>
+                            <constraint firstItem="pLc-mx-GcT" firstAttribute="leading" secondItem="Dpm-1W-RZV" secondAttribute="leading" constant="17.5" id="SB9-22-JSp"/>
+                            <constraint firstItem="7Rr-kJ-7R4" firstAttribute="leading" secondItem="Dpm-1W-RZV" secondAttribute="leading" constant="17.5" id="SBz-7A-AKw"/>
+                            <constraint firstItem="Dpm-1W-RZV" firstAttribute="trailing" secondItem="T2q-Lq-hr5" secondAttribute="trailing" constant="17.5" id="ViU-3H-6SV"/>
+                            <constraint firstItem="WQC-tv-p5i" firstAttribute="leading" secondItem="Dpm-1W-RZV" secondAttribute="leading" id="Wqt-lD-yOR"/>
+                            <constraint firstItem="Dpm-1W-RZV" firstAttribute="trailing" secondItem="7Rr-kJ-7R4" secondAttribute="trailing" constant="17.5" id="YGs-Ep-2Sy"/>
+                            <constraint firstItem="AdE-e3-aaf" firstAttribute="leading" secondItem="Dpm-1W-RZV" secondAttribute="leading" constant="17.5" id="Ylz-2A-smK"/>
+                            <constraint firstItem="T2q-Lq-hr5" firstAttribute="top" secondItem="Dpm-1W-RZV" secondAttribute="top" constant="25" id="afF-tt-UJQ"/>
+                            <constraint firstItem="Dpm-1W-RZV" firstAttribute="trailing" secondItem="pLc-mx-GcT" secondAttribute="trailing" constant="17.5" id="bZa-tg-k17"/>
+                            <constraint firstItem="blC-ev-ovj" firstAttribute="leading" secondItem="Dpm-1W-RZV" secondAttribute="leading" constant="17.5" id="cw4-G9-fdM"/>
+                            <constraint firstItem="Dpm-1W-RZV" firstAttribute="trailing" secondItem="AdE-e3-aaf" secondAttribute="trailing" constant="17.5" id="fCn-yj-4cr"/>
+                            <constraint firstItem="55p-yD-tRx" firstAttribute="leading" secondItem="Dpm-1W-RZV" secondAttribute="leading" constant="17.5" id="guZ-y9-d1y"/>
+                            <constraint firstItem="T2q-Lq-hr5" firstAttribute="leading" secondItem="Dpm-1W-RZV" secondAttribute="leading" constant="17.5" id="hmh-I8-fRS"/>
+                            <constraint firstItem="55p-yD-tRx" firstAttribute="top" secondItem="pLc-mx-GcT" secondAttribute="bottom" constant="25" id="kxN-Un-4kV"/>
+                            <constraint firstItem="Dpm-1W-RZV" firstAttribute="trailing" secondItem="blC-ev-ovj" secondAttribute="trailing" constant="17.5" id="mGq-8b-sh5"/>
+                            <constraint firstItem="blC-ev-ovj" firstAttribute="top" secondItem="7Rr-kJ-7R4" secondAttribute="bottom" constant="25" id="tdB-FK-EPG"/>
+                            <constraint firstItem="pLc-mx-GcT" firstAttribute="top" secondItem="AdE-e3-aaf" secondAttribute="bottom" constant="25" id="xMK-39-VrH"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Dpm-1W-RZV"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PHA-bH-0Kj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1455" y="198"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="TDU-uD-jDa">

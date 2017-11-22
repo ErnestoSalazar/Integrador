@@ -13,6 +13,8 @@
 		B40CB2911FBFDA5E00A88B0C /* AddUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40CB2901FBFDA5E00A88B0C /* AddUserViewController.swift */; };
 		B428F5071FAFD974005D5545 /* PasswrodRecover.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B428F5061FAFD974005D5545 /* PasswrodRecover.storyboard */; };
 		B428F5091FAFDBBE005D5545 /* PasswordRecoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B428F5081FAFDBBE005D5545 /* PasswordRecoverViewController.swift */; };
+		B4325CC51FC5CB1B0043429D /* NotFoundTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4325CC31FC5CB1B0043429D /* NotFoundTableViewCell.swift */; };
+		B4325CC61FC5CB1B0043429D /* NotFoundTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4325CC41FC5CB1B0043429D /* NotFoundTableViewCell.xib */; };
 		B435CE7C1FC24801007371AB /* AddDeliverie.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B435CE7B1FC24801007371AB /* AddDeliverie.storyboard */; };
 		B442DB3B1FB12620001784A5 /* DataGlobal.swift in Sources */ = {isa = PBXBuildFile; fileRef = B442DB3A1FB12620001784A5 /* DataGlobal.swift */; };
 		B442DB3D1FB1269E001784A5 /* WebServiceUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B442DB3C1FB1269E001784A5 /* WebServiceUser.swift */; };
@@ -55,6 +57,8 @@
 		B40CB2901FBFDA5E00A88B0C /* AddUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUserViewController.swift; sourceTree = "<group>"; };
 		B428F5061FAFD974005D5545 /* PasswrodRecover.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PasswrodRecover.storyboard; sourceTree = "<group>"; };
 		B428F5081FAFDBBE005D5545 /* PasswordRecoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordRecoverViewController.swift; sourceTree = "<group>"; };
+		B4325CC31FC5CB1B0043429D /* NotFoundTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotFoundTableViewCell.swift; sourceTree = "<group>"; };
+		B4325CC41FC5CB1B0043429D /* NotFoundTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotFoundTableViewCell.xib; sourceTree = "<group>"; };
 		B435CE7B1FC24801007371AB /* AddDeliverie.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddDeliverie.storyboard; sourceTree = "<group>"; };
 		B442DB3A1FB12620001784A5 /* DataGlobal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataGlobal.swift; sourceTree = "<group>"; };
 		B442DB3C1FB1269E001784A5 /* WebServiceUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebServiceUser.swift; sourceTree = "<group>"; };
@@ -237,6 +241,8 @@
 				B435CE731FC246B8007371AB /* Menu */,
 				B435CE721FC246AE007371AB /* Report */,
 				B435CE711FC2469B007371AB /* Home */,
+				B4325CC41FC5CB1B0043429D /* NotFoundTableViewCell.xib */,
+				B4325CC31FC5CB1B0043429D /* NotFoundTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -324,6 +330,7 @@
 				B499DDF81FB9F02E0058DBAA /* ReporteTableViewCell.xib in Resources */,
 				B4C378411FBC9CBB008ADDD4 /* MenuTableViewCell.xib in Resources */,
 				B4C378391FBC9B41008ADDD4 /* Menu.storyboard in Resources */,
+				B4325CC61FC5CB1B0043429D /* NotFoundTableViewCell.xib in Resources */,
 				B4C378331FBC97D6008ADDD4 /* BoatTableViewCell.xib in Resources */,
 				B428F5071FAFD974005D5545 /* PasswrodRecover.storyboard in Resources */,
 				B499DE001FB9FA520058DBAA /* UserCardTableViewCell.xib in Resources */,
@@ -395,6 +402,7 @@
 				B4C378491FBCA2F1008ADDD4 /* DeliveriesViewController.swift in Sources */,
 				B442DB3D1FB1269E001784A5 /* WebServiceUser.swift in Sources */,
 				B4D390CC1FACCB7200466CA7 /* AppDelegate.swift in Sources */,
+				B4325CC51FC5CB1B0043429D /* NotFoundTableViewCell.swift in Sources */,
 				B4C378321FBC97D6008ADDD4 /* BoatTableViewCell.swift in Sources */,
 				B499DDFF1FB9FA520058DBAA /* UserCardTableViewCell.swift in Sources */,
 				B4C3783B1FBC9BAB008ADDD4 /* MenuViewController.swift in Sources */,

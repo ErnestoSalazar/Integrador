@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="VrZ-A9-NTX">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="VrZ-A9-NTX">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" red="0.8462313414" green="0.83144730330000005" blue="0.83544796710000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </tableView>
@@ -41,6 +41,11 @@
                                 </connections>
                             </barButtonItem>
                         </leftBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="9uz-st-Iyv">
+                            <connections>
+                                <segue destination="Xky-na-VvD" kind="show" id="rUx-VH-ipi"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="VrZ-A9-NTX" id="P3w-bq-L2U"/>
@@ -68,13 +73,21 @@
             </objects>
             <point key="canvasLocation" x="60" y="-125"/>
         </scene>
+        <!--addDeliverie-->
+        <scene sceneID="cOC-xv-42g">
+            <objects>
+                <viewControllerPlaceholder storyboardName="AddDeliverie" referencedIdentifier="addDeliverie" id="Xky-na-VvD" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="v6X-rT-0bk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1381" y="-302"/>
+        </scene>
         <!--menuView-->
         <scene sceneID="aoZ-5t-LZN">
             <objects>
                 <viewControllerPlaceholder storyboardName="Menu" referencedIdentifier="menuView" id="Bnl-s0-pjA" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gvq-SG-hrM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1457" y="-126"/>
+            <point key="canvasLocation" x="1382" y="-110"/>
         </scene>
     </scenes>
     <resources>
