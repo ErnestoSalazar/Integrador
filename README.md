@@ -5,17 +5,17 @@ Web service, Web, Desktop and mobile clients for a school project
 
 Endpoints    | HTTP verbs   | Examples
 ------------ | -------------|-------------
-__/login__            | __POST__                | form: __grant_type: password, username: myUsername, password: myPassword__
-__/login/recover__    | __POST__                | __{mailTo: myEmail}__
+__/login__            | __POST__                | form: __grant_type: password, username: correo, password: myPassword__
+__/login/recover__    | __POST__                | __{mailTo: correo}__
 __/api/users__        | __POST/GET__            | __{nombre, apellido, correo, rfc, rol}__
 __/api/users/{id}__   | __GET/PUT/DELETE__      | __{nombre, apellido, correo, rfc, rol, password}__
-__/api/barcos__       | __POST/GET__            | __{nombre, descripcion, ususarioId}__
-__/api/barcos/{id}__  | __GET/PUT/DELETE__      | __{nombre, descripcion, ususarioId}__
+__/api/barcos__       | __POST/GET__            | __{nombre, descripcion, usuarioId}__
+__/api/barcos/{id}__  | __GET/PUT/DELETE__      | __{nombre, descripcion, usuarioId}__
 __/api/cargas__       | __POST/GET__            | __{cantidad, especie, talla, temperatura, condicion, barcoId}__
 __/api/cargas/{id}__  | __GET/PUT/DELETE__      | __{cantidad, especie, talla, temperatura, condicion, barcoId}__
-__/api/entradas__     | __POST/GET__            | __{folio, turno, usuarioId, cargasId:[]}__
-__/api/entradas?__    | __GET__                 | __fechaInicio=dd/mm/yyyy&fechaFin=dd/mm/yyyy&especie=Rayadillo__
-__/api/entradas{id}__ | __GET/PUT/DELETE__      | __{folio, turno, usuarioId, cargasId:[]}__
+__/api/entradas__     | __POST/GET__            | __{turno, usuarioId, cargasId:[]}__
+__/api/entradas?__    | __GET__                 | __fechaInicio=dd/mm/yyyy&fechaFin=dd/mm/yyyy__
+__/api/entradas/{id}__ | __GET/PUT/DELETE__      | __{turno, usuarioId, cargasId:[]}__
 
 
 ### Login
@@ -38,3 +38,16 @@ __Authorization : bearer *access_token*__
 
 ### Users
 When creating a new user, a password will be created automatically by the server and will be send via email
+
+Accepted values for the following properties are:
+* __Rol__: *Admin, Supervisor, Pescador*
+
+### Cargas
+Accepted values for the following properties are:
+* __Especie__: *Macarela, Japonesa, Monterrey, Rayadillo, Bocona, Anchoveta, Crinuda*
+* __Talla__: *s, m, x, xl*
+* __Condicion__: *Mala, Regular, Buena*
+
+### Entradas
+Accepted values for the following properties are:
+* __Turno__: *Matutino, Vespertino*

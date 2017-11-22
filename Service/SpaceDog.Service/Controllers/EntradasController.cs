@@ -1,4 +1,6 @@
 ﻿using SpaceDog.Service.Dto;
+using SpaceDog.Service.Services;
+using SpaceDog.Shared;
 using SpaceDog.Shared.Data;
 using SpaceDog.Shared.Models;
 using System;
@@ -37,8 +39,6 @@ namespace SpaceDog.Service.Controllers
             var cargas = _entradasRepository.GetListOfCargasInEntrada(entradaDto.CargasId);
             entradaDto.Cargas = cargas;
 
-
-            entradaDto.Fecha = DateTime.Now.ToShortDateString();
             var entradaModel = entradaDto.ToModel();
 
             _entradasRepository.Add(entradaModel);
@@ -50,19 +50,21 @@ namespace SpaceDog.Service.Controllers
                 entradaModel
                 );
 
-            
-
         }
 
         public IHttpActionResult Put(int id, EntradaDto entradaDto)
         {
             var entrada = _entradasRepository.Get(id);
-            var cargas = _entradasRepository.GetListOfCargasInEntrada(entradaDto.CargasId);
+            List<Carga> cargas = null;
+            if(entradaDto.CargasId != null)
+            {
+                cargas = _entradasRepository.GetListOfCargasInEntrada(entradaDto.CargasId);
+            }
 
-            entrada.Folio = entrada.Folio;
-            entrada.Turno = entradaDto.Turno.Value;
-            entrada.Cargas = cargas;
-            entrada.UsuarioId = entradaDto.UsuarioId;
+            
+            entrada.Turno = (entradaDto.Turno != null)          ? entradaDto.Turno.Value    : entrada.Turno;
+            entrada.Cargas = (entradaDto.Cargas != null)        ? cargas                    : entrada.Cargas;
+            entrada.UsuarioId = (entradaDto.UsuarioId != null)  ? entradaDto.UsuarioId.Value: entrada.UsuarioId;
 
             
             _entradasRepository.Update(entrada);
@@ -79,17 +81,17 @@ namespace SpaceDog.Service.Controllers
         }
 
         
-        public IHttpActionResult Get(string fechaInicio, string fechaFin, string especie)
+        public IHttpActionResult Get(string fechaInicio, string fechaFin)
         {
             DateTime dateInicio;
             DateTime dateFin;
             if (DateTime.TryParse(fechaInicio, out dateInicio) && DateTime.TryParse(fechaFin, out dateFin))
             {
-                return Ok(_entradasRepository.GetListByDate(dateInicio, dateFin, especie));
+                return Ok(_entradasRepository.GetListByDate(dateInicio, dateFin));
             }
             else
             {
-                return BadRequest("ingresa una fecha valida yyyy/MM/dd");
+                return BadRequest(Strings.FECHA_INVALIDA);
             }
         }
 

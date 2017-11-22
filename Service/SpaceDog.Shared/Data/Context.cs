@@ -12,7 +12,7 @@ namespace SpaceDog.Shared.Data
     public class Context : DbContext
     {
         // @"{connection string}"
-        public Context() : base(@"")
+        public Context() : base(Strings.CONNECTION_STRING)
         {
             Database.SetInitializer(new DatabaseInitializer());
         }
