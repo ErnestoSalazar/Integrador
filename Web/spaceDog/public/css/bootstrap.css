@@ -6776,5 +6776,11 @@ button.close {
   padding: 7px 10px;
 }
 
+.modal-header, h4, .close {
+  background-color: #ed1c24;
+  color:white !important;
+  text-align: center;
+  font-size: 30px;
+}
 
 /*# sourceMappingURL=bootstrap.css.map */

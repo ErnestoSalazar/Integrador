@@ -12,6 +12,7 @@
       			<input type="search" placeholder="Fin" class="form-control" id="pwd">
     		</div>
     		<button type="submit" class="btn btn-default">Buscar</button>
+			<button type="button" class="btn btn-primary">Generar Reporte</button>
   		</form>
   	</div>
 	<h2>Entregas</h2>
@@ -57,5 +58,106 @@
 				</tr>
 			</tbody>
 		</table>
+	</div>
+	<div class="row">
+		<div class="col-md-3">
+			<h3>Macarela</h3>
+			<form>
+  				<div class="form-group">
+    				<label for="total">Total:</label>
+    				<input class="form-control" id="total">
+  				</div>
+  				<div class="form-group">
+    				<label for="pwd">Porcentaje:</label>
+    				<input class="form-control" id="pwd">
+  				</div>
+			</form>
+		</div>
+		<div class="col-md-3">
+			<h3>Japonesa</h3>
+			<form>
+  				<div class="form-group">
+    				<label for="total">Total:</label>
+    				<input class="form-control" id="total">
+  				</div>
+  				<div class="form-group">
+    				<label for="pwd">Porcentaje:</label>
+    				<input class="form-control" id="pwd">
+  				</div>
+			</form>
+		</div>
+		<div class="col-md-3">
+			<h3>Monterrey</h3>
+			<form>
+  				<div class="form-group">
+    				<label for="total">Total:</label>
+    				<input class="form-control" id="total">
+  				</div>
+  				<div class="form-group">
+    				<label for="pwd">Porcentaje:</label>
+    				<input class="form-control" id="pwd">
+  				</div>
+			</form>
+		</div>
+		<div class="col-md-3">
+			<h3>Rayadillo</h3>
+			<form>
+  				<div class="form-group">
+    				<label for="total">Total:</label>
+    				<input class="form-control" id="total">
+  				</div>
+  				<div class="form-group">
+    				<label for="pwd">Porcentaje:</label>
+    				<input class="form-control" id="pwd">
+  				</div>
+			</form>
+		</div>
+		<div class="col-md-3">
+			<h3>Bocona</h3>
+			<form>
+  				<div class="form-group">
+    				<label for="total">Total:</label>
+    				<input class="form-control" id="total">
+  				</div>
+  				<div class="form-group">
+    				<label for="pwd">Porcentaje:</label>
+    				<input class="form-control" id="pwd">
+  				</div>
+			</form>
+		</div>
+		<div class="col-md-3">
+			<h3>Anchoveta</h3>
+			<form>
+  				<div class="form-group">
+    				<label for="total">Total:</label>
+    				<input class="form-control" id="total">
+  				</div>
+  				<div class="form-group">
+    				<label for="pwd">Porcentaje:</label>
+    				<input class="form-control" id="pwd">
+  				</div>
+			</form>
+		</div>
+		<div class="col-md-3">
+			<h3>Crinuda</h3>
+			<form>
+  				<div class="form-group">
+    				<label for="total">Total:</label>
+    				<input class="form-control" id="total">
+  				</div>
+  				<div class="form-group">
+    				<label for="pwd">Porcentaje:</label>
+    				<input class="form-control" id="pwd">
+  				</div>
+			</form>
+		</div>
+		<div class="col-md-3" style= "margin-top: 100px;">
+			<form>
+  				<div class="form-group">
+    				<label for="total">Total:</label>
+    				<input class="form-control" id="total">
+  				</div>
+			</form>
+		</div>
 	</div>
 @endsection
