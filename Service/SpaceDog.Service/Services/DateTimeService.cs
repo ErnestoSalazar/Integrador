@@ -29,10 +29,7 @@ namespace SpaceDog.Service.Services
         {
             DateTime dateTime = GetActualTime();
             return TimeSpan.Parse($"{dateTime.Hour}:{dateTime.Minute}");
-
         }
-
-        //Hora    =  TimeSpan.Parse($"{DateTime.Now.Hour}:{DateTime.Now.Minute}"),
 
     }
 }

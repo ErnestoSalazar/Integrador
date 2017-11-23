@@ -11,7 +11,7 @@ namespace SpaceDog.Shared.Models
     [JsonConverter(typeof(StringEnumConverter))]
     public enum Especie { Macarela, Japonesa, Monterrey, Rayadillo, Bocona, Anchoveta, Crinuda }
     [JsonConverter(typeof(StringEnumConverter))]
-    public enum Talla { s, m, x, xl }
+    public enum Talla { s, m, l, xl }
     [JsonConverter(typeof(StringEnumConverter))]
     public enum Condicion { Mala, Regular,Buena }
 

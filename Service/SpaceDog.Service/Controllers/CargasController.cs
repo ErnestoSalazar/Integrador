@@ -22,12 +22,22 @@ namespace SpaceDog.Service.Controllers
 
         public IHttpActionResult Get()
         {
-            return Ok(_cargasRepository.GetList());
+            var cargas = _cargasRepository.GetList();
+            if (cargas.Count <= 0)
+            {
+                return NotFound();
+            }
+            return Ok(cargas);
         }
 
         public IHttpActionResult Get(int id)
         {
-            return Ok(_cargasRepository.Get(id));
+            var carga = _cargasRepository.Get(id);
+            if(carga == null)
+            {
+                return NotFound();
+            }
+            return Ok(carga);
         }
 
 

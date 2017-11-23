@@ -25,7 +25,12 @@ namespace SpaceDog.Service.Controllers
 
         public IHttpActionResult Get()
         {
-            return Ok(_usersRepository.GetList());
+            var users = _usersRepository.GetList();
+            if(users.Count <= 0)
+            {
+                return NotFound();
+            }
+            return Ok(users);
         }
 
 
@@ -76,7 +81,7 @@ namespace SpaceDog.Service.Controllers
             {
                 if (UserService.OtherUserHaveSameEmail(id, usuarioDto.Correo)) // if other user have same email
                 {
-                    return BadRequest("Email already in use");
+                    return BadRequest("Correo ya en uso");
                 }
             }
 
@@ -97,6 +102,17 @@ namespace SpaceDog.Service.Controllers
         public void Delete(int id)
         {
             _usersRepository.DeleteD(id);
+        }
+
+
+        public IHttpActionResult GetUsersByRol(string rol)
+        {
+            var users = _usersRepository.GetUsersByRol(rol);
+            if(users.Count <= 0)
+            {
+                return NotFound();
+            }
+            return Ok(users);
         }
 
     }

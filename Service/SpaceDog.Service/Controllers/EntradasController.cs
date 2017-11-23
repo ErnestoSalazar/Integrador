@@ -24,12 +24,22 @@ namespace SpaceDog.Service.Controllers
 
         public IHttpActionResult Get()
         {
-            return Ok(_entradasRepository.GetList());
+            var entradas = _entradasRepository.GetList();
+            if(entradas.Count <= 0)
+            {
+                return NotFound();
+            }
+            return Ok(entradas);
         }
 
         public IHttpActionResult Get(int id)
         {
-            return Ok(_entradasRepository.Get(id));
+            var entrada = _entradasRepository.Get(id);
+            if(entrada == null)
+            {
+                return NotFound();
+            }
+            return Ok(entrada);
         }
 
 
@@ -38,6 +48,7 @@ namespace SpaceDog.Service.Controllers
             
             var cargas = _entradasRepository.GetListOfCargasInEntrada(entradaDto.CargasId);
             entradaDto.Cargas = cargas;
+            entradaDto.Turno = (DateTimeService.GetTimeNow() < new TimeSpan(12, 0, 0)) ? Turno.Matutino : Turno.Vespertino;
 
             var entradaModel = entradaDto.ToModel();
 
@@ -61,15 +72,10 @@ namespace SpaceDog.Service.Controllers
                 cargas = _entradasRepository.GetListOfCargasInEntrada(entradaDto.CargasId);
             }
 
-            
-            entrada.Turno = (entradaDto.Turno != null)          ? entradaDto.Turno.Value    : entrada.Turno;
-            entrada.Cargas = (entradaDto.Cargas != null)        ? cargas                    : entrada.Cargas;
-            entrada.UsuarioId = (entradaDto.UsuarioId != null)  ? entradaDto.UsuarioId.Value: entrada.UsuarioId;
-
+            entrada.Cargas = (entradaDto.Cargas != null) ? cargas : entrada.Cargas;
             
             _entradasRepository.Update(entrada);
             
-
             return StatusCode(System.Net.HttpStatusCode.NoContent);
 
         }
@@ -87,12 +93,27 @@ namespace SpaceDog.Service.Controllers
             DateTime dateFin;
             if (DateTime.TryParse(fechaInicio, out dateInicio) && DateTime.TryParse(fechaFin, out dateFin))
             {
-                return Ok(_entradasRepository.GetListByDate(dateInicio, dateFin));
+                var entradas = _entradasRepository.GetListByDate(dateInicio, dateFin);
+                if(entradas.Count <= 0)
+                {
+                    return NotFound();
+                }
+                return Ok(entradas);
             }
             else
             {
                 return BadRequest(Strings.FECHA_INVALIDA);
             }
+        }
+
+        public IHttpActionResult Get(string folio)
+        {
+            var entrada = _entradasRepository.GetEntradasByFolio(folio);
+            if(entrada == null)
+            {
+                return NotFound();
+            }
+            return Ok(entrada);
         }
 
 

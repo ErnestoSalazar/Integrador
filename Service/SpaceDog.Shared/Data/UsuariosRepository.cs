@@ -21,6 +21,7 @@ namespace SpaceDog.Shared.Data
             return user
                 .Where(u => u.Id == id && u.IsDeleted != true)
                 .SingleOrDefault();
+            
         }
 
         public override IList<Usuario> GetList()
@@ -28,6 +29,14 @@ namespace SpaceDog.Shared.Data
             return Context.Usuarios
                 .OrderBy(u => u.Nombre)
                 .Where(u => u.IsDeleted != true)
+                .ToList();
+        }
+
+        public IList<Usuario> GetUsersByRol(string rol)
+        {
+            return Context.Usuarios
+                .OrderBy(u => u.Nombre)
+                .Where(u => u.IsDeleted != true && u.Rol.ToString() == rol)
                 .ToList();
         }
 

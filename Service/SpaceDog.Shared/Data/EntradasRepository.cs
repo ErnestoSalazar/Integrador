@@ -48,7 +48,7 @@ namespace SpaceDog.Shared.Data
             Context.SaveChanges();
         }
 
-        public dynamic GetListByDate(DateTime dateInicio, DateTime dateFin)
+        public List<EntradaDto> GetListByDate(DateTime dateInicio, DateTime dateFin)
         {
 
             var entradas = Context.Entradas
@@ -113,11 +113,15 @@ namespace SpaceDog.Shared.Data
             return entradas;
         }
 
-        private double GetTotalPesaje(List<Carga> cargas)
+
+        public Entrada GetEntradasByFolio(string folio)
         {
-            return cargas.Sum(c => c.Cantidad);
+            return Context.Entradas
+                .Where(e => e.Folio == folio)
+                .SingleOrDefault();
         }
 
+        
 
         public List<Carga> GetListOfCargasInEntrada(ICollection<Carga> cargas)
         {
@@ -158,6 +162,12 @@ namespace SpaceDog.Shared.Data
             entrada.Cargas = cargas;
             Context.Entradas.Add(entrada);
         }
-        
+
+
+        private double GetTotalPesaje(List<Carga> cargas)
+        {
+            return cargas.Sum(c => c.Cantidad);
+        }
+
     }
 }

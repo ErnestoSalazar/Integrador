@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SpaceDog.Shared.Dto
 {
-    class EntradaDto
+    public class EntradaDto
     {
         public int Id { get; set; }
         

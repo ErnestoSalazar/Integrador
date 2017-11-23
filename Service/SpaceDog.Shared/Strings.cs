@@ -17,6 +17,7 @@ namespace SpaceDog.Shared
         public const string COMPANY = "SpaceDog";
 
         public const string FECHA_INVALIDA = "ingresa una fecha valida yyyy/MM/dd";
-
+        public const string LOGIN_INVALIDO = "El usuario o contraseña es invalido";
+        public const string NO_AUTORIZADO = "No estas autorizado";
     }
 }
