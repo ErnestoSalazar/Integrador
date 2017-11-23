@@ -16,6 +16,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     //MARK: - Varailabels And Constants
     let menuTitles = ["Reportes","Usuarios","Barcos","Entregas"]
+    let menuIcons = [#imageLiteral(resourceName: "reportes"), #imageLiteral(resourceName: "usuarios"), #imageLiteral(resourceName: "barcos"), #imageLiteral(resourceName: "entregas")]
     let segueToUsers = "segueToUsers"
     let segueToDeliveries = "segueToDeliveries"
     let segueToBoats = "segueToBoats"
@@ -34,6 +35,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = Bundle.main.loadNibNamed("MenuTableViewCell", owner: self, options: nil)?.first as! MenuTableViewCell
             cell.labelTitle.text = menuTitles[indexPath.row]
+            cell.imageIcon.image = menuIcons[indexPath.row]
         return cell
     }
 

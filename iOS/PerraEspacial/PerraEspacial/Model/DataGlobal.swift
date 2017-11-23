@@ -10,7 +10,10 @@ import Foundation
 
 let dataGlobal = UserDefaults.standard
 var isAdmin : Bool = false
+var users : [User] = []
+var boats : [Boat] = []
 
 struct DataGlobal {
     static let keyToken = "token"
+    static let keyIndexToEditUser = "indexToEditUser"
 }

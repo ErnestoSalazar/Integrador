@@ -18,6 +18,10 @@
 		B435CE7C1FC24801007371AB /* AddDeliverie.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B435CE7B1FC24801007371AB /* AddDeliverie.storyboard */; };
 		B442DB3B1FB12620001784A5 /* DataGlobal.swift in Sources */ = {isa = PBXBuildFile; fileRef = B442DB3A1FB12620001784A5 /* DataGlobal.swift */; };
 		B442DB3D1FB1269E001784A5 /* WebServiceUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B442DB3C1FB1269E001784A5 /* WebServiceUser.swift */; };
+		B45F03881FC5D40300655022 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45F03871FC5D40300655022 /* User.swift */; };
+		B45F038A1FC5D46400655022 /* Role.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45F03891FC5D46400655022 /* Role.swift */; };
+		B45F038C1FC5D7AB00655022 /* WebServiceBoat.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45F038B1FC5D7AB00655022 /* WebServiceBoat.swift */; };
+		B45F038F1FC5D8B500655022 /* Boat.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45F038E1FC5D8B500655022 /* Boat.swift */; };
 		B4943EAB1FB124B400BF29B8 /* WebLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4943EAA1FB124B400BF29B8 /* WebLinks.swift */; };
 		B499DDF41FB9EEEA0058DBAA /* Reporte.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B499DDF31FB9EEEA0058DBAA /* Reporte.storyboard */; };
 		B499DDF71FB9F02E0058DBAA /* ReporteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B499DDF51FB9F02E0058DBAA /* ReporteTableViewCell.swift */; };
@@ -62,6 +66,10 @@
 		B435CE7B1FC24801007371AB /* AddDeliverie.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddDeliverie.storyboard; sourceTree = "<group>"; };
 		B442DB3A1FB12620001784A5 /* DataGlobal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataGlobal.swift; sourceTree = "<group>"; };
 		B442DB3C1FB1269E001784A5 /* WebServiceUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebServiceUser.swift; sourceTree = "<group>"; };
+		B45F03871FC5D40300655022 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		B45F03891FC5D46400655022 /* Role.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Role.swift; sourceTree = "<group>"; };
+		B45F038B1FC5D7AB00655022 /* WebServiceBoat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebServiceBoat.swift; sourceTree = "<group>"; };
+		B45F038E1FC5D8B500655022 /* Boat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Boat.swift; sourceTree = "<group>"; };
 		B4943EAA1FB124B400BF29B8 /* WebLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebLinks.swift; sourceTree = "<group>"; };
 		B499DDF31FB9EEEA0058DBAA /* Reporte.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Reporte.storyboard; sourceTree = "<group>"; };
 		B499DDF51FB9F02E0058DBAA /* ReporteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReporteTableViewCell.swift; sourceTree = "<group>"; };
@@ -169,6 +177,16 @@
 			path = Deliveries;
 			sourceTree = "<group>";
 		};
+		B45F038D1FC5D7D000655022 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				B4943EAA1FB124B400BF29B8 /* WebLinks.swift */,
+				B442DB3C1FB1269E001784A5 /* WebServiceUser.swift */,
+				B45F038B1FC5D7AB00655022 /* WebServiceBoat.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		B4D390BF1FACCB7200466CA7 = {
 			isa = PBXGroup;
 			children = (
@@ -204,9 +222,11 @@
 		B4D390E11FACCCB100466CA7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				B4943EAA1FB124B400BF29B8 /* WebLinks.swift */,
+				B45F038D1FC5D7D000655022 /* Services */,
 				B442DB3A1FB12620001784A5 /* DataGlobal.swift */,
-				B442DB3C1FB1269E001784A5 /* WebServiceUser.swift */,
+				B45F03871FC5D40300655022 /* User.swift */,
+				B45F03891FC5D46400655022 /* Role.swift */,
+				B45F038E1FC5D8B500655022 /* Boat.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -214,20 +234,16 @@
 		B4D390E21FACCCB100466CA7 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B4D643A21FC728000036B953 /* Boats */,
+				B4D643A11FC71DA00036B953 /* Users */,
 				B4D390E51FACCE4D00466CA7 /* LoginViewController.swift */,
 				B4C3783A1FBC9BAB008ADDD4 /* MenuViewController.swift */,
 				B4C3783E1FBC9CBB008ADDD4 /* MenuTableViewCell.swift */,
 				B428F5081FAFDBBE005D5545 /* PasswordRecoverViewController.swift */,
 				B499DDF91FB9F0420058DBAA /* ReporteViewController.swift */,
 				B499DDF51FB9F02E0058DBAA /* ReporteTableViewCell.swift */,
-				B499DE011FB9FD6F0058DBAA /* UsersViewController.swift */,
-				B499DDFD1FB9FA520058DBAA /* UserCardTableViewCell.swift */,
-				B4C378341FBC9978008ADDD4 /* BoatsViewController.swift */,
-				B4C378301FBC97D6008ADDD4 /* BoatTableViewCell.swift */,
 				B4C378441FBCA2D0008ADDD4 /* DeliveriesTableViewCell.swift */,
 				B4C378481FBCA2F1008ADDD4 /* DeliveriesViewController.swift */,
-				B40CB28C1FBFD2FA00A88B0C /* AddBoatViewController.swift */,
-				B40CB2901FBFDA5E00A88B0C /* AddUserViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -245,6 +261,26 @@
 				B4325CC31FC5CB1B0043429D /* NotFoundTableViewCell.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		B4D643A11FC71DA00036B953 /* Users */ = {
+			isa = PBXGroup;
+			children = (
+				B499DE011FB9FD6F0058DBAA /* UsersViewController.swift */,
+				B499DDFD1FB9FA520058DBAA /* UserCardTableViewCell.swift */,
+				B40CB2901FBFDA5E00A88B0C /* AddUserViewController.swift */,
+			);
+			path = Users;
+			sourceTree = "<group>";
+		};
+		B4D643A21FC728000036B953 /* Boats */ = {
+			isa = PBXGroup;
+			children = (
+				B4C378341FBC9978008ADDD4 /* BoatsViewController.swift */,
+				B4C378301FBC97D6008ADDD4 /* BoatTableViewCell.swift */,
+				B40CB28C1FBFD2FA00A88B0C /* AddBoatViewController.swift */,
+			);
+			path = Boats;
 			sourceTree = "<group>";
 		};
 		ED0C94F9D89FC33B3378AC66 /* Pods */ = {
@@ -394,14 +430,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B45F038F1FC5D8B500655022 /* Boat.swift in Sources */,
 				B442DB3B1FB12620001784A5 /* DataGlobal.swift in Sources */,
 				B40CB2911FBFDA5E00A88B0C /* AddUserViewController.swift in Sources */,
+				B45F038C1FC5D7AB00655022 /* WebServiceBoat.swift in Sources */,
 				B4943EAB1FB124B400BF29B8 /* WebLinks.swift in Sources */,
 				B4C378401FBC9CBB008ADDD4 /* MenuTableViewCell.swift in Sources */,
 				B4D390E61FACCE4D00466CA7 /* LoginViewController.swift in Sources */,
 				B4C378491FBCA2F1008ADDD4 /* DeliveriesViewController.swift in Sources */,
 				B442DB3D1FB1269E001784A5 /* WebServiceUser.swift in Sources */,
 				B4D390CC1FACCB7200466CA7 /* AppDelegate.swift in Sources */,
+				B45F038A1FC5D46400655022 /* Role.swift in Sources */,
+				B45F03881FC5D40300655022 /* User.swift in Sources */,
 				B4325CC51FC5CB1B0043429D /* NotFoundTableViewCell.swift in Sources */,
 				B4C378321FBC97D6008ADDD4 /* BoatTableViewCell.swift in Sources */,
 				B499DDFF1FB9FA520058DBAA /* UserCardTableViewCell.swift in Sources */,

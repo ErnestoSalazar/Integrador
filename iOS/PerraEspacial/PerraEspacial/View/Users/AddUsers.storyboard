@@ -155,6 +155,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Agregar Usuario" id="Qg8-4P-Hlu"/>
                     <connections>
+                        <outlet property="buttonAdd" destination="L0a-Sc-m6U" id="AYL-Mq-6d5"/>
                         <outlet property="textFieldEmail" destination="9L7-dD-w8H" id="L51-YQ-Hlh"/>
                         <outlet property="textFieldLastName" destination="kCe-KN-lqw" id="xC9-kc-xMA"/>
                         <outlet property="textFieldName" destination="fm0-3e-ZdR" id="5eS-Sp-RuM"/>

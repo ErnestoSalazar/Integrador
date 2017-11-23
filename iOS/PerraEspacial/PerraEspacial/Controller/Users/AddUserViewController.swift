@@ -15,17 +15,30 @@ class AddUserViewController: UIViewController, UITextFieldDelegate, UIPickerView
     @IBOutlet weak var textFieldRfc: UITextField!
     @IBOutlet weak var textFieldRole: UITextField!
     @IBOutlet weak var textFieldEmail: UITextField!
+    @IBOutlet weak var buttonAdd: UIButton!
     
     //MARK: - Varailabels And Constants
     let picker = UIPickerView()
     let fishers = ["Administrador", "Pescador"]
-    
+    var selectedRoleId : Int = 0
+    var selectedRoleName : String = ""
+    var indexToEditUser = 0
+    var isEditingUser : Bool = false
     
     //MARK: - View Life
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setDelegates()
         self.setPicker()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.verifyIfIsEditing()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        dataGlobal.removeObject(forKey: DataGlobal.keyIndexToEditUser)
+        dataGlobal.synchronize()
     }
     
     //MARK: - TextField Delegate
@@ -49,7 +62,11 @@ class AddUserViewController: UIViewController, UITextFieldDelegate, UIPickerView
     //MARK: - Actions
     @IBAction func addButtonPressed(_ sender: Any) {
         if self.verifyInputs() {
-            self.navigationController?.popViewController(animated: true)
+            if isEditing {
+                self.editUser()
+            }else {
+                self.addUser()
+            }
         }
     }
     
@@ -65,6 +82,7 @@ class AddUserViewController: UIViewController, UITextFieldDelegate, UIPickerView
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        self.selectedRoleName = fishers[row]
         self.textFieldRole.text = fishers[row]
     }
     
@@ -131,5 +149,57 @@ class AddUserViewController: UIViewController, UITextFieldDelegate, UIPickerView
         alertController.addAction(okAction)
         self.present(alertController, animated: true, completion: nil)
     }
+    
+    func addUser(){
+        let user = self.createUserObject()
+        WebServiceUser.createUser(user: user, completionHandler: { (status : Bool, message : String) in
+            if status {
+                self.navigationController?.popViewController(animated: true)
+            }else {
+                self.alert(title: "Error", message: message)
+            }
+        })
 
+    }
+    
+    func createUserObject() -> User {
+        let role = Role(id: self.selectedRoleId, name: self.selectedRoleName)
+        let user = User(id: 0, email: textFieldEmail.text!, name: textFieldName.text!, lastName: textFieldLastName.text!, password: "", rfc: textFieldRfc.text!, role: role)
+        return user
+    }
+
+    func verifyIfIsEditing(){
+        if let index = dataGlobal.value(forKey: DataGlobal.keyIndexToEditUser) as? Int {
+            self.indexToEditUser = index
+            self.isEditing = true
+            self.setUserValuesToEdit()
+        }
+    }
+    
+    func editUser(){
+        let user = self.createUserObject()
+        let idUser = users[self.indexToEditUser].id
+        WebServiceUser.editUser(idUser : idUser, user: user) { (status : Bool, message : String) in
+            if status {
+                self.navigationController?.popViewController(animated: true)
+                self.alert(title: "Listo", message: "Usuario editado correctamente")
+            }else {
+                self.alert(title: "Error", message: message)
+            }
+        }
+    }
+    
+    func setUserValuesToEdit(){
+        self.title = "Editar Usuario"
+        self.buttonAdd.setTitle("EDITAR", for: .normal)
+        let user = users[self.indexToEditUser]
+        self.textFieldName.text = user.name
+        self.textFieldLastName.text = user.lastName
+        self.textFieldRfc.text = user.rfc
+        self.textFieldRole.text = user.role.name
+        self.textFieldEmail.text = user.email
+        self.selectedRoleId = user.role.id
+    }
+    
+    
 }

@@ -15,10 +15,12 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var textFieldPassword: UITextField!
     @IBOutlet weak var buttonLogin: UIButton!
     
+    //MARK: - Varailabels And Constants
+    let segueToMenu = "segueToMenu"
+    
     //MARK: - View Life
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.5, green: 0.07238791231, blue: 0.1050986536, alpha: 1)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -27,8 +29,15 @@ class LoginViewController: UIViewController {
     
     //MARK: - Actions
     @IBAction func buttonLoginPressed(_ sender: Any) {
-        WebServiceUser.getTokenUser(name: "Sual", password: "pass", completionHandler: { (status : Bool, message : String) in            
-        })
+        if self.verifyInputs() {
+            WebServiceUser.getTokenUser(email: "\(textFieldEmail.text!)", password: "\(textFieldPassword.text!)", completionHandler: { (status : Bool, message : String) in
+                if status {
+                    self.performSegue(withIdentifier: self.segueToMenu, sender: self)
+                }else {
+                    self.alert(title: "Error", message: message)
+                }
+            })
+        }
     }
     
     //MARK: - Functions

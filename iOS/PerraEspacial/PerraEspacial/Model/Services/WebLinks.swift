@@ -18,6 +18,10 @@ struct WebLinks {
     
     struct Service {
         static let urlGetToken = baseUrl + "login"
+        static let urlRecoverPassword = baseUrl + "login/recover"
+        static let urlCreateUser = baseUrl + "api/users"
+        static let urlUser = baseUrl + "api/users/"
+        static let urlBoats = baseUrl + "api/barcos/"
     }
     
 }

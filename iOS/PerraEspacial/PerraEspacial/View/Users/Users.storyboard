@@ -78,6 +78,7 @@
                         <outlet property="buttonSearch" destination="wll-VK-Y0p" id="L2b-Dl-6k5"/>
                         <outlet property="tableView" destination="W1h-Cg-tVM" id="0Rf-QL-r0s"/>
                         <outlet property="textFieldName" destination="XYr-te-pue" id="ee4-Fx-3n1"/>
+                        <segue destination="91e-di-JFP" kind="show" identifier="segueToEditUser" id="k5Q-Zt-ygN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yoV-OR-dGa" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -90,7 +91,7 @@
                 <viewControllerPlaceholder storyboardName="AddUsers" referencedIdentifier="addUserView" id="91e-di-JFP" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bYe-4h-fuh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="977" y="-65"/>
+            <point key="canvasLocation" x="1108" y="-23"/>
         </scene>
         <!--menuView-->
         <scene sceneID="9a2-rU-HZ9">
@@ -122,4 +123,7 @@
     <resources>
         <image name="menu" width="20" height="14"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="k5Q-Zt-ygN"/>
+    </inferredMetricsTieBreakers>
 </document>

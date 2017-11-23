@@ -22,7 +22,14 @@ class PasswordRecoverViewController: UIViewController {
     @IBAction func buttonRecoverPressed(_ sender: Any) {
         if textFieldEmail.text != "" {
             if isValidEmailAddress(emailAddressString: textFieldEmail.text!) {
-                self.alert(title: "Faltan Servicios", message: "Pinche Ernesto")
+                WebServiceUser.recoverPassword(email: textFieldEmail.text!, completionHandler: { (status : Bool, message : String) in
+                    if status {
+                        self.alert(title: "Listo", message: "Se ha enviado un mensaje a \(self.textFieldEmail.text ?? "")")
+                        self.textFieldEmail.text = ""
+                    }else {
+                        self.alert(title: "Error", message: message)
+                    }
+                })
             }else {
                 self.alert(title: "Correo no valido", message: "Favor de ingresar un correo valido. \n Ejemplo: Correo@ejemplo.com")
             }

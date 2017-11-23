@@ -15,7 +15,7 @@ class BoatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBOutlet weak var buttonSearch: UIButton!
     
     //MARK: - Varailabels And Constants
-    
+    var totalRows = 1
     
     //MARK: - View Life
     override func viewDidLoad() {
@@ -25,12 +25,20 @@ class BoatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     //MARK: TableView Delegate And DataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return totalRows
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = Bundle.main.loadNibNamed("BoatTableViewCell", owner: self, options: nil)?.first as! BoatTableViewCell
-        return cell
+        if boats.count > 0 {
+            let cell = Bundle.main.loadNibNamed("BoatTableViewCell", owner: self, options: nil)?.first as! BoatTableViewCell
+            let boat = boats[indexPath.row]
+                
+            
+            return cell
+        }else {
+            let cell = Bundle.main.loadNibNamed("NotFoundTableViewCell", owner: self, options: nil)?.first as! NotFoundTableViewCell
+            return cell
+        }
     }
     
     //MARK: - Actions
@@ -42,4 +50,20 @@ class BoatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.tableView.delegate = self
         self.tableView.dataSource = self
     }
+    
+    func getBoats(){
+        WebServiceBoat.getBoats { (status : Bool, boatsArray : [Boat]) in
+            if status {
+                boats = boatsArray
+                self.totalRows = boats.count
+                self.tableView.reloadData()
+            }else {
+                if boats.count <= 0 {
+                    self.totalRows = 1
+                    self.tableView.reloadData()
+                }
+            }
+        }
+    }
+    
 }

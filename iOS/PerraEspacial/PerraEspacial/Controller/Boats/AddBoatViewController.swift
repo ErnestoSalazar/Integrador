@@ -29,7 +29,14 @@ class AddBoatViewController: UIViewController, UITextFieldDelegate, UIPickerView
     //MARK: - Actions
     @IBAction func createButtonPressed(_ sender: Any) {
         if self.verifyInputs() {
-            self.navigationController?.popViewController(animated: true)
+            let boat = self.createBoatObject()
+            WebServiceBoat.createBoat(boat: boat, completionHandler: { (status : Bool, message : String) in
+                if status {
+                    self.navigationController?.popViewController(animated: true)
+                }else {
+                    
+                }
+            })
         }
     }
     
@@ -102,6 +109,11 @@ class AddBoatViewController: UIViewController, UITextFieldDelegate, UIPickerView
         }
         alertController.addAction(okAction)
         self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func createBoatObject() -> Boat {
+        let boat = Boat(id: 0, name: textFieldName.text!, description: textViewDescription.text!, userId: 1)
+        return boat
     }
 
 }

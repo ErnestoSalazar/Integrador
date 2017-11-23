@@ -25,7 +25,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3jj-ti-K0u">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="ejemplo@correo.com" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="w0A-WB-RO1">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="saulurias08@gmail.com" borderStyle="roundedRect" placeholder="ejemplo@correo.com" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="w0A-WB-RO1">
                                         <rect key="frame" x="30" y="130" width="315" height="30"/>
                                         <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="textColor"/>
@@ -41,10 +41,9 @@
                                         </state>
                                         <connections>
                                             <action selector="buttonLoginPressed:" destination="Gao-bu-X1a" eventType="touchUpInside" id="eOr-hv-xqG"/>
-                                            <segue destination="dpi-0o-9jy" kind="show" id="juA-4Z-neX"/>
                                         </connections>
                                     </button>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Contraseña" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Teu-Ic-q3B">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="8389" borderStyle="roundedRect" placeholder="Contraseña" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Teu-Ic-q3B">
                                         <rect key="frame" x="30" y="206" width="315" height="30"/>
                                         <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="textColor"/>
@@ -90,11 +89,12 @@
                         <outlet property="textFieldEmail" destination="w0A-WB-RO1" id="EgH-C7-wuY"/>
                         <outlet property="textFieldPassword" destination="Teu-Ic-q3B" id="qjd-md-yYk"/>
                         <outlet property="viewBackground" destination="3jj-ti-K0u" id="yzt-Ss-aRu"/>
+                        <segue destination="dpi-0o-9jy" kind="show" identifier="segueToMenu" id="yMn-yW-QU2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fMp-8X-Hcm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-375.19999999999999" y="-456.52173913043481"/>
+            <point key="canvasLocation" x="-386" y="-456"/>
         </scene>
         <!--menuView-->
         <scene sceneID="BFf-2u-vzt">
