@@ -24,7 +24,7 @@ namespace SpaceDog.Shared.Data
             }
 
             return barco
-                .Where(b => b.Id == id)
+                .Where(b => b.Id == id && b.IsDeleted != true)
                 .SingleOrDefault();
         }
 
@@ -33,7 +33,16 @@ namespace SpaceDog.Shared.Data
             return Context.Barcos
                 .Include(b => b.Usuario)
                 .OrderBy(b => b.Nombre)
+                .Where(b => b.IsDeleted != true)
                 .ToList();
+        }
+
+        public void DeleteD(int id)
+        {
+            var barco = Context.Barcos.Find(id);
+            barco.IsDeleted = true;
+            Context.Entry(barco).State = EntityState.Modified;
+            Context.SaveChanges();
         }
     }
 }

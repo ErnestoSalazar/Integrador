@@ -16,7 +16,9 @@ namespace SpaceDog.Service.Dto
         public string Apellido { get; set; }
         [Required]
         public string Rfc { get; set; }
+
         [Required]
+        [RegularExpression(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$|^\+?\d{0,2}\-?\d{4,5}\-?\d{5,6}", ErrorMessage = "Email invalido")]
         public string Correo { get; set; }
         
         public string Password { get; set; }

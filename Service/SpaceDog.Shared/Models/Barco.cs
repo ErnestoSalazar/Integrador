@@ -14,5 +14,7 @@ namespace SpaceDog.Shared.Models
 
         public int UsuarioId { get; set; }
         public Usuario Usuario { get; set; }
+
+        public bool IsDeleted { get; set; }
     }
 }

@@ -1,21 +1,13 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+﻿using SpaceDog.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SpaceDog.Shared.Models
+namespace SpaceDog.Shared.Dto
 {
-    [JsonConverter(typeof(StringEnumConverter))]
-    public enum Especie { Macarela, Japonesa, Monterrey, Rayadillo, Bocona, Anchoveta, Crinuda }
-    [JsonConverter(typeof(StringEnumConverter))]
-    public enum Talla { s, m, l, xl }
-    [JsonConverter(typeof(StringEnumConverter))]
-    public enum Condicion { Mala, Regular,Buena }
-
-    public class Carga
+    public class CargaDto
     {
         public int Id { get; set; }
         public Double Cantidad { get; set; }

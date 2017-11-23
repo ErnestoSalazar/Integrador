@@ -25,12 +25,22 @@ namespace SpaceDog.Service.Controllers
 
         public IHttpActionResult Get()
         {
-            return Ok(_barcosRepository.GetList());
+            var barcos = _barcosRepository.GetList();
+            if(barcos.Count <= 0)
+            {
+                return NotFound();
+            }
+            return Ok(barcos);
         }
 
         public IHttpActionResult Get(int id)
         {
-            return Ok(_barcosRepository.Get(id));
+            var barco = _barcosRepository.Get(id);
+            if (barco == null)
+            {
+                return NotFound();
+            }
+            return Ok(barco);
         }
 
         public IHttpActionResult Post(BarcoDto barcoDto)
@@ -64,7 +74,7 @@ namespace SpaceDog.Service.Controllers
 
         public void Delete(int id)
         {
-            _barcosRepository.Delete(id);
+            _barcosRepository.DeleteD(id);
         }
     }
 }

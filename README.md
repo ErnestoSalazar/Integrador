@@ -1,20 +1,22 @@
 # Integrador
 Web service, Web, Desktop and mobile clients for a school project
 
+## Web service
 
 Endpoints    | HTTP verbs   | Examples
 ------------ | -------------|-------------
-__/login__            | __POST__                | form: __grant_type: password, username: myUsername, password: myPassword__
-__/login/recover__    | __POST__                | __{mailTo: myEmail}__
+__/login__            | __POST__                | form: __grant_type: password, username: correo, password: myPassword__
+__/login/recover__    | __POST__                | __{mailTo: correo}__
 __/api/users__        | __POST/GET__            | __{nombre, apellido, correo, rfc, rol}__
-__/api/users/{id}__   | __GET/PUT/DELETE__      | __{nombre, apellido, correo, rfc, rol, password, PasswordConfirmation}__
-__/api/barcos__       | __POST/GET__            | __{nombre, descripcion, ususarioId}__
-__/api/barcos/{id}__  | __GET/PUT/DELETE__      | __{nombre, descripcion, ususarioId}__
+__/api/users?__       | __GET__                 | __rol=rol__
+__/api/users/{id}__   | __GET/PUT/DELETE__      | __{nombre, apellido, correo, rfc, rol, password}__
+__/api/barcos__       | __POST/GET__            | __{nombre, descripcion, usuarioId}__
+__/api/barcos/{id}__  | __GET/PUT/DELETE__      | __{nombre, descripcion, usuarioId}__
 __/api/cargas__       | __POST/GET__            | __{cantidad, especie, talla, temperatura, condicion, barcoId}__
 __/api/cargas/{id}__  | __GET/PUT/DELETE__      | __{cantidad, especie, talla, temperatura, condicion, barcoId}__
-__/api/entradas__     | __POST/GET__            | __{folio, turno, usuarioId, cargasId:[]}__
-__/api/entradas?__    | __GET__                 | __fechaInicio=dd/mm/yyyy&fechaFin=dd/mm/yyyy&especie=Rayadillo__
-__/api/entradas{id}__ | __GET/PUT/DELETE__      | __{folio, turno, usuarioId, cargasId:[]}__
+__/api/entradas__     | __POST/GET__            | __{usuarioId, cargasId:[]}__
+__/api/entradas?__    | __GET__                 | __fechaInicio=dd/mm/yyyy&fechaFin=dd/mm/yyyy__ *or* __folio=folio__
+__/api/entradas/{id}__| __GET/PUT/DELETE__      | __{cargasId:[]}__
 
 
 ### Login
@@ -24,12 +26,43 @@ after Login you will recieve a response like this :
     "access_token": "ZUot4VTE13rKUagahglxVBCPlTnEAR5g82lMbHHlAeS1wPPSbaRtjBqMmA0V00AVtoFku6fKZmMcCyF8fyPztAumSN3Rzxay_G8F5eo4OtHTQ2npEm-ha4qeTqm_CwSyO6LzJF-IgAP2j9hsPfyttiwpBjd6GgYuZq0sBSKXvKvqW4CGQfjCaw2NHdIFqlkvo5fxvaJS8oqNks4dxiMOJ3Xf0Rlj6t2jiLkoO5X1xHPn34NsoLOqqwUe-ZIlq-VsTrUZtadLKk3PRIcezoWcq9nGX3pLmrR-Wi-Kex_6QC55WXVK8beCtC8GPyUS3zykM2GpR04gvfEN84OCCnsS11KodPOOQSugt1mP-KRUVvqcNDGZqvlTZxmP_F8d118Gd02R1-v2tiGshC6B1EEVDg",
     "token_type": "bearer",
     "expires_in": 86399,
-    "userName": "name",
+    "userName": "correo@example.com",
     ".issued": "Mon, 13 Nov 2017 15:40:00 GMT",
     ".expires": "Tue, 14 Nov 2017 15:40:00 GMT"
 }
 ```
+in case of a failed login you will receive a status code of __*400*__ and a json with error description
+__*otherwise*__
 you will need to keep the *access_token*, this one needs to be sended on the header of every request made to __/api/*__
 with the key/value:
 
 __Authorization : bearer *access_token*__
+
+
+### Status
+#### Ok
+* *When updating any entity you will get a status code of __204__*
+
+* *When creating any new entity you will get a status code of __201__* and a json response with inserted data
+
+* *when retrieving any entity you will get a status code of __200__* and json response or an array of jsons if retrieving a list of entities
+
+#### Error
+* *When retrieving any entity or list of entities that does not exist you will get a status of __404__*
+* *When login fail you will get a status code of __400__* and a json response with error description
+
+### Users
+When creating a new user, a password will be created automatically by the server and will be send via email
+
+Accepted values for the following properties are:
+* __Rol__: *Admin, Supervisor, Pescador*
+
+### Cargas
+Accepted values for the following properties are:
+* __Especie__: *Macarela, Japonesa, Monterrey, Rayadillo, Bocona, Anchoveta, Crinuda*
+* __Talla__: *s, m, l, xl*
+* __Condicion__: *Mala, Regular, Buena*
+
+### Entradas
+Accepted values for the following properties are:
+* __Turno__: *Matutino, Vespertino*

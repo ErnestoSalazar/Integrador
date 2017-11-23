@@ -5,31 +5,30 @@ using System.Threading.Tasks;
 using System.Web;
 using SendGrid;
 using SendGrid.Helpers.Mail;
+using SpaceDog.Shared;
 
 namespace SpaceDog.Service.Services
 {
     public class EmailService
     {
 
-        private static readonly string _mailFrom = "";
         public string mailTo { get; set; }
 
 
         public static void SendPasswordRecoveryMail(string mailTo, string content)
         {
-            SendEmail(mailTo, "Cambio de contraseña", content).GetAwaiter();
+            SendEmail(mailTo, Strings.CAMBIO_DE_CONTRASENA, content).GetAwaiter();
         }
 
         public static void SendPasswordForNewUser(string mailTo, string content)
         {
-            SendEmail(mailTo, "Bienvenido", content).GetAwaiter();
+            SendEmail(mailTo, Strings.BIENVENIDO, content).GetAwaiter();
         }
 
         private static async Task SendEmail(string mailTo, string reason, string content)
         {
-            var apiKey = "";
-            var client = new SendGridClient(apiKey);
-            var from = new EmailAddress(_mailFrom, "");
+            var client = new SendGridClient(Strings.SENDGRID_KEY);
+            var from = new EmailAddress(Strings.MAIL_FROM, Strings.COMPANY);
             var subject = reason;
             var to = new EmailAddress(mailTo, "");
             var plainTextContent = "";
