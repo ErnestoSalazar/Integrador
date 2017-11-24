@@ -15,6 +15,7 @@ namespace SpaceDog.Shared.Data
         public Context() : base(Strings.CONNECTION_STRING)
         {
             Database.SetInitializer(new DatabaseInitializer());
+            this.Configuration.LazyLoadingEnabled = true;
         }
 
         public DbSet<Usuario> Usuarios { get; set; }
