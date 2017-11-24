@@ -16,6 +16,13 @@ public class PanelReportes extends javax.swing.JPanel {
      */
     public PanelReportes() {
         initComponents();
+        
+        
+    }
+    
+    public PanelReportes(boolean set) {
+        initComponents();
+        
     }
 
     /**

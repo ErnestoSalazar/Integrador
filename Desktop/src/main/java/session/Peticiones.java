@@ -24,6 +24,7 @@ import org.apache.http.client.methods.RequestBuilder;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
 /**
@@ -49,7 +50,7 @@ public class Peticiones {
         return salida;
     }
     
-    public String get(String uri, int number, Token token) {
+    public String get(String uri, String number, Token token) {
         String salida = null;
         try {
             CloseableHttpClient httpClient = Client.getHttpClient(token);
@@ -72,14 +73,19 @@ public class Peticiones {
             CloseableHttpClient httpClient = Client.getHttpClient(token);
             HttpPost httpPost = new HttpPost(uri);
             
-            //UrlEncodedFormEntity entity = new UrlEncodedFormEntity(lista);
-            //httpPost.setEntity(new UrlEncodedFormEntity(lista, "UTF-8"));
             StringEntity entity = new StringEntity(json);
             httpPost.setEntity(entity);
-            //httpPost.setHeader("Content-type", "application/json");
             
             CloseableHttpResponse httpResponse = httpClient.execute(httpPost);
-            salida = EntityUtils.toString(httpResponse.getEntity());
+            
+            //int status = httpResponse.getStatusLine().getStatusCode();
+            
+            //if (status >= 200 && status < 300) {
+                salida = EntityUtils.toString(httpResponse.getEntity());
+            //} else {
+                //salida = ""+status;
+            //}
+            
             
         } catch (IOException ex) {
             System.out.println(ex);
@@ -87,8 +93,8 @@ public class Peticiones {
         return salida;
     }
     
-    public String put(String uri, int number, Token token, String json) {
-        String salida = null;
+    public boolean put(String uri, String number, Token token, String json) {
+        boolean salida = false;
         try {
             CloseableHttpClient httpClient = Client.getHttpClient(token);
             
@@ -102,11 +108,10 @@ public class Peticiones {
             int status = httpResponse.getStatusLine().getStatusCode();
             
             if (status >= 200 && status < 300) {
-                salida = ""+status;
+                salida = true;
             } else {
-                salida = EntityUtils.toString(httpResponse.getEntity());
+                salida = false;
             }
-            
             
         } catch (IOException ex) { 
             System.out.println(ex);
@@ -115,9 +120,8 @@ public class Peticiones {
         return salida;
     }
     
-    public String delete(String uri, int number, Token token, String json) {
-        String salida = null;
-        
+    public boolean delete(String uri, String number, Token token) {
+        boolean salida = false;
         try {
             CloseableHttpClient httpClient = Client.getHttpClient(token);
             
@@ -127,10 +131,10 @@ public class Peticiones {
             
             int status = httpResponse.getStatusLine().getStatusCode();
             
-            if (status >=200 && status < 300) {
-                salida = ""+status;
+            if (status >= 200 && status < 300) {
+                salida = true;
             } else {
-                salida = EntityUtils.toString(httpResponse.getEntity());
+                salida = false;
             }
             
         } catch (UnsupportedEncodingException ex) {
@@ -175,5 +179,40 @@ public class Peticiones {
         }
         
         return salida;
+    }
+    
+    public boolean recover(String uri, String correo) {
+        boolean salida = false;
+        try {
+            CloseableHttpClient httpClient = HttpClients.createDefault();
+            
+            String json = "{\"mailTo\" : \""+correo+"\"}";
+            StringEntity entity = new StringEntity(json);
+            
+            HttpUriRequest httpPost = RequestBuilder.post()
+                    .setUri(uri)
+                    .setHeader("Content-Type", "application/json")
+                    .setEntity(entity)
+                    .build();
+            
+            CloseableHttpResponse httpResponse = httpClient.execute(httpPost);
+            
+            int status = httpResponse.getStatusLine().getStatusCode();
+            
+            if (status >= 200 && status < 300) {
+                salida = true;
+            } else {
+                salida = false;
+            }
+            
+            
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
+        return salida;
+    }
+
+    public String get(String MODIFY_USERS, int idSeleccionado, Token token) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

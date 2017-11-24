@@ -16,12 +16,14 @@ public class Token {
     private String access_token;
     private String token_type;
     private String error_description;
+    private String rol;
+    private int id;
     private static Token token;
 
     public Token() {
     }
     
-    public static Token getToken(String json) {
+    public static Token generateToken(String json) {
         if(token == null) {
             Gson gson = new Gson();
             token = gson.fromJson(json, Token.class);
@@ -32,7 +34,7 @@ public class Token {
         return token;
     }
     
-    public static void setToken() {
+    public static void setTokenNull() {
         token = null;
     }
 
@@ -60,10 +62,37 @@ public class Token {
         this.error_description = error_description;
     }
 
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    public static Token getToken() {
+        return token;
+    }
+
+    public static void setToken(Token aToken) {
+        token = aToken;
+    }
+    
+
     @Override
     public String toString() {
-        return "Token{" + "access_token=" + access_token + ", token_type=" + token_type + ", error_description=" + error_description + '}';
+        return "Token{" + "access_token=" + access_token + ", token_type=" + token_type + ", error_description=" + error_description + ", rol=" + rol + ", id=" + id + '}';
     }
+
+    
     
     
     

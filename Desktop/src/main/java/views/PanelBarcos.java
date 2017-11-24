@@ -17,6 +17,11 @@ public class PanelBarcos extends javax.swing.JPanel {
     public PanelBarcos() {
         initComponents();
     }
+    
+    public PanelBarcos(boolean set) {
+        initComponents();
+        
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
