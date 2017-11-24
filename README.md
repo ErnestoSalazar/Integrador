@@ -15,7 +15,7 @@ __/api/barcos/{id}__  | __GET/PUT/DELETE__      | __{nombre, descripcion, usuari
 __/api/cargas__       | __POST/GET__            | __{cantidad, especie, talla, temperatura, condicion, barcoId}__
 __/api/cargas/{id}__  | __GET/PUT/DELETE__      | __{cantidad, especie, talla, temperatura, condicion, barcoId}__
 __/api/entradas__     | __POST/GET__            | __{usuarioId, cargasId:[]}__
-__/api/entradas?__    | __GET__                 | __fechaInicio=dd/mm/yyyy&fechaFin=dd/mm/yyyy__ *or* __folio=folio__
+__/api/entradas?__    | __GET__                 | __fechaInicio=yyyy/mm/dd&fechaFin=yyyy/mm/dd__ *or* __folio=folio__
 __/api/entradas/{id}__| __GET/PUT/DELETE__      | __{cargasId:[]}__
 
 
@@ -23,12 +23,13 @@ __/api/entradas/{id}__| __GET/PUT/DELETE__      | __{cargasId:[]}__
 after Login you will recieve a response like this :
 ```json
 {
-    "access_token": "ZUot4VTE13rKUagahglxVBCPlTnEAR5g82lMbHHlAeS1wPPSbaRtjBqMmA0V00AVtoFku6fKZmMcCyF8fyPztAumSN3Rzxay_G8F5eo4OtHTQ2npEm-ha4qeTqm_CwSyO6LzJF-IgAP2j9hsPfyttiwpBjd6GgYuZq0sBSKXvKvqW4CGQfjCaw2NHdIFqlkvo5fxvaJS8oqNks4dxiMOJ3Xf0Rlj6t2jiLkoO5X1xHPn34NsoLOqqwUe-ZIlq-VsTrUZtadLKk3PRIcezoWcq9nGX3pLmrR-Wi-Kex_6QC55WXVK8beCtC8GPyUS3zykM2GpR04gvfEN84OCCnsS11KodPOOQSugt1mP-KRUVvqcNDGZqvlTZxmP_F8d118Gd02R1-v2tiGshC6B1EEVDg",
+    "access_token": "kbN51O4put0_Hxg75LUgQaD2rMKys_CnDcfkflAGddJH0wnUSHszYiq6VVm-Q-x8tKp8HlQrgbfyGg9QpynEEL3KfUdAqDL9CrC26f5cd8q2qavYO6Xv9efrRBOiLp17fdaIgi31pjegwfwIv5JQuVf12KaddQKVSTlGzcWavlVQgAi_qwRr0hAZEqlB45EA84F5ZDdITMF1T79cMhBDarAMcJbfQ_ezlwnj2fn30WbtwMwVt9HoeT24iSgFHTcgaX8R_iE2vf4uAU55xgcER8NaRxw0UPHf0ZxaDu95oTJl6zOaItLjbnkhrinnm4ueVm9XpLxfLZI75QFu8-jeIICfRQ79MXyPBP1gP3EEc43cjZ8a9CR_WGxVHteJjgyT3EHN2xqmlUeRsTfpVKjDMg",
     "token_type": "bearer",
     "expires_in": 86399,
     "userName": "correo@example.com",
-    ".issued": "Mon, 13 Nov 2017 15:40:00 GMT",
-    ".expires": "Tue, 14 Nov 2017 15:40:00 GMT"
+    "rol": "Admin",
+    ".issued": "Thu, 23 Nov 2017 20:39:14 GMT",
+    ".expires": "Fri, 24 Nov 2017 20:39:14 GMT"
 }
 ```
 in case of a failed login you will receive a status code of __*400*__ and a json with error description

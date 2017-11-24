@@ -71,8 +71,9 @@ namespace SpaceDog.Service.Controllers
             {
                 cargas = _entradasRepository.GetListOfCargasInEntrada(entradaDto.CargasId);
             }
+            entradaDto.Cargas = cargas;
 
-            entrada.Cargas = (entradaDto.Cargas != null) ? cargas : entrada.Cargas;
+            entrada.Cargas = (entradaDto.Cargas.Count <= 0) ? entrada.Cargas : cargas;
             
             _entradasRepository.Update(entrada);
             
