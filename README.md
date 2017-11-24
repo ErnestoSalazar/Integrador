@@ -23,13 +23,14 @@ __/api/entradas/{id}__| __GET/PUT/DELETE__      | __{cargasId:[]}__
 after Login you will recieve a response like this :
 ```json
 {
-    "access_token": "kbN51O4put0_Hxg75LUgQaD2rMKys_CnDcfkflAGddJH0wnUSHszYiq6VVm-Q-x8tKp8HlQrgbfyGg9QpynEEL3KfUdAqDL9CrC26f5cd8q2qavYO6Xv9efrRBOiLp17fdaIgi31pjegwfwIv5JQuVf12KaddQKVSTlGzcWavlVQgAi_qwRr0hAZEqlB45EA84F5ZDdITMF1T79cMhBDarAMcJbfQ_ezlwnj2fn30WbtwMwVt9HoeT24iSgFHTcgaX8R_iE2vf4uAU55xgcER8NaRxw0UPHf0ZxaDu95oTJl6zOaItLjbnkhrinnm4ueVm9XpLxfLZI75QFu8-jeIICfRQ79MXyPBP1gP3EEc43cjZ8a9CR_WGxVHteJjgyT3EHN2xqmlUeRsTfpVKjDMg",
+    "access_token": "3Ze_IidQ6V4W6r6tU573qLtdUQNL58mKduW6umivfypfImTPg-HxrgvqvFGGRhyfg5hP0JV-L2D3Y9Sh7iGjMex-ROBHMC0XoL_9IBjtQqt1SDyW9B31Xn_LEITH-V7ddHVcfSMhcNCp_sk4-HGBL82zf_AaHJpNzOlCKAJZ77p0V4AZZ1YT7foMn5hnLWiXKWWYYWz-3Y66xuFLNnvARa1zSKy0zHXtwT089JkooI3cbJqf5n2SLFd9Y6StMg7r0cPI3QvFt3tkawqGz2DMsKSB_HW2najo88ahPHH6GX74fpTxwixGBMiqZpOSHqqMYqbuXC_7rs5GcZVcMzi2THpM6UYWCYjKfHsmb1VtxL-n0UeokvqjUFIYcJQ-v3fLZdPsB8dyLzDWnnOnQjRedA",
     "token_type": "bearer",
     "expires_in": 86399,
     "userName": "correo@example.com",
     "rol": "Admin",
-    ".issued": "Thu, 23 Nov 2017 20:39:14 GMT",
-    ".expires": "Fri, 24 Nov 2017 20:39:14 GMT"
+    "userId": "1",
+    ".issued": "Fri, 24 Nov 2017 22:24:27 GMT",
+    ".expires": "Sat, 25 Nov 2017 22:24:27 GMT"
 }
 ```
 in case of a failed login you will receive a status code of __*400*__ and a json with error description
@@ -53,17 +54,285 @@ __Authorization : bearer *access_token*__
 * *When login fail you will get a status code of __400__* and a json response with error description
 
 ### Users
+<details>
+<summary>detalles</summary>
 When creating a new user, a password will be created automatically by the server and will be send via email
+
+When retrieving a __single__ usuario you will recieve the following data
+
+```json
+
+    {
+        "id": 1,
+        "nombre": "Ernesto",
+        "apellido": "Salazar",
+        "rfc": "sdsdfsd",
+        "correo": "correo@example.com",
+        "rol": "Admin"
+    }
+```
+
+When retrieving __multiple__ usuarios you will recieve the following data
+```json
+[
+    {
+        "id": 1,
+        "nombre": "Ernesto",
+        "apellido": "Salazar",
+        "rfc": "sdsdfsd",
+        "correo": "correo@example.com",
+        "rol": "Admin"
+    }
+]
+```
+
+
 
 Accepted values for the following properties are:
 * __Rol__: *Admin, Supervisor, Pescador*
 
+</details>
+
+
+
+### Barcos
+<details>
+<summary>Detalles</summary>
+
+When retrieving a __single__ barco you will recieve the following data
+
+```json
+    {
+        "id": 1,
+        "nombre": "barco 1",
+        "descripcion": "BARCO_CAMARONERO",
+        "usuarioId": 1,
+        "usuario": {
+            "id": 1,
+            "nombre": "Ernesto",
+            "apellido": "Salazar",
+            "rfc": "sdsdfsd",
+            "correo": "correo@example.com",
+            "rol": "Admin",
+        }
+    }
+```
+
+When retrieving __multiple__ barcos you will recieve the following data
+
+```json
+[
+    {
+        "id": 1,
+        "nombre": "barco 1",
+        "descripcion": "BARCO_CAMARONERO",
+        "usuarioId": 1,
+        "usuario": {
+            "id": 1,
+            "nombre": "Ernesto",
+            "apellido": "Salazar",
+            "rfc": "sdsdfsd",
+            "correo": "correo@example.com",
+            "rol": "Admin"
+        }
+    }
+]
+```
+
+</details>
+
 ### Cargas
+<details>
+<summary>detalles</summary>
+
+When retrieving a __single__ carga you will recieve the following data
+
+```json
+    {
+        "id": 1,
+        "cantidad": 150,
+        "especie": "Japonesa",
+        "talla": "m",
+        "temperatura": 99.5,
+        "condicion": "Regular",
+        "barcoId": 1,
+        "barco": {
+            "id": 1,
+            "nombre": "barco 1",
+            "descripcion": "BARCO_CAMARONERO",
+            "usuarioId": 1,
+            "usuario": null
+        },
+        "entradaId": 1
+    }
+```
+
+When retrieving __multiple__ cargas you will recieve the following data
+
+```json
+[
+    {
+        "id": 1,
+        "cantidad": 150,
+        "especie": "Japonesa",
+        "talla": "m",
+        "temperatura": 99.5,
+        "condicion": "Regular",
+        "barcoId": 1,
+        "barco": {
+            "id": 1,
+            "nombre": "barco 1",
+            "descripcion": "BARCO_CAMARONERO",
+            "usuarioId": 1,
+            "usuario": {
+                "id": 1,
+                "nombre": "Ernesto",
+                "apellido": "Salazar",
+                "rfc": "sdsdfsd",
+                "correo": "correo@example.com",
+                "rol": "Admin"
+            }
+        },
+        "entradaId": 1
+    }
+]
+```
+
 Accepted values for the following properties are:
 * __Especie__: *Macarela, Japonesa, Monterrey, Rayadillo, Bocona, Anchoveta, Crinuda*
 * __Talla__: *s, m, l, xl*
 * __Condicion__: *Mala, Regular, Buena*
 
+</details>
+
+
 ### Entradas
+<details>
+<summary>Detalles</summary>
+
+When retrieving a __single__ entrada you will recieve the following data
+
+```json
+    {
+        "id": 1,
+        "folio": "20171124_153209",
+        "fecha": "2017-11-24T00:00:00",
+        "hora": "15:32:00",
+        "turno": "Vespertino",
+        "usuarioId": 1,
+        "usuario": {
+            "id": 1,
+            "nombre": "Ernesto",
+            "apellido": "Salazar",
+            "rfc": "sdsdfsd",
+            "correo": "correo@example.com",
+            "rol": "Admin"
+        },
+        "cargas": [
+            {
+                "id": 1,
+                "cantidad": 150,
+                "especie": "Japonesa",
+                "talla": "m",
+                "temperatura": 99.5,
+                "condicion": "Regular",
+                "barcoId": 1,
+                "barco": null,
+                "entradaId": 1
+            }
+        ]
+    }
+```
+
+When retrieving __multiple__ entradas you will recieve the following data
+
+```json
+[
+    {
+        "id": 1,
+        "folio": "20171124_153209",
+        "fecha": "2017-11-24T00:00:00",
+        "hora": "15:32:00",
+        "turno": "Vespertino",
+        "usuarioId": 1,
+        "usuario": {
+            "id": 1,
+            "nombre": "Ernesto",
+            "apellido": "Salazar",
+            "rfc": "sdsdfsd",
+            "correo": "correo@example.com",
+            "rol": "Admin"
+        },
+        "cargas": [
+            {
+                "id": 1,
+                "cantidad": 150,
+                "especie": "Japonesa",
+                "talla": "m",
+                "temperatura": 99.5,
+                "condicion": "Regular",
+                "barcoId": 1,
+                "barco": null,
+                "entradaId": 1
+            }
+        ]
+        
+    }
+]
+```
+
+
 Accepted values for the following properties are:
 * __Turno__: *Matutino, Vespertino*
+</details>
+
+### Entradas by date
+<details>
+<summary>Detalles</summary>
+When searching an entrada by a date you will receive a json array with the following data
+
+```json
+[
+    {
+        "id": 1,
+        "folio": "20171124_153209",
+        "fecha": "2017-11-24T00:00:00",
+        "hora": "15:32:00",
+        "turno": "Vespertino",
+        "usuarioId": 1,
+        "cargas": [
+            {
+                "id": 1,
+                "cantidad": 150,
+                "especie": "Japonesa",
+                "talla": "m",
+                "temperatura": 99.5,
+                "condicion": "Regular",
+                "barcoId": 1,
+                "barco": null,
+                "entradaId": 1,
+                "entrada": null
+            }
+        ],
+        "totalMacarela": 0,
+        "totalJaponesa": 150,
+        "totalMonterrey": 0,
+        "totalRayadillo": 0,
+        "totalBocona": 0,
+        "totalAnchoveta": 0,
+        "totalCrinuda": 0,
+        "porcentajeMacarela": 0,
+        "porcentajeJaponesa": 100,
+        "porcentajeMonterrey": 0,
+        "porcentajeRayadillo": 0,
+        "porcentajeBocona": 0,
+        "porcentajeAnchoveta": 0,
+        "porcentajeCrinuda": 0,
+        "totales": 150,
+        
+    }
+]
+```
+
+
+</details>
