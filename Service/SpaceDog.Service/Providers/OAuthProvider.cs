@@ -24,19 +24,26 @@ namespace SpaceDog.Service.Providers
                 {
                     if(user.Rol != Shared.Models.Rol.Pescador)
                     {
-                        var claims = new List<Claim>()
+                        if(user.IsDeleted != true)
                         {
-                            new Claim(ClaimTypes.Sid, Convert.ToString(user.Id)),
-                            new Claim(ClaimTypes.Name, user.Nombre),
-                            new Claim(ClaimTypes.Email, user.Correo),
-                            new Claim(ClaimTypes.Role, user.Rol.ToString())
-                        };
-                        ClaimsIdentity oAuthIdentity = new ClaimsIdentity(claims,
-                                    Startup.OAuthOptions.AuthenticationType);
+                            var claims = new List<Claim>()
+                            {
+                                new Claim(ClaimTypes.Sid, Convert.ToString(user.Id)),
+                                new Claim(ClaimTypes.Name, user.Nombre),
+                                new Claim(ClaimTypes.Email, user.Correo),
+                                new Claim(ClaimTypes.Role, user.Rol.ToString())
+                            };
+                            ClaimsIdentity oAuthIdentity = new ClaimsIdentity(claims,
+                                        Startup.OAuthOptions.AuthenticationType);
 
-                        var properties = CreateProperties(user.Correo, user.Rol.ToString());
-                        var ticket = new AuthenticationTicket(oAuthIdentity, properties);
-                        context.Validated(ticket);
+                            var properties = CreateProperties(user.Correo, user.Rol.ToString(), user.Id.ToString());
+                            var ticket = new AuthenticationTicket(oAuthIdentity, properties);
+                            context.Validated(ticket);
+                        }
+                        else
+                        {
+                            context.SetError("invalid_grant", Strings.USUARIO_ELIMINADO);
+                        }
                     }
                     else
                     {
@@ -74,12 +81,13 @@ namespace SpaceDog.Service.Providers
         #endregion
 
         #region[CreateProperties]
-        public static AuthenticationProperties CreateProperties(string userName, string rol)
+        public static AuthenticationProperties CreateProperties(string userName, string rol, string id)
         {
             IDictionary<string, string> data = new Dictionary<string, string>
             {
                 { "userName", userName },
-                { "rol", rol }
+                { "rol", rol },
+                { "userId", id }
             };
             return new AuthenticationProperties(data);
         }

@@ -1,4 +1,5 @@
 ﻿using SpaceDog.Service.Dto;
+using SpaceDog.Shared;
 using SpaceDog.Shared.Data;
 using SpaceDog.Shared.Models;
 using System;
@@ -47,7 +48,7 @@ namespace SpaceDog.Service.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                return BadRequest(Strings.ENTIDAD_INVALIDA);
             }
             var barcoModel = barcoDto.ToModel();
 

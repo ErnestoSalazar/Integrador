@@ -45,7 +45,8 @@ namespace SpaceDog.Service.Controllers
 
         public IHttpActionResult Post(EntradaDto entradaDto)
         {
-            
+
+
             var cargas = _entradasRepository.GetListOfCargasInEntrada(entradaDto.CargasId);
             entradaDto.Cargas = cargas;
             entradaDto.Turno = (DateTimeService.GetTimeNow() < new TimeSpan(12, 0, 0)) ? Turno.Matutino : Turno.Vespertino;

@@ -1,5 +1,6 @@
 ﻿using SpaceDog.Service.Dto;
 using SpaceDog.Service.Services;
+using SpaceDog.Shared;
 using SpaceDog.Shared.Data;
 using SpaceDog.Shared.Models;
 using SpaceDog.Shared.Services;
@@ -52,7 +53,7 @@ namespace SpaceDog.Service.Controllers
             }
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                return BadRequest(Strings.ENTIDAD_INVALIDA);
             }
 
             var password = UserService.GenerateRandomPassword();

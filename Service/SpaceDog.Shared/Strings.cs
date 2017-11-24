@@ -19,5 +19,9 @@ namespace SpaceDog.Shared
         public const string FECHA_INVALIDA = "ingresa una fecha valida yyyy/MM/dd";
         public const string LOGIN_INVALIDO = "El usuario o contraseña es invalido";
         public const string NO_AUTORIZADO = "No estas autorizado";
+
+        public const string ENTIDAD_INVALIDA = "información erronea";
+        public const string USUARIO_ELIMINADO = "Este usuario ha sido eliminado y no tiene acceso al sistema";
+
     }
 }
