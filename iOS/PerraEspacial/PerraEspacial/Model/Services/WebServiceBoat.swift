@@ -59,21 +59,21 @@ struct WebServiceBoat {
         }
     }
     
-    static func getBoats(completionHandler:@escaping (_ status : Bool,_ users : [Boat])->()){
+    static func getBoats(completionHandler:@escaping (_ status : Bool,_ boats : [Boat])->()){
         //Alamofire Get Request
         
         Alamofire.request(WebLinks.Service.urlBoats, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: WebLinks.headers).responseJSON { (response:DataResponse<Any>) in
             switch response.result {
             case .success(let value):
                 let jsonResponse = JSON(value)
-                let usersArray = jsonResponse.arrayValue
+                let boatsArray = jsonResponse.arrayValue
                 var boatsInfo : [Boat] = []
                 
-                for user in usersArray {
-                    let id = user["id"].int ?? 0
-                    let name = user["nombre"].string ?? ""
-                    let description = user["descripcion"].string ?? ""
-                    let idUser = user["usuarioId"].int ?? 0
+                for boat in boatsArray {
+                    let id = boat["id"].int ?? 0
+                    let name = boat["nombre"].string ?? ""
+                    let description = boat["descripcion"].string ?? ""
+                    let idUser = boat["usuarioId"].int ?? 0
                     
                     let boat = Boat(id: id, name: name, description: description, userId: idUser)
                     boatsInfo.append(boat)
@@ -87,17 +87,15 @@ struct WebServiceBoat {
         }
     }
     
-    static func editUser(idUser : Int, user : User, completionHandler:@escaping (_ status : Bool, _ message : String)->()){
+    static func editBoat(idBoat : Int, boat : Boat, completionHandler:@escaping (_ status : Bool, _ message : String)->()){
         //Alamofire Put Request
         let parameters : Parameters = [
-            "nombre" : user.name,
-            "apellido" : user.lastName,
-            "correo" : user.email,
-            "rfc" : user.rfc,
-            "rol" : user.role.id
+            "nombre" : boat.name,
+            "descripcion" : boat.description,
+            "usuarioId" : boat.userId
         ]
         
-        Alamofire.request("\(WebLinks.Service.urlUser)\(idUser)", method: .put, parameters: parameters, encoding: JSONEncoding.default, headers: WebLinks.headers).responseJSON { (response:DataResponse<Any>) in
+        Alamofire.request("\(WebLinks.Service.urlBoats)\(idBoat)", method: .put, parameters: parameters, encoding: JSONEncoding.default, headers: WebLinks.headers).responseJSON { (response:DataResponse<Any>) in
             switch response.result {
             case .success( _):
                 if let httpStatusCode = response.response?.statusCode {
@@ -116,8 +114,8 @@ struct WebServiceBoat {
         }
     }
     
-    static func deleteUser(idUser: Int, completionHandler :@escaping (_ succes: Bool, _ message: String)->()){
-        Alamofire.request("\(WebLinks.Service.urlUser)\(idUser)", method: .delete, parameters: nil, encoding: JSONEncoding.default, headers: WebLinks.headers).responseJSON {
+    static func deleteBoat(idBoat: Int, completionHandler :@escaping (_ succes: Bool, _ message: String)->()){
+        Alamofire.request("\(WebLinks.Service.urlBoats)\(idBoat)", method: .delete, parameters: nil, encoding: JSONEncoding.default, headers: WebLinks.headers).responseJSON {
             (responseObject) -> Void in
             if (responseObject.result.isSuccess){
                 if let httpStatusCode = responseObject.response?.statusCode {

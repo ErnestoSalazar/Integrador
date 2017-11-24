@@ -22,6 +22,9 @@
 		B45F038A1FC5D46400655022 /* Role.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45F03891FC5D46400655022 /* Role.swift */; };
 		B45F038C1FC5D7AB00655022 /* WebServiceBoat.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45F038B1FC5D7AB00655022 /* WebServiceBoat.swift */; };
 		B45F038F1FC5D8B500655022 /* Boat.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45F038E1FC5D8B500655022 /* Boat.swift */; };
+		B490D4CF1FC87CF30075CFFB /* WebServiceReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = B490D4CE1FC87CF30075CFFB /* WebServiceReport.swift */; };
+		B490D4D11FC87D490075CFFB /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = B490D4D01FC87D490075CFFB /* Report.swift */; };
+		B490D4D31FC87E880075CFFB /* Carga.swift in Sources */ = {isa = PBXBuildFile; fileRef = B490D4D21FC87E880075CFFB /* Carga.swift */; };
 		B4943EAB1FB124B400BF29B8 /* WebLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4943EAA1FB124B400BF29B8 /* WebLinks.swift */; };
 		B499DDF41FB9EEEA0058DBAA /* Reporte.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B499DDF31FB9EEEA0058DBAA /* Reporte.storyboard */; };
 		B499DDF71FB9F02E0058DBAA /* ReporteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B499DDF51FB9F02E0058DBAA /* ReporteTableViewCell.swift */; };
@@ -70,6 +73,9 @@
 		B45F03891FC5D46400655022 /* Role.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Role.swift; sourceTree = "<group>"; };
 		B45F038B1FC5D7AB00655022 /* WebServiceBoat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebServiceBoat.swift; sourceTree = "<group>"; };
 		B45F038E1FC5D8B500655022 /* Boat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Boat.swift; sourceTree = "<group>"; };
+		B490D4CE1FC87CF30075CFFB /* WebServiceReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebServiceReport.swift; sourceTree = "<group>"; };
+		B490D4D01FC87D490075CFFB /* Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
+		B490D4D21FC87E880075CFFB /* Carga.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Carga.swift; sourceTree = "<group>"; };
 		B4943EAA1FB124B400BF29B8 /* WebLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebLinks.swift; sourceTree = "<group>"; };
 		B499DDF31FB9EEEA0058DBAA /* Reporte.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Reporte.storyboard; sourceTree = "<group>"; };
 		B499DDF51FB9F02E0058DBAA /* ReporteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReporteTableViewCell.swift; sourceTree = "<group>"; };
@@ -183,6 +189,7 @@
 				B4943EAA1FB124B400BF29B8 /* WebLinks.swift */,
 				B442DB3C1FB1269E001784A5 /* WebServiceUser.swift */,
 				B45F038B1FC5D7AB00655022 /* WebServiceBoat.swift */,
+				B490D4CE1FC87CF30075CFFB /* WebServiceReport.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -222,11 +229,13 @@
 		B4D390E11FACCCB100466CA7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				B45F038D1FC5D7D000655022 /* Services */,
 				B442DB3A1FB12620001784A5 /* DataGlobal.swift */,
+				B45F038D1FC5D7D000655022 /* Services */,
 				B45F03871FC5D40300655022 /* User.swift */,
 				B45F03891FC5D46400655022 /* Role.swift */,
 				B45F038E1FC5D8B500655022 /* Boat.swift */,
+				B490D4D01FC87D490075CFFB /* Report.swift */,
+				B490D4D21FC87E880075CFFB /* Carga.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -442,7 +451,9 @@
 				B4D390CC1FACCB7200466CA7 /* AppDelegate.swift in Sources */,
 				B45F038A1FC5D46400655022 /* Role.swift in Sources */,
 				B45F03881FC5D40300655022 /* User.swift in Sources */,
+				B490D4CF1FC87CF30075CFFB /* WebServiceReport.swift in Sources */,
 				B4325CC51FC5CB1B0043429D /* NotFoundTableViewCell.swift in Sources */,
+				B490D4D31FC87E880075CFFB /* Carga.swift in Sources */,
 				B4C378321FBC97D6008ADDD4 /* BoatTableViewCell.swift in Sources */,
 				B499DDFF1FB9FA520058DBAA /* UserCardTableViewCell.swift in Sources */,
 				B4C3783B1FBC9BAB008ADDD4 /* MenuViewController.swift in Sources */,
@@ -450,6 +461,7 @@
 				B4C378461FBCA2D0008ADDD4 /* DeliveriesTableViewCell.swift in Sources */,
 				B4C378351FBC9978008ADDD4 /* BoatsViewController.swift in Sources */,
 				B499DE021FB9FD6F0058DBAA /* UsersViewController.swift in Sources */,
+				B490D4D11FC87D490075CFFB /* Report.swift in Sources */,
 				B499DDFA1FB9F0420058DBAA /* ReporteViewController.swift in Sources */,
 				B40CB28D1FBFD2FA00A88B0C /* AddBoatViewController.swift in Sources */,
 				B428F5091FAFDBBE005D5545 /* PasswordRecoverViewController.swift in Sources */,

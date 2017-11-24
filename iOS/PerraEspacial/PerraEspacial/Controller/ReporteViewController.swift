@@ -17,7 +17,7 @@ class ReporteViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     //MARK: - Varailabels And Constants
     let datePicker = UIDatePicker()
-    
+    var totalRows = 1
     
     //MARK: - View Life
     override func viewDidLoad() {
@@ -29,12 +29,19 @@ class ReporteViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     //MARK: - Tableview Delegate And DataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return totalRows
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = Bundle.main.loadNibNamed("ReporteTableViewCell", owner: self, options: nil)?.first as! ReporteTableViewCell
-        return cell
+        if reports.count > 0 {
+            let cell = Bundle.main.loadNibNamed("ReporteTableViewCell", owner: self, options: nil)?.first as! ReporteTableViewCell
+            let report = reports[indexPath.row]
+                
+            return cell
+        }else {
+            let cell = Bundle.main.loadNibNamed("NotFoundTableViewCell", owner: self, options: nil)?.first as! NotFoundTableViewCell
+            return cell
+        }
     }
     
     //MARK: - Actions
@@ -79,5 +86,17 @@ class ReporteViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.view.endEditing(true)
     }
     
+    func getReports(){
+        WebServiceReport.getReport { (status : Bool, reportsArray : [Report]) in
+            if status {
+                reports = reportsArray
+                self.totalRows = reports.count
+                self.tableView.reloadData()
+            }else {
+                self.totalRows = 1
+                self.tableView.reloadData()
+            }
+        }
+    }
     
 }

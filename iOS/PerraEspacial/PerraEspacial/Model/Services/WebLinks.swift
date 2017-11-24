@@ -22,6 +22,7 @@ struct WebLinks {
         static let urlCreateUser = baseUrl + "api/users"
         static let urlUser = baseUrl + "api/users/"
         static let urlBoats = baseUrl + "api/barcos/"
+        static let urlDeliveries = baseUrl + "/api/entradas"
     }
     
 }

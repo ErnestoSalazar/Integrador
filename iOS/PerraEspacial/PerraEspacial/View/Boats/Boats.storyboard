@@ -79,6 +79,7 @@
                         <outlet property="buttonSearch" destination="cfi-8c-tsL" id="bDb-KK-2ZS"/>
                         <outlet property="tableView" destination="xME-b4-VtK" id="dNI-bd-tCI"/>
                         <outlet property="textFieldName" destination="ook-ON-7QK" id="yYU-Xd-hvv"/>
+                        <segue destination="KBO-JT-gNE" kind="show" identifier="segueToEditBoat" id="xgn-Pc-dfF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FAv-DG-hHZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -123,4 +124,7 @@
     <resources>
         <image name="menu" width="20" height="14"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="xgn-Pc-dfF"/>
+    </inferredMetricsTieBreakers>
 </document>

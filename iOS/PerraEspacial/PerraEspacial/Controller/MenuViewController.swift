@@ -25,6 +25,11 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setDelegates()
+        
+        WebServiceReport.getBoats { (status : Bool, algo : [Boat]) in
+            
+        }
+        
     }
     
     //MARK: TableView Delegate And DataSource

@@ -106,6 +106,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Agregar barco" id="4i2-EW-7fH"/>
                     <connections>
+                        <outlet property="buttonAdd" destination="tDt-5u-Lhc" id="VBx-z0-cZc"/>
                         <outlet property="textFieldFisher" destination="StU-DF-Yhq" id="4eY-uk-bsQ"/>
                         <outlet property="textFieldName" destination="iiF-By-0Mr" id="gzA-Iv-WK5"/>
                         <outlet property="textViewDescription" destination="tEq-Aw-B0z" id="xUd-ok-zPq"/>

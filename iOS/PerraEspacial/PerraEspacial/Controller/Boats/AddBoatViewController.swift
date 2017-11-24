@@ -13,11 +13,12 @@ class AddBoatViewController: UIViewController, UITextFieldDelegate, UIPickerView
     @IBOutlet weak var textFieldName: UITextField!
     @IBOutlet weak var textFieldFisher: UITextField!
     @IBOutlet weak var textViewDescription: UITextView!
+    @IBOutlet weak var buttonAdd: UIButton!
     
     //MARK: - Varailabels And Constants
     let picker = UIPickerView()
     let fishers = ["Pescador 1", "Pescador 2", "Pescador 3", "Pescador 4", "Pescador 5"]
-    
+    var indexToEditBoat = 0
     
     //MARK: - View Life
     override func viewDidLoad() {
@@ -26,17 +27,23 @@ class AddBoatViewController: UIViewController, UITextFieldDelegate, UIPickerView
         self.setPicker()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        verifyIfIsEditing()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        dataGlobal.removeObject(forKey: DataGlobal.keyIndexToEditBoat)
+        dataGlobal.synchronize()
+    }
+    
     //MARK: - Actions
     @IBAction func createButtonPressed(_ sender: Any) {
         if self.verifyInputs() {
-            let boat = self.createBoatObject()
-            WebServiceBoat.createBoat(boat: boat, completionHandler: { (status : Bool, message : String) in
-                if status {
-                    self.navigationController?.popViewController(animated: true)
-                }else {
-                    
-                }
-            })
+            if isEditing {
+                self.editBoat()
+            }else {
+                self.addBoat()
+            }
         }
     }
     
@@ -114,6 +121,46 @@ class AddBoatViewController: UIViewController, UITextFieldDelegate, UIPickerView
     func createBoatObject() -> Boat {
         let boat = Boat(id: 0, name: textFieldName.text!, description: textViewDescription.text!, userId: 1)
         return boat
+    }
+    
+    func verifyIfIsEditing(){
+        if let index = dataGlobal.value(forKey: DataGlobal.keyIndexToEditBoat) as? Int {
+            self.indexToEditBoat = index
+            self.isEditing = true
+            self.setBoatsValuesToEdit()
+        }
+    }
+    
+    func addBoat(){
+        let boat = self.createBoatObject()
+        WebServiceBoat.createBoat(boat: boat, completionHandler: { (status : Bool, message : String) in
+            if status {
+                self.navigationController?.popViewController(animated: true)
+            }else {
+                self.alert(title: "Error", message: message)
+            }
+        })
+    }
+    
+    func editBoat(){
+        let boat = self.createBoatObject()
+        let idBoat = boats[self.indexToEditBoat].id
+        WebServiceBoat.editBoat(idBoat: idBoat, boat: boat) { (status : Bool, message : String) in
+            if status {
+                self.navigationController?.popViewController(animated: true)
+            }else {
+                self.alert(title: "Error", message: message)
+            }
+        }
+    }
+    
+    func setBoatsValuesToEdit() {
+        self.title = "Editar Barco"
+        self.buttonAdd.setTitle("EDITAR", for: .normal)
+        let boat = boats[self.indexToEditBoat]
+        self.textFieldName.text = boat.name
+        self.textFieldFisher.text = ""
+        self.textViewDescription.text = boat.description
     }
 
 }

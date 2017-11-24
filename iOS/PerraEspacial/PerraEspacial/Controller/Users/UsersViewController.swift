@@ -43,10 +43,10 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
         if users.count > 0 {
             let cell = Bundle.main.loadNibNamed("UserCardTableViewCell", owner: self, options: nil)?.first as! UserCardTableViewCell
                 let user = users[indexPath.row]
-                cell.labelName.text = "\(user.name) \(user.lastName)"
-                cell.labelEmail.text = user.email
-                cell.labelRfc.text = user.rfc
-                cell.labelRole.text = user.role.name
+                    cell.labelName.text = "\(user.name) \(user.lastName)"
+                    cell.labelEmail.text = user.email
+                    cell.labelRfc.text = user.rfc
+                    cell.labelRole.text = user.role.name
             cell.delegate = self
             return cell
         }else {
@@ -130,10 +130,5 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 self.alert(title: "Error", message: message)
             }
         }
-    }
-    
-    
-    
-    
-
+    }    
 }
