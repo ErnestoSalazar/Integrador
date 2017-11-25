@@ -34,7 +34,7 @@ namespace SpaceDog.Service.Controllers
 
         public IHttpActionResult Get(int id)
         {
-            var entrada = _entradasRepository.Get(id);
+            var entrada = _entradasRepository.GetReporte(id);
             if(entrada == null)
             {
                 return NotFound();

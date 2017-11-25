@@ -48,9 +48,66 @@ namespace SpaceDog.Shared.Data
             Context.SaveChanges();
         }
 
+        public ReporteDto GetReporte(int id)
+        {
+            var entrada = Context.Entradas
+                .Select(en => new ReporteDto
+                {
+                    Id = en.Id,
+                    Folio = en.Folio,
+                    Fecha = en.Fecha,
+                    Hora = en.Hora,
+                    Turno = en.Turno,
+                    UsuarioId = en.UsuarioId,
+                    Usuario = en.Usuario,
+                    Cargas = en.Cargas.ToList(),
+                    IsDeleted = en.IsDeleted
+                })
+                .Where(e => e.Id == id && e.IsDeleted != true) //e.Cargas.Any(c => c.Especie.ToString() == especie) &&
+                .SingleOrDefault();
+
+            if (entrada != null  && entrada.Cargas.Count > 0)
+            {
+                var cargasMacarela = entrada.Cargas.Where(c => c.Especie == Especie.Macarela).ToList();
+                var cargasJaponesa = entrada.Cargas.Where(c => c.Especie == Especie.Japonesa).ToList();
+                var cargasMonterrey = entrada.Cargas.Where(c => c.Especie == Especie.Monterrey).ToList();
+                var cargasRayadillo = entrada.Cargas.Where(c => c.Especie == Especie.Rayadillo).ToList();
+                var cargasBocona = entrada.Cargas.Where(c => c.Especie == Especie.Bocona).ToList();
+                var cargasAnchoveta = entrada.Cargas.Where(c => c.Especie == Especie.Anchoveta).ToList();
+                var cargasCrinuda = entrada.Cargas.Where(c => c.Especie == Especie.Crinuda).ToList();
+
+
+                if (cargasMacarela.Count > 0) { entrada.TotalMacarela = GetTotalPesaje(cargasMacarela); }
+                if (cargasJaponesa.Count > 0) { entrada.TotalJaponesa = GetTotalPesaje(cargasJaponesa); }
+                if (cargasMonterrey.Count > 0) { entrada.TotalMonterrey = GetTotalPesaje(cargasMonterrey); }
+                if (cargasRayadillo.Count > 0) { entrada.TotalRayadillo = GetTotalPesaje(cargasRayadillo); }
+                if (cargasBocona.Count > 0) { entrada.TotalBocona = GetTotalPesaje(cargasBocona); }
+                if (cargasAnchoveta.Count > 0) { entrada.TotalAnchoveta = GetTotalPesaje(cargasAnchoveta); }
+                if (cargasCrinuda.Count > 0) { entrada.TotalCrinuda = GetTotalPesaje(cargasCrinuda); }
+
+                entrada.Totales =
+                    entrada.TotalMacarela +
+                    entrada.TotalJaponesa +
+                    entrada.TotalMonterrey +
+                    entrada.TotalRayadillo +
+                    entrada.TotalBocona +
+                    entrada.TotalAnchoveta +
+                    entrada.TotalCrinuda;
+
+                entrada.PorcentajeMacarela = (entrada.TotalMacarela * 100) / entrada.Totales;
+                entrada.PorcentajeJaponesa = (entrada.TotalJaponesa * 100) / entrada.Totales;
+                entrada.PorcentajeMonterrey = (entrada.TotalMonterrey * 100) / entrada.Totales;
+                entrada.PorcentajeRayadillo = (entrada.TotalRayadillo * 100) / entrada.Totales;
+                entrada.PorcentajeBocona = (entrada.TotalBocona * 100) / entrada.Totales;
+                entrada.PorcentajeAnchoveta = (entrada.TotalAnchoveta * 100) / entrada.Totales;
+                entrada.PorcentajeCrinuda = (entrada.TotalCrinuda * 100) / entrada.Totales;
+            }
+
+            return entrada;
+        }
+
         public List<EntradaDto> GetListByDate(DateTime dateInicio, DateTime dateFin)
         {
-
             var entradas = Context.Entradas
                 .Select(en => new EntradaDto
                 {
@@ -60,55 +117,12 @@ namespace SpaceDog.Shared.Data
                     Hora = en.Hora,
                     Turno = en.Turno,
                     UsuarioId = en.UsuarioId,
+                    Usuario = en.Usuario,
                     Cargas = en.Cargas.ToList(),
                     IsDeleted = en.IsDeleted
                 })
-                .Where(e => e.Fecha >= dateInicio && e.Fecha <= dateFin &&  e.IsDeleted != true) //e.Cargas.Any(c => c.Especie.ToString() == especie) &&
+                .Where(en => en.Fecha >= dateInicio && en.Fecha <= dateFin && en.IsDeleted != true) //e.Cargas.Any(c => c.Especie.ToString() == especie) &&
                 .ToList();
-
-            
-            
-
-            foreach(var entrada in entradas)
-            {
-                if (entrada.Cargas.Count > 0)
-                {
-                    var cargasMacarela = entrada.Cargas.Where(c => c.Especie == Especie.Macarela).ToList();
-                    var cargasJaponesa = entrada.Cargas.Where(c => c.Especie == Especie.Japonesa).ToList();
-                    var cargasMonterrey = entrada.Cargas.Where(c => c.Especie == Especie.Monterrey).ToList();
-                    var cargasRayadillo = entrada.Cargas.Where(c => c.Especie == Especie.Rayadillo).ToList();
-                    var cargasBocona = entrada.Cargas.Where(c => c.Especie == Especie.Bocona).ToList();
-                    var cargasAnchoveta = entrada.Cargas.Where(c => c.Especie == Especie.Anchoveta).ToList();
-                    var cargasCrinuda = entrada.Cargas.Where(c => c.Especie == Especie.Crinuda).ToList();
-
-
-                    if (cargasMacarela.Count > 0) { entrada.TotalMacarela = GetTotalPesaje(cargasMacarela); }
-                    if (cargasJaponesa.Count > 0) { entrada.TotalJaponesa = GetTotalPesaje(cargasJaponesa); }
-                    if (cargasMonterrey.Count > 0) { entrada.TotalMonterrey = GetTotalPesaje(cargasMonterrey); }
-                    if (cargasRayadillo.Count > 0) { entrada.TotalRayadillo = GetTotalPesaje(cargasRayadillo); }
-                    if (cargasBocona.Count > 0) { entrada.TotalBocona = GetTotalPesaje(cargasBocona); }
-                    if (cargasAnchoveta.Count > 0) { entrada.TotalAnchoveta = GetTotalPesaje(cargasAnchoveta); }
-                    if (cargasCrinuda.Count > 0) { entrada.TotalCrinuda = GetTotalPesaje(cargasCrinuda); }
-
-                    entrada.Totales =
-                        entrada.TotalMacarela +
-                        entrada.TotalJaponesa +
-                        entrada.TotalMonterrey +
-                        entrada.TotalRayadillo +
-                        entrada.TotalBocona +
-                        entrada.TotalAnchoveta +
-                        entrada.TotalCrinuda;
-
-                    entrada.PorcentajeMacarela = (entrada.TotalMacarela * 100) / entrada.Totales;
-                    entrada.PorcentajeJaponesa = (entrada.TotalJaponesa * 100) / entrada.Totales;
-                    entrada.PorcentajeMonterrey = (entrada.TotalMonterrey * 100) / entrada.Totales;
-                    entrada.PorcentajeRayadillo = (entrada.TotalRayadillo * 100) / entrada.Totales;
-                    entrada.PorcentajeBocona = (entrada.TotalBocona * 100) / entrada.Totales;
-                    entrada.PorcentajeAnchoveta = (entrada.TotalAnchoveta * 100) / entrada.Totales;
-                    entrada.PorcentajeCrinuda = (entrada.TotalCrinuda * 100) / entrada.Totales;
-                }
-            }
-
 
             return entradas;
         }
