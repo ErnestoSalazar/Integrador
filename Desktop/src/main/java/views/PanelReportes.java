@@ -5,6 +5,12 @@
  */
 package views;
 
+
+import javax.swing.table.DefaultTableModel;
+import com.itextpdf.text.*;
+import java.io.File;
+import javax.swing.JFileChooser;
+
 /**
  *
  * @author fernandomarenco
@@ -16,8 +22,15 @@ public class PanelReportes extends javax.swing.JPanel {
      */
     public PanelReportes() {
         initComponents();
+        
+        
     }
-
+    
+    public PanelReportes(boolean set) {
+        initComponents();
+        
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -103,6 +116,11 @@ public class PanelReportes extends javax.swing.JPanel {
         btnGenerarReporte.setText("GENERAR REPORTE");
         btnGenerarReporte.setBorderPainted(false);
         btnGenerarReporte.setOpaque(true);
+        btnGenerarReporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenerarReporteActionPerformed(evt);
+            }
+        });
 
         jLabel10.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         jLabel10.setText("Japonesa");
@@ -480,6 +498,30 @@ public class PanelReportes extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    
+    private void btnGenerarReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarReporteActionPerformed
+        JFileChooser chosenFile = new JFileChooser();
+        DefaultTableModel dtmEntradas = new DefaultTableModel();
+        DefaultTableModel dtmCargas = new DefaultTableModel();
+        
+        int columnEntradas = tblEntradasReporte.getModel().getColumnCount();
+        int columnCargas = tblCargasReporte.getModel().getColumnCount();
+        
+        int opcion = chosenFile.showSaveDialog(this);
+        
+        if(opcion == JFileChooser.APPROVE_OPTION){
+            File filePath = chosenFile.getSelectedFile();
+            String path = filePath.toString();
+            System.out.println(path);
+        }
+        else{
+            
+        }
+        
+        generarPDF();
+    }//GEN-LAST:event_btnGenerarReporteActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscarReporte;
@@ -531,4 +573,8 @@ public class PanelReportes extends javax.swing.JPanel {
     private javax.swing.JFormattedTextField txtFechaFin;
     private javax.swing.JFormattedTextField txtFechaInicio;
     // End of variables declaration//GEN-END:variables
+
+    private void generarPDF() {
+        
+    }
 }

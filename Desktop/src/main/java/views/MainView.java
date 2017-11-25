@@ -6,6 +6,7 @@
 package views;
 
 import java.awt.Color;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -50,6 +51,11 @@ public class MainView extends javax.swing.JFrame {
 
         tbMain.setBackground(new java.awt.Color(255, 255, 255));
         tbMain.setOpaque(true);
+        tbMain.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mouseClickedTab(evt);
+            }
+        });
 
         btnLogout.setBackground(new java.awt.Color(255, 255, 255));
         btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/exit20x20Black.png"))); // NOI18N
@@ -116,6 +122,46 @@ public class MainView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void mouseClickedTab(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mouseClickedTab
+        int index = tbMain.getSelectedIndex();
+        
+        switch (index) {
+            case 0:
+                tbMain.remove(0);
+                tbMain.insertTab("Reportes", 
+                        new ImageIcon(this.getClass().getResource("/images/reports50x50Black.png")), 
+                        new PanelReportes(true), null, 
+                        0);
+                tbMain.setSelectedIndex(0);
+                break;
+            case 1:
+                tbMain.remove(1);
+                tbMain.insertTab("Entradas", 
+                        new ImageIcon(this.getClass().getResource("/images/entries50x50Black.png")), 
+                        new PanelEntradas(true), null, 
+                        1);
+                tbMain.setSelectedIndex(1);
+                break;
+            case 2:
+                tbMain.remove(2);
+                tbMain.insertTab("Barcos", 
+                        new ImageIcon(this.getClass().getResource("/images/boat50x50Black.png")), 
+                        new PanelBarcos(true), null, 
+                        2);
+                tbMain.setSelectedIndex(2);
+                break;
+            case 3:
+                tbMain.remove(3);
+                tbMain.insertTab("Usuarios", 
+                        new ImageIcon(this.getClass().getResource("/images/people50x50Black.png")), 
+                        new PanelUsuarios(true), null, 
+                        3);
+                tbMain.setSelectedIndex(3);
+                break;
+        }
+        
+    }//GEN-LAST:event_mouseClickedTab
 
     /**
      * @param args the command line arguments

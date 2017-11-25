@@ -17,6 +17,11 @@ public class PanelEntradas extends javax.swing.JPanel {
     public PanelEntradas() {
         initComponents();
     }
+    
+    public PanelEntradas(boolean set) {
+        initComponents();
+        
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

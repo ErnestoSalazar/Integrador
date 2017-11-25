@@ -43,6 +43,7 @@ public class FormUsuario extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Form Usuario");
 
         jPanel1.setBackground(new java.awt.Color(250, 250, 250));
         jPanel1.setPreferredSize(new java.awt.Dimension(500, 268));
@@ -53,22 +54,22 @@ public class FormUsuario extends javax.swing.JFrame {
 
         jTextField3.setText("RFC");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Supervisor", "Administrador" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Supervisor", "Admin", "Pescador" }));
 
         jTextField4.setText("Correo");
 
         btnAceptarUsuario.setBackground(new java.awt.Color(55, 179, 68));
-        btnAceptarUsuario.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        btnAceptarUsuario.setFont(new java.awt.Font("Lucida Grande", 1, 12)); // NOI18N
         btnAceptarUsuario.setForeground(new java.awt.Color(255, 255, 255));
-        btnAceptarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mx/itson/spacedogdesktop/images/accept20x20White.png"))); // NOI18N
+        btnAceptarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/accept20x20White.png"))); // NOI18N
         btnAceptarUsuario.setText("ACEPTAR");
         btnAceptarUsuario.setBorderPainted(false);
         btnAceptarUsuario.setOpaque(true);
 
         btnCancelarUsuario.setBackground(new java.awt.Color(237, 28, 36));
-        btnCancelarUsuario.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        btnCancelarUsuario.setFont(new java.awt.Font("Lucida Grande", 1, 12)); // NOI18N
         btnCancelarUsuario.setForeground(new java.awt.Color(255, 255, 255));
-        btnCancelarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mx/itson/spacedogdesktop/images/cancel20x20White.png"))); // NOI18N
+        btnCancelarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cancel20x20White.png"))); // NOI18N
         btnCancelarUsuario.setText("CANCELAR");
         btnCancelarUsuario.setBorderPainted(false);
         btnCancelarUsuario.setOpaque(true);
@@ -159,9 +160,9 @@ public class FormUsuario extends javax.swing.JFrame {
                         .addGap(13, 13, 13)
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(6, 6, 6)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnAceptarUsuario)

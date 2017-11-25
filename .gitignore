@@ -286,7 +286,12 @@ __pycache__/
 *.btm.cs
 *.odx.cs
 *.xsd.cs
+<<<<<<< HEAD
 
 # Desktop Java
 
 .DS_Store
+=======
+/Desktop/build/
+/Desktop/.DS_Store
+>>>>>>> 46be8b679edeebbe3baa34746c31fcf4b963e7ed

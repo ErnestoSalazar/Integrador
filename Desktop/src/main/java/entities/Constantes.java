@@ -13,6 +13,8 @@ public class Constantes {
     private static final String URL = "http://spacedog.azurewebsites.net";
     public static final String LOGIN = URL + "/login";
     
+    public static final String RECOVER = LOGIN + "/recover";
+    
     public static final String USERS = URL + "/api/users";
     public static final String MODIFY_USERS = URL + "/api/users/";
     
