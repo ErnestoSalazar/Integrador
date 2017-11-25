@@ -293,5 +293,9 @@ __pycache__/
 .DS_Store
 =======
 /Desktop/build/
+<<<<<<< HEAD
 /Desktop/.DS_Store
 >>>>>>> 46be8b679edeebbe3baa34746c31fcf4b963e7ed
+=======
+Desktop/.DS_Store
+>>>>>>> f4cf5eaff61cb5c1bcc63fdb984eadfcd8e70459

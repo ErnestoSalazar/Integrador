@@ -7,6 +7,7 @@ package views;
 
 import static entities.Constantes.*;
 import entities.Usuario;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -25,12 +26,6 @@ public class PanelUsuarios extends javax.swing.JPanel {
     public PanelUsuarios() {
         initComponents();
         
-        int index = MainView.tbMain.getSelectedIndex();
-        System.out.println("u"+index);
-        boolean activo = MainView.tbMain.isEnabledAt(index);
-        System.out.println(activo);
-        
-        
     }
     
     public PanelUsuarios(boolean set) {
@@ -44,6 +39,7 @@ public class PanelUsuarios extends javax.swing.JPanel {
     }
     
     Peticiones p = new Peticiones();
+    List<Usuario> usuarios = new ArrayList<>();
     
     //llenar tabla de usuarios
     public void setTableUsuarios() {
@@ -72,7 +68,7 @@ public class PanelUsuarios extends javax.swing.JPanel {
         //consultar usuarios
         String json = p.getAll(USERS, Token.getToken());
         
-        List<Usuario> usuarios = new Usuario().getListUsers(json);
+        usuarios = new Usuario().getListUsers(json);
         System.out.println(usuarios.size());
         
         //filas
@@ -132,6 +128,7 @@ public class PanelUsuarios extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         btnEditarUsuario = new javax.swing.JButton();
         btnEliminarUsuario = new javax.swing.JButton();
+        btnActualizarUsuario = new javax.swing.JButton();
 
         formUsuario.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         formUsuario.setTitle("Usuario");
@@ -378,6 +375,19 @@ public class PanelUsuarios extends javax.swing.JPanel {
             }
         });
 
+        btnActualizarUsuario.setBackground(new java.awt.Color(255, 118, 73));
+        btnActualizarUsuario.setFont(new java.awt.Font("Lucida Grande", 1, 12)); // NOI18N
+        btnActualizarUsuario.setForeground(new java.awt.Color(255, 255, 255));
+        btnActualizarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add20x20White.png"))); // NOI18N
+        btnActualizarUsuario.setText("ACTUALIZAR");
+        btnActualizarUsuario.setBorderPainted(false);
+        btnActualizarUsuario.setOpaque(true);
+        btnActualizarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarUsuarioActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -393,17 +403,19 @@ public class PanelUsuarios extends javax.swing.JPanel {
                             .addComponent(jScrollPane5))
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 227, Short.MAX_VALUE)
+                        .addGap(0, 128, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtBuscarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtBuscarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnBuscarUsuario)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnActualizarUsuario)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnAgregarUsuario)
-                                .addGap(232, 232, 232))
+                                .addGap(127, 127, 127))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(btnEditarUsuario)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -418,8 +430,9 @@ public class PanelUsuarios extends javax.swing.JPanel {
                     .addComponent(jLabel6)
                     .addComponent(txtBuscarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscarUsuario)
+                    .addComponent(btnActualizarUsuario)
                     .addComponent(btnAgregarUsuario))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(15, 15, 15)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -427,43 +440,43 @@ public class PanelUsuarios extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEliminarUsuario)
                     .addComponent(btnEditarUsuario))
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarUsuarioActionPerformed
+        setTableUsuarios();
         DefaultTableModel model = (DefaultTableModel) tblUsuarios.getModel();
         
-        String buscar = txtBuscarUsuario.getText();
+        String buscar = txtBuscarUsuario.getText().trim();
+        List<Usuario> buscados = new ArrayList<>();
         
         if(!buscar.equals("")) {
             //consultar usuarios
-            for (int i = 0; i < tblUsuarios.getColumnCount(); i++) {
-                for (int j = 0; j < tblUsuarios.getRowCount(); j++) {
-                    if (model.getValueAt(i, j).equals(buscar)) {
-                        
+            for (int i = 0; i < tblUsuarios.getRowCount()-1; i++) {
+                for (int j = 0; j < tblUsuarios.getColumnCount()-1; j++) {
+                    String s = (String) model.getValueAt(i, j);
+                    if (s.contains(buscar)) {
+                        buscados.add(usuarios.get(i));
+                        //System.out.println(usuarios.get(i));
+                        break;
                     }
+                    
                 }
             }
             
-            String json = p.get(MODIFY_USERS, buscar, Token.getToken());
+            model.setRowCount(0);
             
-            Usuario usuario = new Usuario().jsonToUser(json);
-
-            if (usuario.getMessage() == null) {
-                model.setRowCount(0);
-                
-                //filas
-                Object[] filas = new Object[tblUsuarios.getColumnCount()];
-                filas[0] = usuario.getNombre() + " " + usuario.getApellido();
-                filas[1] = usuario.getRol();
-                filas[2] = usuario.getRfc();
-                filas[3] = usuario.getCorreo();
-                filas[4] = usuario.getId();
+            //filas
+            Object[] filas = new Object[5];
+            for (int i = 0; i < buscados.size(); i++) {
+                filas[0] = buscados.get(i).getNombre() + " " + buscados.get(i).getApellido();
+                filas[1] = buscados.get(i).getRol();
+                filas[2] = buscados.get(i).getRfc();
+                filas[3] = buscados.get(i).getCorreo();
+                filas[4] = buscados.get(i).getId();
 
                 model.addRow(filas);
-            } else {
-                JOptionPane.showMessageDialog(this, "No se encontró ningún usuario");
             }
             
         } else {
@@ -621,6 +634,10 @@ public class PanelUsuarios extends javax.swing.JPanel {
         }
         
     }//GEN-LAST:event_btnEliminarUsuarioActionPerformed
+
+    private void btnActualizarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarUsuarioActionPerformed
+        setTableUsuarios();
+    }//GEN-LAST:event_btnActualizarUsuarioActionPerformed
     
     public boolean evaluarDatos(String[] datos) {
         for (String dato : datos) {
@@ -638,6 +655,7 @@ public class PanelUsuarios extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptarUsuario;
+    private javax.swing.JButton btnActualizarUsuario;
     private javax.swing.JButton btnAgregarUsuario;
     private javax.swing.JButton btnBuscarUsuario;
     private javax.swing.JButton btnCancelarUsuario;
