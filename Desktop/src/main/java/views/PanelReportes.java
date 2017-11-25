@@ -515,6 +515,11 @@ public class PanelReportes extends javax.swing.JPanel {
         tblEntradasReporte.setModel(dtmEntradas);
         tblCargasReporte.setModel(dtmCargas);
         
+        String[] cols = {"Folio", "Generado por", "Turno", "Fecha", "Hora"};
+        for(String col : cols){
+            dtmEntradas.addColumn(col);
+        }
+        
         int columnEntradas = tblEntradasReporte.getModel().getColumnCount();
         int columnCargas = tblCargasReporte.getModel().getColumnCount();
         
