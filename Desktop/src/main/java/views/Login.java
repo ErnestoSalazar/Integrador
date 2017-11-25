@@ -119,7 +119,7 @@ public class Login extends javax.swing.JFrame {
 
         jLabel2.setText("Contraseña:");
 
-        txtPassword.setText("8875");
+        txtPassword.setText("2261");
 
         btnIngresar.setBackground(new java.awt.Color(237, 28, 36));
         btnIngresar.setFont(new java.awt.Font("Lucida Grande", 1, 12)); // NOI18N

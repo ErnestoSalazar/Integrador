@@ -21,6 +21,8 @@ public class Barco {
     private int usuarioId;
     private Usuario usuario;
     
+    private String message;
+    
     //Contructor
     public Barco() {}
 
@@ -91,10 +93,19 @@ public class Barco {
         this.usuarioId = usuarioId;
     }
 
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
     @Override
     public String toString() {
-        return "Barco{" + "id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", usuarioId=" + usuarioId + ", usuario=" + usuario + '}';
+        return "Barco{" + "id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", usuarioId=" + usuarioId + ", usuario=" + usuario + ", message=" + message + '}';
     }
+
     
     
     
