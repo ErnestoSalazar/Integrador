@@ -5,6 +5,19 @@
  */
 package views;
 
+
+import javax.swing.table.DefaultTableModel;
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author fernandomarenco
@@ -24,7 +37,7 @@ public class PanelReportes extends javax.swing.JPanel {
         initComponents();
         
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -110,6 +123,11 @@ public class PanelReportes extends javax.swing.JPanel {
         btnGenerarReporte.setText("GENERAR REPORTE");
         btnGenerarReporte.setBorderPainted(false);
         btnGenerarReporte.setOpaque(true);
+        btnGenerarReporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenerarReporteActionPerformed(evt);
+            }
+        });
 
         jLabel10.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         jLabel10.setText("Japonesa");
@@ -141,7 +159,7 @@ public class PanelReportes extends javax.swing.JPanel {
                 java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, true, false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -487,6 +505,62 @@ public class PanelReportes extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    
+    private void btnGenerarReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarReporteActionPerformed
+        JFileChooser chosenFile = new JFileChooser();
+        DefaultTableModel dtmEntradas = new DefaultTableModel();
+        DefaultTableModel dtmCargas = new DefaultTableModel();
+        
+        tblEntradasReporte.setModel(dtmEntradas);
+        tblCargasReporte.setModel(dtmCargas);
+        
+        String[] cols = {"Folio", "Generado por", "Turno", "Fecha", "Hora"};
+        for(String col : cols){
+            dtmEntradas.addColumn(col);
+        }
+        
+        int columnEntradas = tblEntradasReporte.getModel().getColumnCount();
+        int columnCargas = tblCargasReporte.getModel().getColumnCount();
+        
+        int rowEntradas = tblEntradasReporte.getModel().getRowCount();
+        int rowCargas = tblCargasReporte.getModel().getRowCount();
+        
+        int opcion = chosenFile.showSaveDialog(this);
+        
+        if(opcion == JFileChooser.APPROVE_OPTION){
+            File filePath = chosenFile.getSelectedFile();
+            String path = filePath.toString();
+            
+            try {
+                FileOutputStream fileName = new FileOutputStream(path +".pdf");
+                Document document = new Document();
+                
+                PdfWriter.getInstance(document, fileName);
+                document.open();
+                
+                for(int i = 0; i < columnEntradas; i++){
+                    String contentEntradas = "Test ColEntradas"; //tblEntradasReporte.getColumnName(i);
+                    document.add(new Paragraph (contentEntradas));
+                }
+                
+                document.close();
+                
+                JOptionPane.showMessageDialog(null, "Se guardó con éxito el PDF");
+                
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(PanelReportes.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (DocumentException ex) {
+                Logger.getLogger(PanelReportes.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "No se ha guardado nada");
+        }
+        
+        
+    }//GEN-LAST:event_btnGenerarReporteActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscarReporte;
@@ -538,4 +612,5 @@ public class PanelReportes extends javax.swing.JPanel {
     private javax.swing.JFormattedTextField txtFechaFin;
     private javax.swing.JFormattedTextField txtFechaInicio;
     // End of variables declaration//GEN-END:variables
+
 }
