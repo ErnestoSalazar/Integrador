@@ -27,7 +27,7 @@
         </a>
       </div>
       <div class="navbar3 navbar-collapse collapse">
-        <ul class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav navbar-right hidden-xs">
           <li><a href="#">Nombre usuario</a></li>
           <li><a href="#"> <i class="material-icons">power_settings_new</i></a></li>
         </ul>
@@ -45,7 +45,11 @@
                 <li><a href="/usuario">Usuario</a></li>
                 <li><a href="/entregas">Entregas</a></li>
                 <li><a href="/barcos">Barcos</a></li>
-            </ul>        
+            </ul>  
+            <ul class="nav navbar-nav navbar-right hidden-lg">
+            <li><a href="#">Nombre usuario</a></li>
+                <li><a href="#"> <i class="material-icons">power_settings_new</i></a></li>
+            </ul>      
           </div>
         </div>
     </nav>

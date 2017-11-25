@@ -16,3 +16,7 @@ Route::get('entregas', function () {
 Route::get('barcos', function () {
     return view('barcos');
 });
+
+Route::get('login', function () {
+    return view('login');
+});

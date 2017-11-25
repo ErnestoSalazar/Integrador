@@ -23,12 +23,15 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>T</td>
-                        <td>T</td>
-                        <td>T</td>
-                        <td>T</td>
-                        <td>T</td>
-                        <td><button>Marenco</button><button>Ernesto</button></td>
+                        <td>Contenido</td>
+                        <td>Contenido</td>
+                        <td>Mas Contenido</td>
+                        <td>Contenido</td>
+                        <td>Mas contenido</td>
+                        <td>
+                            <button type="submit" class="btn btn-primary btn-block"><i class="material-icons">check</i></button>
+              		        <button type="submit" class="btn btn-danger btn-block"><i class="material-icons">close</i></button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -40,7 +43,7 @@
       <div class="modal-content">
         <div class="modal-header" style="padding:35px 50px;">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4>Usuario</h4>
+          <h4>Entregas</h4>
         </div>
         <div class="modal-body" style="padding:40px 50px;">
           <form role="form">

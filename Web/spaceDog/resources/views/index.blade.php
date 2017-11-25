@@ -12,10 +12,9 @@
       			<input type="search" placeholder="Fin" class="form-control" id="pwd">
     		</div>
     		<button type="submit" class="btn btn-default">Buscar</button>
-			<button type="button" class="btn btn-primary">Generar Reporte</button>
   		</form>
   	</div>
-	<h2>Entregas</h2>
+	<h2>Entradas</h2>
   	<div class="table-responsive">
     	<table class="table">
 			<thead>
@@ -36,7 +35,7 @@
 			</tbody>
     	</table>
   	</div>
-	<h2>Cargas:</h2>
+	<h2>Cargas</h2>
 	<div class="table-responsive">
 		<table class="table">
 			<thead>
@@ -62,102 +61,103 @@
 	<div class="row">
 		<div class="col-md-3">
 			<h3>Macarela</h3>
-			<form>
-  				<div class="form-group">
-    				<label for="total">Total:</label>
-    				<input class="form-control" id="total">
-  				</div>
-  				<div class="form-group">
-    				<label for="pwd">Porcentaje:</label>
-    				<input class="form-control" id="pwd">
-  				</div>
-			</form>
+				<div class="col-md-6">
+					<div class="testt">
+						<span class="label label-default">Total:</span>
+						<label for="">label_total</label>
+					</div>
+					<div class="testt">
+						<span class="label label-default">Porcentaje:</span>
+						<label for="">label_porcentaje</label>
+					</div>
+				</div>
 		</div>
 		<div class="col-md-3">
 			<h3>Japonesa</h3>
-			<form>
-  				<div class="form-group">
-    				<label for="total">Total:</label>
-    				<input class="form-control" id="total">
-  				</div>
-  				<div class="form-group">
-    				<label for="pwd">Porcentaje:</label>
-    				<input class="form-control" id="pwd">
-  				</div>
-			</form>
+				<div class="col-md-6">
+					<div class="testt">
+						<span class="label label-default">Total:</span>
+						<label for="">label_total</label>
+					</div>
+					<div class="testt">
+						<span class="label label-default">Porcentaje:</span>
+						<label for="">label_porcentaje</label>
+					</div>
+				</div>
 		</div>
 		<div class="col-md-3">
 			<h3>Monterrey</h3>
-			<form>
-  				<div class="form-group">
-    				<label for="total">Total:</label>
-    				<input class="form-control" id="total">
-  				</div>
-  				<div class="form-group">
-    				<label for="pwd">Porcentaje:</label>
-    				<input class="form-control" id="pwd">
-  				</div>
-			</form>
+				<div class="col-md-6">
+					<div class="testt">
+						<span class="label label-default">Total:</span>
+						<label for="">label_total</label>
+					</div>
+					<div class="testt">
+						<span class="label label-default">Porcentaje:</span>
+						<label for="">label_porcentaje</label>
+					</div>
+				</div>
 		</div>
 		<div class="col-md-3">
 			<h3>Rayadillo</h3>
-			<form>
-  				<div class="form-group">
-    				<label for="total">Total:</label>
-    				<input class="form-control" id="total">
-  				</div>
-  				<div class="form-group">
-    				<label for="pwd">Porcentaje:</label>
-    				<input class="form-control" id="pwd">
-  				</div>
-			</form>
+				<div class="col-md-6">
+					<div class="testt">
+						<span class="label label-default">Total:</span>
+						<label for="">label_total</label>
+					</div>
+					<div class="testt">
+						<span class="label label-default">Porcentaje:</span>
+						<label for="">label_porcentaje</label>
+					</div>
+				</div>
 		</div>
 		<div class="col-md-3">
 			<h3>Bocona</h3>
-			<form>
-  				<div class="form-group">
-    				<label for="total">Total:</label>
-    				<input class="form-control" id="total">
-  				</div>
-  				<div class="form-group">
-    				<label for="pwd">Porcentaje:</label>
-    				<input class="form-control" id="pwd">
-  				</div>
-			</form>
+				<div class="col-md-6">
+					<div class="testt">
+						<span class="label label-default">Total:</span>
+						<label for="">label_total</label>
+					</div>
+					<div class="testt">
+						<span class="label label-default">Porcentaje:</span>
+						<label for="">label_porcentaje</label>
+					</div>
+				</div>
+
 		</div>
 		<div class="col-md-3">
 			<h3>Anchoveta</h3>
-			<form>
-  				<div class="form-group">
-    				<label for="total">Total:</label>
-    				<input class="form-control" id="total">
-  				</div>
-  				<div class="form-group">
-    				<label for="pwd">Porcentaje:</label>
-    				<input class="form-control" id="pwd">
-  				</div>
-			</form>
-		</div>
+				<div class="col-md-6">
+					<div class="testt">
+						<span class="label label-default">Total:</span>
+						<label for="">label_total</label>
+					</div>
+					<div class="testt">
+						<span class="label label-default">Porcentaje:</span>
+						<label for="">label_porcentaje</label>
+					</div>
+				</div>
+		</div>		
 		<div class="col-md-3">
 			<h3>Crinuda</h3>
-			<form>
-  				<div class="form-group">
-    				<label for="total">Total:</label>
-    				<input class="form-control" id="total">
-  				</div>
-  				<div class="form-group">
-    				<label for="pwd">Porcentaje:</label>
-    				<input class="form-control" id="pwd">
-  				</div>
-			</form>
+				<div class="col-md-6">
+					<div class="testt">
+						<span class="label label-default">Total:</span>
+						<label for="">label_total</label>
+					</div>
+					<div class="testt">
+						<span class="label label-default">Porcentaje:</span>
+						<label for="">label_porcentaje</label>
+					</div>
+				</div>
 		</div>
-		<div class="col-md-3" style= "margin-top: 100px;">
-			<form>
-  				<div class="form-group">
-    				<label for="total">Total:</label>
-    				<input class="form-control" id="total">
-  				</div>
-			</form>
+		<div class="col-md-3">
+				<div class="col-md-6">
+					<div class="testt">
+						<h3><span class="label label-default">Total:</span></h3>
+						<label for="">label_total</label>
+					</div>
+				</div>
 		</div>
 	</div>
 @endsection

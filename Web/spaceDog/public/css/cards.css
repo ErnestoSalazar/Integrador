@@ -8,7 +8,7 @@ html, body {
 }
 .user__card {
 	min-width: 25em; /* 400px */
-	height: 30em; /* 600px */
+	height: 32em; /* 600px */
     border-radius: 10px; /* 20px */
     margin-bottom: 10px;
 }
@@ -97,7 +97,7 @@ html, body {
 	border-bottom: 1px solid rgba(255,255,255,0.75);
 }
 .info h3 {
-	font-size: 3.5em;
+	font-size: 3em;
 	margin-bottom: 8px;
 }
 .info p:nth-child(2) {
@@ -107,11 +107,6 @@ html, body {
 .info p:nth-child(3) {
 	font-size: 1.2em;
 }
-.followers {
-  padding-top: 40px;
-	height: 80%;
-  text-align: center;
-}
 
 .profile {
 	color: #fff;
@@ -119,3 +114,13 @@ html, body {
 	font-size: 80px;
 }
 
+.btn-delete {
+	width: 200px;
+	background-color: red;
+	color: white;
+}
+.btn-edit {
+	width: 200px;
+	background-color: blue;
+	color: white;
+}
