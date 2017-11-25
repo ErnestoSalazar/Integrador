@@ -214,34 +214,49 @@ When retrieving a __single__ entrada you will recieve the following data
 
 ```json
     {
+    "id": 1,
+    "folio": "20171124_153209",
+    "fecha": "2017-11-24T00:00:00",
+    "hora": "15:32:00",
+    "turno": "Vespertino",
+    "usuarioId": 1,
+    "usuario": {
         "id": 1,
-        "folio": "20171124_153209",
-        "fecha": "2017-11-24T00:00:00",
-        "hora": "15:32:00",
-        "turno": "Vespertino",
-        "usuarioId": 1,
-        "usuario": {
+        "nombre": "Ernesto",
+        "apellido": "Salazar",
+        "rfc": "sdsdfsd",
+        "correo": "correo@example.com",
+        "rol": "Admin"
+    },
+    "cargas": [
+        {
             "id": 1,
-            "nombre": "Ernesto",
-            "apellido": "Salazar",
-            "rfc": "sdsdfsd",
-            "correo": "correo@example.com",
-            "rol": "Admin"
-        },
-        "cargas": [
-            {
-                "id": 1,
-                "cantidad": 150,
-                "especie": "Japonesa",
-                "talla": "m",
-                "temperatura": 99.5,
-                "condicion": "Regular",
-                "barcoId": 1,
-                "barco": null,
-                "entradaId": 1
-            }
-        ]
-    }
+            "cantidad": 150,
+            "especie": "Japonesa",
+            "talla": "m",
+            "temperatura": 99.5,
+            "condicion": "Regular",
+            "barcoId": 1,
+            "barco": null,
+            "entradaId": 1
+        }
+    ],
+    "totalMacarela": 0,
+    "totalJaponesa": 150,
+    "totalMonterrey": 0,
+    "totalRayadillo": 0,
+    "totalBocona": 0,
+    "totalAnchoveta": 0,
+    "totalCrinuda": 0,
+    "porcentajeMacarela": 0,
+    "porcentajeJaponesa": 100,
+    "porcentajeMonterrey": 0,
+    "porcentajeRayadillo": 0,
+    "porcentajeBocona": 0,
+    "porcentajeAnchoveta": 0,
+    "porcentajeCrinuda": 0,
+    "totales": 150
+}
 ```
 
 When retrieving __multiple__ entradas you will recieve the following data
@@ -300,6 +315,14 @@ When searching an entrada by a date you will receive a json array with the follo
         "hora": "15:32:00",
         "turno": "Vespertino",
         "usuarioId": 1,
+        "usuario": {
+            "id": 1,
+            "nombre": "Ernesto",
+            "apellido": "Salazar",
+            "rfc": "sdsdfsd",
+            "correo": "correo@example.com",
+            "rol": "Admin"
+        },
         "cargas": [
             {
                 "id": 1,
@@ -310,26 +333,9 @@ When searching an entrada by a date you will receive a json array with the follo
                 "condicion": "Regular",
                 "barcoId": 1,
                 "barco": null,
-                "entradaId": 1,
-                "entrada": null
+                "entradaId": 1
             }
-        ],
-        "totalMacarela": 0,
-        "totalJaponesa": 150,
-        "totalMonterrey": 0,
-        "totalRayadillo": 0,
-        "totalBocona": 0,
-        "totalAnchoveta": 0,
-        "totalCrinuda": 0,
-        "porcentajeMacarela": 0,
-        "porcentajeJaponesa": 100,
-        "porcentajeMonterrey": 0,
-        "porcentajeRayadillo": 0,
-        "porcentajeBocona": 0,
-        "porcentajeAnchoveta": 0,
-        "porcentajeCrinuda": 0,
-        "totales": 150,
-        
+        ]
     }
 ]
 ```
