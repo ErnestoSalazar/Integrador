@@ -8,8 +8,15 @@ package views;
 
 import javax.swing.table.DefaultTableModel;
 import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -152,7 +159,7 @@ public class PanelReportes extends javax.swing.JPanel {
                 java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, true, false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -505,21 +512,48 @@ public class PanelReportes extends javax.swing.JPanel {
         DefaultTableModel dtmEntradas = new DefaultTableModel();
         DefaultTableModel dtmCargas = new DefaultTableModel();
         
+        tblEntradasReporte.setModel(dtmEntradas);
+        tblCargasReporte.setModel(dtmCargas);
+        
         int columnEntradas = tblEntradasReporte.getModel().getColumnCount();
         int columnCargas = tblCargasReporte.getModel().getColumnCount();
+        
+        int rowEntradas = tblEntradasReporte.getModel().getRowCount();
+        int rowCargas = tblCargasReporte.getModel().getRowCount();
         
         int opcion = chosenFile.showSaveDialog(this);
         
         if(opcion == JFileChooser.APPROVE_OPTION){
             File filePath = chosenFile.getSelectedFile();
             String path = filePath.toString();
-            System.out.println(path);
+            
+            try {
+                FileOutputStream fileName = new FileOutputStream(path +".pdf");
+                Document document = new Document();
+                
+                PdfWriter.getInstance(document, fileName);
+                document.open();
+                
+                for(int i = 0; i < columnEntradas; i++){
+                    String contentEntradas = "Test ColEntradas"; //tblEntradasReporte.getColumnName(i);
+                    document.add(new Paragraph (contentEntradas));
+                }
+                
+                document.close();
+                
+                JOptionPane.showMessageDialog(null, "Se guardó con éxito el PDF");
+                
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(PanelReportes.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (DocumentException ex) {
+                Logger.getLogger(PanelReportes.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         else{
-            
+            JOptionPane.showMessageDialog(null, "No se ha guardado nada");
         }
         
-        generarPDF();
+        
     }//GEN-LAST:event_btnGenerarReporteActionPerformed
 
 
@@ -574,7 +608,4 @@ public class PanelReportes extends javax.swing.JPanel {
     private javax.swing.JFormattedTextField txtFechaInicio;
     // End of variables declaration//GEN-END:variables
 
-    private void generarPDF() {
-        
-    }
 }
