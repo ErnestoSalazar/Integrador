@@ -9,10 +9,16 @@ package views;
 import javax.swing.table.DefaultTableModel;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.pdf.draw.LineSeparator;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
@@ -515,9 +521,14 @@ public class PanelReportes extends javax.swing.JPanel {
         tblEntradasReporte.setModel(dtmEntradas);
         tblCargasReporte.setModel(dtmCargas);
         
-        String[] cols = {"Folio", "Generado por", "Turno", "Fecha", "Hora"};
-        for(String col : cols){
+        String[] colsEntradas = {"Folio", "Generado por", "Turno", "Fecha", "Hora"};
+        for(String col : colsEntradas){
             dtmEntradas.addColumn(col);
+        }
+        
+        String[] colsCargas = {"Barco", "Especie", "Cantidad", "Talla", "Temperatura", "Condición"};
+        for(String col : colsCargas){
+            dtmCargas.addColumn(col);
         }
         
         int columnEntradas = tblEntradasReporte.getModel().getColumnCount();
@@ -536,13 +547,89 @@ public class PanelReportes extends javax.swing.JPanel {
                 FileOutputStream fileName = new FileOutputStream(path +".pdf");
                 Document document = new Document();
                 
-                PdfWriter.getInstance(document, fileName);
+                PdfWriter.getInstance(document, fileName).setInitialLeading(20);
+                
                 document.open();
                 
+                Font fontawesome = new Font(Font.FontFamily.UNDEFINED, Font.DEFAULTSIZE, Font.BOLD);
+                
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MMM/yyyy, HH:mm:ss");
+                
+                document.add(new Paragraph("Reporte del " + LocalDateTime.now().format(dtf)));
+                document.add(new Paragraph(" "));
+                document.add(new LineSeparator());
+                document.add(new Paragraph(" "));
+                
+                document.add(new Paragraph("Tabla de Entradas", fontawesome));
+                
+                document.add(new Paragraph(" "));
+                
+                PdfPTable tablaEntradas = new PdfPTable(columnEntradas);
+                
                 for(int i = 0; i < columnEntradas; i++){
-                    String contentEntradas = "Test ColEntradas"; //tblEntradasReporte.getColumnName(i);
-                    document.add(new Paragraph (contentEntradas));
+                    String contentEntradas = tblEntradasReporte.getColumnName(i);
+                    tablaEntradas.addCell(contentEntradas);
                 }
+                
+                tablaEntradas.setWidthPercentage(100);
+                
+                document.add(tablaEntradas);
+                
+                document.add(new Paragraph(" "));
+                
+                document.add(new Paragraph("Tabla de Cargas", fontawesome));
+                
+                document.add(new Paragraph(" "));
+                
+                PdfPTable tablaCargas = new PdfPTable(columnCargas);
+                
+                for(int i = 0; i < columnCargas; i++){
+                    String contentCargas = tblCargasReporte.getColumnName(i);
+                    tablaCargas.addCell(contentCargas);
+                }
+                
+                tablaCargas.setWidthPercentage(100);
+                
+                document.add(tablaCargas);
+                
+                document.add(new Paragraph(" "));
+                
+                document.add(new Paragraph("Tabla de Totales", fontawesome));
+                
+                document.add(new Paragraph(" "));
+                
+                //INICIA CONTENIDO DE TOTALES
+                
+                PdfPTable tablaTotales = new PdfPTable(8);
+                
+                String[] colsTotales = {"", "Macarela", "Japonesa", "Monterrey", "Rayadillo", "Bocona", "Anchoveta", "Crinuda"};
+                
+                for (String colNamesTotales : colsTotales) {
+                    tablaTotales.addCell(colNamesTotales);
+                }
+                
+                
+                tablaTotales.addCell("Total");
+                
+                String[] contenidoTotales = {lblTotalMacarela.getText(), lblTotalJaponesa.getText(), lblTotalMonterrey.getText(), lblTotalRayadillo.getText(), lblTotalBocona.getText(), lblTotalAnchoveta.getText(), lblTotalCrinuda.getText()};
+                
+                for(String totales : contenidoTotales){
+                    tablaTotales.addCell(totales);
+                }
+                
+                tablaTotales.addCell("Porcentaje");
+                
+                String[] contenidoPorcentajes = {lblPorcMacarela.getText(), lblPorcJaponesa.getText(), lblPorcMonterrey.getText(), lblPorcRayadillo.getText(), lblPorcBocona.getText(), lblPorcAnchoveta.getText(), lblPorcCrinuda.getText()};
+                
+                for(String porcentajes : contenidoPorcentajes){
+                    tablaTotales.addCell(porcentajes);
+                }
+                
+                tablaTotales.setWidthPercentage(100);
+                
+                document.add(tablaTotales);
+                
+                //FINALIZA CONTENIDO DE TOTALES
                 
                 document.close();
                 
