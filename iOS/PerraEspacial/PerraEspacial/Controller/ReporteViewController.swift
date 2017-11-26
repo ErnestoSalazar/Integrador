@@ -24,6 +24,7 @@ class ReporteViewController: UIViewController, UITableViewDelegate, UITableViewD
         super.viewDidLoad()
         self.setDelegates()
         self.setDatePicker()
+        self.getReports()
     }
     
     
@@ -36,7 +37,14 @@ class ReporteViewController: UIViewController, UITableViewDelegate, UITableViewD
         if reports.count > 0 {
             let cell = Bundle.main.loadNibNamed("ReporteTableViewCell", owner: self, options: nil)?.first as! ReporteTableViewCell
             let report = reports[indexPath.row]
-                
+                cell.labelFolio.text = report.folio
+                cell.labelBacona.text = "\(report.totalBocona)"
+                cell.labelCrinuda.text = "\(report.totalCrinuda)"
+                cell.labelJaponesa.text = "\(report.totalJaponesa)"
+                cell.labelMacarela.text = "\(report.totalMacarela)"
+                cell.labelAnchoveta.text = "\(report.totalAnchoveta)"
+                cell.labelMonterrey.text = "\(report.totalMonterrey)"
+                cell.labelTotal.text = "\(report.totals)"
             return cell
         }else {
             let cell = Bundle.main.loadNibNamed("NotFoundTableViewCell", owner: self, options: nil)?.first as! NotFoundTableViewCell

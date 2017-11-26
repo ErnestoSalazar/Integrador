@@ -190,7 +190,15 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="labelAnchoveta" destination="dgN-Qb-cfC" id="GYR-o7-twp"/>
+                <outlet property="labelBacona" destination="Er9-Cf-um7" id="CIq-vL-6PE"/>
+                <outlet property="labelCrinuda" destination="CoE-lH-jBx" id="AuI-cL-Lik"/>
+                <outlet property="labelFolio" destination="xNk-Zr-WGu" id="yxg-j6-6fG"/>
+                <outlet property="labelJaponesa" destination="ZPs-Fq-eQa" id="9rS-ge-enl"/>
+                <outlet property="labelMacarela" destination="EDR-H4-GG9" id="FtU-ys-vFd"/>
+                <outlet property="labelMonterrey" destination="avm-mJ-yil" id="6eu-bB-u46"/>
                 <outlet property="labelTitle" destination="5ec-ie-oUz" id="jJR-tt-0Kw"/>
+                <outlet property="labelTotal" destination="uk7-xV-gqa" id="bKH-wj-MGd"/>
             </connections>
             <point key="canvasLocation" x="25" y="158.5"/>
         </tableViewCell>
