@@ -1,3 +1,14 @@
 body {
-    background-color: red;
+    #background-color: red;
+}
+
+.bckg-transparent{
+    background-color: transparent;
+}
+
+.delete-option{
+}
+
+.modify-option{
+
 }

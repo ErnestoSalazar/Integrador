@@ -117,23 +117,52 @@ class Profiler
     }
 
     /**
+     * Exports the current profiler data.
+     *
+     * @return string The exported data
+     */
+    public function export(Profile $profile)
+    {
+        return base64_encode(serialize($profile));
+    }
+
+    /**
+     * Imports data into the profiler storage.
+     *
+     * @param string $data A data string as exported by the export() method
+     *
+     * @return Profile|false A Profile instance
+     */
+    public function import($data)
+    {
+        $profile = unserialize(base64_decode($data));
+
+        if ($this->storage->read($profile->getToken())) {
+            return false;
+        }
+
+        $this->saveProfile($profile);
+
+        return $profile;
+    }
+
+    /**
      * Finds profiler tokens for the given criteria.
      *
-     * @param string $ip         The IP
-     * @param string $url        The URL
-     * @param string $limit      The maximum number of tokens to return
-     * @param string $method     The request method
-     * @param string $start      The start date to search from
-     * @param string $end        The end date to search to
-     * @param string $statusCode The request status code
+     * @param string $ip     The IP
+     * @param string $url    The URL
+     * @param string $limit  The maximum number of tokens to return
+     * @param string $method The request method
+     * @param string $start  The start date to search from
+     * @param string $end    The end date to search to
      *
      * @return array An array of tokens
      *
      * @see http://php.net/manual/en/datetime.formats.php for the supported date/time formats
      */
-    public function find($ip, $url, $limit, $method, $start, $end, $statusCode = null)
+    public function find($ip, $url, $limit, $method, $start, $end)
     {
-        return $this->storage->find($ip, $url, $limit, $method, $this->getTimestamp($start), $this->getTimestamp($end), $statusCode);
+        return $this->storage->find($ip, $url, $limit, $method, $this->getTimestamp($start), $this->getTimestamp($end));
     }
 
     /**

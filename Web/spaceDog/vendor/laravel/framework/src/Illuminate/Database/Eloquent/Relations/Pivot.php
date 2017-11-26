@@ -1,225 +1,171 @@
-<?php
+<?php namespace Illuminate\Database\Eloquent\Relations;
 
-namespace Illuminate\Database\Eloquent\Relations;
-
-use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 
-class Pivot extends Model
-{
-    /**
-     * The parent model of the relationship.
-     *
-     * @var \Illuminate\Database\Eloquent\Model
-     */
-    public $pivotParent;
+class Pivot extends Model {
 
-    /**
-     * The name of the foreign key column.
-     *
-     * @var string
-     */
-    protected $foreignKey;
+	/**
+	 * The parent model of the relationship.
+	 *
+	 * @var \Illuminate\Database\Eloquent\Model
+	 */
+	protected $parent;
 
-    /**
-     * The name of the "other key" column.
-     *
-     * @var string
-     */
-    protected $relatedKey;
+	/**
+	 * The name of the foreign key column.
+	 *
+	 * @var string
+	 */
+	protected $foreignKey;
 
-    /**
-     * The attributes that aren't mass assignable.
-     *
-     * @var array
-     */
-    protected $guarded = [];
+	/**
+	 * The name of the "other key" column.
+	 *
+	 * @var string
+	 */
+	protected $otherKey;
 
-    /**
-     * Create a new pivot model instance.
-     *
-     * @param  \Illuminate\Database\Eloquent\Model  $parent
-     * @param  array   $attributes
-     * @param  string  $table
-     * @param  bool    $exists
-     * @return static
-     */
-    public static function fromAttributes(Model $parent, $attributes, $table, $exists = false)
-    {
-        $instance = new static;
+	/**
+	 * The attributes that aren't mass assignable.
+	 *
+	 * @var array
+	 */
+	protected $guarded = array();
 
-        // The pivot model is a "dynamic" model since we will set the tables dynamically
-        // for the instance. This allows it work for any intermediate tables for the
-        // many to many relationship that are defined by this developer's classes.
-        $instance->setConnection($parent->getConnectionName())
-                ->setTable($table)
-                ->forceFill($attributes)
-                ->syncOriginal();
+	/**
+	 * Create a new pivot model instance.
+	 *
+	 * @param  \Illuminate\Database\Eloquent\Model  $parent
+	 * @param  array   $attributes
+	 * @param  string  $table
+	 * @param  bool    $exists
+	 * @return void
+	 */
+	public function __construct(Model $parent, $attributes, $table, $exists = false)
+	{
+		parent::__construct();
 
-        // We store off the parent instance so we will access the timestamp column names
-        // for the model, since the pivot model timestamps aren't easily configurable
-        // from the developer's point of view. We can use the parents to get these.
-        $instance->pivotParent = $parent;
+		// The pivot model is a "dynamic" model since we will set the tables dynamically
+		// for the instance. This allows it work for any intermediate tables for the
+		// many to many relationship that are defined by this developer's classes.
+		$this->setRawAttributes($attributes, true);
 
-        $instance->exists = $exists;
+		$this->setTable($table);
 
-        $instance->timestamps = $instance->hasTimestampAttributes();
+		$this->setConnection($parent->getConnectionName());
 
-        return $instance;
-    }
+		// We store off the parent instance so we will access the timestamp column names
+		// for the model, since the pivot model timestamps aren't easily configurable
+		// from the developer's point of view. We can use the parents to get these.
+		$this->parent = $parent;
 
-    /**
-     * Create a new pivot model from raw values returned from a query.
-     *
-     * @param  \Illuminate\Database\Eloquent\Model  $parent
-     * @param  array   $attributes
-     * @param  string  $table
-     * @param  bool    $exists
-     * @return static
-     */
-    public static function fromRawAttributes(Model $parent, $attributes, $table, $exists = false)
-    {
-        $instance = static::fromAttributes($parent, $attributes, $table, $exists);
+		$this->exists = $exists;
 
-        $instance->setRawAttributes($attributes, true);
+		$this->timestamps = $this->hasTimestampAttributes();
+	}
 
-        return $instance;
-    }
+	/**
+	 * Set the keys for a save update query.
+	 *
+	 * @param  \Illuminate\Database\Eloquent\Builder
+	 * @return \Illuminate\Database\Eloquent\Builder
+	 */
+	protected function setKeysForSaveQuery(Builder $query)
+	{
+		$query->where($this->foreignKey, $this->getAttribute($this->foreignKey));
 
-    /**
-     * Set the keys for a save update query.
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    protected function setKeysForSaveQuery(Builder $query)
-    {
-        if (isset($this->attributes[$this->getKeyName()])) {
-            return parent::setKeysForSaveQuery($query);
-        }
+		return $query->where($this->otherKey, $this->getAttribute($this->otherKey));
+	}
 
-        $query->where($this->foreignKey, $this->getAttribute($this->foreignKey));
+	/**
+	 * Delete the pivot model record from the database.
+	 *
+	 * @return int
+	 */
+	public function delete()
+	{
+		return $this->getDeleteQuery()->delete();
+	}
 
-        return $query->where($this->relatedKey, $this->getAttribute($this->relatedKey));
-    }
+	/**
+	 * Get the query builder for a delete operation on the pivot.
+	 *
+	 * @return \Illuminate\Database\Eloquent\Builder
+	 */
+	protected function getDeleteQuery()
+	{
+		$foreign = $this->getAttribute($this->foreignKey);
 
-    /**
-     * Delete the pivot model record from the database.
-     *
-     * @return int
-     */
-    public function delete()
-    {
-        if (isset($this->attributes[$this->getKeyName()])) {
-            return parent::delete();
-        }
+		$query = $this->newQuery()->where($this->foreignKey, $foreign);
 
-        return $this->getDeleteQuery()->delete();
-    }
+		return $query->where($this->otherKey, $this->getAttribute($this->otherKey));
+	}
 
-    /**
-     * Get the query builder for a delete operation on the pivot.
-     *
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    protected function getDeleteQuery()
-    {
-        return $this->newQuery()->where([
-            $this->foreignKey => $this->getAttribute($this->foreignKey),
-            $this->relatedKey => $this->getAttribute($this->relatedKey),
-        ]);
-    }
+	/**
+	 * Get the foreign key column name.
+	 *
+	 * @return string
+	 */
+	public function getForeignKey()
+	{
+		return $this->foreignKey;
+	}
 
-    /**
-     * Get the table associated with the model.
-     *
-     * @return string
-     */
-    public function getTable()
-    {
-        if (! isset($this->table)) {
-            $this->setTable(str_replace(
-                '\\', '', Str::snake(Str::singular(class_basename($this)))
-            ));
-        }
+	/**
+	 * Get the "other key" column name.
+	 *
+	 * @return string
+	 */
+	public function getOtherKey()
+	{
+		return $this->otherKey;
+	}
 
-        return $this->table;
-    }
+	/**
+	 * Set the key names for the pivot model instance.
+	 *
+	 * @param  string  $foreignKey
+	 * @param  string  $otherKey
+	 * @return $this
+	 */
+	public function setPivotKeys($foreignKey, $otherKey)
+	{
+		$this->foreignKey = $foreignKey;
 
-    /**
-     * Get the foreign key column name.
-     *
-     * @return string
-     */
-    public function getForeignKey()
-    {
-        return $this->foreignKey;
-    }
+		$this->otherKey = $otherKey;
 
-    /**
-     * Get the "related key" column name.
-     *
-     * @return string
-     */
-    public function getRelatedKey()
-    {
-        return $this->relatedKey;
-    }
+		return $this;
+	}
 
-    /**
-     * Get the "related key" column name.
-     *
-     * @return string
-     */
-    public function getOtherKey()
-    {
-        return $this->getRelatedKey();
-    }
+	/**
+	 * Determine if the pivot model has timestamp attributes.
+	 *
+	 * @return bool
+	 */
+	public function hasTimestampAttributes()
+	{
+		return array_key_exists($this->getCreatedAtColumn(), $this->attributes);
+	}
 
-    /**
-     * Set the key names for the pivot model instance.
-     *
-     * @param  string  $foreignKey
-     * @param  string  $relatedKey
-     * @return $this
-     */
-    public function setPivotKeys($foreignKey, $relatedKey)
-    {
-        $this->foreignKey = $foreignKey;
+	/**
+	 * Get the name of the "created at" column.
+	 *
+	 * @return string
+	 */
+	public function getCreatedAtColumn()
+	{
+		return $this->parent->getCreatedAtColumn();
+	}
 
-        $this->relatedKey = $relatedKey;
+	/**
+	 * Get the name of the "updated at" column.
+	 *
+	 * @return string
+	 */
+	public function getUpdatedAtColumn()
+	{
+		return $this->parent->getUpdatedAtColumn();
+	}
 
-        return $this;
-    }
-
-    /**
-     * Determine if the pivot model has timestamp attributes.
-     *
-     * @return bool
-     */
-    public function hasTimestampAttributes()
-    {
-        return array_key_exists($this->getCreatedAtColumn(), $this->attributes);
-    }
-
-    /**
-     * Get the name of the "created at" column.
-     *
-     * @return string
-     */
-    public function getCreatedAtColumn()
-    {
-        return $this->pivotParent->getCreatedAtColumn();
-    }
-
-    /**
-     * Get the name of the "updated at" column.
-     *
-     * @return string
-     */
-    public function getUpdatedAtColumn()
-    {
-        return $this->pivotParent->getUpdatedAtColumn();
-    }
 }

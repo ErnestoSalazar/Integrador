@@ -1,46 +1,21 @@
-<?php
-
-namespace Illuminate\Queue\Connectors;
+<?php namespace Illuminate\Queue\Connectors;
 
 use Aws\Sqs\SqsClient;
-use Illuminate\Support\Arr;
 use Illuminate\Queue\SqsQueue;
 
-class SqsConnector implements ConnectorInterface
-{
-    /**
-     * Establish a queue connection.
-     *
-     * @param  array  $config
-     * @return \Illuminate\Contracts\Queue\Queue
-     */
-    public function connect(array $config)
-    {
-        $config = $this->getDefaultConfiguration($config);
+class SqsConnector implements ConnectorInterface {
 
-        if ($config['key'] && $config['secret']) {
-            $config['credentials'] = Arr::only($config, ['key', 'secret']);
-        }
+	/**
+	 * Establish a queue connection.
+	 *
+	 * @param  array  $config
+	 * @return \Illuminate\Queue\QueueInterface
+	 */
+	public function connect(array $config)
+	{
+		$sqs = SqsClient::factory($config);
 
-        return new SqsQueue(
-            new SqsClient($config), $config['queue'], $config['prefix'] ?? ''
-        );
-    }
+		return new SqsQueue($sqs, $config['queue']);
+	}
 
-    /**
-     * Get the default configuration for SQS.
-     *
-     * @param  array  $config
-     * @return array
-     */
-    protected function getDefaultConfiguration(array $config)
-    {
-        return array_merge([
-            'version' => 'latest',
-            'http' => [
-                'timeout' => 60,
-                'connect_timeout' => 60,
-            ],
-        ], $config);
-    }
 }

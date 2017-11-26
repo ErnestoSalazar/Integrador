@@ -71,7 +71,12 @@ class DumpDataCollector extends DataCollector implements DataDumperInterface
             $this->isCollected = false;
         }
 
-        $trace = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT | DEBUG_BACKTRACE_IGNORE_ARGS, 7);
+        $trace = DEBUG_BACKTRACE_PROVIDE_OBJECT | DEBUG_BACKTRACE_IGNORE_ARGS;
+        if (\PHP_VERSION_ID >= 50400) {
+            $trace = debug_backtrace($trace, 7);
+        } else {
+            $trace = debug_backtrace($trace);
+        }
 
         $file = $trace[0]['file'];
         $line = $trace[0]['line'];
@@ -99,7 +104,7 @@ class DumpDataCollector extends DataCollector implements DataDumperInterface
                         $info = $template->getDebugInfo();
                         if (isset($info[$trace[$i - 1]['line']])) {
                             $line = $info[$trace[$i - 1]['line']];
-                            $file = method_exists($template, 'getSourceContext') ? $template->getSourceContext()->getPath() : null;
+                            $file = method_exists($template, 'getSourceContext') ? $template->getSourceContext()->getPath() : false;
 
                             if ($src) {
                                 $src = explode("\n", $src);
@@ -153,7 +158,6 @@ class DumpDataCollector extends DataCollector implements DataDumperInterface
         ) {
             if ($response->headers->has('Content-Type') && false !== strpos($response->headers->get('Content-Type'), 'html')) {
                 $this->dumper = new HtmlDumper('php://output', $this->charset);
-                $this->dumper->setDisplayOptions(array('fileLinkFormat' => $this->fileLinkFormat));
             } else {
                 $this->dumper = new CliDumper('php://output', $this->charset);
             }
@@ -203,14 +207,18 @@ class DumpDataCollector extends DataCollector implements DataDumperInterface
 
         if ('html' === $format) {
             $dumper = new HtmlDumper($data, $this->charset);
-            $dumper->setDisplayOptions(array('fileLinkFormat' => $this->fileLinkFormat));
         } else {
             throw new \InvalidArgumentException(sprintf('Invalid dump format: %s', $format));
         }
         $dumps = array();
 
         foreach ($this->data as $dump) {
-            $dumper->dump($dump['data']->withMaxDepth($maxDepthLimit)->withMaxItemsPerDepth($maxItemsPerDepth));
+            if (method_exists($dump['data'], 'withMaxDepth')) {
+                $dumper->dump($dump['data']->withMaxDepth($maxDepthLimit)->withMaxItemsPerDepth($maxItemsPerDepth));
+            } else {
+                // getLimitedClone is @deprecated, to be removed in 3.0
+                $dumper->dump($dump['data']->getLimitedClone($maxDepthLimit, $maxItemsPerDepth));
+            }
             $dump['data'] = stream_get_contents($data, -1, 0);
             ftruncate($data, 0);
             rewind($data);
@@ -240,7 +248,6 @@ class DumpDataCollector extends DataCollector implements DataDumperInterface
 
             if ('cli' !== PHP_SAPI && stripos($h[$i], 'html')) {
                 $this->dumper = new HtmlDumper('php://output', $this->charset);
-                $this->dumper->setDisplayOptions(array('fileLinkFormat' => $this->fileLinkFormat));
             } else {
                 $this->dumper = new CliDumper('php://output', $this->charset);
             }
@@ -257,17 +264,18 @@ class DumpDataCollector extends DataCollector implements DataDumperInterface
 
     private function doDump($data, $name, $file, $line)
     {
-        if ($this->dumper instanceof CliDumper) {
-            $contextDumper = function ($name, $file, $line, $fmt) {
+        if (\PHP_VERSION_ID >= 50400 && $this->dumper instanceof CliDumper) {
+            $contextDumper = function ($name, $file, $line, $fileLinkFormat) {
                 if ($this instanceof HtmlDumper) {
-                    if ($file) {
+                    if ('' !== $file) {
                         $s = $this->style('meta', '%s');
-                        $f = strip_tags($this->style('', $file));
                         $name = strip_tags($this->style('', $name));
-                        if ($fmt && $link = is_string($fmt) ? strtr($fmt, array('%f' => $file, '%l' => $line)) : $fmt->format($file, $line)) {
-                            $name = sprintf('<a href="%s" title="%s">'.$s.'</a>', strip_tags($this->style('', $link)), $f, $name);
+                        $file = strip_tags($this->style('', $file));
+                        if ($fileLinkFormat) {
+                            $link = strtr(strip_tags($this->style('', $fileLinkFormat)), array('%f' => $file, '%l' => (int) $line));
+                            $name = sprintf('<a href="%s" title="%s">'.$s.'</a>', $link, $file, $name);
                         } else {
-                            $name = sprintf('<abbr title="%s">'.$s.'</abbr>', $f, $name);
+                            $name = sprintf('<abbr title="%s">'.$s.'</abbr>', $file, $name);
                         }
                     } else {
                         $name = $this->style('meta', $name);

@@ -1,135 +1,150 @@
-<?php
+<?php namespace Illuminate\Queue\Jobs;
 
-namespace Illuminate\Queue\Jobs;
-
-use Pheanstalk\Pheanstalk;
+use Pheanstalk_Job;
 use Illuminate\Container\Container;
-use Pheanstalk\Job as PheanstalkJob;
-use Illuminate\Contracts\Queue\Job as JobContract;
+use Pheanstalk_Pheanstalk as Pheanstalk;
 
-class BeanstalkdJob extends Job implements JobContract
-{
-    /**
-     * The Pheanstalk instance.
-     *
-     * @var \Pheanstalk\Pheanstalk
-     */
-    protected $pheanstalk;
+class BeanstalkdJob extends Job {
 
-    /**
-     * The Pheanstalk job instance.
-     *
-     * @var \Pheanstalk\Job
-     */
-    protected $job;
+	/**
+	 * The Pheanstalk instance.
+	 *
+	 * @var \Pheanstalk_Pheanstalk
+	 */
+	protected $pheanstalk;
 
-    /**
-     * Create a new job instance.
-     *
-     * @param  \Illuminate\Container\Container  $container
-     * @param  \Pheanstalk\Pheanstalk  $pheanstalk
-     * @param  \Pheanstalk\Job  $job
-     * @param  string  $connectionName
-     * @param  string  $queue
-     * @return void
-     */
-    public function __construct(Container $container, Pheanstalk $pheanstalk, PheanstalkJob $job, $connectionName, $queue)
-    {
-        $this->job = $job;
-        $this->queue = $queue;
-        $this->container = $container;
-        $this->pheanstalk = $pheanstalk;
-        $this->connectionName = $connectionName;
-    }
+	/**
+	 * The Pheanstalk job instance.
+	 *
+	 * @var \Pheanstalk_Job
+	 */
+	protected $job;
 
-    /**
-     * Release the job back into the queue.
-     *
-     * @param  int   $delay
-     * @return void
-     */
-    public function release($delay = 0)
-    {
-        parent::release($delay);
+	/**
+	 * Create a new job instance.
+	 *
+	 * @param  \Illuminate\Container\Container  $container
+	 * @param  \Pheanstalk_Pheanstalk  $pheanstalk
+	 * @param  \Pheanstalk_Job  $job
+	 * @param  string  $queue
+	 * @return void
+	 */
+	public function __construct(Container $container,
+                                Pheanstalk $pheanstalk,
+                                Pheanstalk_Job $job,
+                                $queue)
+	{
+		$this->job = $job;
+		$this->queue = $queue;
+		$this->container = $container;
+		$this->pheanstalk = $pheanstalk;
+	}
 
-        $priority = Pheanstalk::DEFAULT_PRIORITY;
+	/**
+	 * Fire the job.
+	 *
+	 * @return void
+	 */
+	public function fire()
+	{
+		$this->resolveAndFire(json_decode($this->getRawBody(), true));
+	}
 
-        $this->pheanstalk->release($this->job, $priority, $delay);
-    }
+	/**
+	 * Get the raw body string for the job.
+	 *
+	 * @return string
+	 */
+	public function getRawBody()
+	{
+		return $this->job->getData();
+	}
 
-    /**
-     * Bury the job in the queue.
-     *
-     * @return void
-     */
-    public function bury()
-    {
-        parent::release();
+	/**
+	 * Delete the job from the queue.
+	 *
+	 * @return void
+	 */
+	public function delete()
+	{
+		parent::delete();
 
-        $this->pheanstalk->bury($this->job);
-    }
+		$this->pheanstalk->delete($this->job);
+	}
 
-    /**
-     * Delete the job from the queue.
-     *
-     * @return void
-     */
-    public function delete()
-    {
-        parent::delete();
+	/**
+	 * Release the job back into the queue.
+	 *
+	 * @param  int   $delay
+	 * @return void
+	 */
+	public function release($delay = 0)
+	{
+		$priority = Pheanstalk::DEFAULT_PRIORITY;
 
-        $this->pheanstalk->delete($this->job);
-    }
+		$this->pheanstalk->release($this->job, $priority, $delay);
+	}
 
-    /**
-     * Get the number of times the job has been attempted.
-     *
-     * @return int
-     */
-    public function attempts()
-    {
-        $stats = $this->pheanstalk->statsJob($this->job);
+	/**
+	 * Bury the job in the queue.
+	 *
+	 * @return void
+	 */
+	public function bury()
+	{
+		$this->pheanstalk->bury($this->job);
+	}
 
-        return (int) $stats->reserves;
-    }
+	/**
+	 * Get the number of times the job has been attempted.
+	 *
+	 * @return int
+	 */
+	public function attempts()
+	{
+		$stats = $this->pheanstalk->statsJob($this->job);
 
-    /**
-     * Get the job identifier.
-     *
-     * @return int
-     */
-    public function getJobId()
-    {
-        return $this->job->getId();
-    }
+		return (int) $stats->reserves;
+	}
 
-    /**
-     * Get the raw body string for the job.
-     *
-     * @return string
-     */
-    public function getRawBody()
-    {
-        return $this->job->getData();
-    }
+	/**
+	 * Get the job identifier.
+	 *
+	 * @return string
+	 */
+	public function getJobId()
+	{
+		return $this->job->getId();
+	}
 
-    /**
-     * Get the underlying Pheanstalk instance.
-     *
-     * @return \Pheanstalk\Pheanstalk
-     */
-    public function getPheanstalk()
-    {
-        return $this->pheanstalk;
-    }
+	/**
+	 * Get the IoC container instance.
+	 *
+	 * @return \Illuminate\Container\Container
+	 */
+	public function getContainer()
+	{
+		return $this->container;
+	}
 
-    /**
-     * Get the underlying Pheanstalk job.
-     *
-     * @return \Pheanstalk\Job
-     */
-    public function getPheanstalkJob()
-    {
-        return $this->job;
-    }
+	/**
+	 * Get the underlying Pheanstalk instance.
+	 *
+	 * @return \Pheanstalk_Pheanstalk
+	 */
+	public function getPheanstalk()
+	{
+		return $this->pheanstalk;
+	}
+
+	/**
+	 * Get the underlying Pheanstalk job.
+	 *
+	 * @return \Pheanstalk_Job
+	 */
+	public function getPheanstalkJob()
+	{
+		return $this->job;
+	}
+
 }

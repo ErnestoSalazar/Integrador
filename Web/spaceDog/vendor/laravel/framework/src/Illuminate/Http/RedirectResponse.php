@@ -1,238 +1,224 @@
-<?php
+<?php namespace Illuminate\Http;
 
-namespace Illuminate\Http;
-
-use BadMethodCallException;
-use Illuminate\Support\Str;
 use Illuminate\Support\MessageBag;
 use Illuminate\Support\ViewErrorBag;
-use Illuminate\Support\Traits\Macroable;
+use Symfony\Component\HttpFoundation\Cookie;
 use Illuminate\Session\Store as SessionStore;
-use Illuminate\Contracts\Support\MessageProvider;
-use Symfony\Component\HttpFoundation\File\UploadedFile as SymfonyUploadedFile;
-use Symfony\Component\HttpFoundation\RedirectResponse as BaseRedirectResponse;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Illuminate\Support\Contracts\MessageProviderInterface;
 
-class RedirectResponse extends BaseRedirectResponse
-{
-    use ResponseTrait, Macroable {
-        Macroable::__call as macroCall;
-    }
+class RedirectResponse extends \Symfony\Component\HttpFoundation\RedirectResponse {
 
-    /**
-     * The request instance.
-     *
-     * @var \Illuminate\Http\Request
-     */
-    protected $request;
+	/**
+	 * The request instance.
+	 *
+	 * @var \Illuminate\Http\Request
+	 */
+	protected $request;
 
-    /**
-     * The session store implementation.
-     *
-     * @var \Illuminate\Session\Store
-     */
-    protected $session;
+	/**
+	 * The session store implementation.
+	 *
+	 * @var \Illuminate\Session\Store
+	 */
+	protected $session;
 
-    /**
-     * Flash a piece of data to the session.
-     *
-     * @param  string|array  $key
-     * @param  mixed  $value
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function with($key, $value = null)
-    {
-        $key = is_array($key) ? $key : [$key => $value];
+	/**
+	 * Set a header on the Response.
+	 *
+	 * @param  string  $key
+	 * @param  string  $value
+	 * @param  bool  $replace
+	 * @return $this
+	 */
+	public function header($key, $value, $replace = true)
+	{
+		$this->headers->set($key, $value, $replace);
 
-        foreach ($key as $k => $v) {
-            $this->session->flash($k, $v);
-        }
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Flash a piece of data to the session.
+	 *
+	 * @param  string  $key
+	 * @param  mixed   $value
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function with($key, $value = null)
+	{
+		$key = is_array($key) ? $key : [$key => $value];
 
-    /**
-     * Add multiple cookies to the response.
-     *
-     * @param  array  $cookies
-     * @return $this
-     */
-    public function withCookies(array $cookies)
-    {
-        foreach ($cookies as $cookie) {
-            $this->headers->setCookie($cookie);
-        }
+		foreach ($key as $k => $v)
+		{
+			$this->session->flash($k, $v);
+		}
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Flash an array of input to the session.
-     *
-     * @param  array  $input
-     * @return $this
-     */
-    public function withInput(array $input = null)
-    {
-        $this->session->flashInput($this->removeFilesFromInput(
-            ! is_null($input) ? $input : $this->request->input()
-        ));
+	/**
+	 * Add a cookie to the response.
+	 *
+	 * @param  \Symfony\Component\HttpFoundation\Cookie  $cookie
+	 * @return $this
+	 */
+	public function withCookie(Cookie $cookie)
+	{
+		$this->headers->setCookie($cookie);
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Remove all uploaded files form the given input array.
-     *
-     * @param  array  $input
-     * @return array
-     */
-    protected function removeFilesFromInput(array $input)
-    {
-        foreach ($input as $key => $value) {
-            if (is_array($value)) {
-                $input[$key] = $this->removeFilesFromInput($value);
-            }
+	/**
+	 * Add multiple cookies to the response.
+	 *
+	 * @param  array  $cookie
+	 * @return $this
+	 */
+	public function withCookies(array $cookies)
+	{
+		foreach ($cookies as $cookie)
+		{
+			$this->headers->setCookie($cookie);
+		}
 
-            if ($value instanceof SymfonyUploadedFile) {
-                unset($input[$key]);
-            }
-        }
+		return $this;
+	}
 
-        return $input;
-    }
+	/**
+	 * Flash an array of input to the session.
+	 *
+	 * @param  array  $input
+	 * @return $this
+	 */
+	public function withInput(array $input = null)
+	{
+		$input = $input ?: $this->request->input();
 
-    /**
-     * Flash an array of input to the session.
-     *
-     * @return $this
-     */
-    public function onlyInput()
-    {
-        return $this->withInput($this->request->only(func_get_args()));
-    }
+		$this->session->flashInput(array_filter($input, function ($value)
+		{
+			return ! $value instanceof UploadedFile;
+		}));
 
-    /**
-     * Flash an array of input to the session.
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function exceptInput()
-    {
-        return $this->withInput($this->request->except(func_get_args()));
-    }
+		return $this;
+	}
 
-    /**
-     * Flash a container of errors to the session.
-     *
-     * @param  \Illuminate\Contracts\Support\MessageProvider|array|string  $provider
-     * @param  string  $key
-     * @return $this
-     */
-    public function withErrors($provider, $key = 'default')
-    {
-        $value = $this->parseErrors($provider);
+	/**
+	 * Flash an array of input to the session.
+	 *
+	 * @param  mixed  string
+	 * @return $this
+	 */
+	public function onlyInput()
+	{
+		return $this->withInput($this->request->only(func_get_args()));
+	}
 
-        $errors = $this->session->get('errors', new ViewErrorBag);
+	/**
+	 * Flash an array of input to the session.
+	 *
+	 * @param  mixed  string
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function exceptInput()
+	{
+		return $this->withInput($this->request->except(func_get_args()));
+	}
 
-        if (! $errors instanceof ViewErrorBag) {
-            $errors = new ViewErrorBag;
-        }
+	/**
+	 * Flash a container of errors to the session.
+	 *
+	 * @param  \Illuminate\Support\Contracts\MessageProviderInterface|array  $provider
+	 * @param  string  $key
+	 * @return $this
+	 */
+	public function withErrors($provider, $key = 'default')
+	{
+		$value = $this->parseErrors($provider);
 
-        $this->session->flash(
-            'errors', $errors->put($key, $value)
-        );
+		$this->session->flash(
+			'errors', $this->session->get('errors', new ViewErrorBag)->put($key, $value)
+		);
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Parse the given errors into an appropriate value.
-     *
-     * @param  \Illuminate\Contracts\Support\MessageProvider|array|string  $provider
-     * @return \Illuminate\Support\MessageBag
-     */
-    protected function parseErrors($provider)
-    {
-        if ($provider instanceof MessageProvider) {
-            return $provider->getMessageBag();
-        }
+	/**
+	 * Parse the given errors into an appropriate value.
+	 *
+	 * @param  \Illuminate\Support\Contracts\MessageProviderInterface|array  $provider
+	 * @return \Illuminate\Support\MessageBag
+	 */
+	protected function parseErrors($provider)
+	{
+		if ($provider instanceof MessageProviderInterface)
+		{
+			return $provider->getMessageBag();
+		}
 
-        return new MessageBag((array) $provider);
-    }
+		return new MessageBag((array) $provider);
+	}
 
-    /**
-     * Get the original response content.
-     *
-     * @return null
-     */
-    public function getOriginalContent()
-    {
-        //
-    }
+	/**
+	 * Get the request instance.
+	 *
+	 * @return  \Illuminate\Http\Request
+	 */
+	public function getRequest()
+	{
+		return $this->request;
+	}
 
-    /**
-     * Get the request instance.
-     *
-     * @return \Illuminate\Http\Request|null
-     */
-    public function getRequest()
-    {
-        return $this->request;
-    }
+	/**
+	 * Set the request instance.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @return void
+	 */
+	public function setRequest(Request $request)
+	{
+		$this->request = $request;
+	}
 
-    /**
-     * Set the request instance.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return void
-     */
-    public function setRequest(Request $request)
-    {
-        $this->request = $request;
-    }
+	/**
+	 * Get the session store implementation.
+	 *
+	 * @return \Illuminate\Session\Store
+	 */
+	public function getSession()
+	{
+		return $this->session;
+	}
 
-    /**
-     * Get the session store implementation.
-     *
-     * @return \Illuminate\Session\Store|null
-     */
-    public function getSession()
-    {
-        return $this->session;
-    }
+	/**
+	 * Set the session store implementation.
+	 *
+	 * @param  \Illuminate\Session\Store  $session
+	 * @return void
+	 */
+	public function setSession(SessionStore $session)
+	{
+		$this->session = $session;
+	}
 
-    /**
-     * Set the session store implementation.
-     *
-     * @param  \Illuminate\Session\Store  $session
-     * @return void
-     */
-    public function setSession(SessionStore $session)
-    {
-        $this->session = $session;
-    }
+	/**
+	 * Dynamically bind flash data in the session.
+	 *
+	 * @param  string  $method
+	 * @param  array  $parameters
+	 * @return void
+	 *
+	 * @throws \BadMethodCallException
+	 */
+	public function __call($method, $parameters)
+	{
+		if (starts_with($method, 'with'))
+		{
+			return $this->with(snake_case(substr($method, 4)), $parameters[0]);
+		}
 
-    /**
-     * Dynamically bind flash data in the session.
-     *
-     * @param  string  $method
-     * @param  array  $parameters
-     * @return $this
-     *
-     * @throws \BadMethodCallException
-     */
-    public function __call($method, $parameters)
-    {
-        if (static::hasMacro($method)) {
-            return $this->macroCall($method, $parameters);
-        }
+		throw new \BadMethodCallException("Method [$method] does not exist on Redirect.");
+	}
 
-        if (Str::startsWith($method, 'with')) {
-            return $this->with(Str::snake(substr($method, 4)), $parameters[0]);
-        }
-
-        throw new BadMethodCallException(
-            "Method [$method] does not exist on Redirect."
-        );
-    }
 }

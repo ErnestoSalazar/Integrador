@@ -2,8 +2,6 @@ Declare
 -----
 <?php
 
-declare (X='Y');
-
 declare (A='B', C='D') {}
 
 declare (A='B', C='D'):
@@ -11,17 +9,6 @@ enddeclare;
 -----
 array(
     0: Stmt_Declare(
-        declares: array(
-            0: Stmt_DeclareDeclare(
-                key: X
-                value: Scalar_String(
-                    value: Y
-                )
-            )
-        )
-        stmts: null
-    )
-    1: Stmt_Declare(
         declares: array(
             0: Stmt_DeclareDeclare(
                 key: A
@@ -39,7 +26,7 @@ array(
         stmts: array(
         )
     )
-    2: Stmt_Declare(
+    1: Stmt_Declare(
         declares: array(
             0: Stmt_DeclareDeclare(
                 key: A

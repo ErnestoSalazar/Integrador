@@ -19,35 +19,19 @@ class ProjectUrlMatcher extends Symfony\Component\Routing\Tests\Fixtures\Redirec
     {
         $allow = array();
         $pathinfo = rawurldecode($pathinfo);
-        $trimmedPathinfo = rtrim($pathinfo, '/');
         $context = $this->context;
         $request = $this->request;
-        $requestMethod = $canonicalMethod = $context->getMethod();
-        $scheme = $context->getScheme();
 
-        if ('HEAD' === $requestMethod) {
-            $canonicalMethod = 'GET';
+        // foo
+        if (0 === strpos($pathinfo, '/foo') && preg_match('#^/foo/(?P<bar>baz|symfony)$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'foo')), array (  'def' => 'test',));
         }
 
-
-        if (0 === strpos($pathinfo, '/foo')) {
-            // foo
-            if (preg_match('#^/foo/(?P<bar>baz|symfony)$#s', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'foo')), array (  'def' => 'test',));
-            }
-
-            // foofoo
-            if ('/foofoo' === $pathinfo) {
-                return array (  'def' => 'test',  '_route' => 'foofoo',);
-            }
-
-        }
-
-        elseif (0 === strpos($pathinfo, '/bar')) {
+        if (0 === strpos($pathinfo, '/bar')) {
             // bar
             if (preg_match('#^/bar/(?P<foo>[^/]++)$#s', $pathinfo, $matches)) {
-                if ('GET' !== $canonicalMethod) {
-                    $allow[] = 'GET';
+                if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'HEAD'));
                     goto not_bar;
                 }
 
@@ -57,8 +41,8 @@ class ProjectUrlMatcher extends Symfony\Component\Routing\Tests\Fixtures\Redirec
 
             // barhead
             if (0 === strpos($pathinfo, '/barhead') && preg_match('#^/barhead/(?P<foo>[^/]++)$#s', $pathinfo, $matches)) {
-                if ('GET' !== $canonicalMethod) {
-                    $allow[] = 'GET';
+                if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'HEAD'));
                     goto not_barhead;
                 }
 
@@ -68,7 +52,7 @@ class ProjectUrlMatcher extends Symfony\Component\Routing\Tests\Fixtures\Redirec
 
         }
 
-        elseif (0 === strpos($pathinfo, '/test')) {
+        if (0 === strpos($pathinfo, '/test')) {
             if (0 === strpos($pathinfo, '/test/baz')) {
                 // baz
                 if ('/test/baz' === $pathinfo) {
@@ -81,7 +65,7 @@ class ProjectUrlMatcher extends Symfony\Component\Routing\Tests\Fixtures\Redirec
                 }
 
                 // baz3
-                if ('/test/baz3' === $trimmedPathinfo) {
+                if ('/test/baz3' === rtrim($pathinfo, '/')) {
                     if (substr($pathinfo, -1) !== '/') {
                         return $this->redirect($pathinfo.'/', 'baz3');
                     }
@@ -102,7 +86,7 @@ class ProjectUrlMatcher extends Symfony\Component\Routing\Tests\Fixtures\Redirec
 
             // baz5
             if (preg_match('#^/test/(?P<foo>[^/]++)/$#s', $pathinfo, $matches)) {
-                if ('POST' !== $canonicalMethod) {
+                if ($this->context->getMethod() != 'POST') {
                     $allow[] = 'POST';
                     goto not_baz5;
                 }
@@ -113,7 +97,7 @@ class ProjectUrlMatcher extends Symfony\Component\Routing\Tests\Fixtures\Redirec
 
             // baz.baz6
             if (preg_match('#^/test/(?P<foo>[^/]++)/$#s', $pathinfo, $matches)) {
-                if ('PUT' !== $canonicalMethod) {
+                if ($this->context->getMethod() != 'PUT') {
                     $allow[] = 'PUT';
                     goto not_bazbaz6;
                 }
@@ -122,6 +106,11 @@ class ProjectUrlMatcher extends Symfony\Component\Routing\Tests\Fixtures\Redirec
             }
             not_bazbaz6:
 
+        }
+
+        // foofoo
+        if ('/foofoo' === $pathinfo) {
+            return array (  'def' => 'test',  '_route' => 'foofoo',);
         }
 
         // quoter
@@ -168,24 +157,24 @@ class ProjectUrlMatcher extends Symfony\Component\Routing\Tests\Fixtures\Redirec
 
         }
 
-        elseif (0 === strpos($pathinfo, '/multi')) {
+        if (0 === strpos($pathinfo, '/multi')) {
             // helloWorld
             if (0 === strpos($pathinfo, '/multi/hello') && preg_match('#^/multi/hello(?:/(?P<who>[^/]++))?$#s', $pathinfo, $matches)) {
                 return $this->mergeDefaults(array_replace($matches, array('_route' => 'helloWorld')), array (  'who' => 'World!',));
             }
 
+            // overridden2
+            if ('/multi/new' === $pathinfo) {
+                return array('_route' => 'overridden2');
+            }
+
             // hey
-            if ('/multi/hey' === $trimmedPathinfo) {
+            if ('/multi/hey' === rtrim($pathinfo, '/')) {
                 if (substr($pathinfo, -1) !== '/') {
                     return $this->redirect($pathinfo.'/', 'hey');
                 }
 
                 return array('_route' => 'hey');
-            }
-
-            // overridden2
-            if ('/multi/new' === $pathinfo) {
-                return array('_route' => 'overridden2');
             }
 
         }
@@ -213,7 +202,7 @@ class ProjectUrlMatcher extends Symfony\Component\Routing\Tests\Fixtures\Redirec
 
         }
 
-        $host = $context->getHost();
+        $host = $this->context->getHost();
 
         if (preg_match('#^a\\.example\\.com$#si', $host, $hostMatches)) {
             // route1
@@ -291,30 +280,36 @@ class ProjectUrlMatcher extends Symfony\Component\Routing\Tests\Fixtures\Redirec
 
         }
 
-        // route16
-        if (0 === strpos($pathinfo, '/route16') && preg_match('#^/route16/(?P<name>[^/]++)$#s', $pathinfo, $matches)) {
-            return $this->mergeDefaults(array_replace($matches, array('_route' => 'route16')), array (  'var1' => 'val',));
-        }
-
-        // route17
-        if ('/route17' === $pathinfo) {
-            return array('_route' => 'route17');
-        }
-
-        // a
-        if ('/a/a...' === $pathinfo) {
-            return array('_route' => 'a');
-        }
-
-        if (0 === strpos($pathinfo, '/a/b')) {
-            // b
-            if (preg_match('#^/a/b/(?P<var>[^/]++)$#s', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'b')), array ());
+        if (0 === strpos($pathinfo, '/route1')) {
+            // route16
+            if (0 === strpos($pathinfo, '/route16') && preg_match('#^/route16/(?P<name>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'route16')), array (  'var1' => 'val',));
             }
 
-            // c
-            if (0 === strpos($pathinfo, '/a/b/c') && preg_match('#^/a/b/c/(?P<var>[^/]++)$#s', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'c')), array ());
+            // route17
+            if ('/route17' === $pathinfo) {
+                return array('_route' => 'route17');
+            }
+
+        }
+
+        if (0 === strpos($pathinfo, '/a')) {
+            // a
+            if ('/a/a...' === $pathinfo) {
+                return array('_route' => 'a');
+            }
+
+            if (0 === strpos($pathinfo, '/a/b')) {
+                // b
+                if (preg_match('#^/a/b/(?P<var>[^/]++)$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'b')), array ());
+                }
+
+                // c
+                if (0 === strpos($pathinfo, '/a/b/c') && preg_match('#^/a/b/c/(?P<var>[^/]++)$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'c')), array ());
+                }
+
             }
 
         }
@@ -322,7 +317,7 @@ class ProjectUrlMatcher extends Symfony\Component\Routing\Tests\Fixtures\Redirec
         // secure
         if ('/secure' === $pathinfo) {
             $requiredSchemes = array (  'https' => 0,);
-            if (!isset($requiredSchemes[$scheme])) {
+            if (!isset($requiredSchemes[$this->context->getScheme()])) {
                 return $this->redirect($pathinfo, 'secure', key($requiredSchemes));
             }
 
@@ -332,7 +327,7 @@ class ProjectUrlMatcher extends Symfony\Component\Routing\Tests\Fixtures\Redirec
         // nonsecure
         if ('/nonsecure' === $pathinfo) {
             $requiredSchemes = array (  'http' => 0,);
-            if (!isset($requiredSchemes[$scheme])) {
+            if (!isset($requiredSchemes[$this->context->getScheme()])) {
                 return $this->redirect($pathinfo, 'nonsecure', key($requiredSchemes));
             }
 

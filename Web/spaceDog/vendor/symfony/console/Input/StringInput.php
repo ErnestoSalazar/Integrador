@@ -11,8 +11,6 @@
 
 namespace Symfony\Component\Console\Input;
 
-use Symfony\Component\Console\Exception\InvalidArgumentException;
-
 /**
  * StringInput represents an input provided as a string.
  *
@@ -28,13 +26,24 @@ class StringInput extends ArgvInput
     const REGEX_QUOTED_STRING = '(?:"([^"\\\\]*(?:\\\\.[^"\\\\]*)*)"|\'([^\'\\\\]*(?:\\\\.[^\'\\\\]*)*)\')';
 
     /**
-     * @param string $input An array of parameters from the CLI (in the argv format)
+     * @param string          $input      An array of parameters from the CLI (in the argv format)
+     * @param InputDefinition $definition A InputDefinition instance
+     *
+     * @deprecated The second argument is deprecated as it does not work (will be removed in 3.0), use 'bind' method instead
      */
-    public function __construct($input)
+    public function __construct($input, InputDefinition $definition = null)
     {
-        parent::__construct(array());
+        if ($definition) {
+            @trigger_error('The $definition argument of the '.__METHOD__.' method is deprecated and will be removed in 3.0. Set this parameter with the bind() method instead.', E_USER_DEPRECATED);
+        }
+
+        parent::__construct(array(), null);
 
         $this->setTokens($this->tokenize($input));
+
+        if (null !== $definition) {
+            $this->bind($definition);
+        }
     }
 
     /**
@@ -44,7 +53,7 @@ class StringInput extends ArgvInput
      *
      * @return array An array of tokens
      *
-     * @throws InvalidArgumentException When unable to parse input (should never happen)
+     * @throws \InvalidArgumentException When unable to parse input (should never happen)
      */
     private function tokenize($input)
     {
@@ -61,7 +70,7 @@ class StringInput extends ArgvInput
                 $tokens[] = stripcslashes($match[1]);
             } else {
                 // should never happen
-                throw new InvalidArgumentException(sprintf('Unable to parse input near "... %s ..."', substr($input, $cursor, 10)));
+                throw new \InvalidArgumentException(sprintf('Unable to parse input near "... %s ..."', substr($input, $cursor, 10)));
             }
 
             $cursor += strlen($match[0]);

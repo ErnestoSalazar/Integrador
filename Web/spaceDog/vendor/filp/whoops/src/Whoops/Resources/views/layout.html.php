@@ -3,11 +3,10 @@
 * Layout template file for Whoops's pretty error output.
 */
 ?>
-<!DOCTYPE html><?php echo $preface; ?>
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="robots" content="noindex,nofollow"/>
     <title><?php echo $tpl->escape($page_title) ?></title>
 
     <style><?php echo $stylesheet ?></style>
@@ -15,18 +14,24 @@
   <body>
 
     <div class="Whoops container">
+
       <div class="stack-container">
-
-        <?php $tpl->render($panel_left_outer) ?>
-
-        <?php $tpl->render($panel_details_outer) ?>
-
+        <div class="frames-container cf <?php echo (!$has_frames ? 'empty' : '') ?>">
+          <?php $tpl->render($frame_list) ?>
+        </div>
+        <div class="details-container cf">
+          <header>
+            <?php $tpl->render($header) ?>
+          </header>
+          <?php $tpl->render($frame_code) ?>
+          <?php $tpl->render($env_details) ?>
+        </div>
       </div>
     </div>
 
-    <script><?php echo $prettify ?></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/zeroclipboard/1.3.5/ZeroClipboard.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/prettify/r224/prettify.js"></script>
     <script><?php echo $zepto ?></script>
-    <script><?php echo $clipboard ?></script>
     <script><?php echo $javascript ?></script>
   </body>
 </html>

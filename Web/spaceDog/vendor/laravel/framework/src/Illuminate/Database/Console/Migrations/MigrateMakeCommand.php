@@ -1,130 +1,127 @@
-<?php
+<?php namespace Illuminate\Database\Console\Migrations;
 
-namespace Illuminate\Database\Console\Migrations;
-
-use Illuminate\Support\Composer;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Input\InputArgument;
 use Illuminate\Database\Migrations\MigrationCreator;
 
-class MigrateMakeCommand extends BaseCommand
-{
-    /**
-     * The console command signature.
-     *
-     * @var string
-     */
-    protected $signature = 'make:migration {name : The name of the migration.}
-        {--create= : The table to be created.}
-        {--table= : The table to migrate.}
-        {--path= : The location where the migration file should be created.}';
+class MigrateMakeCommand extends BaseCommand {
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
-    protected $description = 'Create a new migration file';
+	/**
+	 * The console command name.
+	 *
+	 * @var string
+	 */
+	protected $name = 'migrate:make';
 
-    /**
-     * The migration creator instance.
-     *
-     * @var \Illuminate\Database\Migrations\MigrationCreator
-     */
-    protected $creator;
+	/**
+	 * The console command description.
+	 *
+	 * @var string
+	 */
+	protected $description = 'Create a new migration file';
 
-    /**
-     * The Composer instance.
-     *
-     * @var \Illuminate\Support\Composer
-     */
-    protected $composer;
+	/**
+	 * The migration creator instance.
+	 *
+	 * @var \Illuminate\Database\Migrations\MigrationCreator
+	 */
+	protected $creator;
 
-    /**
-     * Create a new migration install command instance.
-     *
-     * @param  \Illuminate\Database\Migrations\MigrationCreator  $creator
-     * @param  \Illuminate\Support\Composer  $composer
-     * @return void
-     */
-    public function __construct(MigrationCreator $creator, Composer $composer)
-    {
-        parent::__construct();
+	/**
+	 * The path to the packages directory (vendor).
+	 *
+	 * @var string
+	 */
+	protected $packagePath;
 
-        $this->creator = $creator;
-        $this->composer = $composer;
-    }
+	/**
+	 * Create a new migration install command instance.
+	 *
+	 * @param  \Illuminate\Database\Migrations\MigrationCreator  $creator
+	 * @param  string  $packagePath
+	 * @return void
+	 */
+	public function __construct(MigrationCreator $creator, $packagePath)
+	{
+		parent::__construct();
 
-    /**
-     * Execute the console command.
-     *
-     * @return void
-     */
-    public function handle()
-    {
-        // It's possible for the developer to specify the tables to modify in this
-        // schema operation. The developer may also specify if this table needs
-        // to be freshly created so we can create the appropriate migrations.
-        $name = trim($this->input->getArgument('name'));
+		$this->creator = $creator;
+		$this->packagePath = $packagePath;
+	}
 
-        $table = $this->input->getOption('table');
+	/**
+	 * Execute the console command.
+	 *
+	 * @return void
+	 */
+	public function fire()
+	{
+		// It's possible for the developer to specify the tables to modify in this
+		// schema operation. The developer may also specify if this table needs
+		// to be freshly created so we can create the appropriate migrations.
+		$name = $this->input->getArgument('name');
 
-        $create = $this->input->getOption('create') ?: false;
+		$table = $this->input->getOption('table');
 
-        // If no table was given as an option but a create option is given then we
-        // will use the "create" option as the table name. This allows the devs
-        // to pass a table name into this option as a short-cut for creating.
-        if (! $table && is_string($create)) {
-            $table = $create;
+		$create = $this->input->getOption('create');
 
-            $create = true;
-        }
+		if ( ! $table && is_string($create)) $table = $create;
 
-        // Next, we will attempt to guess the table name if this the migration has
-        // "create" in the name. This will allow us to provide a convenient way
-        // of creating migrations that create new tables for the application.
-        if (! $table) {
-            if (preg_match('/^create_(\w+)_table$/', $name, $matches)) {
-                $table = $matches[1];
+		// Now we are ready to write the migration out to disk. Once we've written
+		// the migration out, we will dump-autoload for the entire framework to
+		// make sure that the migrations are registered by the class loaders.
+		$this->writeMigration($name, $table, $create);
 
-                $create = true;
-            }
-        }
+		$this->call('dump-autoload');
+	}
 
-        // Now we are ready to write the migration out to disk. Once we've written
-        // the migration out, we will dump-autoload for the entire framework to
-        // make sure that the migrations are registered by the class loaders.
-        $this->writeMigration($name, $table, $create);
+	/**
+	 * Write the migration file to disk.
+	 *
+	 * @param  string  $name
+	 * @param  string  $table
+	 * @param  bool    $create
+	 * @return string
+	 */
+	protected function writeMigration($name, $table, $create)
+	{
+		$path = $this->getMigrationPath();
 
-        $this->composer->dumpAutoloads();
-    }
+		$file = pathinfo($this->creator->create($name, $path, $table, $create), PATHINFO_FILENAME);
 
-    /**
-     * Write the migration file to disk.
-     *
-     * @param  string  $name
-     * @param  string  $table
-     * @param  bool    $create
-     * @return string
-     */
-    protected function writeMigration($name, $table, $create)
-    {
-        $file = pathinfo($this->creator->create(
-            $name, $this->getMigrationPath(), $table, $create
-        ), PATHINFO_FILENAME);
+		$this->line("<info>Created Migration:</info> $file");
+	}
 
-        $this->line("<info>Created Migration:</info> {$file}");
-    }
+	/**
+	 * Get the console command arguments.
+	 *
+	 * @return array
+	 */
+	protected function getArguments()
+	{
+		return array(
+			array('name', InputArgument::REQUIRED, 'The name of the migration'),
+		);
+	}
 
-    /**
-     * Get migration path (either specified by '--path' option or default location).
-     *
-     * @return string
-     */
-    protected function getMigrationPath()
-    {
-        if (! is_null($targetPath = $this->input->getOption('path'))) {
-            return $this->laravel->basePath().'/'.$targetPath;
-        }
+	/**
+	 * Get the console command options.
+	 *
+	 * @return array
+	 */
+	protected function getOptions()
+	{
+		return array(
+			array('bench', null, InputOption::VALUE_OPTIONAL, 'The workbench the migration belongs to.', null),
 
-        return parent::getMigrationPath();
-    }
+			array('create', null, InputOption::VALUE_OPTIONAL, 'The table to be created.'),
+
+			array('package', null, InputOption::VALUE_OPTIONAL, 'The package the migration belongs to.', null),
+
+			array('path', null, InputOption::VALUE_OPTIONAL, 'Where to store the migration.', null),
+
+			array('table', null, InputOption::VALUE_OPTIONAL, 'The table to migrate.'),
+		);
+	}
+
 }

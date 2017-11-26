@@ -14,9 +14,6 @@ namespace Symfony\Component\Process\Tests;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Process\ProcessUtils;
 
-/**
- * @group legacy
- */
 class ProcessUtilsTest extends TestCase
 {
     /**

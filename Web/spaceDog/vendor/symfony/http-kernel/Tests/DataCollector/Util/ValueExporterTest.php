@@ -14,9 +14,6 @@ namespace Symfony\Component\HttpKernel\Tests\DataCollector\Util;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpKernel\DataCollector\Util\ValueExporter;
 
-/**
- * @group legacy
- */
 class ValueExporterTest extends TestCase
 {
     /**
@@ -35,6 +32,9 @@ class ValueExporterTest extends TestCase
         $this->assertSame('Object(DateTime) - 2014-06-10T07:35:40+00:00', $this->valueExporter->exportValue($dateTime));
     }
 
+    /**
+     * @requires PHP 5.5
+     */
     public function testDateTimeImmutable()
     {
         $dateTime = new \DateTimeImmutable('2014-06-10 07:35:40', new \DateTimeZone('UTC'));

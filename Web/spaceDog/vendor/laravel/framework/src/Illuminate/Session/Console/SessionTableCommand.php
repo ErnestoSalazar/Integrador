@@ -1,81 +1,72 @@
-<?php
-
-namespace Illuminate\Session\Console;
+<?php namespace Illuminate\Session\Console;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Composer;
 use Illuminate\Filesystem\Filesystem;
 
-class SessionTableCommand extends Command
-{
-    /**
-     * The console command name.
-     *
-     * @var string
-     */
-    protected $name = 'session:table';
+class SessionTableCommand extends Command {
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
-    protected $description = 'Create a migration for the session database table';
+	/**
+	 * The console command name.
+	 *
+	 * @var string
+	 */
+	protected $name = 'session:table';
 
-    /**
-     * The filesystem instance.
-     *
-     * @var \Illuminate\Filesystem\Filesystem
-     */
-    protected $files;
+	/**
+	 * The console command description.
+	 *
+	 * @var string
+	 */
+	protected $description = 'Create a migration for the session database table';
 
-    /**
-     * @var \Illuminate\Support\Composer
-     */
-    protected $composer;
+	/**
+	 * The filesystem instance.
+	 *
+	 * @var \Illuminate\Filesystem\Filesystem
+	 */
+	protected $files;
 
-    /**
-     * Create a new session table command instance.
-     *
-     * @param  \Illuminate\Filesystem\Filesystem  $files
-     * @param  \Illuminate\Support\Composer  $composer
-     * @return void
-     */
-    public function __construct(Filesystem $files, Composer $composer)
-    {
-        parent::__construct();
+	/**
+	 * Create a new session table command instance.
+	 *
+	 * @param  \Illuminate\Filesystem\Filesystem  $files
+	 * @return void
+	 */
+	public function __construct(Filesystem $files)
+	{
+		parent::__construct();
 
-        $this->files = $files;
-        $this->composer = $composer;
-    }
+		$this->files = $files;
+	}
 
-    /**
-     * Execute the console command.
-     *
-     * @return void
-     */
-    public function handle()
-    {
-        $fullPath = $this->createBaseMigration();
+	/**
+	 * Execute the console command.
+	 *
+	 * @return void
+	 */
+	public function fire()
+	{
+		$fullPath = $this->createBaseMigration();
 
-        $this->files->put($fullPath, $this->files->get(__DIR__.'/stubs/database.stub'));
+		$this->files->put($fullPath, $this->files->get(__DIR__.'/stubs/database.stub'));
 
-        $this->info('Migration created successfully!');
+		$this->info('Migration created successfully!');
 
-        $this->composer->dumpAutoloads();
-    }
+		$this->call('dump-autoload');
+	}
 
-    /**
-     * Create a base migration file for the session.
-     *
-     * @return string
-     */
-    protected function createBaseMigration()
-    {
-        $name = 'create_sessions_table';
+	/**
+	 * Create a base migration file for the session.
+	 *
+	 * @return string
+	 */
+	protected function createBaseMigration()
+	{
+		$name = 'create_session_table';
 
-        $path = $this->laravel->databasePath().'/migrations';
+		$path = $this->laravel['path'].'/database/migrations';
 
-        return $this->laravel['migration.creator']->create($name, $path);
-    }
+		return $this->laravel['migration.creator']->create($name, $path);
+	}
+
 }

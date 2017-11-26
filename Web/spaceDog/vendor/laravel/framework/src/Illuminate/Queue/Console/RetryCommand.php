@@ -1,93 +1,74 @@
-<?php
+<?php namespace Illuminate\Queue\Console;
 
-namespace Illuminate\Queue\Console;
-
-use Illuminate\Support\Arr;
 use Illuminate\Console\Command;
+use Symfony\Component\Console\Input\InputArgument;
 
-class RetryCommand extends Command
-{
-    /**
-     * The console command signature.
-     *
-     * @var string
-     */
-    protected $signature = 'queue:retry {id* : The ID of the failed job.}';
+class RetryCommand extends Command {
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
-    protected $description = 'Retry a failed queue job';
+	/**
+	 * The console command name.
+	 *
+	 * @var string
+	 */
+	protected $name = 'queue:retry';
 
-    /**
-     * Execute the console command.
-     *
-     * @return void
-     */
-    public function handle()
-    {
-        foreach ($this->getJobIds() as $id) {
-            $job = $this->laravel['queue.failer']->find($id);
+	/**
+	 * The console command description.
+	 *
+	 * @var string
+	 */
+	protected $description = 'Retry a failed queue job';
 
-            if (is_null($job)) {
-                $this->error("Unable to find failed job with ID [{$id}].");
-            } else {
-                $this->retryJob($job);
+	/**
+	 * Execute the console command.
+	 *
+	 * @return void
+	 */
+	public function fire()
+	{
+		$failed = $this->laravel['queue.failer']->find($this->argument('id'));
 
-                $this->info("The failed job [{$id}] has been pushed back onto the queue!");
+		if ( ! is_null($failed))
+		{
+			$failed->payload = $this->resetAttempts($failed->payload);
 
-                $this->laravel['queue.failer']->forget($id);
-            }
-        }
-    }
+			$this->laravel['queue']->connection($failed->connection)->pushRaw($failed->payload, $failed->queue);
 
-    /**
-     * Get the job IDs to be retried.
-     *
-     * @return array
-     */
-    protected function getJobIds()
-    {
-        $ids = (array) $this->argument('id');
+			$this->laravel['queue.failer']->forget($failed->id);
 
-        if (count($ids) === 1 && $ids[0] === 'all') {
-            $ids = Arr::pluck($this->laravel['queue.failer']->all(), 'id');
-        }
+			$this->info('The failed job has been pushed back onto the queue!');
+		}
+		else
+		{
+			$this->error('No failed job matches the given ID.');
+		}
+	}
 
-        return $ids;
-    }
+	/**
+	 * Reset the payload attempts.
+	 *
+	 * @param  string  $payload
+	 * @return string
+	 */
+	protected function resetAttempts($payload)
+	{
+		$payload = json_decode($payload, true);
 
-    /**
-     * Retry the queue job.
-     *
-     * @param  \stdClass  $job
-     * @return void
-     */
-    protected function retryJob($job)
-    {
-        $this->laravel['queue']->connection($job->connection)->pushRaw(
-            $this->resetAttempts($job->payload), $job->queue
-        );
-    }
+		if (isset($payload['attempts'])) $payload['attempts'] = 0;
 
-    /**
-     * Reset the payload attempts.
-     *
-     * Applicable to Redis jobs which store attempts in their payload.
-     *
-     * @param  string  $payload
-     * @return string
-     */
-    protected function resetAttempts($payload)
-    {
-        $payload = json_decode($payload, true);
+		return json_encode($payload);
+	}
 
-        if (isset($payload['attempts'])) {
-            $payload['attempts'] = 0;
-        }
+	/**
+	 * Get the console command arguments.
+	 *
+	 * @return array
+	 */
+	protected function getArguments()
+	{
+		return array(
+			array('id', InputArgument::REQUIRED, 'The ID of the failed job'),
+		);
+	}
 
-        return json_encode($payload);
-    }
 }

@@ -1,34 +1,33 @@
-<?php
-
-namespace Illuminate\Foundation\Console;
+<?php namespace Illuminate\Foundation\Console;
 
 use Illuminate\Console\Command;
 
-class UpCommand extends Command
-{
-    /**
-     * The console command name.
-     *
-     * @var string
-     */
-    protected $name = 'up';
+class UpCommand extends Command {
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
-    protected $description = 'Bring the application out of maintenance mode';
+	/**
+	 * The console command name.
+	 *
+	 * @var string
+	 */
+	protected $name = 'up';
 
-    /**
-     * Execute the console command.
-     *
-     * @return void
-     */
-    public function handle()
-    {
-        @unlink($this->laravel->storagePath().'/framework/down');
+	/**
+	 * The console command description.
+	 *
+	 * @var string
+	 */
+	protected $description = "Bring the application out of maintenance mode";
 
-        $this->info('Application is now live.');
-    }
+	/**
+	 * Execute the console command.
+	 *
+	 * @return void
+	 */
+	public function fire()
+	{
+		@unlink($this->laravel['config']['app.manifest'].'/down');
+
+		$this->info('Application is now live.');
+	}
+
 }

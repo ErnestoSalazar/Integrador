@@ -50,7 +50,6 @@ class ConsoleLogger extends AbstractLogger
         LogLevel::INFO => self::INFO,
         LogLevel::DEBUG => self::INFO,
     );
-    private $errored = false;
 
     public function __construct(OutputInterface $output, array $verbosityLevelMap = array(), array $formatLevelMap = array())
     {
@@ -68,29 +67,16 @@ class ConsoleLogger extends AbstractLogger
             throw new InvalidArgumentException(sprintf('The log level "%s" does not exist.', $level));
         }
 
-        $output = $this->output;
-
         // Write to the error output if necessary and available
-        if (self::ERROR === $this->formatLevelMap[$level]) {
-            if ($this->output instanceof ConsoleOutputInterface) {
-                $output = $output->getErrorOutput();
-            }
-            $this->errored = true;
+        if (self::ERROR === $this->formatLevelMap[$level] && $this->output instanceof ConsoleOutputInterface) {
+            $output = $this->output->getErrorOutput();
+        } else {
+            $output = $this->output;
         }
 
-        // the if condition check isn't necessary -- it's the same one that $output will do internally anyway.
-        // We only do it for efficiency here as the message formatting is relatively expensive.
         if ($output->getVerbosity() >= $this->verbosityLevelMap[$level]) {
-            $output->writeln(sprintf('<%1$s>[%2$s] %3$s</%1$s>', $this->formatLevelMap[$level], $level, $this->interpolate($message, $context)), $this->verbosityLevelMap[$level]);
+            $output->writeln(sprintf('<%1$s>[%2$s] %3$s</%1$s>', $this->formatLevelMap[$level], $level, $this->interpolate($message, $context)));
         }
-    }
-
-    /**
-     * Returns true when any messages have been logged at error levels.
-     */
-    public function hasErrored()
-    {
-        return $this->errored;
     }
 
     /**

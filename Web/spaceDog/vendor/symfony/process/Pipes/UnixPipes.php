@@ -24,13 +24,13 @@ class UnixPipes extends AbstractPipes
 {
     private $ttyMode;
     private $ptyMode;
-    private $haveReadSupport;
+    private $disableOutput;
 
-    public function __construct($ttyMode, $ptyMode, $input, $haveReadSupport)
+    public function __construct($ttyMode, $ptyMode, $input, $disableOutput)
     {
         $this->ttyMode = (bool) $ttyMode;
         $this->ptyMode = (bool) $ptyMode;
-        $this->haveReadSupport = (bool) $haveReadSupport;
+        $this->disableOutput = (bool) $disableOutput;
 
         parent::__construct($input);
     }
@@ -45,7 +45,7 @@ class UnixPipes extends AbstractPipes
      */
     public function getDescriptors()
     {
-        if (!$this->haveReadSupport) {
+        if ($this->disableOutput) {
             $nullstream = fopen('/dev/null', 'c');
 
             return array(
@@ -135,16 +135,21 @@ class UnixPipes extends AbstractPipes
     /**
      * {@inheritdoc}
      */
-    public function haveReadSupport()
-    {
-        return $this->haveReadSupport;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function areOpen()
     {
         return (bool) $this->pipes;
+    }
+
+    /**
+     * Creates a new UnixPipes instance.
+     *
+     * @param Process         $process
+     * @param string|resource $input
+     *
+     * @return static
+     */
+    public static function create(Process $process, $input)
+    {
+        return new static($process->isTty(), $process->isPty(), $input, $process->isOutputDisabled());
     }
 }

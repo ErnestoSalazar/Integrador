@@ -1,7 +1,5 @@
 <?php /* List data-table values, i.e: $_SERVER, $_GET, .... */ ?>
 <div class="details">
-  <h2 class="details-heading">Environment &amp; details:</h2>
-
   <div class="data-table-container" id="data-tables">
     <?php foreach ($tables as $label => $data): ?>
       <div class="data-table" id="sg-<?php echo $tpl->escape($tpl->slug($label)) ?>">
@@ -17,7 +15,7 @@
             <?php foreach ($data as $k => $value): ?>
               <tr>
                 <td><?php echo $tpl->escape($k) ?></td>
-                <td><?php echo $tpl->dump($value) ?></td>
+                <td><?php echo $tpl->escape(print_r($value, true)) ?></td>
               </tr>
             <?php endforeach ?>
             </table>

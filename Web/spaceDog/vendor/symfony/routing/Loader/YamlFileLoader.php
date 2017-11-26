@@ -17,7 +17,6 @@ use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\Yaml\Exception\ParseException;
 use Symfony\Component\Yaml\Parser as YamlParser;
 use Symfony\Component\Config\Loader\FileLoader;
-use Symfony\Component\Yaml\Yaml;
 
 /**
  * YamlFileLoader loads Yaml routing files.
@@ -28,7 +27,7 @@ use Symfony\Component\Yaml\Yaml;
 class YamlFileLoader extends FileLoader
 {
     private static $availableKeys = array(
-        'resource', 'type', 'prefix', 'path', 'host', 'schemes', 'methods', 'defaults', 'requirements', 'options', 'condition',
+        'resource', 'type', 'prefix', 'pattern', 'path', 'host', 'schemes', 'methods', 'defaults', 'requirements', 'options', 'condition',
     );
     private $yamlParser;
 
@@ -58,18 +57,10 @@ class YamlFileLoader extends FileLoader
             $this->yamlParser = new YamlParser();
         }
 
-        $prevErrorHandler = set_error_handler(function ($level, $message, $script, $line) use ($file, &$prevErrorHandler) {
-            $message = E_USER_DEPRECATED === $level ? preg_replace('/ on line \d+/', ' in "'.$file.'"$0', $message) : $message;
-
-            return $prevErrorHandler ? $prevErrorHandler($level, $message, $script, $line) : false;
-        });
-
         try {
-            $parsedConfig = $this->yamlParser->parse(file_get_contents($path), Yaml::PARSE_KEYS_AS_STRINGS);
+            $parsedConfig = $this->yamlParser->parse(file_get_contents($path));
         } catch (ParseException $e) {
             throw new \InvalidArgumentException(sprintf('The file "%s" does not contain valid YAML.', $path), 0, $e);
-        } finally {
-            restore_error_handler();
         }
 
         $collection = new RouteCollection();
@@ -86,6 +77,17 @@ class YamlFileLoader extends FileLoader
         }
 
         foreach ($parsedConfig as $name => $config) {
+            if (isset($config['pattern'])) {
+                if (isset($config['path'])) {
+                    throw new \InvalidArgumentException(sprintf('The file "%s" cannot define both a "path" and a "pattern" attribute. Use only "path".', $path));
+                }
+
+                @trigger_error(sprintf('The "pattern" option in file "%s" is deprecated since version 2.2 and will be removed in 3.0. Use the "path" option in the route definition instead.', $path), E_USER_DEPRECATED);
+
+                $config['path'] = $config['pattern'];
+                unset($config['pattern']);
+            }
+
             $this->validate($config, $name, $path);
 
             if (isset($config['resource'])) {
@@ -123,6 +125,24 @@ class YamlFileLoader extends FileLoader
         $schemes = isset($config['schemes']) ? $config['schemes'] : array();
         $methods = isset($config['methods']) ? $config['methods'] : array();
         $condition = isset($config['condition']) ? $config['condition'] : null;
+
+        if (isset($requirements['_method'])) {
+            if (0 === count($methods)) {
+                $methods = explode('|', $requirements['_method']);
+            }
+
+            unset($requirements['_method']);
+            @trigger_error(sprintf('The "_method" requirement of route "%s" in file "%s" is deprecated since version 2.2 and will be removed in 3.0. Use the "methods" option instead.', $name, $path), E_USER_DEPRECATED);
+        }
+
+        if (isset($requirements['_scheme'])) {
+            if (0 === count($schemes)) {
+                $schemes = explode('|', $requirements['_scheme']);
+            }
+
+            unset($requirements['_scheme']);
+            @trigger_error(sprintf('The "_scheme" requirement of route "%s" in file "%s" is deprecated since version 2.2 and will be removed in 3.0. Use the "schemes" option instead.', $name, $path), E_USER_DEPRECATED);
+        }
 
         $route = new Route($config['path'], $defaults, $requirements, $options, $host, $schemes, $methods, $condition);
 

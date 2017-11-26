@@ -191,20 +191,7 @@ class TextDescriptor extends Descriptor
             $this->writeText("\n");
             $this->writeText("\n");
 
-            $commands = $description->getCommands();
-            $namespaces = $description->getNamespaces();
-            if ($describedNamespace && $namespaces) {
-                // make sure all alias commands are included when describing a specific namespace
-                $describedNamespaceInfo = reset($namespaces);
-                foreach ($describedNamespaceInfo['commands'] as $name) {
-                    $commands[$name] = $description->getCommand($name);
-                }
-            }
-
-            // calculate max. width based on available commands per namespace
-            $width = $this->getColumnWidth(call_user_func_array('array_merge', array_map(function ($namespace) use ($commands) {
-                return array_intersect($namespace['commands'], array_keys($commands));
-            }, $namespaces)));
+            $width = $this->getColumnWidth($description->getCommands());
 
             if ($describedNamespace) {
                 $this->writeText(sprintf('<comment>Available commands for the "%s" namespace:</comment>', $describedNamespace), $options);
@@ -212,15 +199,8 @@ class TextDescriptor extends Descriptor
                 $this->writeText('<comment>Available commands:</comment>', $options);
             }
 
-            foreach ($namespaces as $namespace) {
-                $namespace['commands'] = array_filter($namespace['commands'], function ($name) use ($commands) {
-                    return isset($commands[$name]);
-                });
-
-                if (!$namespace['commands']) {
-                    continue;
-                }
-
+            // add commands by namespace
+            foreach ($description->getNamespaces() as $namespace) {
                 if (!$describedNamespace && ApplicationDescription::GLOBAL_NAMESPACE !== $namespace['id']) {
                     $this->writeText("\n");
                     $this->writeText(' <comment>'.$namespace['id'].'</comment>', $options);
@@ -229,9 +209,7 @@ class TextDescriptor extends Descriptor
                 foreach ($namespace['commands'] as $name) {
                     $this->writeText("\n");
                     $spacingWidth = $width - Helper::strlen($name);
-                    $command = $commands[$name];
-                    $commandAliases = $name === $command->getName() ? $this->getCommandAliasesText($command) : '';
-                    $this->writeText(sprintf('  <info>%s</info>%s%s', $name, str_repeat(' ', $spacingWidth), $commandAliases.$command->getDescription()), $options);
+                    $this->writeText(sprintf('  <info>%s</info>%s%s', $name, str_repeat(' ', $spacingWidth), $description->getCommand($name)->getDescription()), $options);
                 }
             }
 
@@ -248,23 +226,6 @@ class TextDescriptor extends Descriptor
             isset($options['raw_text']) && $options['raw_text'] ? strip_tags($content) : $content,
             isset($options['raw_output']) ? !$options['raw_output'] : true
         );
-    }
-
-    /**
-     * Formats command aliases to show them in the command description.
-     *
-     * @return string
-     */
-    private function getCommandAliasesText(Command $command)
-    {
-        $text = '';
-        $aliases = $command->getAliases();
-
-        if ($aliases) {
-            $text = '['.implode('|', $aliases).'] ';
-        }
-
-        return $text;
     }
 
     /**
@@ -290,11 +251,15 @@ class TextDescriptor extends Descriptor
             }
         }
 
+        if (\PHP_VERSION_ID < 50400) {
+            return str_replace(array('\/', '\\\\'), array('/', '\\'), json_encode($default));
+        }
+
         return str_replace('\\\\', '\\', json_encode($default, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
     }
 
     /**
-     * @param (Command|string)[] $commands
+     * @param Command[] $commands
      *
      * @return int
      */
@@ -303,17 +268,13 @@ class TextDescriptor extends Descriptor
         $widths = array();
 
         foreach ($commands as $command) {
-            if ($command instanceof Command) {
-                $widths[] = Helper::strlen($command->getName());
-                foreach ($command->getAliases() as $alias) {
-                    $widths[] = Helper::strlen($alias);
-                }
-            } else {
-                $widths[] = Helper::strlen($command);
+            $widths[] = Helper::strlen($command->getName());
+            foreach ($command->getAliases() as $alias) {
+                $widths[] = Helper::strlen($alias);
             }
         }
 
-        return $widths ? max($widths) + 2 : 0;
+        return max($widths) + 2;
     }
 
     /**
@@ -326,7 +287,7 @@ class TextDescriptor extends Descriptor
         $totalWidth = 0;
         foreach ($options as $option) {
             // "-" + shortcut + ", --" + name
-            $nameLength = 1 + max(Helper::strlen($option->getShortcut()), 1) + 4 + Helper::strlen($option->getName());
+            $nameLength = 1 + max(strlen($option->getShortcut()), 1) + 4 + Helper::strlen($option->getName());
 
             if ($option->acceptValue()) {
                 $valueLength = 1 + Helper::strlen($option->getName()); // = + value

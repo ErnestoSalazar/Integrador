@@ -23,18 +23,7 @@ class JsonResponseHandler extends Handler
     /**
      * @var bool
      */
-    private $jsonApi = false;
-
-    /**
-     * Returns errors[[]] instead of error[] to be in compliance with the json:api spec
-     * @param bool $jsonApi Default is false
-     * @return $this
-     */
-    public function setJsonApi($jsonApi = false)
-    {
-        $this->jsonApi = (bool) $jsonApi;
-        return $this;
-    }
+    private $onlyForAjaxRequests = false;
 
     /**
      * @param  bool|null  $returnFrames
@@ -51,38 +40,51 @@ class JsonResponseHandler extends Handler
     }
 
     /**
+     * @param  bool|null $onlyForAjaxRequests
+     * @return null|bool
+     */
+    public function onlyForAjaxRequests($onlyForAjaxRequests = null)
+    {
+        if (func_num_args() == 0) {
+            return $this->onlyForAjaxRequests;
+        }
+
+        $this->onlyForAjaxRequests = (bool) $onlyForAjaxRequests;
+    }
+
+    /**
+     * Check, if possible, that this execution was triggered by an AJAX request.
+     *
+     * @return bool
+     */
+    private function isAjaxRequest()
+    {
+        return (
+            !empty($_SERVER['HTTP_X_REQUESTED_WITH'])
+            && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest');
+    }
+
+    /**
      * @return int
      */
     public function handle()
     {
-        if ($this->jsonApi === true) {
-            $response = [
-                'errors' => [
-                    Formatter::formatExceptionAsDataArray(
-                        $this->getInspector(),
-                        $this->addTraceToOutput()
-                    ),
-                ]
-            ];
-        } else {
-            $response = [
-                'error' => Formatter::formatExceptionAsDataArray(
-                    $this->getInspector(),
-                    $this->addTraceToOutput()
-                ),
-            ];
+        if ($this->onlyForAjaxRequests() && !$this->isAjaxRequest()) {
+            return Handler::DONE;
         }
 
-        echo json_encode($response, defined('JSON_PARTIAL_OUTPUT_ON_ERROR') ? JSON_PARTIAL_OUTPUT_ON_ERROR : 0);
+        $response = array(
+            'error' => Formatter::formatExceptionAsDataArray(
+                $this->getInspector(),
+                $this->addTraceToOutput()
+            ),
+        );
 
+        if (\Whoops\Util\Misc::canSendHeaders()) {
+            header('Content-Type: application/json');
+        }
+
+        echo json_encode($response);
         return Handler::QUIT;
-    }
-
-    /**
-     * @return string
-     */
-    public function contentType()
-    {
-        return 'application/json';
     }
 }

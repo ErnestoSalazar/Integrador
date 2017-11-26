@@ -1,48 +1,44 @@
 {
     "name": "illuminate/queue",
-    "description": "The Illuminate Queue package.",
     "license": "MIT",
-    "homepage": "https://laravel.com",
-    "support": {
-        "issues": "https://github.com/laravel/framework/issues",
-        "source": "https://github.com/laravel/framework"
-    },
     "authors": [
         {
             "name": "Taylor Otwell",
-            "email": "taylor@laravel.com"
+            "email": "taylorotwell@gmail.com"
         }
     ],
     "require": {
-        "php": ">=7.0",
-        "illuminate/console": "5.5.*",
-        "illuminate/container": "5.5.*",
-        "illuminate/contracts": "5.5.*",
-        "illuminate/database": "5.5.*",
-        "illuminate/filesystem": "5.5.*",
-        "illuminate/support": "5.5.*",
-        "symfony/debug": "~3.3",
-        "symfony/process": "~3.3"
+        "php": ">=5.4.0",
+        "illuminate/console": "4.2.*",
+        "illuminate/container": "4.2.*",
+        "illuminate/http": "4.2.*",
+        "illuminate/support": "4.2.*",
+        "symfony/process": "2.5.*",
+        "nesbot/carbon": "~1.0"
+    },
+    "require-dev": {
+        "illuminate/cache": "4.2.*",
+        "illuminate/events": "4.2.*",
+        "aws/aws-sdk-php": "~2.6",
+        "iron-io/iron_mq": "~1.5",
+        "pda/pheanstalk": "~2.1"
     },
     "autoload": {
-        "psr-4": {
-            "Illuminate\\Queue\\": ""
-        }
+        "psr-0": {
+            "Illuminate\\Queue": ""
+        },
+        "classmap": [
+            "IlluminateQueueClosure.php"
+        ]
     },
+    "target-dir": "Illuminate/Queue",
     "extra": {
         "branch-alias": {
-            "dev-master": "5.5-dev"
+            "dev-master": "4.2-dev"
         }
     },
     "suggest": {
-        "ext-pcntl": "Required to use all features of the queue worker.",
-        "ext-posix": "Required to use all features of the queue worker.",
-        "aws/aws-sdk-php": "Required to use the SQS queue driver (~3.0).",
-        "illuminate/redis": "Required to use the Redis queue driver (5.5.*).",
-        "pda/pheanstalk": "Required to use the Beanstalk queue driver (~3.0)."
-    },
-    "config": {
-        "sort-packages": true
+        "illuminate/redis": "Allows use of the Redis queue driver."
     },
     "minimum-stability": "dev"
 }

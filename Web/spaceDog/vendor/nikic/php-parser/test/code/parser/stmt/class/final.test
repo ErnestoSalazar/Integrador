@@ -6,12 +6,12 @@ final class A {}
 -----
 array(
     0: Stmt_Class(
-        flags: MODIFIER_FINAL (32)
-        name: A
+        type: 32
         extends: null
         implements: array(
         )
         stmts: array(
         )
+        name: A
     )
 )

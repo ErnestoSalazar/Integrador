@@ -33,11 +33,10 @@ class ProfilerTest extends TestCase
         $profiler = new Profiler($this->storage);
         $profiler->add($collector);
         $profile = $profiler->collect($request, $response);
-        $profiler->saveProfile($profile);
 
         $this->assertSame(204, $profile->getStatusCode());
         $this->assertSame('GET', $profile->getMethod());
-        $this->assertSame('bar', $profile->getCollector('request')->getRequestQuery()->all()['foo']->getValue());
+        $this->assertEquals(array('foo' => 'bar'), $profiler->get('request')->getRequestQuery()->all());
     }
 
     public function testFindWorksWithDates()
@@ -59,13 +58,6 @@ class ProfilerTest extends TestCase
         $profiler = new Profiler($this->storage);
 
         $this->assertCount(0, $profiler->find(null, null, null, null, 'some string', ''));
-    }
-
-    public function testFindWorksWithStatusCode()
-    {
-        $profiler = new Profiler($this->storage);
-
-        $this->assertCount(0, $profiler->find(null, null, null, null, null, null, '204'));
     }
 
     protected function setUp()

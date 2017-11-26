@@ -1,81 +1,85 @@
-<?php
-
-namespace Illuminate\Http;
+<?php namespace Illuminate\Http;
 
 use ArrayObject;
-use JsonSerializable;
-use Illuminate\Support\Traits\Macroable;
-use Illuminate\Contracts\Support\Jsonable;
-use Illuminate\Contracts\Support\Arrayable;
-use Illuminate\Contracts\Support\Renderable;
-use Symfony\Component\HttpFoundation\Response as BaseResponse;
+use Illuminate\Support\Contracts\JsonableInterface;
+use Illuminate\Support\Contracts\RenderableInterface;
 
-class Response extends BaseResponse
-{
-    use ResponseTrait, Macroable {
-        Macroable::__call as macroCall;
-    }
+class Response extends \Symfony\Component\HttpFoundation\Response {
 
-    /**
-     * Set the content on the response.
-     *
-     * @param  mixed  $content
-     * @return $this
-     */
-    public function setContent($content)
-    {
-        $this->original = $content;
+	use ResponseTrait;
 
-        // If the content is "JSONable" we will set the appropriate header and convert
-        // the content to JSON. This is useful when returning something like models
-        // from routes that will be automatically transformed to their JSON form.
-        if ($this->shouldBeJson($content)) {
-            $this->header('Content-Type', 'application/json');
+	/**
+	 * The original content of the response.
+	 *
+	 * @var mixed
+	 */
+	public $original;
 
-            $content = $this->morphToJson($content);
-        }
+	/**
+	 * Set the content on the response.
+	 *
+	 * @param  mixed  $content
+	 * @return $this
+	 */
+	public function setContent($content)
+	{
+		$this->original = $content;
 
-        // If this content implements the "Renderable" interface then we will call the
-        // render method on the object so we will avoid any "__toString" exceptions
-        // that might be thrown and have their errors obscured by PHP's handling.
-        elseif ($content instanceof Renderable) {
-            $content = $content->render();
-        }
+		// If the content is "JSONable" we will set the appropriate header and convert
+		// the content to JSON. This is useful when returning something like models
+		// from routes that will be automatically transformed to their JSON form.
+		if ($this->shouldBeJson($content))
+		{
+			$this->headers->set('Content-Type', 'application/json');
 
-        parent::setContent($content);
+			$content = $this->morphToJson($content);
+		}
 
-        return $this;
-    }
+		// If this content implements the "RenderableInterface", then we will call the
+		// render method on the object so we will avoid any "__toString" exceptions
+		// that might be thrown and have their errors obscured by PHP's handling.
+		elseif ($content instanceof RenderableInterface)
+		{
+			$content = $content->render();
+		}
 
-    /**
-     * Determine if the given content should be turned into JSON.
-     *
-     * @param  mixed  $content
-     * @return bool
-     */
-    protected function shouldBeJson($content)
-    {
-        return $content instanceof Arrayable ||
-               $content instanceof Jsonable ||
-               $content instanceof ArrayObject ||
-               $content instanceof JsonSerializable ||
-               is_array($content);
-    }
+		return parent::setContent($content);
+	}
 
-    /**
-     * Morph the given content into JSON.
-     *
-     * @param  mixed   $content
-     * @return string
-     */
-    protected function morphToJson($content)
-    {
-        if ($content instanceof Jsonable) {
-            return $content->toJson();
-        } elseif ($content instanceof Arrayable) {
-            return json_encode($content->toArray());
-        }
+	/**
+	 * Morph the given content into JSON.
+	 *
+	 * @param  mixed   $content
+	 * @return string
+	 */
+	protected function morphToJson($content)
+	{
+		if ($content instanceof JsonableInterface) return $content->toJson();
 
-        return json_encode($content);
-    }
+		return json_encode($content);
+	}
+
+	/**
+	 * Determine if the given content should be turned into JSON.
+	 *
+	 * @param  mixed  $content
+	 * @return bool
+	 */
+	protected function shouldBeJson($content)
+	{
+		return $content instanceof JsonableInterface ||
+			   $content instanceof ArrayObject ||
+			   is_array($content);
+	}
+
+	/**
+	 * Get the original response content.
+	 *
+	 * @return mixed
+	 */
+	public function getOriginalContent()
+	{
+		return $this->original;
+	}
+
 }

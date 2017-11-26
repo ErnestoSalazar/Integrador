@@ -1,22 +1,21 @@
 PHP Parser
 ==========
 
-[![Build Status](https://travis-ci.org/nikic/PHP-Parser.svg?branch=master)](https://travis-ci.org/nikic/PHP-Parser) [![Coverage Status](https://coveralls.io/repos/github/nikic/PHP-Parser/badge.svg?branch=master)](https://coveralls.io/github/nikic/PHP-Parser?branch=master)
-
-This is a PHP 5.2 to PHP 7.1 parser written in PHP. Its purpose is to simplify static code analysis and
+This is a PHP 5.5 (and older) parser written in PHP. It's purpose is to simplify static code analysis and
 manipulation.
 
-[**Documentation for version 3.x**][doc_master] (stable; for running on PHP >= 5.5; for parsing PHP 5.2 to PHP 7.1).
+Documentation can be found in the [`doc/`][1] directory.
 
-[Documentation for version 2.x][doc_2_x] (stable; for running on PHP >= 5.4; for parsing PHP 5.2 to PHP 7.0).
-
-[Documentation for version 1.x][doc_1_x] (unsupported; for running on PHP >= 5.3; for parsing PHP 5.2 to PHP 5.6).
+***Note: This project is experimental, so the API is subject to change.***
 
 In a Nutshell
 -------------
 
-The parser turns PHP source code into an abstract syntax tree. For example, if you pass the following code into the
-parser:
+Basically, the parser does nothing more than turn some PHP code into an abstract syntax tree. ("nothing
+more" is kind of sarcastic here as PHP has a ... uhm, let's just say "not nice" ... grammar, which makes
+parsing PHP very hard.)
+
+For example, if you stick this code in the parser:
 
 ```php
 <?php
@@ -26,7 +25,7 @@ hello\world('foo', 'bar' . 'baz');
 
 You'll get a syntax tree looking roughly like this:
 
-```php
+```
 array(
     0: Stmt_Echo(
         exprs: array(
@@ -74,26 +73,6 @@ programming errors or security issues).
 Additionally, you can convert a syntax tree back to PHP code. This allows you to do code preprocessing
 (like automatedly porting code to older PHP versions).
 
-Installation
-------------
+So, that's it, in a nutshell. You can find everything else in the [docs][1].
 
-The preferred installation method is [composer](https://getcomposer.org):
-
-    php composer.phar require nikic/php-parser
-
-Documentation
--------------
-
- 1. [Introduction](doc/0_Introduction.markdown)
- 2. [Usage of basic components](doc/2_Usage_of_basic_components.markdown)
- 3. [Other node tree representations](doc/3_Other_node_tree_representations.markdown)
- 4. [Code generation](doc/4_Code_generation.markdown)
-
-Component documentation:
-
- 1. [Error handling](doc/component/Error_handling.markdown)
- 2. [Lexer](doc/component/Lexer.markdown)
-
- [doc_1_x]: https://github.com/nikic/PHP-Parser/tree/1.x/doc
- [doc_2_x]: https://github.com/nikic/PHP-Parser/tree/2.x/doc
- [doc_master]: https://github.com/nikic/PHP-Parser/tree/master/doc
+ [1]: https://github.com/nikic/PHP-Parser/tree/master/doc

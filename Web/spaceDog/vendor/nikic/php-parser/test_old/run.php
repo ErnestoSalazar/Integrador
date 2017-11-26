@@ -14,12 +14,11 @@ This script has to be called with the following signature:
 
     php run.php [--no-progress] testType pathToTestFiles
 
-The test type must be one of: PHP5, PHP7 or Symfony.
+The test type can be either "Symfony" or "PHP".
 
 The following options are available:
 
     --no-progress    Disables showing which file is currently tested.
-
 OUTPUT
     );
 }
@@ -42,39 +41,56 @@ if (count($arguments) !== 2) {
     showHelp('Too little arguments passed!');
 }
 
-$showProgress = true;
-$verbose = false;
-foreach ($options as $option) {
-    if ($option === '--no-progress') {
-        $showProgress = false;
-    } elseif ($option === '--verbose') {
-        $verbose = true;
+$SHOW_PROGRESS = true;
+if (count($options) > 0) {
+    if (count($options) === 1 && $options[0] === '--no-progress') {
+        $SHOW_PROGRESS = false;
     } else {
         showHelp('Invalid option passed!');
     }
 }
 
-$testType = $arguments[0];
-$dir = $arguments[1];
+$TEST_TYPE = $arguments[0];
+$DIR       = $arguments[1];
 
-switch ($testType) {
-    case 'Symfony':
-        $version = 'Php5';
-        $fileFilter = function($path) {
-            return preg_match('~\.php(?:\.cache)?$~', $path) && false === strpos($path, 'skeleton');
-        };
-        $codeExtractor = function($file, $code) {
-            return $code;
-        };
-        break;
-    case 'PHP5':
-    case 'PHP7':
-    $version = $testType === 'PHP5' ? 'Php5' : 'Php7';
-        $fileFilter = function($path) {
-            return preg_match('~\.phpt$~', $path);
-        };
-        $codeExtractor = function($file, $code) {
-            if (preg_match('~(?:
+if ('Symfony' === $TEST_TYPE) {
+    function filter_func($path) {
+        return preg_match('~\.php(?:\.cache)?$~', $path) && false === strpos($path, 'skeleton');
+    };
+} elseif ('PHP' === $TEST_TYPE) {
+    function filter_func($path) {
+        return preg_match('~\.phpt$~', $path);
+    };
+} else {
+    showHelp('Test type must be either "Symfony" or "PHP"!');
+}
+
+require_once dirname(__FILE__) . '/../lib/PHPParser/Autoloader.php';
+PHPParser_Autoloader::register();
+
+$parser        = new PHPParser_Parser(new PHPParser_Lexer_Emulative);
+$prettyPrinter = new PHPParser_PrettyPrinter_Default;
+$nodeDumper    = new PHPParser_NodeDumper;
+
+$parseFail = $ppFail = $compareFail = $count = 0;
+
+$readTime = $parseTime = $ppTime = $reparseTime = $compareTime = 0;
+$totalStartTime = microtime(true);
+
+foreach (new RecursiveIteratorIterator(
+             new RecursiveDirectoryIterator($DIR),
+             RecursiveIteratorIterator::LEAVES_ONLY)
+         as $file) {
+    if (!filter_func($file)) {
+        continue;
+    }
+
+    $startTime = microtime(true);
+    $code = file_get_contents($file);
+    $readTime += microtime(true) - $startTime;
+
+    if ('PHP' === $TEST_TYPE) {
+        if (preg_match('~(?:
 # skeleton files
   ext.gmp.tests.001
 | ext.skeleton.tests.001
@@ -83,68 +99,31 @@ switch ($testType) {
 | Zend.tests.multibyte.multibyte_encoding_001
 | Zend.tests.multibyte.multibyte_encoding_004
 | Zend.tests.multibyte.multibyte_encoding_005
+# token_get_all bug (https://bugs.php.net/bug.php?id=60097)
+| Zend.tests.bug47516
 # pretty print difference due to INF vs 1e1000
 | ext.standard.tests.general_functions.bug27678
 | tests.lang.bug24640
-# pretty print differences due to negative LNumbers
-| Zend.tests.neg_num_string
-| Zend.tests.bug72918
-# pretty print difference due to nop statements
-| ext.mbstring.tests.htmlent
-| ext.standard.tests.file.fread_basic
 )\.phpt$~x', $file)) {
-                return null;
-            }
+            continue;
+        }
 
-            if (!preg_match('~--FILE--\s*(.*?)--[A-Z]+--~s', $code, $matches)) {
-                return null;
-            }
-            if (preg_match('~--EXPECT(?:F|REGEX)?--\s*(?:Parse|Fatal) error~', $code)) {
-                return null;
-            }
+        if (!preg_match('~--FILE--\s*(.*?)--[A-Z]+--~s', $code, $matches)) {
+            continue;
+        }
+        if (preg_match('~--EXPECT(?:F|REGEX)?--\s*(?:Parse|Fatal) error~', $code)) {
+            continue;
+        }
 
-            return $matches[1];
-        };
-        break;
-    default:
-        showHelp('Test type must be one of: PHP5, PHP7 or Symfony');
-}
-
-require_once dirname(__FILE__) . '/../lib/PhpParser/Autoloader.php';
-PhpParser\Autoloader::register();
-
-$parserName    = 'PhpParser\Parser\\' . $version;
-$parser        = new $parserName(new PhpParser\Lexer\Emulative);
-$prettyPrinter = new PhpParser\PrettyPrinter\Standard;
-$nodeDumper    = new PhpParser\NodeDumper;
-
-$parseFail = $ppFail = $compareFail = $count = 0;
-
-$readTime = $parseTime = $ppTime = $reparseTime = $compareTime = 0;
-$totalStartTime = microtime(true);
-
-foreach (new RecursiveIteratorIterator(
-             new RecursiveDirectoryIterator($dir),
-             RecursiveIteratorIterator::LEAVES_ONLY)
-         as $file) {
-    if (!$fileFilter($file)) {
-        continue;
-    }
-
-    $startTime = microtime(true);
-    $code = file_get_contents($file);
-    $readTime += microtime(true) - $startTime;
-
-    if (null === $code = $codeExtractor($file, $code)) {
-        continue;
+        $code = $matches[1];
     }
 
     set_time_limit(10);
 
     ++$count;
 
-    if ($showProgress) {
-        echo substr(str_pad('Testing file ' . $count . ': ' . substr($file, strlen($dir)), 79), 0, 79), "\r";
+    if ($SHOW_PROGRESS) {
+        echo substr(str_pad('Testing file ' . $count . ': ' . substr($file, strlen($DIR)), 79), 0, 79), "\r";
     }
 
     try {
@@ -167,21 +146,15 @@ foreach (new RecursiveIteratorIterator(
 
             if (!$same) {
                 echo $file, ":\n    Result of initial parse and parse after pretty print differ\n";
-                if ($verbose) {
-                    echo "Pretty printer output:\n=====\n$code\n=====\n\n";
-                }
 
                 ++$compareFail;
             }
-        } catch (PhpParser\Error $e) {
+        } catch (PHPParser_Error $e) {
             echo $file, ":\n    Parse of pretty print failed with message: {$e->getMessage()}\n";
-            if ($verbose) {
-                echo "Pretty printer output:\n=====\n$code\n=====\n\n";
-            }
 
             ++$ppFail;
         }
-    } catch (PhpParser\Error $e) {
+    } catch (PHPParser_Error $e) {
         echo $file, ":\n    Parse failed with message: {$e->getMessage()}\n";
 
         ++$parseFail;
@@ -189,10 +162,8 @@ foreach (new RecursiveIteratorIterator(
 }
 
 if (0 === $parseFail && 0 === $ppFail && 0 === $compareFail) {
-    $exit = 0;
     echo "\n\n", 'All tests passed.', "\n";
 } else {
-    $exit = 1;
     echo "\n\n", '==========', "\n\n", 'There were: ', "\n";
     if (0 !== $parseFail) {
         echo '    ', $parseFail,   ' parse failures.',        "\n";
@@ -216,5 +187,3 @@ echo "\n",
      "\n",
      'Total time:           ', microtime(true) - $totalStartTime, "\n",
      'Maximum memory usage: ', memory_get_peak_usage(true), "\n";
-
-exit($exit);

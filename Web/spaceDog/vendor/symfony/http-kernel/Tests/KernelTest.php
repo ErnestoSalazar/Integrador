@@ -12,7 +12,6 @@
 namespace Symfony\Component\HttpKernel\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;
@@ -23,7 +22,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Tests\Fixtures\KernelForTest;
 use Symfony\Component\HttpKernel\Tests\Fixtures\KernelForOverrideName;
-use Symfony\Component\HttpKernel\Tests\Fixtures\KernelWithoutBundles;
+use Symfony\Component\HttpKernel\Tests\Fixtures\FooBarBundle;
 
 class KernelTest extends TestCase
 {
@@ -95,9 +94,6 @@ class KernelTest extends TestCase
         $this->assertTrue($kernel->isBooted());
     }
 
-    /**
-     * @group legacy
-     */
     public function testClassCacheIsLoaded()
     {
         $kernel = $this->getKernel(array('initializeBundles', 'initializeContainer', 'doLoadClassCache'));
@@ -118,9 +114,6 @@ class KernelTest extends TestCase
         $kernel->boot();
     }
 
-    /**
-     * @group legacy
-     */
     public function testClassCacheIsNotLoadedWhenKernelIsNotBooted()
     {
         $kernel = $this->getKernel(array('initializeBundles', 'initializeContainer', 'doLoadClassCache'));
@@ -326,6 +319,48 @@ EOF;
         }
 
         $this->assertEquals($expected, $output);
+    }
+
+    /**
+     * @group legacy
+     */
+    public function testLegacyIsClassInActiveBundleFalse()
+    {
+        $kernel = $this->getKernelMockForIsClassInActiveBundleTest();
+
+        $this->assertFalse($kernel->isClassInActiveBundle('Not\In\Active\Bundle'));
+    }
+
+    /**
+     * @group legacy
+     */
+    public function testLegacyIsClassInActiveBundleFalseNoNamespace()
+    {
+        $kernel = $this->getKernelMockForIsClassInActiveBundleTest();
+
+        $this->assertFalse($kernel->isClassInActiveBundle('NotNamespacedClass'));
+    }
+
+    /**
+     * @group legacy
+     */
+    public function testLegacyIsClassInActiveBundleTrue()
+    {
+        $kernel = $this->getKernelMockForIsClassInActiveBundleTest();
+
+        $this->assertTrue($kernel->isClassInActiveBundle(__NAMESPACE__.'\Fixtures\FooBarBundle\SomeClass'));
+    }
+
+    protected function getKernelMockForIsClassInActiveBundleTest()
+    {
+        $bundle = new FooBarBundle();
+
+        $kernel = $this->getKernel(array('getBundles'));
+        $kernel->expects($this->once())
+            ->method('getBundles')
+            ->will($this->returnValue(array($bundle)));
+
+        return $kernel;
     }
 
     public function testGetRootDir()
@@ -734,48 +769,12 @@ EOF;
         $kernel->terminate(Request::create('/'), new Response());
     }
 
-    public function testKernelWithoutBundles()
-    {
-        $kernel = new KernelWithoutBundles('test', true);
-        $kernel->boot();
-
-        $this->assertTrue($kernel->getContainer()->getParameter('test_executed'));
-    }
-
     public function testKernelRootDirNameStartingWithANumber()
     {
         $dir = __DIR__.'/Fixtures/123';
         require_once $dir.'/Kernel123.php';
         $kernel = new \Symfony\Component\HttpKernel\Tests\Fixtures\_123\Kernel123('dev', true);
         $this->assertEquals('_123', $kernel->getName());
-    }
-
-    /**
-     * @group legacy
-     * @expectedDeprecation The Symfony\Component\HttpKernel\Kernel::getEnvParameters() method is deprecated as of 3.3 and will be removed in 4.0. Use the %cenv()%c syntax to get the value of any environment variable from configuration files instead.
-     * @expectedDeprecation The support of special environment variables that start with SYMFONY__ (such as "SYMFONY__FOO__BAR") is deprecated as of 3.3 and will be removed in 4.0. Use the %cenv()%c syntax instead to get the value of environment variables in configuration files.
-     */
-    public function testSymfonyEnvironmentVariables()
-    {
-        $_SERVER['SYMFONY__FOO__BAR'] = 'baz';
-
-        $kernel = $this->getKernel();
-        $method = new \ReflectionMethod($kernel, 'getEnvParameters');
-        $method->setAccessible(true);
-
-        $envParameters = $method->invoke($kernel);
-        $this->assertSame('baz', $envParameters['foo.bar']);
-
-        unset($_SERVER['SYMFONY__FOO__BAR']);
-    }
-
-    public function testProjectDirExtension()
-    {
-        $kernel = new CustomProjectDirKernel('test', true);
-        $kernel->boot();
-
-        $this->assertSame('foo', $kernel->getProjectDir());
-        $this->assertSame('foo', $kernel->getContainer()->getParameter('kernel.project_dir'));
     }
 
     /**
@@ -872,36 +871,5 @@ class TestKernel implements HttpKernelInterface
 
     public function handle(Request $request, $type = self::MASTER_REQUEST, $catch = true)
     {
-    }
-}
-
-class CustomProjectDirKernel extends Kernel
-{
-    private $baseDir;
-
-    public function __construct()
-    {
-        parent::__construct('test', false);
-
-        $this->baseDir = 'foo';
-    }
-
-    public function registerBundles()
-    {
-        return array();
-    }
-
-    public function registerContainerConfiguration(LoaderInterface $loader)
-    {
-    }
-
-    public function getProjectDir()
-    {
-        return $this->baseDir;
-    }
-
-    public function getRootDir()
-    {
-        return __DIR__.'/Fixtures';
     }
 }

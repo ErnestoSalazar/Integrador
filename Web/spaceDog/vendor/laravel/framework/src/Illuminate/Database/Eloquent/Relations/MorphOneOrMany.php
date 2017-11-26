@@ -1,140 +1,159 @@
-<?php
-
-namespace Illuminate\Database\Eloquent\Relations;
+<?php namespace Illuminate\Database\Eloquent\Relations;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 
-abstract class MorphOneOrMany extends HasOneOrMany
-{
-    /**
-     * The foreign key type for the relationship.
-     *
-     * @var string
-     */
-    protected $morphType;
+abstract class MorphOneOrMany extends HasOneOrMany {
 
-    /**
-     * The class name of the parent model.
-     *
-     * @var string
-     */
-    protected $morphClass;
+	/**
+	 * The foreign key type for the relationship.
+	 *
+	 * @var string
+	 */
+	protected $morphType;
 
-    /**
-     * Create a new morph one or many relationship instance.
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @param  \Illuminate\Database\Eloquent\Model  $parent
-     * @param  string  $type
-     * @param  string  $id
-     * @param  string  $localKey
-     * @return void
-     */
-    public function __construct(Builder $query, Model $parent, $type, $id, $localKey)
-    {
-        $this->morphType = $type;
+	/**
+	 * The class name of the parent model.
+	 *
+	 * @var string
+	 */
+	protected $morphClass;
 
-        $this->morphClass = $parent->getMorphClass();
+	/**
+	 * Create a new has many relationship instance.
+	 *
+	 * @param  \Illuminate\Database\Eloquent\Builder  $query
+	 * @param  \Illuminate\Database\Eloquent\Model  $parent
+	 * @param  string  $type
+	 * @param  string  $id
+	 * @param  string  $localKey
+	 * @return void
+	 */
+	public function __construct(Builder $query, Model $parent, $type, $id, $localKey)
+	{
+		$this->morphType = $type;
 
-        parent::__construct($query, $parent, $id, $localKey);
-    }
+		$this->morphClass = $parent->getMorphClass();
 
-    /**
-     * Set the base constraints on the relation query.
-     *
-     * @return void
-     */
-    public function addConstraints()
-    {
-        if (static::$constraints) {
-            parent::addConstraints();
+		parent::__construct($query, $parent, $id, $localKey);
+	}
 
-            $this->query->where($this->morphType, $this->morphClass);
-        }
-    }
+	/**
+	 * Set the base constraints on the relation query.
+	 *
+	 * @return void
+	 */
+	public function addConstraints()
+	{
+		if (static::$constraints)
+		{
+			parent::addConstraints();
 
-    /**
-     * Set the constraints for an eager load of the relation.
-     *
-     * @param  array  $models
-     * @return void
-     */
-    public function addEagerConstraints(array $models)
-    {
-        parent::addEagerConstraints($models);
+			$this->query->where($this->morphType, $this->morphClass);
+		}
+	}
 
-        $this->query->where($this->morphType, $this->morphClass);
-    }
+	/**
+	 * Get the relationship count query.
+	 *
+	 * @param  \Illuminate\Database\Eloquent\Builder  $query
+	 * @param  \Illuminate\Database\Eloquent\Builder  $parent
+	 * @return \Illuminate\Database\Eloquent\Builder
+	 */
+	public function getRelationCountQuery(Builder $query, Builder $parent)
+	{
+		$query = parent::getRelationCountQuery($query, $parent);
 
-    /**
-     * Attach a model instance to the parent model.
-     *
-     * @param  \Illuminate\Database\Eloquent\Model  $model
-     * @return \Illuminate\Database\Eloquent\Model
-     */
-    public function save(Model $model)
-    {
-        $model->setAttribute($this->getMorphType(), $this->morphClass);
+		return $query->where($this->morphType, $this->morphClass);
+	}
 
-        return parent::save($model);
-    }
+	/**
+	 * Set the constraints for an eager load of the relation.
+	 *
+	 * @param  array  $models
+	 * @return void
+	 */
+	public function addEagerConstraints(array $models)
+	{
+		parent::addEagerConstraints($models);
 
-    /**
-     * Set the foreign ID and type for creating a related model.
-     *
-     * @param  \Illuminate\Database\Eloquent\Model  $model
-     * @return void
-     */
-    protected function setForeignAttributesForCreate(Model $model)
-    {
-        $model->{$this->getForeignKeyName()} = $this->getParentKey();
+		$this->query->where($this->morphType, $this->morphClass);
+	}
 
-        $model->{$this->getMorphType()} = $this->morphClass;
-    }
+	/**
+	 * Attach a model instance to the parent model.
+	 *
+	 * @param  \Illuminate\Database\Eloquent\Model  $model
+	 * @return \Illuminate\Database\Eloquent\Model
+	 */
+	public function save(Model $model)
+	{
+		$model->setAttribute($this->getPlainMorphType(), $this->morphClass);
 
-    /**
-     * Get the relationship query.
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @param  \Illuminate\Database\Eloquent\Builder  $parentQuery
-     * @param  array|mixed  $columns
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function getRelationExistenceQuery(Builder $query, Builder $parentQuery, $columns = ['*'])
-    {
-        return parent::getRelationExistenceQuery($query, $parentQuery, $columns)->where(
-            $this->morphType, $this->morphClass
-        );
-    }
+		return parent::save($model);
+	}
 
-    /**
-     * Get the foreign key "type" name.
-     *
-     * @return string
-     */
-    public function getQualifiedMorphType()
-    {
-        return $this->morphType;
-    }
+	/**
+	 * Create a new instance of the related model.
+	 *
+	 * @param  array  $attributes
+	 * @return \Illuminate\Database\Eloquent\Model
+	 */
+	public function create(array $attributes)
+	{
+		$instance = $this->related->newInstance($attributes);
 
-    /**
-     * Get the plain morph type name without the table.
-     *
-     * @return string
-     */
-    public function getMorphType()
-    {
-        return last(explode('.', $this->morphType));
-    }
+		// When saving a polymorphic relationship, we need to set not only the foreign
+		// key, but also the foreign key type, which is typically the class name of
+		// the parent model. This makes the polymorphic item unique in the table.
+		$this->setForeignAttributesForCreate($instance);
 
-    /**
-     * Get the class name of the parent model.
-     *
-     * @return string
-     */
-    public function getMorphClass()
-    {
-        return $this->morphClass;
-    }
+		$instance->save();
+
+		return $instance;
+	}
+
+	/**
+	 * Set the foreign ID and type for creating a related model.
+	 *
+	 * @param  \Illuminate\Database\Eloquent\Model  $model
+	 * @return void
+	 */
+	protected function setForeignAttributesForCreate(Model $model)
+	{
+		$model->{$this->getPlainForeignKey()} = $this->getParentKey();
+
+		$model->{last(explode('.', $this->morphType))} = $this->morphClass;
+	}
+
+	/**
+	 * Get the foreign key "type" name.
+	 *
+	 * @return string
+	 */
+	public function getMorphType()
+	{
+		return $this->morphType;
+	}
+
+	/**
+	 * Get the plain morph type name without the table.
+	 *
+	 * @return string
+	 */
+	public function getPlainMorphType()
+	{
+		return last(explode('.', $this->morphType));
+	}
+
+	/**
+	 * Get the class name of the parent model.
+	 *
+	 * @return string
+	 */
+	public function getMorphClass()
+	{
+		return $this->morphClass;
+	}
+
 }

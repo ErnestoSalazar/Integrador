@@ -32,13 +32,13 @@ class WindowsPipes extends AbstractPipes
         Process::STDOUT => 0,
         Process::STDERR => 0,
     );
-    private $haveReadSupport;
+    private $disableOutput;
 
-    public function __construct($input, $haveReadSupport)
+    public function __construct($disableOutput, $input)
     {
-        $this->haveReadSupport = (bool) $haveReadSupport;
+        $this->disableOutput = (bool) $disableOutput;
 
-        if ($this->haveReadSupport) {
+        if (!$this->disableOutput) {
             // Fix for PHP bug #51800: reading from STDOUT pipe hangs forever on Windows if the output is too big.
             // Workaround for this problem is to use temporary files instead of pipes on Windows platform.
             //
@@ -93,7 +93,7 @@ class WindowsPipes extends AbstractPipes
      */
     public function getDescriptors()
     {
-        if (!$this->haveReadSupport) {
+        if ($this->disableOutput) {
             $nullstream = fopen('NUL', 'c');
 
             return array(
@@ -156,14 +156,6 @@ class WindowsPipes extends AbstractPipes
     /**
      * {@inheritdoc}
      */
-    public function haveReadSupport()
-    {
-        return $this->haveReadSupport;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function areOpen()
     {
         return $this->pipes && $this->fileHandles;
@@ -179,6 +171,19 @@ class WindowsPipes extends AbstractPipes
             fclose($handle);
         }
         $this->fileHandles = array();
+    }
+
+    /**
+     * Creates a new WindowsPipes instance.
+     *
+     * @param Process $process The process
+     * @param $input
+     *
+     * @return static
+     */
+    public static function create(Process $process, $input)
+    {
+        return new static($process->isOutputDisabled(), $input);
     }
 
     /**

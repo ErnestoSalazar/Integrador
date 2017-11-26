@@ -1,139 +1,134 @@
-<?php
-
-namespace Illuminate\Queue\Jobs;
+<?php namespace Illuminate\Queue\Jobs;
 
 use Illuminate\Queue\RedisQueue;
 use Illuminate\Container\Container;
-use Illuminate\Contracts\Queue\Job as JobContract;
 
-class RedisJob extends Job implements JobContract
-{
-    /**
-     * The Redis queue instance.
-     *
-     * @var \Illuminate\Queue\RedisQueue
-     */
-    protected $redis;
+class RedisJob extends Job {
 
-    /**
-     * The Redis raw job payload.
-     *
-     * @var string
-     */
-    protected $job;
+	/**
+	 * The Redis queue instance.
+	 *
+	 * @var \Illuminate\Queue\RedisQueue
+	 */
+	protected $redis;
 
-    /**
-     * The JSON decoded version of "$job".
-     *
-     * @var array
-     */
-    protected $decoded;
+	/**
+	 * The Redis job payload.
+	 *
+	 * @var string
+	 */
+	protected $job;
 
-    /**
-     * The Redis job payload inside the reserved queue.
-     *
-     * @var string
-     */
-    protected $reserved;
+	/**
+	 * Create a new job instance.
+	 *
+	 * @param  \Illuminate\Container\Container  $container
+	 * @param  \Illuminate\Queue\RedisQueue  $redis
+	 * @param  string  $job
+	 * @param  string  $queue
+	 * @return void
+	 */
+	public function __construct(Container $container, RedisQueue $redis, $job, $queue)
+	{
+		$this->job = $job;
+		$this->redis = $redis;
+		$this->queue = $queue;
+		$this->container = $container;
+	}
 
-    /**
-     * Create a new job instance.
-     *
-     * @param  \Illuminate\Container\Container  $container
-     * @param  \Illuminate\Queue\RedisQueue  $redis
-     * @param  string  $job
-     * @param  string  $reserved
-     * @param  string  $connectionName
-     * @param  string  $queue
-     * @return void
-     */
-    public function __construct(Container $container, RedisQueue $redis, $job, $reserved, $connectionName, $queue)
-    {
-        // The $job variable is the original job JSON as it existed in the ready queue while
-        // the $reserved variable is the raw JSON in the reserved queue. The exact format
-        // of the reserved job is required in order for us to properly delete its data.
-        $this->job = $job;
-        $this->redis = $redis;
-        $this->queue = $queue;
-        $this->reserved = $reserved;
-        $this->container = $container;
-        $this->connectionName = $connectionName;
+	/**
+	 * Fire the job.
+	 *
+	 * @return void
+	 */
+	public function fire()
+	{
+		$this->resolveAndFire(json_decode($this->getRawBody(), true));
+	}
 
-        $this->decoded = $this->payload();
-    }
+	/**
+	 * Get the raw body string for the job.
+	 *
+	 * @return string
+	 */
+	public function getRawBody()
+	{
+		return $this->job;
+	}
 
-    /**
-     * Get the raw body string for the job.
-     *
-     * @return string
-     */
-    public function getRawBody()
-    {
-        return $this->job;
-    }
+	/**
+	 * Delete the job from the queue.
+	 *
+	 * @return void
+	 */
+	public function delete()
+	{
+		parent::delete();
 
-    /**
-     * Delete the job from the queue.
-     *
-     * @return void
-     */
-    public function delete()
-    {
-        parent::delete();
+		$this->redis->deleteReserved($this->queue, $this->job);
+	}
 
-        $this->redis->deleteReserved($this->queue, $this);
-    }
+	/**
+	 * Release the job back into the queue.
+	 *
+	 * @param  int   $delay
+	 * @return void
+	 */
+	public function release($delay = 0)
+	{
+		$this->delete();
 
-    /**
-     * Release the job back into the queue.
-     *
-     * @param  int   $delay
-     * @return void
-     */
-    public function release($delay = 0)
-    {
-        parent::release($delay);
+		$this->redis->release($this->queue, $this->job, $delay, $this->attempts() + 1);
+	}
 
-        $this->redis->deleteAndRelease($this->queue, $this, $delay);
-    }
+	/**
+	 * Get the number of times the job has been attempted.
+	 *
+	 * @return int
+	 */
+	public function attempts()
+	{
+		return array_get(json_decode($this->job, true), 'attempts');
+	}
 
-    /**
-     * Get the number of times the job has been attempted.
-     *
-     * @return int
-     */
-    public function attempts()
-    {
-        return ($this->decoded['attempts'] ?? null) + 1;
-    }
+	/**
+	 * Get the job identifier.
+	 *
+	 * @return string
+	 */
+	public function getJobId()
+	{
+		return array_get(json_decode($this->job, true), 'id');
+	}
 
-    /**
-     * Get the job identifier.
-     *
-     * @return string
-     */
-    public function getJobId()
-    {
-        return $this->decoded['id'] ?? null;
-    }
+	/**
+	 * Get the IoC container instance.
+	 *
+	 * @return \Illuminate\Container\Container
+	 */
+	public function getContainer()
+	{
+		return $this->container;
+	}
 
-    /**
-     * Get the underlying Redis factory implementation.
-     *
-     * @return \Illuminate\Contracts\Redis\Factory
-     */
-    public function getRedisQueue()
-    {
-        return $this->redis;
-    }
+	/**
+	 * Get the underlying queue driver instance.
+	 *
+	 * @return \Illuminate\Redis\Database
+	 */
+	public function getRedisQueue()
+	{
+		return $this->redis;
+	}
 
-    /**
-     * Get the underlying reserved Redis job.
-     *
-     * @return string
-     */
-    public function getReservedJob()
-    {
-        return $this->reserved;
-    }
+	/**
+	 * Get the underlying Redis job.
+	 *
+	 * @return string
+	 */
+	public function getRedisJob()
+	{
+		return $this->job;
+	}
+
 }
