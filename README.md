@@ -8,7 +8,7 @@ Endpoints    | HTTP verbs   | Examples
 __/login__            | __POST__                | form: __grant_type: password, username: correo, password: myPassword__
 __/login/recover__    | __POST__                | __{mailTo: correo}__
 __/api/users__        | __POST/GET__            | __{nombre, apellido, correo, rfc, rol}__
-__/api/users?__       | __GET__                 | __rol=rol__
+__/api/users?__       | __GET__                 | __rol=rol__ *or* __nombre=nombre&apellido=apellido__
 __/api/users/{id}__   | __GET/PUT/DELETE__      | __{nombre, apellido, correo, rfc, rol, password}__
 __/api/barcos__       | __POST/GET__            | __{nombre, descripcion, usuarioId}__
 __/api/barcos/{id}__  | __GET/PUT/DELETE__      | __{nombre, descripcion, usuarioId}__
@@ -86,10 +86,36 @@ When retrieving __multiple__ usuarios you will recieve the following data
 ]
 ```
 
+When making a GET call to __/api/users?nombre=example&apellido=example__ you will recieve the following data that matches the user nombre and apellido
+```json
+[
+    {
+        "id": 32,
+        "nombre": "Ernesto",
+        "apellido": "Salazar",
+        "rfc": "sdsdfsd",
+        "correo": "ernestoalbertosalazar@gmail.com",
+        "rol": "Admin"
+    }
+]
+```
 
+When making a GET call to __/api/users?rol=example__ you will recieve the following data that matches the user role
+```json
+[
+    {
+        "id": 35,
+        "nombre": "Isael",
+        "apellido": "Atondo",
+        "rfc": "isael",
+        "correo": "isaelatondo@gmail.com",
+        "rol": "Pescador"
+    }
+]
+```
 
 Accepted values for the following properties are:
-* __Rol__: *Admin, Supervisor, Pescador*
+* __Rol__: *Administrador, Supervisor, Pescador*
 
 </details>
 
@@ -200,7 +226,7 @@ When retrieving __multiple__ cargas you will recieve the following data
 
 Accepted values for the following properties are:
 * __Especie__: *Macarela, Japonesa, Monterrey, Rayadillo, Bocona, Anchoveta, Crinuda*
-* __Talla__: *s, m, l, xl*
+* __Talla__: *S, M, L, XL*
 * __Condicion__: *Mala, Regular, Buena*
 
 </details>
@@ -304,7 +330,7 @@ Accepted values for the following properties are:
 ### Entradas by date
 <details>
 <summary>Detalles</summary>
-When searching an entrada by a date you will receive a json array with the following data
+When searching an entrada by a date you will receive a json array with the following data that matches with those dates parameters
 
 ```json
 [

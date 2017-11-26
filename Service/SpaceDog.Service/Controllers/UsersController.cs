@@ -116,5 +116,19 @@ namespace SpaceDog.Service.Controllers
             return Ok(users);
         }
 
+        public IHttpActionResult GetUsersByName(string nombre,string apellido)
+        {
+            var users = _usersRepository.GetUsuariosByName(nombre,apellido);
+            if(users == null)
+            {
+                return NotFound();
+            }
+            if(users.Count <= 0)
+            {
+                return NotFound();
+            }
+            return Ok(users);
+        }
+
     }
 }

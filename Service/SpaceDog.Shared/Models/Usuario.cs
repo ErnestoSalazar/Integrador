@@ -12,7 +12,7 @@ namespace SpaceDog.Shared.Models
     [JsonConverter(typeof(StringEnumConverter))]
     public enum Rol
     {
-        Admin,
+        Administrador,
         Supervisor,
         Pescador
     }
