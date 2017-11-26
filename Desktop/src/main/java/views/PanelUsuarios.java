@@ -68,19 +68,26 @@ public class PanelUsuarios extends javax.swing.JPanel {
         //consultar usuarios
         String json = p.getAll(USERS, Token.getToken());
         
-        usuarios = new Usuario().getListUsers(json);
-        System.out.println(usuarios.size());
+        //si no hay usuarios
+        if(!json.equals("")) {
+            usuarios = new Usuario().getListUsers(json);
+            System.out.println(usuarios.size());
+
+            //filas
+            Object[] filas = new Object[columnas.length];
+            for (int i = 0; i < usuarios.size(); i++) {
+                filas[0] = usuarios.get(i).getNombre() + " " + usuarios.get(i).getApellido();
+                filas[1] = usuarios.get(i).getRol();
+                filas[2] = usuarios.get(i).getRfc();
+                filas[3] = usuarios.get(i).getCorreo();
+                filas[4] = usuarios.get(i).getId();
+
+                model.addRow(filas);
+            }
         
-        //filas
-        Object[] filas = new Object[columnas.length];
-        for (int i = 0; i < usuarios.size(); i++) {
-            filas[0] = usuarios.get(i).getNombre() + " " + usuarios.get(i).getApellido();
-            filas[1] = usuarios.get(i).getRol();
-            filas[2] = usuarios.get(i).getRfc();
-            filas[3] = usuarios.get(i).getCorreo();
-            filas[4] = usuarios.get(i).getId();
-            
-            model.addRow(filas);
+            btnBuscarUsuario.setEnabled(true);
+        } else {
+            btnBuscarUsuario.setEnabled(false);
         }
         
     }
@@ -378,7 +385,7 @@ public class PanelUsuarios extends javax.swing.JPanel {
         btnActualizarUsuario.setBackground(new java.awt.Color(255, 118, 73));
         btnActualizarUsuario.setFont(new java.awt.Font("Lucida Grande", 1, 12)); // NOI18N
         btnActualizarUsuario.setForeground(new java.awt.Color(255, 255, 255));
-        btnActualizarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add20x20White.png"))); // NOI18N
+        btnActualizarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/update20x20White.png"))); // NOI18N
         btnActualizarUsuario.setText("ACTUALIZAR");
         btnActualizarUsuario.setBorderPainted(false);
         btnActualizarUsuario.setOpaque(true);
@@ -393,34 +400,31 @@ public class PanelUsuarios extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(134, 134, 134)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtBuscarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnBuscarUsuario)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnActualizarUsuario)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnAgregarUsuario)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jScrollPane5))
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 128, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtBuscarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnBuscarUsuario)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnActualizarUsuario)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnAgregarUsuario)
-                                .addGap(127, 127, 127))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(btnEditarUsuario)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnEliminarUsuario)
-                                .addGap(319, 319, 319))))))
+                        .addComponent(jLabel8)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane5))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnEditarUsuario)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnEliminarUsuario)
+                .addGap(344, 344, 344))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -448,16 +452,18 @@ public class PanelUsuarios extends javax.swing.JPanel {
         setTableUsuarios();
         DefaultTableModel model = (DefaultTableModel) tblUsuarios.getModel();
         
-        String buscar = txtBuscarUsuario.getText().trim();
+        String buscar = txtBuscarUsuario.getText().trim().toLowerCase();
         List<Usuario> buscados = new ArrayList<>();
         
         if(!buscar.equals("")) {
             //consultar usuarios
-            for (int i = 0; i < tblUsuarios.getRowCount()-1; i++) {
-                for (int j = 0; j < tblUsuarios.getColumnCount()-1; j++) {
-                    String s = (String) model.getValueAt(i, j);
+            for (int i = 0; i < tblUsuarios.getRowCount(); i++) {
+                for (int j = 0; j < tblUsuarios.getColumnCount(); j++) {
+                    String s = String.valueOf(model.getValueAt(i, j)).toLowerCase();
+                    //System.out.println(s);
                     if (s.contains(buscar)) {
                         buscados.add(usuarios.get(i));
+                        
                         //System.out.println(usuarios.get(i));
                         break;
                     }
@@ -468,7 +474,7 @@ public class PanelUsuarios extends javax.swing.JPanel {
             model.setRowCount(0);
             
             //filas
-            Object[] filas = new Object[5];
+            Object[] filas = new Object[tblUsuarios.getColumnCount()];
             for (int i = 0; i < buscados.size(); i++) {
                 filas[0] = buscados.get(i).getNombre() + " " + buscados.get(i).getApellido();
                 filas[1] = buscados.get(i).getRol();
@@ -508,6 +514,7 @@ public class PanelUsuarios extends javax.swing.JPanel {
         //System.out.println(evaluarDatos);
         
         if (evaluarDatos) {
+            //Crear usuario
             Usuario usuario = new Usuario(
                 txtNombre.getText().trim(), 
                 txtApellido.getText().trim(), 
@@ -550,7 +557,7 @@ public class PanelUsuarios extends javax.swing.JPanel {
                     tblUsuarios.setEnabled(true);
                     
                 } else {
-                    JOptionPane.showMessageDialog(formUsuario, usuario.getMessage());
+                    JOptionPane.showMessageDialog(formUsuario, "Error al agregar usuario");
                 }
                 
             }
