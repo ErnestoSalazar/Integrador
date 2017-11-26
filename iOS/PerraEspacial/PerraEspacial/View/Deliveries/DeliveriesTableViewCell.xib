@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -111,11 +111,17 @@
                                         <rect key="frame" x="0.0" y="0.0" width="160" height="35"/>
                                         <color key="backgroundColor" red="0.23090076446533203" green="0.5626259446144104" blue="0.97057634592056274" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" image="editWhite"/>
+                                        <connections>
+                                            <action selector="editButtonPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="br0-AD-PhN"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b7m-Il-Aui">
                                         <rect key="frame" x="160" y="0.0" width="160" height="35"/>
                                         <color key="backgroundColor" red="0.95935612916946411" green="0.063386090099811554" blue="0.068927444517612457" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" image="deleteWhite"/>
+                                        <connections>
+                                            <action selector="deleteButtonPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="aPE-qJ-Rdt"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>

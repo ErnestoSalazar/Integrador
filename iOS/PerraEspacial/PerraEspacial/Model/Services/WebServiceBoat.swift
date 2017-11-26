@@ -69,13 +69,26 @@ struct WebServiceBoat {
                 let boatsArray = jsonResponse.arrayValue
                 var boatsInfo : [Boat] = []
                 
+                print(jsonResponse)
+                
                 for boat in boatsArray {
                     let id = boat["id"].int ?? 0
                     let name = boat["nombre"].string ?? ""
                     let description = boat["descripcion"].string ?? ""
                     let idUser = boat["usuarioId"].int ?? 0
                     
-                    let boat = Boat(id: id, name: name, description: description, userId: idUser)
+                    let user = boat["usuario"]
+                    let userId = user["id"].int ?? 0
+                    let email = user["correo"].string ?? ""
+                    let nameUser = user["nombre"].string ?? ""
+                    let lastName = user["apellido"].string ?? ""
+                    let rfc = user["rfc"].string ?? ""
+                    let roleName = user["rol"].string ?? ""
+                    let role = Role(id: 0, name: roleName)
+                    let userInfo = User(id: userId, email: email, name: nameUser, lastName: lastName, password: "", rfc: rfc, role: role)
+                    
+                    
+                    let boat = Boat(id: id, name: name, description: description, userId: idUser, user: userInfo)
                     boatsInfo.append(boat)
                 }
                 

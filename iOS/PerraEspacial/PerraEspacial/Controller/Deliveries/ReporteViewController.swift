@@ -17,14 +17,17 @@ class ReporteViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     //MARK: - Varailabels And Constants
     let datePicker = UIDatePicker()
+    let dateFormatter = DateFormatter()
     var totalRows = 1
+    var dateBegin = ""
+    var dateEnd = ""
     
     //MARK: - View Life
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setDelegates()
         self.setDatePicker()
-        self.getReports()
+        self.setDateFormat()
     }
     
     
@@ -54,6 +57,11 @@ class ReporteViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     //MARK: - Actions
     @IBAction func buttonSearchPressed(_ sender: Any) {
+        if textFieldDateBegin.text == "" || textFieldDateEnd.text == "" {
+            self.alert(title: "Requerido", message: "Es necesario ingresar una fecha de inicio y una de cierre")
+        }else {
+            self.getReports()
+        }
     }
     
     
@@ -85,17 +93,37 @@ class ReporteViewController: UIViewController, UITableViewDelegate, UITableViewD
         textFieldDateEnd.inputView = datePicker
     }
     
+    func setDateFormat(){
+        dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .none
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+    }
+    
     @objc func doneClick(){
+        if textFieldDateBegin.isEditing {
+            textFieldDateBegin.text = "\(dateFormatter.string(from: datePicker.date))"
+            self.dateBegin = "\(dateFormatter.string(from: datePicker.date))"
+        }else if textFieldDateEnd.isEditing {
+            textFieldDateEnd.text = "\(dateFormatter.string(from: datePicker.date))"
+            self.dateEnd = "\(dateFormatter.string(from: datePicker.date))"
+        }
         self.view.endEditing(true)
     }
     
     
     @objc func cancelClick(){
+        if textFieldDateBegin.isEditing {
+           textFieldDateBegin.text = ""
+            dateBegin = ""
+        }else if textFieldDateEnd.isEditing {
+            textFieldDateEnd.text = ""
+            dateEnd = ""
+        }
         self.view.endEditing(true)
     }
     
     func getReports(){
-        WebServiceReport.getReport { (status : Bool, reportsArray : [Report]) in
+        WebServiceReport.getReport(dateBegin: self.dateBegin, dateEnd: self.dateEnd) { (status : Bool, reportsArray : [Report]) in
             if status {
                 reports = reportsArray
                 self.totalRows = reports.count
@@ -105,6 +133,15 @@ class ReporteViewController: UIViewController, UITableViewDelegate, UITableViewD
                 self.tableView.reloadData()
             }
         }
+    }
+    
+    func alert(title: String , message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
+            (result : UIAlertAction) -> Void in
+        }
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
     }
     
 }

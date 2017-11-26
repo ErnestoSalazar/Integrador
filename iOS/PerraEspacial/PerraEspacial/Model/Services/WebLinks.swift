@@ -21,8 +21,10 @@ struct WebLinks {
         static let urlRecoverPassword = baseUrl + "login/recover"
         static let urlCreateUser = baseUrl + "api/users"
         static let urlUser = baseUrl + "api/users/"
+        static let urlFishers = baseUrl + "api/users?rol=Pescador"
         static let urlBoats = baseUrl + "api/barcos/"
         static let urlDeliveries = baseUrl + "/api/entradas"
+        static let urlCargas = baseUrl + "/api/cargas"
     }
     
 }

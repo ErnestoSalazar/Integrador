@@ -17,14 +17,16 @@ class AddBoatViewController: UIViewController, UITextFieldDelegate, UIPickerView
     
     //MARK: - Varailabels And Constants
     let picker = UIPickerView()
-    let fishers = ["Pescador 1", "Pescador 2", "Pescador 3", "Pescador 4", "Pescador 5"]
+    var fishers : [User] = []
     var indexToEditBoat = 0
+    var selectedFisher = 0
     
     //MARK: - View Life
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setDelegates()
         self.setPicker()
+        self.getFishers()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -38,12 +40,15 @@ class AddBoatViewController: UIViewController, UITextFieldDelegate, UIPickerView
     
     //MARK: - Actions
     @IBAction func createButtonPressed(_ sender: Any) {
+        self.view.makeToastActivity(.center)
         if self.verifyInputs() {
             if isEditing {
                 self.editBoat()
             }else {
                 self.addBoat()
             }
+        }else {
+            self.view.hideToastActivity()
         }
     }
     
@@ -57,12 +62,15 @@ class AddBoatViewController: UIViewController, UITextFieldDelegate, UIPickerView
         return fishers.count
     }
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return fishers[row]
+        return fishers[row].name
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        textFieldFisher.text = fishers[row]
+        self.textFieldFisher.text = fishers[row].name
+        self.selectedFisher = row
     }
+    
+    
     
     
     //MARK: - Functions
@@ -70,20 +78,6 @@ class AddBoatViewController: UIViewController, UITextFieldDelegate, UIPickerView
         self.textFieldFisher.delegate = self
         self.picker.delegate = self
         self.picker.dataSource = self
-    }
-    
-    func verifyInputs() -> Bool {
-        if textFieldName.text == "" {
-            self.alert(title: "Valor requerido", message: "Favor de ingresar el nombre del barco")
-            return false
-        }else if textFieldFisher.text == "" {
-            self.alert(title: "Valor requerido", message: "Favor de seleccionar un pescador")
-            return false
-        }else if textViewDescription.text == "" {
-            self.alert(title: "Valor requerido", message: "Favor de añadir una descripción")
-            return false
-        }
-        return true
     }
     
     func setPicker(){
@@ -109,6 +103,20 @@ class AddBoatViewController: UIViewController, UITextFieldDelegate, UIPickerView
         self.view.endEditing(true)
     }
     
+    func verifyInputs() -> Bool {
+        if textFieldName.text == "" {
+            self.alert(title: "Valor requerido", message: "Favor de ingresar el nombre del barco")
+            return false
+        }else if textFieldFisher.text == "" {
+            self.alert(title: "Valor requerido", message: "Favor de seleccionar un pescador")
+            return false
+        }else if textViewDescription.text == "" {
+            self.alert(title: "Valor requerido", message: "Favor de añadir una descripción")
+            return false
+        }
+        return true
+    }
+    
     func alert(title: String , message: String) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
         let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
@@ -119,7 +127,9 @@ class AddBoatViewController: UIViewController, UITextFieldDelegate, UIPickerView
     }
     
     func createBoatObject() -> Boat {
-        let boat = Boat(id: 0, name: textFieldName.text!, description: textViewDescription.text!, userId: 1)
+        let userId = fishers[self.selectedFisher].id
+        let user = fishers[self.selectedFisher]
+        let boat = Boat(id: 0, name: textFieldName.text!, description: textViewDescription.text!, userId: userId, user: user)
         return boat
     }
     
@@ -135,8 +145,10 @@ class AddBoatViewController: UIViewController, UITextFieldDelegate, UIPickerView
         let boat = self.createBoatObject()
         WebServiceBoat.createBoat(boat: boat, completionHandler: { (status : Bool, message : String) in
             if status {
+                self.view.hideToastActivity()
                 self.navigationController?.popViewController(animated: true)
             }else {
+                self.view.hideToastActivity()
                 self.alert(title: "Error", message: message)
             }
         })
@@ -147,8 +159,10 @@ class AddBoatViewController: UIViewController, UITextFieldDelegate, UIPickerView
         let idBoat = boats[self.indexToEditBoat].id
         WebServiceBoat.editBoat(idBoat: idBoat, boat: boat) { (status : Bool, message : String) in
             if status {
+                self.view.hideToastActivity()
                 self.navigationController?.popViewController(animated: true)
             }else {
+                self.view.hideToastActivity()
                 self.alert(title: "Error", message: message)
             }
         }
@@ -159,8 +173,31 @@ class AddBoatViewController: UIViewController, UITextFieldDelegate, UIPickerView
         self.buttonAdd.setTitle("EDITAR", for: .normal)
         let boat = boats[self.indexToEditBoat]
         self.textFieldName.text = boat.name
-        self.textFieldFisher.text = ""
         self.textViewDescription.text = boat.description
+        self.setSelectedFisherToEdit(idUser: boat.user?.id ?? 0)
+    }
+    
+    func setSelectedFisherToEdit(idUser : Int){
+        for i in 0...fishers.count-1 {
+            if idUser == fishers[i].id {
+                self.textFieldFisher.text = fishers[i].name
+                self.picker.selectRow(i, inComponent: 0, animated: true)
+                break;
+            }
+        }
+    }
+    
+    func getFishers(){
+        self.view.makeToastActivity(.center)
+        WebServiceUser.getFishers { (status : Bool, fishersArray : [User]) in
+            if status && fishersArray.count > 0 {
+                self.fishers = fishersArray
+                self.picker.reloadAllComponents()
+                self.view.hideToastActivity()
+            }else {
+                self.view.hideToastActivity()
+            }
+        }
     }
 
 }

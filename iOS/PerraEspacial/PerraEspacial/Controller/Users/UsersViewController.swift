@@ -90,13 +90,17 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func getUsers(){
+        self.view.makeToastActivity(.center)
         WebServiceUser.getUsers { (status : Bool, usersArray : [User]) in
             if status && usersArray.count > 0 {
                 users = usersArray
                 self.totalRows = usersArray.count
                 self.tableView.reloadData()
+                self.view.hideToastActivity()
             }else {
                 self.totalRows = 1
+                self.tableView.reloadData()
+                self.view.hideToastActivity()
             }
         }
     }
@@ -120,13 +124,22 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func deleteUser(index : Int){
+        self.view.makeToastActivity(.center)
         WebServiceUser.deleteUser(idUser: users[index].id) { (status : Bool, message : String) in
             if status {
                 users.remove(at: index)
-                self.totalRows = users.count
+                
+                if users.count > 0 {
+                    self.totalRows = users.count
+                }else {
+                    self.totalRows = 1
+                }
+                
                 self.tableView.reloadData()
+                self.view.hideToastActivity()
                 self.alert(title: "Listo", message: "Usuario eliminado")
             }else {
+                self.view.hideToastActivity()
                 self.alert(title: "Error", message: message)
             }
         }

@@ -19,7 +19,7 @@ class AddUserViewController: UIViewController, UITextFieldDelegate, UIPickerView
     
     //MARK: - Varailabels And Constants
     let picker = UIPickerView()
-    let fishers = ["Administrador", "Pescador"]
+    let roles = ["Administrador", "Supervisor", "Pescador"]
     var selectedRoleId : Int = 0
     var selectedRoleName : String = ""
     var indexToEditUser = 0
@@ -67,6 +67,8 @@ class AddUserViewController: UIViewController, UITextFieldDelegate, UIPickerView
             }else {
                 self.addUser()
             }
+        }else {
+            self.view.hideToastActivity()
         }
     }
     
@@ -75,15 +77,16 @@ class AddUserViewController: UIViewController, UITextFieldDelegate, UIPickerView
         return 1
     }
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return fishers.count
+        return roles.count
     }
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return fishers[row]
+        return roles[row]
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        self.selectedRoleName = fishers[row]
-        self.textFieldRole.text = fishers[row]
+        self.selectedRoleId = row
+        self.selectedRoleName = roles[row]
+        self.textFieldRole.text = roles[row]
     }
     
     
@@ -151,11 +154,14 @@ class AddUserViewController: UIViewController, UITextFieldDelegate, UIPickerView
     }
     
     func addUser(){
+        self.view.makeToastActivity(.center)
         let user = self.createUserObject()
         WebServiceUser.createUser(user: user, completionHandler: { (status : Bool, message : String) in
             if status {
+                self.view.hideToastActivity()
                 self.navigationController?.popViewController(animated: true)
             }else {
+                self.view.hideToastActivity()
                 self.alert(title: "Error", message: message)
             }
         })
@@ -177,13 +183,16 @@ class AddUserViewController: UIViewController, UITextFieldDelegate, UIPickerView
     }
     
     func editUser(){
+        self.view.makeToastActivity(.center)
         let user = self.createUserObject()
         let idUser = users[self.indexToEditUser].id
         WebServiceUser.editUser(idUser : idUser, user: user) { (status : Bool, message : String) in
             if status {
+                self.view.hideToastActivity()
                 self.navigationController?.popViewController(animated: true)
                 self.alert(title: "Listo", message: "Usuario editado correctamente")
             }else {
+                self.view.hideToastActivity()
                 self.alert(title: "Error", message: message)
             }
         }

@@ -15,12 +15,13 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     
     //MARK: - Varailabels And Constants
-    let menuTitles = ["Reportes","Usuarios","Barcos","Entregas"]
-    let menuIcons = [#imageLiteral(resourceName: "reportes"), #imageLiteral(resourceName: "usuarios"), #imageLiteral(resourceName: "barcos"), #imageLiteral(resourceName: "entregas")]
+    let menuTitles = ["Reportes","Usuarios","Barcos","Entregas","Cerrar Sesión"]
+    let menuIcons = [#imageLiteral(resourceName: "reportes"), #imageLiteral(resourceName: "usuarios"), #imageLiteral(resourceName: "barcos"), #imageLiteral(resourceName: "entregas"), #imageLiteral(resourceName: "logout")]
     let segueToUsers = "segueToUsers"
     let segueToDeliveries = "segueToDeliveries"
     let segueToBoats = "segueToBoats"
     let segueToReports = "segueToReports"
+    let segueToLogin = "segueToLogin"
     //MARK: - View Life
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +50,9 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.performSegue(withIdentifier: self.segueToBoats, sender: self)
         }else if indexPath.row == 3 {
             self.performSegue(withIdentifier: self.segueToDeliveries, sender: self)
+        }else {
+            DataGlobal.cleanSavedValues()
+            self.performSegue(withIdentifier: self.segueToLogin, sender: self)
         }
     }
     

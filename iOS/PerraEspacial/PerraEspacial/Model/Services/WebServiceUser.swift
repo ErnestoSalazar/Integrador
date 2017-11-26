@@ -82,7 +82,7 @@ struct WebServiceUser {
             "apellido" : user.lastName,
             "correo" : user.email,
             "rfc" : user.rfc,
-            "rol" : user.role.id
+            "rol" : user.role.name
         ]
         
         Alamofire.request(WebLinks.Service.urlCreateUser, method: .post, parameters: parameters, encoding: URLEncoding.httpBody).responseJSON { response in
@@ -124,7 +124,6 @@ struct WebServiceUser {
     
     static func getUsers(completionHandler:@escaping (_ status : Bool,_ users : [User])->()){
         //Alamofire Get Request
-        
         Alamofire.request(WebLinks.Service.urlUser, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: WebLinks.headers).responseJSON { (response:DataResponse<Any>) in
             switch response.result {
             case .success(let value):
@@ -151,6 +150,35 @@ struct WebServiceUser {
         }
     }
     
+    static func getFishers(completionHandler:@escaping (_ status : Bool,_ users : [User])->()){
+        //Alamofire Get Request
+        Alamofire.request(WebLinks.Service.urlFishers, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: WebLinks.headers).responseJSON { (response:DataResponse<Any>) in
+            switch response.result {
+            case .success(let value):
+                let jsonResponse = JSON(value)
+                let usersArray = jsonResponse.arrayValue
+                var usersInfo : [User] = []
+                for user in usersArray {
+                    let id = user["id"].int ?? 0
+                    let email = user["correo"].string ?? ""
+                    let name = user["nombre"].string ?? ""
+                    let lastName = user["apellido"].string ?? ""
+                    let rfc = user["rfc"].string ?? ""
+                    let roleName = user["rol"].string ?? ""
+                    let role = Role(id: 0, name: roleName)
+                    let user = User(id: id, email: email, name: name, lastName: lastName, password: "", rfc: rfc, role: role)
+                    usersInfo.append(user)
+                }
+                
+                completionHandler(true,usersInfo)
+            case .failure(let error):
+                print(error)
+                completionHandler(false, [])
+            }
+        }
+    }
+    
+    
     static func editUser(idUser : Int, user : User, completionHandler:@escaping (_ status : Bool, _ message : String)->()){
         //Alamofire Put Request
         let parameters : Parameters = [
@@ -158,7 +186,7 @@ struct WebServiceUser {
             "apellido" : user.lastName,
             "correo" : user.email,
             "rfc" : user.rfc,
-            "rol" : user.role.id
+            "rol" : user.role.name
         ]
         
         Alamofire.request("\(WebLinks.Service.urlUser)\(idUser)", method: .put, parameters: parameters, encoding: JSONEncoding.default, headers: WebLinks.headers).responseJSON { (response:DataResponse<Any>) in

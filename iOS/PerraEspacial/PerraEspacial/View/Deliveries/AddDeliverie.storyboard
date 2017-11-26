@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="l5Z-lG-8BW">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="l5Z-lG-8BW">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,7 +20,7 @@
         <!--Agregar Entrada-->
         <scene sceneID="N31-sC-nSx">
             <objects>
-                <viewController restorationIdentifier="addDeliverie" storyboardIdentifier="addDeliverie" id="1YO-0V-WbW" sceneMemberID="viewController">
+                <viewController restorationIdentifier="addDeliverie" storyboardIdentifier="addDeliverie" id="1YO-0V-WbW" customClass="AddDeliveryViewController" customModule="PerraEspacial" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XNR-Z7-d9Q">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -32,32 +32,50 @@
                                     <constraint firstAttribute="height" constant="45" id="gH9-mJ-RSy"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="15"/>
-                                <state key="normal" title="AGREGAR CARGA">
+                                <state key="normal" title="CREAR ENTRADA">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="MLb-QX-2SP" kind="show" id="NpU-hE-X6e"/>
+                                    <action selector="createDeliveryButtonPressed:" destination="1YO-0V-WbW" eventType="touchUpInside" id="Qn3-me-Xc8"/>
                                 </connections>
                             </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bMV-nN-FKE">
+                                <rect key="frame" x="0.0" y="64" width="375" height="558"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="bMV-nN-FKE" firstAttribute="top" secondItem="ZAq-FI-SiW" secondAttribute="top" id="Aa6-Y0-0bD"/>
                             <constraint firstItem="bpm-vJ-gbV" firstAttribute="leading" secondItem="ZAq-FI-SiW" secondAttribute="leading" id="ST4-cF-fZB"/>
+                            <constraint firstItem="bpm-vJ-gbV" firstAttribute="top" secondItem="bMV-nN-FKE" secondAttribute="bottom" id="Wc8-Tz-hI5"/>
                             <constraint firstItem="bpm-vJ-gbV" firstAttribute="trailing" secondItem="ZAq-FI-SiW" secondAttribute="trailing" id="fkN-cl-isP"/>
+                            <constraint firstItem="ZAq-FI-SiW" firstAttribute="trailing" secondItem="bMV-nN-FKE" secondAttribute="trailing" id="lkx-jr-TDZ"/>
+                            <constraint firstItem="bMV-nN-FKE" firstAttribute="leading" secondItem="ZAq-FI-SiW" secondAttribute="leading" id="v0E-6C-ctG"/>
                             <constraint firstItem="bpm-vJ-gbV" firstAttribute="bottom" secondItem="ZAq-FI-SiW" secondAttribute="bottom" id="yH5-I3-lzM"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ZAq-FI-SiW"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Agregar Entrada" id="93l-ry-by7"/>
+                    <navigationItem key="navigationItem" title="Agregar Entrada" id="93l-ry-by7">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="OTF-EU-XU6">
+                            <connections>
+                                <segue destination="MLb-QX-2SP" kind="show" id="IDu-Gw-0KL"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="bMV-nN-FKE" id="srK-KB-VvS"/>
+                        <segue destination="MLb-QX-2SP" kind="show" identifier="segueToEditCarga" id="XEO-Xu-XWW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BQ1-gc-Vpg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="703.20000000000005" y="199.25037481259372"/>
         </scene>
-        <!--View Controller-->
+        <!--Add Carga View Controller-->
         <scene sceneID="8pe-S5-Ikv">
             <objects>
-                <viewController id="MLb-QX-2SP" sceneMemberID="viewController">
+                <viewController id="MLb-QX-2SP" customClass="AddCargaViewController" customModule="PerraEspacial" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Zwi-Wz-c4Q">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -72,6 +90,9 @@
                                 <state key="normal" title="GUARDAR">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="saveButtonPressed:" destination="MLb-QX-2SP" eventType="touchUpInside" id="S1y-Km-exR"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Barco" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="T2q-Lq-hr5">
                                 <rect key="frame" x="17.5" y="89" width="340" height="30"/>
@@ -89,7 +110,7 @@
                                 <rect key="frame" x="17.5" y="199" width="340" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="17"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Talla" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="55p-yD-tRx">
                                 <rect key="frame" x="17.5" y="254" width="340" height="30"/>
@@ -101,7 +122,7 @@
                                 <rect key="frame" x="17.5" y="309" width="340" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="17"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Condición" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="blC-ev-ovj">
                                 <rect key="frame" x="17.5" y="364" width="340" height="30"/>
@@ -136,6 +157,15 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Dpm-1W-RZV"/>
                     </view>
+                    <connections>
+                        <outlet property="buttonSave" destination="WQC-tv-p5i" id="XBD-qz-ziY"/>
+                        <outlet property="textFieldBoat" destination="T2q-Lq-hr5" id="rT5-pZ-AxP"/>
+                        <outlet property="textFieldCondition" destination="blC-ev-ovj" id="cOD-oy-Egl"/>
+                        <outlet property="textFieldEspecie" destination="pLc-mx-GcT" id="iKk-UL-tWe"/>
+                        <outlet property="textFieldQuantity" destination="AdE-e3-aaf" id="9x0-Gt-0wx"/>
+                        <outlet property="textFieldSize" destination="55p-yD-tRx" id="xEr-R6-jzq"/>
+                        <outlet property="textFieldTemperature" destination="7Rr-kJ-7R4" id="Aqn-bt-1WQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PHA-bH-0Kj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -160,4 +190,7 @@
             <point key="canvasLocation" x="-129" y="199"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="XEO-Xu-XWW"/>
+    </inferredMetricsTieBreakers>
 </document>

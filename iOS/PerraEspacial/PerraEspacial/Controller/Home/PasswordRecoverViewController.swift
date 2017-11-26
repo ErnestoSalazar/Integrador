@@ -20,20 +20,25 @@ class PasswordRecoverViewController: UIViewController {
     
     //MARK: - Actions
     @IBAction func buttonRecoverPressed(_ sender: Any) {
+        self.view.makeToastActivity(.center)
         if textFieldEmail.text != "" {
             if isValidEmailAddress(emailAddressString: textFieldEmail.text!) {
                 WebServiceUser.recoverPassword(email: textFieldEmail.text!, completionHandler: { (status : Bool, message : String) in
                     if status {
+                        self.view.hideToastActivity()
                         self.alert(title: "Listo", message: "Se ha enviado un mensaje a \(self.textFieldEmail.text ?? "")")
                         self.textFieldEmail.text = ""
                     }else {
+                        self.view.hideToastActivity()
                         self.alert(title: "Error", message: message)
                     }
                 })
             }else {
+                self.view.hideToastActivity()
                 self.alert(title: "Correo no valido", message: "Favor de ingresar un correo valido. \n Ejemplo: Correo@ejemplo.com")
             }
         }else {
+            self.view.hideToastActivity()
             self.alert(title: "Requerido", message: "Favor de ingresar su correo")
         }
     }

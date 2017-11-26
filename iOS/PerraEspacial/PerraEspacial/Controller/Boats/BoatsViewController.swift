@@ -87,16 +87,19 @@ class BoatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func getBoats(){
+        self.view.makeToastActivity(.center)
         WebServiceBoat.getBoats { (status : Bool, boatsArray : [Boat]) in
             if status {
                 boats = boatsArray
                 self.totalRows = boats.count
                 self.tableView.reloadData()
+                self.view.hideToastActivity()
             }else {
                 if boats.count <= 0 {
                     self.totalRows = 1
                     self.tableView.reloadData()
                 }
+                self.view.hideToastActivity()
             }
         }
     }
@@ -120,13 +123,21 @@ class BoatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func deleteBoat(index : Int) {
+        self.view.makeToastActivity(.center)
         WebServiceBoat.deleteBoat(idBoat: boats[index].id) { (status : Bool, message : String) in
             if status {
                 boats.remove(at: index)
-                self.totalRows = boats.count
+                if boats.count > 0 {
+                    self.totalRows = boats.count
+                }else {
+                    self.totalRows = 1
+                }
+                
                 self.tableView.reloadData()
+                self.view.hideToastActivity()
                 self.alert(title: "Listo", message: "Barco eliminado")
             }else {
+                self.view.hideToastActivity()
                 self.alert(title: "Error", message: message)
             }
         }

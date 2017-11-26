@@ -13,6 +13,7 @@ struct Carga {
     let quantity : Double
     let temperature : Double
     let boatId : Int
+    let boat : Boat
     let especie : String
     let size : String
 }

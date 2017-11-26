@@ -11,9 +11,9 @@ import Alamofire
 import SwiftyJSON
 
 struct WebServiceReport {
-    static func getReport(completionHandler:@escaping (_ status : Bool,_ reports : [Report])->()){
+    static func getReport(dateBegin : String, dateEnd : String, completionHandler:@escaping (_ status : Bool,_ reports : [Report])->()){
         //Alamofire Get Request        
-        Alamofire.request("\(WebLinks.Service.urlDeliveries)?fechaInicio=2017/11/13&fechaFin=2017/11/23", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: WebLinks.headers).responseJSON { (response:DataResponse<Any>) in
+        Alamofire.request("\(WebLinks.Service.urlDeliveries)?fechaInicio=\(dateBegin)&fechaFin=\(dateEnd)", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: WebLinks.headers).responseJSON { (response:DataResponse<Any>) in
             switch response.result {
             case .success(let value):
                 let jsonResponse = JSON(value)
@@ -53,7 +53,15 @@ struct WebServiceReport {
                         let especie = carga["especie"].string ?? ""
                         let size = carga["talla"].string ?? ""
                         
-                        let cargaInfo = Carga(id: id, condition: condition, quantity: quantity, temperature: temperature, boatId: boatId, especie: especie, size: size)
+                        
+                        let boat = carga["barco"]
+                        let idBoat = boat["id"].int ?? 0
+                        let nameBoat = boat["nombre"].string ?? ""
+                        let descriptionBoat = boat["descripcion"].string ?? ""
+                        let userIdBoat = boat["usuarioId"].int ?? 0
+                        let boatInfo = Boat(id: idBoat, name: nameBoat, description: descriptionBoat, userId: userIdBoat, user: nil)
+                        
+                        let cargaInfo = Carga(id: id, condition: condition, quantity: quantity, temperature: temperature, boatId: boatId, boat: boatInfo, especie: especie, size: size)
                         cargas.append(cargaInfo)
                     }
                     

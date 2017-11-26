@@ -29,14 +29,19 @@ class LoginViewController: UIViewController {
     
     //MARK: - Actions
     @IBAction func buttonLoginPressed(_ sender: Any) {
+        self.view.makeToastActivity(.center)
         if self.verifyInputs() {
             WebServiceUser.getTokenUser(email: "\(textFieldEmail.text!)", password: "\(textFieldPassword.text!)", completionHandler: { (status : Bool, message : String) in
                 if status {
+                    self.view.hideToastActivity()
                     self.performSegue(withIdentifier: self.segueToMenu, sender: self)
                 }else {
+                    self.view.hideToastActivity()
                     self.alert(title: "Error", message: message)
                 }
             })
+        }else {
+            self.view.hideToastActivity()
         }
     }
     

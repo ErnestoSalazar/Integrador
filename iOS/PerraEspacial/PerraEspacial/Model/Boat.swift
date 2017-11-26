@@ -12,4 +12,5 @@ struct Boat {
     let name : String
     let description : String
     let userId : Int
+    let user : User?
 }

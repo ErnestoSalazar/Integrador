@@ -34,6 +34,13 @@
 		B499DDFF1FB9FA520058DBAA /* UserCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B499DDFD1FB9FA520058DBAA /* UserCardTableViewCell.swift */; };
 		B499DE001FB9FA520058DBAA /* UserCardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B499DDFE1FB9FA520058DBAA /* UserCardTableViewCell.xib */; };
 		B499DE021FB9FD6F0058DBAA /* UsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B499DE011FB9FD6F0058DBAA /* UsersViewController.swift */; };
+		B4B7A6BF1FCB3C5F004F7ADD /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B7A6BE1FCB3C5F004F7ADD /* Toast.swift */; };
+		B4B7A6C11FCB504E004F7ADD /* WebServiceDeliveries.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B7A6C01FCB504E004F7ADD /* WebServiceDeliveries.swift */; };
+		B4B7A6C31FCB508B004F7ADD /* Delivery.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B7A6C21FCB508B004F7ADD /* Delivery.swift */; };
+		B4B7A6C71FCB67DE004F7ADD /* AddDeliveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B7A6C61FCB67DE004F7ADD /* AddDeliveryViewController.swift */; };
+		B4B7A6C91FCB7078004F7ADD /* AddCargaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B7A6C81FCB7078004F7ADD /* AddCargaViewController.swift */; };
+		B4B7A6CC1FCB79F3004F7ADD /* CargaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B7A6CA1FCB79F3004F7ADD /* CargaTableViewCell.swift */; };
+		B4B7A6CD1FCB79F3004F7ADD /* CargaTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4B7A6CB1FCB79F3004F7ADD /* CargaTableViewCell.xib */; };
 		B4C378321FBC97D6008ADDD4 /* BoatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C378301FBC97D6008ADDD4 /* BoatTableViewCell.swift */; };
 		B4C378331FBC97D6008ADDD4 /* BoatTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4C378311FBC97D6008ADDD4 /* BoatTableViewCell.xib */; };
 		B4C378351FBC9978008ADDD4 /* BoatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C378341FBC9978008ADDD4 /* BoatsViewController.swift */; };
@@ -85,6 +92,13 @@
 		B499DDFD1FB9FA520058DBAA /* UserCardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCardTableViewCell.swift; sourceTree = "<group>"; };
 		B499DDFE1FB9FA520058DBAA /* UserCardTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserCardTableViewCell.xib; sourceTree = "<group>"; };
 		B499DE011FB9FD6F0058DBAA /* UsersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersViewController.swift; sourceTree = "<group>"; };
+		B4B7A6BE1FCB3C5F004F7ADD /* Toast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
+		B4B7A6C01FCB504E004F7ADD /* WebServiceDeliveries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebServiceDeliveries.swift; sourceTree = "<group>"; };
+		B4B7A6C21FCB508B004F7ADD /* Delivery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Delivery.swift; sourceTree = "<group>"; };
+		B4B7A6C61FCB67DE004F7ADD /* AddDeliveryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDeliveryViewController.swift; sourceTree = "<group>"; };
+		B4B7A6C81FCB7078004F7ADD /* AddCargaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCargaViewController.swift; sourceTree = "<group>"; };
+		B4B7A6CA1FCB79F3004F7ADD /* CargaTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CargaTableViewCell.swift; sourceTree = "<group>"; };
+		B4B7A6CB1FCB79F3004F7ADD /* CargaTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CargaTableViewCell.xib; sourceTree = "<group>"; };
 		B4C378301FBC97D6008ADDD4 /* BoatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoatTableViewCell.swift; sourceTree = "<group>"; };
 		B4C378311FBC97D6008ADDD4 /* BoatTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BoatTableViewCell.xib; sourceTree = "<group>"; };
 		B4C378341FBC9978008ADDD4 /* BoatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoatsViewController.swift; sourceTree = "<group>"; };
@@ -179,6 +193,7 @@
 				B4C3784A1FBCA2FE008ADDD4 /* Deliveries.storyboard */,
 				B4C378451FBCA2D0008ADDD4 /* DeliveriesTableViewCell.xib */,
 				B435CE7B1FC24801007371AB /* AddDeliverie.storyboard */,
+				B4B7A6CB1FCB79F3004F7ADD /* CargaTableViewCell.xib */,
 			);
 			path = Deliveries;
 			sourceTree = "<group>";
@@ -190,8 +205,34 @@
 				B442DB3C1FB1269E001784A5 /* WebServiceUser.swift */,
 				B45F038B1FC5D7AB00655022 /* WebServiceBoat.swift */,
 				B490D4CE1FC87CF30075CFFB /* WebServiceReport.swift */,
+				B4B7A6C01FCB504E004F7ADD /* WebServiceDeliveries.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		B4B7A6C41FCB659B004F7ADD /* Deliveries */ = {
+			isa = PBXGroup;
+			children = (
+				B499DDF91FB9F0420058DBAA /* ReporteViewController.swift */,
+				B499DDF51FB9F02E0058DBAA /* ReporteTableViewCell.swift */,
+				B4C378441FBCA2D0008ADDD4 /* DeliveriesTableViewCell.swift */,
+				B4C378481FBCA2F1008ADDD4 /* DeliveriesViewController.swift */,
+				B4B7A6C61FCB67DE004F7ADD /* AddDeliveryViewController.swift */,
+				B4B7A6C81FCB7078004F7ADD /* AddCargaViewController.swift */,
+				B4B7A6CA1FCB79F3004F7ADD /* CargaTableViewCell.swift */,
+			);
+			path = Deliveries;
+			sourceTree = "<group>";
+		};
+		B4B7A6C51FCB65B0004F7ADD /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				B4D390E51FACCE4D00466CA7 /* LoginViewController.swift */,
+				B4C3783A1FBC9BAB008ADDD4 /* MenuViewController.swift */,
+				B4C3783E1FBC9CBB008ADDD4 /* MenuTableViewCell.swift */,
+				B428F5081FAFDBBE005D5545 /* PasswordRecoverViewController.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 		B4D390BF1FACCB7200466CA7 = {
@@ -236,6 +277,8 @@
 				B45F038E1FC5D8B500655022 /* Boat.swift */,
 				B490D4D01FC87D490075CFFB /* Report.swift */,
 				B490D4D21FC87E880075CFFB /* Carga.swift */,
+				B4B7A6BE1FCB3C5F004F7ADD /* Toast.swift */,
+				B4B7A6C21FCB508B004F7ADD /* Delivery.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -243,16 +286,10 @@
 		B4D390E21FACCCB100466CA7 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B4B7A6C51FCB65B0004F7ADD /* Home */,
+				B4B7A6C41FCB659B004F7ADD /* Deliveries */,
 				B4D643A21FC728000036B953 /* Boats */,
 				B4D643A11FC71DA00036B953 /* Users */,
-				B4D390E51FACCE4D00466CA7 /* LoginViewController.swift */,
-				B4C3783A1FBC9BAB008ADDD4 /* MenuViewController.swift */,
-				B4C3783E1FBC9CBB008ADDD4 /* MenuTableViewCell.swift */,
-				B428F5081FAFDBBE005D5545 /* PasswordRecoverViewController.swift */,
-				B499DDF91FB9F0420058DBAA /* ReporteViewController.swift */,
-				B499DDF51FB9F02E0058DBAA /* ReporteTableViewCell.swift */,
-				B4C378441FBCA2D0008ADDD4 /* DeliveriesTableViewCell.swift */,
-				B4C378481FBCA2F1008ADDD4 /* DeliveriesViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -374,6 +411,7 @@
 				B499DDF41FB9EEEA0058DBAA /* Reporte.storyboard in Resources */,
 				B499DDF81FB9F02E0058DBAA /* ReporteTableViewCell.xib in Resources */,
 				B4C378411FBC9CBB008ADDD4 /* MenuTableViewCell.xib in Resources */,
+				B4B7A6CD1FCB79F3004F7ADD /* CargaTableViewCell.xib in Resources */,
 				B4C378391FBC9B41008ADDD4 /* Menu.storyboard in Resources */,
 				B4325CC61FC5CB1B0043429D /* NotFoundTableViewCell.xib in Resources */,
 				B4C378331FBC97D6008ADDD4 /* BoatTableViewCell.xib in Resources */,
@@ -447,20 +485,26 @@
 				B4C378401FBC9CBB008ADDD4 /* MenuTableViewCell.swift in Sources */,
 				B4D390E61FACCE4D00466CA7 /* LoginViewController.swift in Sources */,
 				B4C378491FBCA2F1008ADDD4 /* DeliveriesViewController.swift in Sources */,
+				B4B7A6C71FCB67DE004F7ADD /* AddDeliveryViewController.swift in Sources */,
 				B442DB3D1FB1269E001784A5 /* WebServiceUser.swift in Sources */,
 				B4D390CC1FACCB7200466CA7 /* AppDelegate.swift in Sources */,
 				B45F038A1FC5D46400655022 /* Role.swift in Sources */,
 				B45F03881FC5D40300655022 /* User.swift in Sources */,
+				B4B7A6C91FCB7078004F7ADD /* AddCargaViewController.swift in Sources */,
 				B490D4CF1FC87CF30075CFFB /* WebServiceReport.swift in Sources */,
 				B4325CC51FC5CB1B0043429D /* NotFoundTableViewCell.swift in Sources */,
 				B490D4D31FC87E880075CFFB /* Carga.swift in Sources */,
 				B4C378321FBC97D6008ADDD4 /* BoatTableViewCell.swift in Sources */,
+				B4B7A6C11FCB504E004F7ADD /* WebServiceDeliveries.swift in Sources */,
+				B4B7A6BF1FCB3C5F004F7ADD /* Toast.swift in Sources */,
+				B4B7A6CC1FCB79F3004F7ADD /* CargaTableViewCell.swift in Sources */,
 				B499DDFF1FB9FA520058DBAA /* UserCardTableViewCell.swift in Sources */,
 				B4C3783B1FBC9BAB008ADDD4 /* MenuViewController.swift in Sources */,
 				B499DDF71FB9F02E0058DBAA /* ReporteTableViewCell.swift in Sources */,
 				B4C378461FBCA2D0008ADDD4 /* DeliveriesTableViewCell.swift in Sources */,
 				B4C378351FBC9978008ADDD4 /* BoatsViewController.swift in Sources */,
 				B499DE021FB9FD6F0058DBAA /* UsersViewController.swift in Sources */,
+				B4B7A6C31FCB508B004F7ADD /* Delivery.swift in Sources */,
 				B490D4D11FC87D490075CFFB /* Report.swift in Sources */,
 				B499DDFA1FB9F0420058DBAA /* ReporteViewController.swift in Sources */,
 				B40CB28D1FBFD2FA00A88B0C /* AddBoatViewController.swift in Sources */,

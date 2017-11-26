@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="uif-sX-cJF">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="uif-sX-cJF">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="VerdanaBold.ttf">
+            <string>Verdana-Bold</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Entregas-->
         <scene sceneID="szX-oq-wQO">
@@ -19,16 +24,56 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="VrZ-A9-NTX">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="114" width="375" height="508"/>
                                 <color key="backgroundColor" red="0.8462313414" green="0.83144730330000005" blue="0.83544796710000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </tableView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Fecha inicio" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zvQ-1f-AbI">
+                                <rect key="frame" x="18" y="76" width="140" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="140" id="TVy-Ff-aie"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Fecha cierre" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6WO-u7-lbP">
+                                <rect key="frame" x="217" y="76" width="140" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="140" id="n9s-Ji-fVE"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PpA-Qh-of5">
+                                <rect key="frame" x="0.0" y="622" width="375" height="45"/>
+                                <color key="backgroundColor" red="0.92549019610000005" green="0.1333333333" blue="0.1450980392" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="mNM-jv-nhq"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="15"/>
+                                <state key="normal" title="BUSCAR">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="buttonSearchPressed:" destination="Sg8-f4-EMd" eventType="touchUpInside" id="39G-ZY-2Ds"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="PpA-Qh-of5" firstAttribute="leading" secondItem="u92-P3-K8G" secondAttribute="leading" id="4iY-tN-0Bf"/>
+                            <constraint firstItem="6WO-u7-lbP" firstAttribute="top" secondItem="u92-P3-K8G" secondAttribute="top" constant="12" id="82r-p9-e2Y"/>
+                            <constraint firstItem="zvQ-1f-AbI" firstAttribute="top" secondItem="u92-P3-K8G" secondAttribute="top" constant="12" id="9Ts-jd-EIC"/>
+                            <constraint firstItem="PpA-Qh-of5" firstAttribute="bottom" secondItem="u92-P3-K8G" secondAttribute="bottom" id="DDh-cq-bn1"/>
                             <constraint firstItem="VrZ-A9-NTX" firstAttribute="leading" secondItem="u92-P3-K8G" secondAttribute="leading" id="Sge-yN-NPA"/>
-                            <constraint firstItem="u92-P3-K8G" firstAttribute="bottom" secondItem="VrZ-A9-NTX" secondAttribute="bottom" id="gr7-kt-ZRX"/>
-                            <constraint firstItem="VrZ-A9-NTX" firstAttribute="top" secondItem="u92-P3-K8G" secondAttribute="top" id="jaf-xY-haP"/>
+                            <constraint firstItem="u92-P3-K8G" firstAttribute="trailing" secondItem="6WO-u7-lbP" secondAttribute="trailing" constant="17.5" id="Ud1-tO-XAd"/>
+                            <constraint firstItem="zvQ-1f-AbI" firstAttribute="leading" secondItem="u92-P3-K8G" secondAttribute="leading" constant="17.5" id="hql-4W-JBc"/>
+                            <constraint firstItem="PpA-Qh-of5" firstAttribute="top" secondItem="VrZ-A9-NTX" secondAttribute="bottom" id="iCR-SB-NFG"/>
+                            <constraint firstItem="PpA-Qh-of5" firstAttribute="trailing" secondItem="u92-P3-K8G" secondAttribute="trailing" id="lIb-Pw-No3"/>
+                            <constraint firstItem="VrZ-A9-NTX" firstAttribute="top" secondItem="zvQ-1f-AbI" secondAttribute="bottom" constant="8" id="lJ2-7z-vKz"/>
                             <constraint firstItem="u92-P3-K8G" firstAttribute="trailing" secondItem="VrZ-A9-NTX" secondAttribute="trailing" id="lpB-hI-TfT"/>
+                            <constraint firstItem="VrZ-A9-NTX" firstAttribute="top" secondItem="6WO-u7-lbP" secondAttribute="bottom" constant="8" id="zWK-mu-0ut"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="u92-P3-K8G"/>
                     </view>
@@ -49,6 +94,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="VrZ-A9-NTX" id="P3w-bq-L2U"/>
+                        <outlet property="textFieldDateBegin" destination="zvQ-1f-AbI" id="gmu-q4-NXT"/>
+                        <outlet property="textFieldDateEnd" destination="6WO-u7-lbP" id="LG7-Ld-qu7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5yt-QI-XiP" userLabel="First Responder" sceneMemberID="firstResponder"/>

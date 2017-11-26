@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="xvs-Yk-4Sc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="xvs-Yk-4Sc">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -48,6 +48,7 @@
                         <segue destination="qfS-OO-rTV" kind="show" identifier="segueToDeliveries" id="d8a-UI-Tie"/>
                         <segue destination="xad-Li-DkH" kind="show" identifier="segueToBoats" id="EIk-as-7yB"/>
                         <segue destination="2jP-S1-liM" kind="show" identifier="segueToReports" id="f67-d7-8V8"/>
+                        <segue destination="e9z-Ko-GVZ" kind="presentation" identifier="segueToLogin" modalTransitionStyle="crossDissolve" id="dly-gg-PER"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3m0-Gk-BgT" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -111,6 +112,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DF0-Aw-a9T" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="520" y="-1469"/>
+        </scene>
+        <!--loginView-->
+        <scene sceneID="HzO-mR-wmm">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Login" referencedIdentifier="loginView" id="e9z-Ko-GVZ" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RxW-im-h2C" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="518" y="-1420"/>
         </scene>
     </scenes>
     <resources>
