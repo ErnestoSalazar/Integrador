@@ -87,12 +87,12 @@ namespace SpaceDog.Service.Controllers
             }
 
 
-            usuario.Nombre      = (usuarioDto.Nombre != null)   ? usuarioDto.Nombre     :  usuario.Nombre;
-            usuario.Apellido    = (usuarioDto.Apellido != null) ? usuarioDto.Apellido   : usuario.Apellido;
-            usuario.Rfc         = (usuarioDto.Rfc != null)      ? usuarioDto.Rfc        : usuario.Rfc;
-            usuario.Correo      = (usuarioDto.Correo != null)   ? usuarioDto.Correo     : usuario.Correo;
-            usuario.Password    = (usuarioDto.Password != null) ? PasswordEncryptService.passwordEncrypt(usuarioDto.Password) : usuario.Password;
-            usuario.Rol         = (usuarioDto.Rol != null)      ? usuarioDto.Rol.Value  : usuario.Rol;
+            usuario.Nombre      = (usuarioDto.Nombre != null    && usuarioDto.Nombre.Length > 0)        ? usuarioDto.Nombre     :  usuario.Nombre;
+            usuario.Apellido    = (usuarioDto.Apellido != null  && usuarioDto.Apellido.Length > 0)      ? usuarioDto.Apellido   : usuario.Apellido;
+            usuario.Rfc         = (usuarioDto.Rfc != null       && usuarioDto.Rfc.Length > 0)           ? usuarioDto.Rfc        : usuario.Rfc;
+            usuario.Correo      = (usuarioDto.Correo != null    && usuarioDto.Correo.Length> 0)         ? usuarioDto.Correo     : usuario.Correo;
+            usuario.Password    = (usuarioDto.Password != null  && usuarioDto.Password.Length > 0 )     ? PasswordEncryptService.passwordEncrypt(usuarioDto.Password) : usuario.Password;
+            usuario.Rol         = (usuarioDto.Rol != null       && usuarioDto.Rol.ToString().Length > 0)? usuarioDto.Rol.Value  : usuario.Rol;
             
 
             _usersRepository.Update(usuario);
