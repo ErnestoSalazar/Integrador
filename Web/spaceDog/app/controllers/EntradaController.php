@@ -9,9 +9,11 @@ class EntradaController extends \BaseController {
 	 */
 	public function index()
 	{
+	    $entradas = Entrada::getEntradas();
 	    $barcos = Barco::getBarcos();
 		return View::make('entrada.index')->with([
-		    "listBarcos" => $barcos
+		    "listBarcos" => $barcos,
+            "listEntradas" => $entradas
         ]);
 	}
 
