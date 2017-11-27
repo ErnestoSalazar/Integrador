@@ -17,33 +17,43 @@
     </form>
     <!--Targetas Barcos-->
     <div class="container">
+        @if(Session::has('message'))
+            <blockquote>
+                {{{Session::get('message')}}}
+            </blockquote>
+        @endif
         <div class="row">
-            <div class="col-md-4">
-                <div class="user__card">
-                    <div class="bg">
-                        <div class="perfil"><img src="img/boatProfile.png" alt=""></div>
-                    </div>
-                    <div class="main__content">
-                        <div class="upper__card">
-                            <div class="info">
-                                <h3>Nombre</h3>
-                                <p>Pescador</p>
-                                <p>Descripcion</p>
+            @if(isset($listBarcos))
+                @foreach($listBarcos as $barco)
+                    <div class="col-md-4">
+                        <div class="user__card">
+                            <div class="bg">
+                                <div class="perfil"><img src="img/boatProfile.png" alt=""></div>
+                            </div>
+                            <div class="main__content">
+                                <div class="upper__card">
+                                    <div class="info">
+                                        <h3>{{{$barco->nombre}}}</h3>
+                                        <p>{{{$barco->usuario->nombre}}}</p>
+                                        <p>{{{$barco->descripcion}}}</p>
+                                    </div>
+                                </div>
+                                <div class="card-options">
+                                    <button type="button" class="btn-option-editar" data-toggle="modal" data-target="#modal-edit-barco">
+                                        <input type="text" value="{{{$barco->id}}}" hidden>
+                                        Editar
+                                    </button>
+                                    {{Form::open([ 'method'  => 'delete', 'route' => [ 'barcos.destroy', $barco->id ] ])}}
+                                    <button type="submit" name="sent" value="sent" class="btn-option-eliminar">
+                                        Eliminar
+                                    </button>
+                                    {{Form::close()}}
+                                </div>
                             </div>
                         </div>
-                        <div class="card-options">
-                            <button type="button" class="btn-option-editar" data-toggle="modal" data-target="#modal-edit-usuario">
-                                <input type="text" value="" hidden>
-                                Editar
-                            </button>
-                            <button type="button" class="btn-option-eliminar">
-                                <input type="text" value="" hidden>
-                                Eliminar
-                            </button>
-                        </div>
                     </div>
-                </div>
-            </div>   
+                @endforeach
+            @endif
         </div>
     </div>
 
@@ -56,32 +66,86 @@
                     <h4>Barco</h4>
                 </div>
                 <div class="modal-body" style="padding:40px 50px;">
+                    {{Form::open(array('route'=>'barcos.store'))}}
                     <form role="form">
                         <div class="row">
                             <div class="col-xs-6">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="nombre" placeholder="Nombre">
+                                    {{Form::text("nombre",null,['placeholder'=> 'Nombre', 'id' => 'nombre', 'class' => 'form-control'])}}
                                 </div>
                             </div>
                             <div class="col-xs-6">
                                 <div class="form-group">
-                                    <select class="form-control" id="sel1">
-                                        <option>Pescador</option>
-                                        <option>Supervisor</option>
+                                    <select class="form-control" id="sel1" name="usuario">
+                                        @if(isset($listUsuarios))
+                                            @foreach($listUsuarios as $usuario)
+                                                @if($usuario->rol == 'Pescador')
+                                                    <option value="{{{$usuario->id}}}">{{{$usuario->nombre}}}</option>
+                                                @endif
+                                            @endforeach
+                                        @endif
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <textarea class="form-control" rows="5" placeholder="Descripción..."></textarea>
+                                <textarea name="descripcion" class="form-control" rows="5" placeholder="Descripción..."></textarea>
                             </div>
+                            
+                        </div>
                     </form>
+                    
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success btn-block">Aceptar</button>
-                    <button type="submit" class="btn btn-danger btn-block">Cancelar</button>
+                <button type="submit" name="sent" value="sent" class="btn btn-success btn-block">Aceptar</button>
+                            <button type="button" class="btn btn-danger btn-block" data-dismiss="modal">Cancelar</button>
+                </div>
+                {{Form::close()}}
+            </div>
+        </div>
+    </div>
+
+    {{--Modal for update--}}
+    <div class="modal fade" id="modal-edit-barco" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="padding:35px 50px;">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4>Barco</h4>
+                </div>
+                <div class="modal-body" style="padding:40px 50px;">
+                    {{Form::open(['route'=>['barcos.update',""],'method'=>'PUT', 'id'=>'update-barco'])}}
+                    <form role="form">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    {{Form::text("nombre",null,['placeholder'=> 'Nombre', 'id' => 'nombre', 'class' => 'form-control'])}}
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <select class="form-control" id="sel1" name="usuario">
+                                        @if(isset($listUsuarios))
+                                            @foreach($listUsuarios as $usuario)
+                                                @if($usuario->rol == 'Pescador')
+                                                    <option value="{{{$usuario->id}}}">{{{$usuario->nombre}}}</option>
+                                                @endif
+                                            @endforeach
+                                        @endif
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <textarea name="descripcion" class="form-control" rows="5" placeholder="Descripción..."></textarea>
+                            </div>
+                            <button type="submit" name="sent" value="sent" class="btn btn-success btn-block">Aceptar</button>
+                            <button type="button" class="btn btn-danger btn-block" data-dismiss="modal">Cancelar</button>
+                        </div>
+                    </form>
+                    {{Form::close()}}
                 </div>
             </div>
         </div>
     </div>
+
     </div>
 @stop

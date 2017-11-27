@@ -146,3 +146,7 @@ html, body {
 	border-width: 0;
 	float: left;
 }
+
+.card-options form {
+	display: inline;
+}

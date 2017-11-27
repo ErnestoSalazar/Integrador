@@ -10,7 +10,11 @@ class BarcoController extends \BaseController {
 	public function index()
 	{
 		$barcos = Barco::getBarcos();
-		return View::make('barco.index')->with('listBarcos', $barcos);
+		$usuarios = Usuario::getUsuarios();
+		return View::make('barco.index')->with([
+            'listBarcos' => $barcos,
+            'listUsuarios'=> $usuarios
+        ]);
 	}
 
 
@@ -32,7 +36,21 @@ class BarcoController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		$button = Input::get('sent');
+
+		if($button == "sent"){
+		    $nombre = Input::get('nombre');
+		    $descripcion = Input::get('descripcion');
+		    $usuarioId = (int)Input::get('usuario');
+
+		    $bool = Barco::postBarco($nombre,$descripcion,$usuarioId);
+		    if($bool){
+		        return Redirect::route('barcos.index')->withMessage("Barco registrado");
+            }
+            else{
+		        return Redirect::route('barcos.index')->withMessage(Strings::ERROR);
+            }
+        }
 	}
 
 
@@ -68,7 +86,7 @@ class BarcoController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+	    return Redirect::route('usuarios.index');
 	}
 
 
@@ -80,8 +98,35 @@ class BarcoController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+	    $button = Input::get('sent');
+	    if($button == 'sent'){
+            $bool = Barco::deleteBarco($id);
+            if($bool){
+                return Redirect::route('barcos.index')->withMessage('Registro eliminado');
+            }
+            else{
+                return Redirect::route('barcos.index')->withMessage(Strings::ERROR);
+            }
+        }
 	}
 
+	public function updateBarco($id){
+	    $button = Input::get('sent');
+	    if($button == 'sent'){
+	        $nombre = Input::get('nombre');
+	        $descripcion = Input::get('descripcion');
+	        $usuarioId = (int)Input::get('usuario');
+
+	        $bool = Barco::updateBarco($id, $nombre, $descripcion, $usuarioId);
+
+	        if($bool[0]){
+	            return Redirect::route('barcos.index')->withMessage('Información actualizada');
+            }
+            else{
+                return Redirect::route('barcos.index')->withMessage($bool[1]);
+            }
+
+        }
+    }
 
 }
