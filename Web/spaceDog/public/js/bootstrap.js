@@ -2374,4 +2374,9 @@ if (typeof jQuery === 'undefined') {
     })
   })
 
+
+
+  if(attr('aria-expanded', false)) {
+    document.getElementById("rex").style.backgroundColor = "red";
+  }
 }(jQuery);

@@ -114,16 +114,6 @@ html, body {
 	font-size: 80px;
 }
 
-.btn-delete {
-	width: 200px;
-	background-color: red;
-	color: white;
-}
-.btn-edit {
-	width: 200px;
-	background-color: blue;
-	color: white;
-}
 
 .card-options{
 	position: absolute;

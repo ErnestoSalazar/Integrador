@@ -90,12 +90,16 @@
                             <div class="form-group">
                                 <textarea name="descripcion" class="form-control" rows="5" placeholder="Descripción..."></textarea>
                             </div>
-                            <button type="submit" name="sent" value="sent" class="btn btn-success btn-block">Aceptar</button>
-                            <button type="button" class="btn btn-danger btn-block" data-dismiss="modal">Cancelar</button>
+                            
                         </div>
                     </form>
-                    {{Form::close()}}
+                    
                 </div>
+                <div class="modal-footer">
+                <button type="submit" name="sent" value="sent" class="btn btn-success btn-block">Aceptar</button>
+                            <button type="button" class="btn btn-danger btn-block" data-dismiss="modal">Cancelar</button>
+                </div>
+                {{Form::close()}}
             </div>
         </div>
     </div>

@@ -15,8 +15,11 @@
             {{Form::open(array('route'=>'login.store'))}}
                 <p>{{Form::text('login',null,['placeholder'=> 'Email'])}}</p>
                 <p>{{Form::password('password',['placeholder'=>'Password'])}}</p>
+                
                 <p class="submit">
+                     <button type="button" class="btn-login" >
                     <input type="submit" name="sent" value="Login">
+                    </button>
                 </p>
                 <p class="submit"><input type="submit" value="Recuperar contraseña"></p>
             {{Form::close()}}
