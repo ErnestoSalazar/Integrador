@@ -21,6 +21,10 @@ Route::get('/reporte','ReporteController@index');
 Route::post('/usuarios/edit/{id}', 'UsuarioController@editUsuario');
 Route::post('/usuarios/delete/{id}','UsuarioController@deleteUsuario');
 
+
+Route::put('/barcos/edit/{id}','BarcoController@updateBarco');
+
 Route::resource('login','LoginController');
 Route::resource('usuarios','UsuarioController');
+Route::resource('barcos', 'BarcoController');
 Route::resource('entradas','EntradaController');

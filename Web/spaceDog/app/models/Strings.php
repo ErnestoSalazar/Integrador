@@ -14,4 +14,5 @@ class Strings
     const CONTENT_JSON = "Content-Type: application/json";
     const AUTH_TOKEN = "Authorization: bearer";
 
+    const ERROR = "Algo ha salido mal";
 }
