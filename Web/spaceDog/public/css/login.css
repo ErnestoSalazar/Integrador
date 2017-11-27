@@ -6,6 +6,7 @@ body {
     width: 640px; }
   
   .login {
+    height: 180px;
     position: relative;
     margin: 0 auto;
     padding: 20px 20px 20px;
@@ -68,18 +69,40 @@ body {
       outline-color: rgba(0, 0, 0, 0.08);
       outline-offset: 0; }
   
-  input[type=submit] {
-    padding: 0 18px;
-    height: 29px;
-    font-size: 12px;
-    font-weight: bold;
-    background: #ed1c24;
-    border-radius: 16px;
-    outline: 0;
-    color: #fff; }
-  
   .hola {
     margin: 0 auto;
     text-align: center; }
   
-  
+    .card-options .btn-login{
+      position: relative;
+      width: 50%;
+      height: 100%;
+      box-sizing: border-box;
+      background-color: #ed1c24;
+      border-width: 0;
+      float: left;
+      color: white;
+    }
+
+    .card-options{
+      position: absolute;
+      display: block;
+      bottom:0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: 30px;
+      background-color: red;
+      z-index: 2;
+    }
+
+    .card-options .btn-recuperar{
+      position: relative;
+      width: 50%;
+      height: 100%;
+      box-sizing: border-box;
+      background-color: #1f648b;
+      border-width: 0;
+      float: left;
+      color: white;
+    }

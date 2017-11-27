@@ -102,15 +102,13 @@
                                     {{Form::text('correo',null,['placeholder'=>'Correo', 'class'=>'form-control'])}}
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <button type="submit" name="sent" value="sent" class="btn btn-success btn-block">Aceptar</button>
-                            </div>
-                            <div class="col-md-6">
-                                <button type="button" class="btn btn-danger btn-block" data-dismiss="modal">Cancelar</button>
-                            </div>
                         </div>
-                    {{Form::close()}}
                 </div>
+                <div class="modal-footer">
+                    <button type="submit" name="sent" value="sent" class="btn btn-success btn-block">Aceptar</button>
+                    <button type="button" class="btn btn-danger btn-block" data-dismiss="modal">Cancelar</button>
+                </div>
+                {{Form::close()}}
             </div>
         </div>
     </div>

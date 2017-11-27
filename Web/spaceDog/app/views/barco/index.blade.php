@@ -74,9 +74,11 @@
                             <div class="form-group">
                                 <textarea class="form-control" rows="5" placeholder="Descripción..."></textarea>
                             </div>
-                            <button type="submit" class="btn btn-success btn-block">Aceptar</button>
-                            <button type="submit" class="btn btn-danger btn-block">Cancelar</button>
                     </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success btn-block">Aceptar</button>
+                    <button type="submit" class="btn btn-danger btn-block">Cancelar</button>
                 </div>
             </div>
         </div>
