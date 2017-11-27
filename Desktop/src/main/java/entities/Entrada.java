@@ -31,11 +31,15 @@ public class Entrada {
     public Entrada() {
     }
 
-    public Entrada(String turno, int usuarioId, List<Integer> cargasId) {
-        this.turno = turno;
+    public Entrada(int usuarioId, List<Integer> cargasId) {
         this.usuarioId = usuarioId;
         this.cargasId = cargasId;
     }
+
+    public Entrada(List<Integer> cargasId) {
+        this.cargasId = cargasId;
+    }
+    
     
     
     public List<Entrada> getListEntradas(String salida) {
@@ -56,7 +60,7 @@ public class Entrada {
         String json = gson.toJson(Entrada.this);
         return json;
     }
-
+    
     
     //Getter and Setter
     public int getId() {

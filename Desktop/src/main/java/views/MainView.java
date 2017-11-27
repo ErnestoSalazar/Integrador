@@ -44,6 +44,7 @@ public class MainView extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Space Dog System");
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(900, 610));
 
@@ -62,6 +63,8 @@ public class MainView extends javax.swing.JFrame {
         btnLogout.setBorderPainted(false);
         btnLogout.setOpaque(true);
 
+        lblUsername.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
+        lblUsername.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblUsername.setText("Nombre User Nombre User");
 
         lblIniciales.setFont(new java.awt.Font("Lucida Grande", 1, 36)); // NOI18N

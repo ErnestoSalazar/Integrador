@@ -140,7 +140,6 @@ public class PanelUsuarios extends javax.swing.JPanel {
         formUsuario.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         formUsuario.setTitle("Usuario");
         formUsuario.setAlwaysOnTop(true);
-        formUsuario.setPreferredSize(new java.awt.Dimension(500, 280));
         formUsuario.setResizable(false);
         formUsuario.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -160,7 +159,7 @@ public class PanelUsuarios extends javax.swing.JPanel {
 
         txtRfc.setText("RFC");
 
-        cbRol.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Supervisor", "Admin", "Pescador" }));
+        cbRol.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Supervisor", "Administrador", "Pescador" }));
 
         txtCorreo.setText("Correo");
 
@@ -337,8 +336,6 @@ public class PanelUsuarios extends javax.swing.JPanel {
                 btnBuscarUsuarioActionPerformed(evt);
             }
         });
-
-        txtBuscarUsuario.setText("Nombre");
 
         jLabel6.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         jLabel6.setText("Buscar:");
@@ -557,7 +554,7 @@ public class PanelUsuarios extends javax.swing.JPanel {
                     tblUsuarios.setEnabled(true);
                     
                 } else {
-                    JOptionPane.showMessageDialog(formUsuario, "Error al agregar usuario");
+                    JOptionPane.showMessageDialog(formUsuario, "Error al editar usuario");
                 }
                 
             }

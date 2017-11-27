@@ -239,8 +239,5 @@ public class Peticiones {
         }
         return salida;
     }
-
-    public String get(String MODIFY_USERS, int idSeleccionado, Token token) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 }
