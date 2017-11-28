@@ -62,7 +62,7 @@ namespace SpaceDog.Service.Controllers
             var userModel = usuarioDto.ToModel();
             _usersRepository.Add(userModel);
 
-            EmailService.SendPasswordForNewUser(userModel.Correo, $"Bienvenido nuevo usuario, aquí tienes tu contraseña de acceso: {password}");
+            EmailService.SendPasswordForNewUser(userModel.Correo, $"Bienvenido {userModel.Nombre} {userModel.Apellido}, aquí tienes tu contraseña de acceso: {password} (No olvides cambiarlo)");
 
             usuarioDto.Id = userModel.Id;
             return Created(
@@ -100,9 +100,17 @@ namespace SpaceDog.Service.Controllers
             return StatusCode(System.Net.HttpStatusCode.NoContent);
         }
 
-        public void Delete(int id)
+        public IHttpActionResult Delete(int id)
         {
+            var users = _usersRepository.GetList();
+
+            if(users.Count > 0 && users.Count < 2)
+            {
+                return Content(System.Net.HttpStatusCode.BadRequest, Strings.ELIMINACION_INVALIDA_ULTIMO_USUARIO);
+            }
             _usersRepository.DeleteD(id);
+
+            return Content(System.Net.HttpStatusCode.NoContent, "usuario eliminado");
         }
 
 

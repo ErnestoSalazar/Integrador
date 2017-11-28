@@ -6,6 +6,8 @@ using SpaceDog.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 
@@ -61,6 +63,63 @@ namespace SpaceDog.Service.Controllers
                 Url.Link("DefaultApi", new { controller = "Entradas", id = entradaDto.Id }),
                 entradaModel
                 );
+
+        }
+
+        [HttpPost]
+        [Route("api/entradas/formdata")]
+        public async System.Threading.Tasks.Task<IHttpActionResult> PostEntradasAsync()
+        {
+            if (!Request.Content.IsMimeMultipartContent())
+            {
+                throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
+            }
+            string root = HttpContext.Current.Server.MapPath("~/App_Data");
+            var provider = new MultipartFormDataStreamProvider(root);
+
+            try
+            {
+                // Read the form data.
+                await Request.Content.ReadAsMultipartAsync(provider);
+
+                // This illustrates how to get the file names.
+
+                int usuarioId = int.Parse(provider.FormData.Get("userId"));
+                List<char> cargasIdForm = provider.FormData.Get("cargasId").ToList();
+
+                List<int> cargasId = new List<int>();
+                foreach(var number in cargasIdForm)// char in cargasIdForm
+                {
+                    int cargaId;
+                    bool result = Int32.TryParse(number.ToString(), out cargaId);
+                    if (result)
+                    {
+                        cargasId.Add(cargaId);
+                    }
+                }
+
+                EntradaDto entradaDto = new EntradaDto();
+                var cargas = _entradasRepository.GetListOfCargasInEntrada(cargasId);
+                entradaDto.UsuarioId = usuarioId;
+                entradaDto.Cargas = cargas;
+                entradaDto.Turno = (DateTimeService.GetTimeNow() < new TimeSpan(12, 0, 0)) ? Turno.Matutino : Turno.Vespertino;
+
+                var entradaModel = entradaDto.ToModel();
+
+                _entradasRepository.Add(entradaModel);
+
+                entradaDto.Id = entradaModel.Id;
+
+                return Created(
+                        Url.Link("DefaultApi", new { controller = "Entradas", id = entradaDto.Id }),
+                        entradaModel
+                    );
+
+            }
+            catch (System.Exception e)
+            {
+                return InternalServerError();
+            }
 
         }
 

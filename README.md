@@ -29,6 +29,8 @@ after Login you will recieve a response like this :
     "userName": "correo@example.com",
     "rol": "Admin",
     "userId": "1",
+    "nombre": "Ernesto",
+    "apellido": "Salazar",
     ".issued": "Fri, 24 Nov 2017 22:24:27 GMT",
     ".expires": "Sat, 25 Nov 2017 22:24:27 GMT"
 }
@@ -43,11 +45,13 @@ __Authorization : bearer *access_token*__
 
 ### Status
 #### Ok
-* *When updating any entity you will get a status code of __204__*
-
 * *When creating any new entity you will get a status code of __201__* and a json response with inserted data
 
-* *when retrieving any entity you will get a status code of __200__* and json response or an array of jsons if retrieving a list of entities
+* *When retrieving any entity you will get a status code of __200__* and json response or an array of jsons if retrieving a list of entities
+
+* *When updating any entity you will get a status code of __204__*
+
+* *When deleting any entity you will get a status code of __204__*
 
 #### Error
 * *When retrieving any entity or list of entities that does not exist you will get a status of __404__*

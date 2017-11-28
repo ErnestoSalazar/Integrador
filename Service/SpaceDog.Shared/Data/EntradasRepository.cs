@@ -33,11 +33,27 @@ namespace SpaceDog.Shared.Data
 
         public override IList<Entrada> GetList()
         {
-            return Context.Entradas
+            var cargas = Context.Cargas.Include(c => c.Barco).ToList();
+            var entradas = Context.Entradas
                 .Include(e => e.Usuario)
                 .Include(e => e.Cargas)
                 .Where(e => e.IsDeleted != true)
                 .ToList();
+
+            foreach (var entrada in entradas)
+            {
+                entrada.Cargas = new List<Carga>();
+                foreach (var carga in cargas)
+                {
+                    if (entrada.Id == carga.EntradaId)
+                    {
+                        entrada.Cargas.Add(carga);
+                    }
+                }
+            }
+
+            return entradas;
+
         }
 
         public void DeleteD(int id)
@@ -50,6 +66,9 @@ namespace SpaceDog.Shared.Data
 
         public ReporteDto GetReporte(int id)
         {
+
+            var cargas = Context.Cargas.Include(c => c.Barco).Where(c => c.EntradaId == id).ToList();
+
             var entrada = Context.Entradas
                 .Select(en => new ReporteDto
                 {
@@ -60,11 +79,13 @@ namespace SpaceDog.Shared.Data
                     Turno = en.Turno,
                     UsuarioId = en.UsuarioId,
                     Usuario = en.Usuario,
-                    Cargas = en.Cargas.ToList(),
                     IsDeleted = en.IsDeleted
                 })
                 .Where(e => e.Id == id && e.IsDeleted != true) //e.Cargas.Any(c => c.Especie.ToString() == especie) &&
                 .SingleOrDefault();
+
+
+            entrada.Cargas = cargas;
 
             if (entrada != null  && entrada.Cargas.Count > 0)
             {
@@ -108,6 +129,7 @@ namespace SpaceDog.Shared.Data
 
         public List<EntradaDto> GetListByDate(DateTime dateInicio, DateTime dateFin)
         {
+            var cargas = Context.Cargas.Include(c => c.Barco).ToList();
             var entradas = Context.Entradas
                 .Select(en => new EntradaDto
                 {
@@ -118,11 +140,22 @@ namespace SpaceDog.Shared.Data
                     Turno = en.Turno,
                     UsuarioId = en.UsuarioId,
                     Usuario = en.Usuario,
-                    Cargas = en.Cargas.ToList(),
                     IsDeleted = en.IsDeleted
                 })
                 .Where(en => en.Fecha >= dateInicio && en.Fecha <= dateFin && en.IsDeleted != true) //e.Cargas.Any(c => c.Especie.ToString() == especie) &&
                 .ToList();
+
+            foreach (var entrada in entradas)
+            {
+                entrada.Cargas = new List<Carga>();
+                foreach(var carga in cargas)
+                {
+                    if(entrada.Id == carga.EntradaId)
+                    {
+                        entrada.Cargas.Add(carga);
+                    }
+                }
+            }
 
             return entradas;
         }
