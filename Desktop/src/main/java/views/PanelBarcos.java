@@ -42,6 +42,8 @@ public class PanelBarcos extends javax.swing.JPanel {
     
     Peticiones p = new Peticiones();
     List<Barco> barcos = new ArrayList<>();
+    
+    //combo box obtener pescadores de existen
     List<Usuario> pescadores = new ArrayList<>();
     
     public void setTableBarcos() {
@@ -78,8 +80,7 @@ public class PanelBarcos extends javax.swing.JPanel {
         //si no hay barcos
         if(!json.equals("")) {
             barcos = new Barco().getListBarcos(json);
-
-            barcos.size();
+            
 
             //filas
             Object[] filas = new Object[columnas.length];
@@ -94,6 +95,7 @@ public class PanelBarcos extends javax.swing.JPanel {
             }
 
             btnBuscarBarco.setEnabled(true);
+            
         } else {
             btnBuscarBarco.setEnabled(false);
         }
@@ -155,7 +157,7 @@ public class PanelBarcos extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(250, 250, 250));
 
         btnAceptarBarco.setBackground(new java.awt.Color(55, 179, 68));
-        btnAceptarBarco.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        btnAceptarBarco.setFont(new java.awt.Font("Lucida Grande", 1, 12)); // NOI18N
         btnAceptarBarco.setForeground(new java.awt.Color(255, 255, 255));
         btnAceptarBarco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/accept20x20White.png"))); // NOI18N
         btnAceptarBarco.setText("ACEPTAR");
@@ -168,7 +170,7 @@ public class PanelBarcos extends javax.swing.JPanel {
         });
 
         btnCancelarBarco.setBackground(new java.awt.Color(237, 28, 36));
-        btnCancelarBarco.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        btnCancelarBarco.setFont(new java.awt.Font("Lucida Grande", 1, 12)); // NOI18N
         btnCancelarBarco.setForeground(new java.awt.Color(255, 255, 255));
         btnCancelarBarco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cancel20x20White.png"))); // NOI18N
         btnCancelarBarco.setText("CANCELAR");
@@ -295,8 +297,6 @@ public class PanelBarcos extends javax.swing.JPanel {
 
         jLabel6.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         jLabel6.setText("Buscar:");
-
-        txtBuscarBarco.setText("Nombre");
 
         btnBuscarBarco.setBackground(new java.awt.Color(249, 183, 72));
         btnBuscarBarco.setFont(new java.awt.Font("Lucida Grande", 1, 12)); // NOI18N
@@ -441,11 +441,11 @@ public class PanelBarcos extends javax.swing.JPanel {
         List<Barco> buscados = new ArrayList<>();
         
         if(!buscar.equals("")) {
-            //consultar usuarios
+            //consultar barcos
             for (int i = 0; i < tblBarcos.getRowCount(); i++) {
                 for (int j = 0; j < tblBarcos.getColumnCount(); j++) {
                     String s = String.valueOf(model.getValueAt(i, j)).toLowerCase();
-                    System.out.println(s);
+                    
                     if (s.contains(buscar)) {
                         buscados.add(barcos.get(i));
                         System.out.println(barcos.get(i));
@@ -499,9 +499,8 @@ public class PanelBarcos extends javax.swing.JPanel {
             txtDescripcion.getText()
         };
         
-        boolean evaluarDatos = evaluarDatos(datos);
         
-        if (evaluarDatos) {
+        if (evaluarDatos(datos)) {
             //Crear barco
             Barco barco = new Barco(txtNombre.getText().trim(), 
                     txtDescripcion.getText().trim(), 
@@ -541,7 +540,7 @@ public class PanelBarcos extends javax.swing.JPanel {
                     tblBarcos.setEnabled(true);
                     
                 } else {
-                    JOptionPane.showMessageDialog(formBarco, "Error al agregar barco");
+                    JOptionPane.showMessageDialog(formBarco, "Error al editar barco");
                 }
             }
             

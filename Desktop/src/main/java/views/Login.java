@@ -47,7 +47,7 @@ public class Login extends javax.swing.JFrame {
                         new PanelEntradas(), null, 
                         1);
 
-        if(token.getRol().equals("Admin")) {
+        if(token.getRol().contains("Administrador")) {
             MainView.tbMain.insertTab("Barcos", 
                         new ImageIcon(this.getClass().getResource("/images/boat50x50Black.png")), 
                         new PanelBarcos(), null, 
@@ -115,11 +115,11 @@ public class Login extends javax.swing.JFrame {
 
         jLabel1.setText("Usuario:");
 
-        txtUser.setText("fernando.marenco10@gmail.com");
+        txtUser.setText("o.denaf@gmail.com");
 
         jLabel2.setText("Contraseña:");
 
-        txtPassword.setText("2261");
+        txtPassword.setText("1182");
 
         btnIngresar.setBackground(new java.awt.Color(237, 28, 36));
         btnIngresar.setFont(new java.awt.Font("Lucida Grande", 1, 12)); // NOI18N

@@ -17,7 +17,7 @@ public class Token {
     private String token_type;
     private String error_description;
     private String rol;
-    private int id;
+    private int userId;
     private static Token token;
 
     public Token() {
@@ -69,14 +69,6 @@ public class Token {
     public void setRol(String rol) {
         this.rol = rol;
     }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
     
     public static Token getToken() {
         return token;
@@ -85,11 +77,18 @@ public class Token {
     public static void setToken(Token aToken) {
         token = aToken;
     }
-    
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 
     @Override
     public String toString() {
-        return "Token{" + "access_token=" + access_token + ", token_type=" + token_type + ", error_description=" + error_description + ", rol=" + rol + ", id=" + id + '}';
+        return "Token{" + "access_token=" + access_token + ", token_type=" + token_type + ", error_description=" + error_description + ", rol=" + rol + ", userId=" + userId + '}';
     }
 
     
