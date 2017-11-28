@@ -15,4 +15,8 @@ class Strings
     const AUTH_TOKEN = "Authorization: bearer";
 
     const ERROR = "Algo ha salido mal";
+
+    const R_ELIMINADO = "Registro eliminado";
+    const R_AGREGADO = "Registro agregado";
+    const R_ACTUALIZADO = "Registro actualizado";
 }

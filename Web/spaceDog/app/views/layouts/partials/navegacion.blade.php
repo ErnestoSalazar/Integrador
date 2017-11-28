@@ -16,7 +16,7 @@
                 </div>
                 <div class="navbar3 navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right hidden-xs">
-                        <li><a href="#">Nombre usuario</a></li>
+                        <li><a href="#">{{{Session::get('userName')}}}</a></li>
                         <li><a href="#"> <i class="material-icons">power_settings_new</i></a></li>
                     </ul>
                 </div>
