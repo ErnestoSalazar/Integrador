@@ -40,6 +40,12 @@ public class Reporte extends Entrada {
         return entradas;
     }
     
+    public Reporte jsonToReporte(String json) {
+        Gson gson = new Gson();
+        Reporte reporte = gson.fromJson(json, Reporte.class);
+        return reporte;
+    }
+    
     public double getTotalMacarela() {
         return totalMacarela;
     }

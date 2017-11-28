@@ -26,4 +26,6 @@ public class Constantes {
     
     public static final String ENTRADAS = URL + "/api/entradas";
     public static final String MODIFY_ENTRADAS = URL + "/api/entradas/";
+    
+    public static final String REPORTES = ENTRADAS + "?";
 }
