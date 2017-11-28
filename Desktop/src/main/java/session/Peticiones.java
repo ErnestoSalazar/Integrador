@@ -95,6 +95,35 @@ public class Peticiones {
         return salida;
     }
     
+    public String getByFecha(String uri, Token token, String fechaInicio, String fechaFin) {
+        String salida = null;
+        try {
+            CloseableHttpClient httpClient = Client.getHttpClient(token);
+            
+            URI uriParam = new URIBuilder(uri)
+                    .addParameter("fechaInicio", fechaInicio)
+                    .addParameter("fechaFin", fechaFin)
+                    .build();
+            
+            HttpGet httpGet = new HttpGet(uriParam);
+            
+            CloseableHttpResponse httpResponse = httpClient.execute(httpGet);
+            
+            int status = httpResponse.getStatusLine().getStatusCode();
+            
+            if (status >= 200 && status < 300) {
+                salida = EntityUtils.toString(httpResponse.getEntity());
+            }
+            
+        } catch (URISyntaxException ex) {
+            System.out.println(ex);
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
+        
+        return salida;
+    }
+    
     public String post(String uri, Token token, String json) {
         String salida = null;
         try {

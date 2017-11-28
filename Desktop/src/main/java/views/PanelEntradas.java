@@ -354,7 +354,6 @@ public class PanelEntradas extends javax.swing.JPanel {
         formEntrada.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         formEntrada.setTitle("Entrada");
         formEntrada.setAlwaysOnTop(true);
-        formEntrada.setPreferredSize(new java.awt.Dimension(500, 530));
         formEntrada.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formEntradasClose(evt);
@@ -694,7 +693,7 @@ public class PanelEntradas extends javax.swing.JPanel {
         });
 
         togServicio.setText("Servicio");
-        togEditar.setVisible(false);
+        togServicio.setVisible(false);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);

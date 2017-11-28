@@ -15,6 +15,8 @@ import com.itextpdf.text.pdf.draw.LineSeparator;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -44,6 +46,8 @@ public class PanelReportes extends javax.swing.JPanel {
         
     }
     
+    DateFormat df = DateFormat.getDateInstance();
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -56,7 +60,6 @@ public class PanelReportes extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         lblPorcMacarela = new javax.swing.JLabel();
         jLabel37 = new javax.swing.JLabel();
-        txtFechaInicio = new javax.swing.JFormattedTextField();
         jLabel9 = new javax.swing.JLabel();
         lblPorcCrinuda = new javax.swing.JLabel();
         btnGenerarReporte = new javax.swing.JButton();
@@ -84,7 +87,6 @@ public class PanelReportes extends javax.swing.JPanel {
         jLabel31 = new javax.swing.JLabel();
         jLabel44 = new javax.swing.JLabel();
         lblTotalAnchoveta = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
         lblTotalBocona = new javax.swing.JLabel();
@@ -100,10 +102,18 @@ public class PanelReportes extends javax.swing.JPanel {
         jLabel18 = new javax.swing.JLabel();
         lblTotalJaponesa = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
-        txtFechaFin = new javax.swing.JFormattedTextField();
+        datFechaFin = new com.toedter.calendar.JDateChooser();
+        datFechaInicio = new com.toedter.calendar.JDateChooser();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(245, 245, 245));
         setPreferredSize(new java.awt.Dimension(881, 492));
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelClick(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         jLabel5.setText("Cargas:");
@@ -113,8 +123,6 @@ public class PanelReportes extends javax.swing.JPanel {
 
         jLabel37.setFont(new java.awt.Font("Lucida Grande", 1, 12)); // NOI18N
         jLabel37.setText("Total:");
-
-        txtFechaInicio.setText("Inicio");
 
         jLabel9.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         jLabel9.setText("Macarela");
@@ -245,9 +253,6 @@ public class PanelReportes extends javax.swing.JPanel {
         lblTotalAnchoveta.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
         lblTotalAnchoveta.setText("num");
 
-        jLabel3.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
-        jLabel3.setText("Ingresar fecha:");
-
         jLabel16.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         jLabel16.setText("Total");
 
@@ -276,6 +281,11 @@ public class PanelReportes extends javax.swing.JPanel {
         btnBuscarReporte.setText("BUSCAR");
         btnBuscarReporte.setBorderPainted(false);
         btnBuscarReporte.setOpaque(true);
+        btnBuscarReporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarReporteActionPerformed(evt);
+            }
+        });
 
         lblPorcRayadillo.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
         lblPorcRayadillo.setText("porc");
@@ -298,7 +308,17 @@ public class PanelReportes extends javax.swing.JPanel {
         jLabel34.setFont(new java.awt.Font("Lucida Grande", 1, 12)); // NOI18N
         jLabel34.setText("Porcentaje:");
 
-        txtFechaFin.setText("Fin");
+        datFechaFin.setBackground(new java.awt.Color(245, 245, 245));
+        datFechaFin.setDateFormatString("dd/MM/yyyy");
+
+        datFechaInicio.setBackground(new java.awt.Color(245, 245, 245));
+        datFechaInicio.setDateFormatString("dd-MM-yyyy");
+
+        jLabel4.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        jLabel4.setText("Inicio:");
+
+        jLabel6.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        jLabel6.setText("Fin:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -307,30 +327,31 @@ public class PanelReportes extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel5))
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 169, Short.MAX_VALUE)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnBuscarReporte)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnGenerarReporte)
-                        .addGap(144, 144, 144))
                     .addGroup(javax.swing.GroupLayout.Alignment.CENTER, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.CENTER)
+                            .addGroup(javax.swing.GroupLayout.Alignment.CENTER, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                                .addComponent(jScrollPane4)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel4)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(datFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLabel6)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(datFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(12, 12, 12)
+                                    .addComponent(btnBuscarReporte)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(btnGenerarReporte)))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.CENTER))
                         .addGap(6, 6, 6))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel8))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 154, Short.MAX_VALUE)
+                        .addGap(0, 154, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9)
                             .addGroup(layout.createSequentialGroup()
@@ -412,16 +433,20 @@ public class PanelReportes extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBuscarReporte)
-                    .addComponent(btnGenerarReporte)
-                    .addComponent(txtFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(datFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(btnBuscarReporte)
+                                .addComponent(btnGenerarReporte))
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(datFechaFin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -648,10 +673,43 @@ public class PanelReportes extends javax.swing.JPanel {
         
     }//GEN-LAST:event_btnGenerarReporteActionPerformed
 
+    private void btnBuscarReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarReporteActionPerformed
+        
+        datFechaInicio.setFocusable(false);
+        datFechaFin.setFocusable(false);
+        
+        try {
+            String fechaInicio = new SimpleDateFormat("yyyy-MM-dd").format(datFechaInicio.getDate());
+            String fechaFin = new SimpleDateFormat("yyyy-MM-dd").format(datFechaFin.getDate());
+            
+            LocalDate f1 = LocalDate.parse(fechaInicio);
+            LocalDate f2 = LocalDate.parse(fechaFin);
+            
+            if (f1.isAfter(f2)) {
+                JOptionPane.showMessageDialog(this, "Introducir bien un rango de fechas");
+            } else {
+                System.out.println(fechaInicio + fechaFin);
+                
+                
+                
+            }
+            
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(this, "Introducir un rango de fechas");
+        }
+        
+    }//GEN-LAST:event_btnBuscarReporteActionPerformed
+
+    private void panelClick(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelClick
+        // TODO add your handling code here:
+    }//GEN-LAST:event_panelClick
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscarReporte;
     private javax.swing.JButton btnGenerarReporte;
+    private com.toedter.calendar.JDateChooser datFechaFin;
+    private com.toedter.calendar.JDateChooser datFechaInicio;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -665,16 +723,17 @@ public class PanelReportes extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel39;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
@@ -696,8 +755,6 @@ public class PanelReportes extends javax.swing.JPanel {
     private javax.swing.JLabel lblTotalRayadillo;
     private javax.swing.JTable tblCargasReporte;
     private javax.swing.JTable tblEntradasReporte;
-    private javax.swing.JFormattedTextField txtFechaFin;
-    private javax.swing.JFormattedTextField txtFechaInicio;
     // End of variables declaration//GEN-END:variables
 
 }

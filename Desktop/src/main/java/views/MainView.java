@@ -5,8 +5,13 @@
  */
 package views;
 
-import java.awt.Color;
+import static entities.Constantes.MODIFY_USERS;
+import static entities.Constantes.USERS;
+import entities.Usuario;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import session.Peticiones;
+import session.Token;
 
 /**
  *
@@ -23,8 +28,25 @@ public class MainView extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         
+        setUsuario();
+    }
+    
+    Peticiones p = new Peticiones();
+    
+    public void setUsuario() {
+        Token token = Token.getToken();
+        
+        String json = p.get(MODIFY_USERS, String.valueOf(token.getUserId()), token);
+        Usuario usuario = new Usuario().jsonToUser(json);
+        
+        String iniciales = usuario.getNombre().substring(0, 1) + usuario.getApellido().substring(0, 1);
+        String nombre = usuario.getNombre() +" "+ usuario.getApellido();
+        
+        lblIniciales.setText(iniciales);
+        lblUsername.setText(nombre);
         
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -62,9 +84,14 @@ public class MainView extends javax.swing.JFrame {
         btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/exit20x20Black.png"))); // NOI18N
         btnLogout.setBorderPainted(false);
         btnLogout.setOpaque(true);
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
 
         lblUsername.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
-        lblUsername.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblUsername.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblUsername.setText("Nombre User Nombre User");
 
         lblIniciales.setFont(new java.awt.Font("Lucida Grande", 1, 36)); // NOI18N
@@ -165,6 +192,23 @@ public class MainView extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_mouseClickedTab
+
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        int sesion = JOptionPane.showConfirmDialog(this, "¿Esta seguro de salir?");
+        
+        switch (sesion) {
+            case 0:
+                Login login = new Login();
+                login.setVisible(true);
+                
+                this.dispose();
+                Token.setTokenNull();
+                break;
+            case 1:
+                break;
+        }
+        
+    }//GEN-LAST:event_btnLogoutActionPerformed
 
     /**
      * @param args the command line arguments
