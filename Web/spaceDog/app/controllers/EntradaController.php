@@ -136,5 +136,26 @@ class EntradaController extends \BaseController {
         }
     }
 
+    public function findByFolio(){
+	    $button = Input::get('sent');
+	    if($button == 'sent'){
+
+            $especies = ['Macarela', 'Japonesa', 'Monterrey', 'Rayadillo', 'Bocona', 'Anchoveta', 'Crinuda'];
+            $tallas = ['s', 'm', 'l', 'xl'];
+            $condiciones = ['Mala', 'Regular', 'Buena'];
+
+	        $folio = Input::get('folio');
+	        $entrada = Entrada::getEntradaByFolio($folio);
+            $barcos = Barco::getBarcos();
+	        return View::make('entrada.index')->with([
+                "listBarcos" => $barcos,
+                "listEntradas" => $entrada,
+                "listEspecies" => $especies,
+                "listTallas" => $tallas,
+                "listCondiciones" => $condiciones
+            ]);
+        }
+    }
+
 
 }
