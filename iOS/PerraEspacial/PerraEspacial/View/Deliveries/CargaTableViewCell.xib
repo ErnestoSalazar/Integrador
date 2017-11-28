@@ -30,9 +30,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="237.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Barco" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3lX-mW-NUl">
-                                <rect key="frame" x="17.5" y="15" width="54.5" height="21"/>
+                                <rect key="frame" x="18" y="15" width="62" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="54.5" id="XkJ-Ab-VZo"/>
+                                    <constraint firstAttribute="width" constant="62" id="XkJ-Ab-VZo"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -66,16 +66,16 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Condición" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dJ6-zb-g3f">
-                                <rect key="frame" x="17.5" y="159" width="93.5" height="21"/>
+                                <rect key="frame" x="18" y="159" width="106" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="93.5" id="mCo-rA-Ibc"/>
+                                    <constraint firstAttribute="width" constant="106" id="mCo-rA-Ibc"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1MA-dX-6Dn">
-                                <rect key="frame" x="80" y="16.5" width="222" height="19.5"/>
+                                <rect key="frame" x="80.5" y="16.5" width="221.5" height="19.5"/>
                                 <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -99,7 +99,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tPF-PW-pVa">
-                                <rect key="frame" x="119" y="160.5" width="184" height="19.5"/>
+                                <rect key="frame" x="119.5" y="160.5" width="183.5" height="19.5"/>
                                 <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -148,7 +148,7 @@
                             <constraint firstItem="1MA-dX-6Dn" firstAttribute="centerY" secondItem="3lX-mW-NUl" secondAttribute="centerY" id="5AQ-Xf-Qgl"/>
                             <constraint firstItem="dJ6-zb-g3f" firstAttribute="leading" secondItem="wbG-DV-iDE" secondAttribute="leading" constant="17.5" id="5lf-ZT-WnO"/>
                             <constraint firstItem="klN-fd-uin" firstAttribute="leading" secondItem="wbG-DV-iDE" secondAttribute="leading" constant="17.5" id="AgN-Hj-fMP"/>
-                            <constraint firstItem="1MA-dX-6Dn" firstAttribute="leading" secondItem="3lX-mW-NUl" secondAttribute="trailing" constant="8" id="BFl-iY-Jkc"/>
+                            <constraint firstItem="1MA-dX-6Dn" firstAttribute="leading" secondItem="3lX-mW-NUl" secondAttribute="trailing" constant="0.5" id="BFl-iY-Jkc"/>
                             <constraint firstItem="UfS-iU-O4S" firstAttribute="leading" secondItem="wbG-DV-iDE" secondAttribute="leading" id="BbE-P6-Nme"/>
                             <constraint firstItem="t8I-Gz-S5U" firstAttribute="leading" secondItem="Dl2-Oq-MWB" secondAttribute="trailing" constant="8" id="C4f-bu-XG5"/>
                             <constraint firstItem="t8I-Gz-S5U" firstAttribute="centerY" secondItem="Dl2-Oq-MWB" secondAttribute="centerY" id="GEm-3g-Ywf"/>
@@ -166,7 +166,7 @@
                             <constraint firstItem="ZEM-CU-0Jc" firstAttribute="leading" secondItem="mux-yj-h1e" secondAttribute="trailing" constant="8" id="hjd-TF-wYT"/>
                             <constraint firstItem="3lX-mW-NUl" firstAttribute="leading" secondItem="wbG-DV-iDE" secondAttribute="leading" constant="17.5" id="rME-y3-Kfw"/>
                             <constraint firstAttribute="bottom" secondItem="UfS-iU-O4S" secondAttribute="bottom" id="yJh-S3-z5G"/>
-                            <constraint firstItem="tPF-PW-pVa" firstAttribute="leading" secondItem="dJ6-zb-g3f" secondAttribute="trailing" constant="8" id="zdc-n4-Bnx"/>
+                            <constraint firstItem="tPF-PW-pVa" firstAttribute="leading" secondItem="dJ6-zb-g3f" secondAttribute="trailing" constant="-4.5" id="zdc-n4-Bnx"/>
                         </constraints>
                     </view>
                 </subviews>

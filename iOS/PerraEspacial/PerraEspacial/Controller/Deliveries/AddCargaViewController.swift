@@ -103,19 +103,24 @@ class AddCargaViewController: UIViewController, UITextFieldDelegate, UIPickerVie
     
     //MARK: - Actions
     @IBAction func saveButtonPressed(_ sender: Any) {
+        self.view.makeToastActivity(.center)
         if verifyTextFields() {
             let carga = self.createCargaObject()
             if isEditingCarga {
                 if carga.id != 0 {
                     self.editCarga(carga: carga)
                 }else {
+                    self.view.hideToastActivity()
                     cargas[self.indexToEdit] = carga
                 }
             }else {
+                self.view.hideToastActivity()
                 cargas.append(carga)
             }
             
             self.navigationController?.popViewController(animated: true)
+        }else {
+            self.view.hideToastActivity()
         }
     }
     
@@ -257,9 +262,11 @@ class AddCargaViewController: UIViewController, UITextFieldDelegate, UIPickerVie
     func editCarga(carga : Carga){
         WebServiceDeliveries.editCarga(idCarga: carga.id, carga: carga) { (status : Bool, message : String) in
             if status {
+                self.view.hideToastActivity()
                 cargas[self.indexToEdit] = carga
                 self.navigationController?.popViewController(animated: true)
             }else {
+                self.view.hideToastActivity()
                 self.alert(title: "Error", message: message)
             }
         }

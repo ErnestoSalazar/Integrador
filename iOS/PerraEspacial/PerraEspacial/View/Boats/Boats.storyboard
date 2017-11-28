@@ -1,19 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="KLJ-gf-csK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="KLJ-gf-csK">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="VerdanaBold.ttf">
-            <string>Verdana-Bold</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--Barcos-->
         <scene sceneID="NdF-ZJ-vpK">
@@ -23,40 +18,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Nombre" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ook-ON-7QK">
-                                <rect key="frame" x="17.5" y="77" width="340" height="30"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cfi-8c-tsL">
-                                <rect key="frame" x="0.0" y="622" width="375" height="45"/>
-                                <color key="backgroundColor" red="0.92549019610000005" green="0.1333333333" blue="0.1450980392" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="3ZL-pG-9It"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="15"/>
-                                <state key="normal" title="BUSCAR">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xME-b4-VtK">
-                                <rect key="frame" x="0.0" y="115" width="375" height="507"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="ook-ON-7QK" firstAttribute="leading" secondItem="FoR-0I-4ge" secondAttribute="leading" constant="17.5" id="7ZQ-5e-4WQ"/>
-                            <constraint firstItem="xME-b4-VtK" firstAttribute="top" secondItem="ook-ON-7QK" secondAttribute="bottom" constant="8" id="Dh4-yP-Ver"/>
-                            <constraint firstItem="cfi-8c-tsL" firstAttribute="leading" secondItem="FoR-0I-4ge" secondAttribute="leading" id="Nd7-LX-f4p"/>
-                            <constraint firstItem="FoR-0I-4ge" firstAttribute="trailing" secondItem="ook-ON-7QK" secondAttribute="trailing" constant="17.5" id="PSd-LZ-h0N"/>
-                            <constraint firstItem="cfi-8c-tsL" firstAttribute="bottom" secondItem="FoR-0I-4ge" secondAttribute="bottom" id="QUF-BA-hID"/>
-                            <constraint firstItem="cfi-8c-tsL" firstAttribute="top" secondItem="xME-b4-VtK" secondAttribute="bottom" id="Zw1-2d-4rF"/>
+                            <constraint firstItem="xME-b4-VtK" firstAttribute="top" secondItem="FoR-0I-4ge" secondAttribute="top" id="Hwx-Ro-l6C"/>
+                            <constraint firstItem="FoR-0I-4ge" firstAttribute="bottom" secondItem="xME-b4-VtK" secondAttribute="bottom" id="Zxw-ZO-zuP"/>
                             <constraint firstItem="xME-b4-VtK" firstAttribute="trailing" secondItem="FoR-0I-4ge" secondAttribute="trailing" id="cj9-Vd-6rc"/>
-                            <constraint firstItem="cfi-8c-tsL" firstAttribute="trailing" secondItem="FoR-0I-4ge" secondAttribute="trailing" id="iAC-LF-nQD"/>
                             <constraint firstItem="xME-b4-VtK" firstAttribute="leading" secondItem="FoR-0I-4ge" secondAttribute="leading" id="x34-DM-X1h"/>
-                            <constraint firstItem="ook-ON-7QK" firstAttribute="top" secondItem="FoR-0I-4ge" secondAttribute="top" constant="13" id="yJj-v3-gww"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="FoR-0I-4ge"/>
                     </view>
@@ -76,9 +48,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="buttonSearch" destination="cfi-8c-tsL" id="bDb-KK-2ZS"/>
                         <outlet property="tableView" destination="xME-b4-VtK" id="dNI-bd-tCI"/>
-                        <outlet property="textFieldName" destination="ook-ON-7QK" id="yYU-Xd-hvv"/>
                         <segue destination="KBO-JT-gNE" kind="show" identifier="segueToEditBoat" id="xgn-Pc-dfF"/>
                     </connections>
                 </viewController>

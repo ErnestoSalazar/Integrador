@@ -11,6 +11,7 @@ import Foundation
 
 let dataGlobal = UserDefaults.standard
 var isAdmin : Bool = false
+var loggedUser : User?
 var users : [User] = []
 var boats : [Boat] = []
 var reports : [Report] = []

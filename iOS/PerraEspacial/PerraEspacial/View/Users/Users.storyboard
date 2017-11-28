@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ZYB-Ah-wvJ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ZYB-Ah-wvJ">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="VerdanaBold.ttf">
-            <string>Verdana-Bold</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--Users-->
         <scene sceneID="qcq-fu-6Iw">
@@ -22,42 +17,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Nombre" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XYr-te-pue">
-                                <rect key="frame" x="17.5" y="77" width="340" height="30"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wll-VK-Y0p">
-                                <rect key="frame" x="0.0" y="622" width="375" height="45"/>
-                                <color key="backgroundColor" red="0.92549019610000005" green="0.1333333333" blue="0.1450980392" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="I3p-52-m88"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="15"/>
-                                <state key="normal" title="BUSCAR">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="buttonSearchPressed:" destination="b2I-9Z-vBc" eventType="touchUpInside" id="t7N-Gs-t04"/>
-                                </connections>
-                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="W1h-Cg-tVM">
-                                <rect key="frame" x="0.0" y="115" width="375" height="507"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="wll-VK-Y0p" firstAttribute="top" secondItem="W1h-Cg-tVM" secondAttribute="bottom" id="0cC-8r-XrS"/>
-                            <constraint firstItem="kUv-Ic-orf" firstAttribute="trailing" secondItem="XYr-te-pue" secondAttribute="trailing" constant="17.5" id="4jo-LP-NQd"/>
+                            <constraint firstItem="W1h-Cg-tVM" firstAttribute="bottom" secondItem="kUv-Ic-orf" secondAttribute="bottom" id="67M-dC-ocT"/>
+                            <constraint firstItem="W1h-Cg-tVM" firstAttribute="top" secondItem="kUv-Ic-orf" secondAttribute="top" id="8ZI-RQ-Pxm"/>
                             <constraint firstItem="W1h-Cg-tVM" firstAttribute="leading" secondItem="kUv-Ic-orf" secondAttribute="leading" id="H7i-1h-BiK"/>
-                            <constraint firstItem="wll-VK-Y0p" firstAttribute="trailing" secondItem="kUv-Ic-orf" secondAttribute="trailing" id="Lgh-WJ-ybS"/>
-                            <constraint firstItem="wll-VK-Y0p" firstAttribute="leading" secondItem="kUv-Ic-orf" secondAttribute="leading" id="YEh-wh-l1B"/>
-                            <constraint firstItem="XYr-te-pue" firstAttribute="leading" secondItem="kUv-Ic-orf" secondAttribute="leading" constant="17.5" id="bTR-Fi-Im2"/>
-                            <constraint firstItem="wll-VK-Y0p" firstAttribute="bottom" secondItem="kUv-Ic-orf" secondAttribute="bottom" id="ibR-Ap-1ng"/>
-                            <constraint firstItem="XYr-te-pue" firstAttribute="top" secondItem="kUv-Ic-orf" secondAttribute="top" constant="13" id="oyb-fe-J7D"/>
-                            <constraint firstItem="W1h-Cg-tVM" firstAttribute="top" secondItem="XYr-te-pue" secondAttribute="bottom" constant="8" id="tXe-rF-PCs"/>
                             <constraint firstItem="W1h-Cg-tVM" firstAttribute="trailing" secondItem="kUv-Ic-orf" secondAttribute="trailing" id="wIV-OF-uuQ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="kUv-Ic-orf"/>
@@ -75,9 +44,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="buttonSearch" destination="wll-VK-Y0p" id="L2b-Dl-6k5"/>
                         <outlet property="tableView" destination="W1h-Cg-tVM" id="0Rf-QL-r0s"/>
-                        <outlet property="textFieldName" destination="XYr-te-pue" id="ee4-Fx-3n1"/>
                         <segue destination="91e-di-JFP" kind="show" identifier="segueToEditUser" id="k5Q-Zt-ygN"/>
                     </connections>
                 </viewController>

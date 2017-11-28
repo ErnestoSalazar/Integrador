@@ -30,6 +30,27 @@ struct WebServiceUser {
                     switch(httpStatusCode){
                     case 200:
                         if let token = JSON["access_token"] {
+                            var id = 0
+                            var email = ""
+                            var roleName = ""
+                            
+                            if let idUser = JSON["userId"] as? String {
+                                id = Int(idUser)!
+                            }
+                            
+                            if let emailUser = JSON["userName"] {
+                                email = emailUser as? String ?? ""
+                            }
+                            
+                            if let roleUser = JSON["rol"] {
+                                roleName = roleUser as? String ?? ""
+                            }
+                            
+                            print("\(id), \(email) \(roleName)")
+
+                            let role = Role(id: 0, name: roleName)
+                            loggedUser = User(id: 1, email: email, name: "", lastName: "", password: "", rfc: "", role: role)
+                            
                             WebLinks.headers["Authorization"] = "bearer \(token)"
                             dataGlobal.set(token, forKey: DataGlobal.keyToken)
                             dataGlobal.synchronize()
@@ -149,6 +170,35 @@ struct WebServiceUser {
             }
         }
     }
+    
+    static func getUsers(name: String, completionHandler:@escaping (_ status : Bool,_ users : [User])->()){
+        //Alamofire Get Request
+        Alamofire.request(WebLinks.Service.urlUser, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: WebLinks.headers).responseJSON { (response:DataResponse<Any>) in
+            switch response.result {
+            case .success(let value):
+                let jsonResponse = JSON(value)
+                let usersArray = jsonResponse.arrayValue
+                var usersInfo : [User] = []
+                for user in usersArray {
+                    let id = user["id"].int ?? 0
+                    let email = user["correo"].string ?? ""
+                    let name = user["nombre"].string ?? ""
+                    let lastName = user["apellido"].string ?? ""
+                    let rfc = user["rfc"].string ?? ""
+                    let roleName = user["rol"].string ?? ""
+                    let role = Role(id: 0, name: roleName)
+                    let user = User(id: id, email: email, name: name, lastName: lastName, password: "", rfc: rfc, role: role)
+                    usersInfo.append(user)
+                }
+                
+                completionHandler(true,usersInfo)
+            case .failure(let error):
+                print(error)
+                completionHandler(false, [])
+            }
+        }
+    }
+    
     
     static func getFishers(completionHandler:@escaping (_ status : Bool,_ users : [User])->()){
         //Alamofire Get Request

@@ -8,11 +8,9 @@
 
 import UIKit
 
-class BoatsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, BoatCellDelegate {
+class BoatsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, BoatCellDelegate, UISearchBarDelegate {
     //MARK: - IBOutlets
-    @IBOutlet weak var textFieldName: UITextField!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var buttonSearch: UIButton!
     
     //MARK: - Varailabels And Constants
     var totalRows = 1
@@ -25,11 +23,41 @@ class BoatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         if boats.count <= 0 {
             self.getBoats()
         }
+        self.searchBarSetUp()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         boats.removeAll()
         self.getBoats()
+    }
+    
+    //MARK: - Search Bar Delegate
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty{
+            users.removeAll()
+            self.getBoats()
+            self.totalRows = boats.count
+            self.tableView.reloadData();
+        }else {
+            filterTableView(text: searchText);
+        }
+    }
+    
+    
+    func filterTableView(text: String){
+        boats = boats.filter { (mod) -> Bool in
+            return mod.name.lowercased().contains(text.lowercased());
+        }
+        self.totalRows = boats.count
+        self.tableView.reloadData();
+    }
+    
+    func searchBarSetUp(){
+        let searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 70));
+        searchBar.showsScopeBar = true;
+        searchBar.placeholder = "Buscar"
+        self.navigationItem.titleView = searchBar
+        searchBar.delegate = self;
     }
     
     //MARK: TableView Delegate And DataSource
@@ -64,11 +92,6 @@ class BoatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         if let index = self.tableView.indexPath(for: cell)?.row {
          self.deleteBoatAlert(index: index)
         }
-    }
-    
-    //MARK: - Actions
-    @IBAction func buttonSearchPressed(_ sender: Any) {
-    
     }
     
     //MARK: - Functions

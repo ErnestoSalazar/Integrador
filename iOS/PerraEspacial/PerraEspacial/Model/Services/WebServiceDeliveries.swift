@@ -118,8 +118,7 @@ struct WebServiceDeliveries {
         }
     }
     
-    
-    static func createCarga(carga : Carga, completionHandler :@escaping (_ status: Bool, _ message: String)->()) {
+    static func createCarga(carga : Carga, completionHandler :@escaping (_ idCarga : Int, _ status: Bool, _ message: String)->()) {
         
         let parameters : Parameters = [
             "cantidad" : carga.quantity,
@@ -130,12 +129,62 @@ struct WebServiceDeliveries {
             "barcoId" : carga.boat.id
         ]
         
+        print("\(parameters)")
+        
         Alamofire.request(WebLinks.Service.urlCargas, method: .post, parameters: parameters, encoding: URLEncoding.httpBody, headers: WebLinks.headers).responseJSON { response in
+            print("\(response)")
             switch(response.result)
             {
                 
             case .success( _):
                 let JSON = response.result.value as! NSDictionary
+                
+                if let httpStatusCode = response.response?.statusCode
+                {
+                    var message = ""
+                    switch(httpStatusCode){
+                    case 201:
+                        if let idCarga = JSON["id"] as? Int {
+                            completionHandler(idCarga, true, message)
+                        }
+                        
+                    default:
+                        print("Code: \(httpStatusCode) Mensaje: \(JSON["error_description"] ?? "N/A")")
+                        if let messageResponse = JSON["error_description"] {
+                            message = messageResponse as! String
+                            completionHandler(0, false, message)
+                        }
+                    }
+                }
+            case .failure(let error):
+                if let httpStatusCode = response.response?.statusCode {
+                    completionHandler(0, false, "Ha ocurrido un error (\(httpStatusCode)), por favor intente mas tarde!")
+                    print("Error \(httpStatusCode)")
+                }
+                else {
+                    completionHandler(0, false, "Ha ocurrido un error, por favor intente mas tarde!")
+                    print(error.localizedDescription)
+                }
+            }
+        }
+    }
+    
+    static func createDelivery(idCargas : [Int], completionHandler :@escaping (_ status: Bool, _ message: String)->()) {
+        
+        let parameters : Parameters = [
+            "usuarioId" : loggedUser?.id ?? 0,
+            "cargasId" : idCargas
+        ]
+        
+        print("\(parameters)")
+        
+        Alamofire.request(WebLinks.Service.urlDeliveries, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: WebLinks.headers).responseJSON { response in
+            switch(response.result)
+            {
+                
+            case .success( _):
+                let JSON = response.result.value as! NSDictionary
+                print("JSON: \(JSON)")
                 
                 if let httpStatusCode = response.response?.statusCode
                 {
@@ -165,8 +214,11 @@ struct WebServiceDeliveries {
                 }
             }
         }
+
     }
     
+    
+
     static func editCarga(idCarga : Int, carga : Carga, completionHandler:@escaping (_ status : Bool, _ message : String)->()){
         //Alamofire Put Request
         let parameters : Parameters = [

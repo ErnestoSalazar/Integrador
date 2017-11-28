@@ -49,7 +49,7 @@ class AddDeliveryViewController: UIViewController, UITableViewDelegate, UITableV
             return cell
         }else {
             let cell = Bundle.main.loadNibNamed("NotFoundTableViewCell", owner: self, options: nil)?.first as! NotFoundTableViewCell
-            cell.labelNotFound.text = "No se han registrado cargas para esta demanda."
+            cell.labelNotFound.text = "No se han registrado cargas para esta entrega."
             return cell
         }
         
@@ -72,9 +72,11 @@ class AddDeliveryViewController: UIViewController, UITableViewDelegate, UITableV
     
     //MARK: - Actions
     @IBAction func createDeliveryButtonPressed(_ sender: Any) {
+        self.view.hideToastActivity()
         if cargas.count > 0 {
-            
+            self.createCargas()
         }else {
+            self.view.hideToastActivity()
             self.alert(title: "Valores Requeridos", message: "Es necesario agregar al menos una carga")
         }
     }
@@ -139,5 +141,37 @@ class AddDeliveryViewController: UIViewController, UITableViewDelegate, UITableV
         }
         alertController.addAction(okAction)
         self.present(alertController, animated: true, completion: nil)
-    }    
+    }
+    
+    func createCargas(){
+        var idCargas : [Int] = []
+        for i in 0...cargas.count-1 {
+            WebServiceDeliveries.createCarga(carga: cargas[i], completionHandler: { (idCarga : Int, status : Bool, message : String) in
+                if status && idCarga != 0 {
+                    idCargas.append(idCarga)
+                    if i == cargas.count-1 {
+                        self.createDelivery(idCargas: idCargas)
+                    }
+                }else {
+                    self.view.hideToastActivity()
+                    self.alert(title: "Error", message: message)
+                }
+            })
+        }
+    }
+    
+    
+    func createDelivery(idCargas : [Int]){
+        WebServiceDeliveries.createDelivery(idCargas: idCargas) { (status : Bool, message : String) in
+            if status {
+                self.view.hideToastActivity()
+                self.navigationController?.popViewController(animated: true)
+            }else {
+                self.view.hideToastActivity()
+                self.alert(title: "Error", message: message)
+            }
+        }
+    }
+    
+    
 }

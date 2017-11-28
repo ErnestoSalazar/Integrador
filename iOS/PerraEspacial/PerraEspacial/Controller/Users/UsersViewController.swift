@@ -8,11 +8,9 @@
 
 import UIKit
 
-class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UserCardCellDelegate {
+class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UserCardCellDelegate, UISearchBarDelegate {
     //MARK: - IBOutlets
-    @IBOutlet weak var textFieldName: UITextField!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var buttonSearch: UIButton!
     
     //MARK: - Varailabels And Constants
     var totalRows = 1
@@ -22,6 +20,7 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setDelegates()
+        self.searchBarSetUp()
         if users.count == 0 {
             self.getUsers()
         }else {
@@ -32,6 +31,36 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
     override func viewDidAppear(_ animated: Bool) {
         users.removeAll()
         self.getUsers()
+    }
+    
+    
+    //MARK: - Search Bar Delegate
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty{
+            users.removeAll()
+            self.getUsers()
+            self.totalRows = users.count
+            self.tableView.reloadData();
+        }else {
+            filterTableView(text: searchText);
+        }
+    }
+    
+    
+    func filterTableView(text: String){
+        users = users.filter { (mod) -> Bool in
+            return mod.name.lowercased().contains(text.lowercased());
+        }
+        self.totalRows = users.count
+        self.tableView.reloadData();
+    }
+    
+    func searchBarSetUp(){
+        let searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 70));
+        searchBar.showsScopeBar = true;
+        searchBar.placeholder = "Buscar"
+        self.navigationItem.titleView = searchBar
+        searchBar.delegate = self;
     }
     
     //MARK: TableView Delegate And DataSource
@@ -68,10 +97,6 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
         if let index = self.tableView.indexPath(for: cell)?.row {
             self.deleteUserAlert(index: index)
         }
-    }
-    
-    //MARK: - Actions
-    @IBAction func buttonSearchPressed(_ sender: Any) {
     }
     
     //MARK: - Functions
