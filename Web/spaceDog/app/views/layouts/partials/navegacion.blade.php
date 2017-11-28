@@ -15,8 +15,14 @@
                     </a>
                 </div>
                 <div class="navbar3 navbar-collapse collapse">
-                    <ul class="nav navbar-nav navbar-right hidden-xs">
-                        <li><a href="#">Nombre usuario</a></li>
+                    <ul class="nav navbar-nav  visible-xs">
+                    <li><a href="/reporte">Reporte</a></li>
+                    <li><a href="/usuarios">Usuario</a></li>
+                    <li><a href="/entradas">Entregas</a></li>
+                    <li><a href="/barcos">Barcos</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="hidden-xs    "><a href="#">Nombre usuario</a></li>
                         <li><a href="#"> <i class="material-icons">power_settings_new</i></a></li>
                     </ul>
                 </div>
@@ -25,7 +31,7 @@
             <!--/.container-fluid -->
         </nav>
     </div>
-    <nav class="navbar">
+    <nav class="navbar hidden-xs">
         <div class="container-fluid">
             <div class="navbar3 navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -33,10 +39,6 @@
                     <li><a href="/usuarios">Usuario</a></li>
                     <li><a href="/entradas">Entregas</a></li>
                     <li><a href="/barcos">Barcos</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right visible-xs">
-                    <li><a href="#">Nombre usuario</a></li>
-                    <li><a href="#"> <i class="material-icons">power_settings_new</i></a></li>
                 </ul>
             </div>
         </div>

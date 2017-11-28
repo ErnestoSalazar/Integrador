@@ -10,18 +10,18 @@
             </blockquote>
         @endif
         <div class="login">
-            <h1>Space Dog</h1>
+            <h1 class="login-header">Space Dog</h1>
 
             {{Form::open(array('route'=>'login.store'))}}
                 <p>{{Form::text('login',null,['placeholder'=> 'Email'])}}</p>
                 <p>{{Form::password('password',['placeholder'=>'Password'])}}</p>
-                
-                <p class="submit">
+                <div class="login-btns">
                      <button type="button" class="btn-login" >
-                    <input type="submit" name="sent" value="Login">
+                        <input type="submit" name="sent" value="Login">
                     </button>
-                </p>
-                <p class="submit"><input type="submit" value="Recuperar contraseña"></p>
+                    <button type="button" class="btn-recuperar">Recuperar Contraseña</button>
+                </div>
+
             {{Form::close()}}
         </div>
     </section>

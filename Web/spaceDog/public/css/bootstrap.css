@@ -6784,4 +6784,20 @@ button.close {
   font-size: 30px;
 }
 
+
+@media only screen and (max-width: 768px) {
+    
+    [class*="navbar3"] {
+        background-color:#ed1c24;
+        color: white;
+    }
+
+    .navbar-inverse .navbar-nav > li > a {
+      color: #fff;
+    }
+    .navbar-inverse .navbar-nav > li > a:hover,
+    .navbar-inverse .navbar-nav > li > a:focus {
+      color: #9d9d9d;
+    }
+}
 /*# sourceMappingURL=bootstrap.css.map */

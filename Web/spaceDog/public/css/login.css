@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand');
+
 body {
     color: #404040; }
   
@@ -69,11 +71,16 @@ body {
       outline-color: rgba(0, 0, 0, 0.08);
       outline-offset: 0; }
   
+
+      .login-header {
+        font-family: 'Quicksand', sans-serif;
+        font-size: 1em;
+      }
   .hola {
     margin: 0 auto;
     text-align: center; }
   
-    .card-options .btn-login{
+    .login-btns .btn-login{
       position: relative;
       width: 50%;
       height: 100%;
@@ -84,7 +91,7 @@ body {
       color: white;
     }
 
-    .card-options{
+    .login-btns{
       position: absolute;
       display: block;
       bottom:0;
@@ -96,7 +103,7 @@ body {
       z-index: 2;
     }
 
-    .card-options .btn-recuperar{
+    .login-btns .btn-recuperar{
       position: relative;
       width: 50%;
       height: 100%;
@@ -105,4 +112,10 @@ body {
       border-width: 0;
       float: left;
       color: white;
+    }
+
+    .btn-login input{
+      background-color: transparent;
+      color: white;
+      border: hidden;
     }
