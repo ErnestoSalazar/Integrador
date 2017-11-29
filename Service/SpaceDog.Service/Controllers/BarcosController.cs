@@ -77,5 +77,23 @@ namespace SpaceDog.Service.Controllers
         {
             _barcosRepository.DeleteD(id);
         }
+
+        public IHttpActionResult GetBarcosByName(string nombre)
+        {
+            var barcos = _barcosRepository.GetBarcosByName(nombre);
+
+            if(barcos == null)
+            {
+                return NotFound();
+            }
+            if(barcos.Count <= 0)
+            {
+                return NotFound();
+            }
+            return Ok(barcos);
+
+        }
+
+
     }
 }
