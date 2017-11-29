@@ -70,6 +70,7 @@ public class Client {
         List<Header> headers = new ArrayList<>();
         headers.add(new BasicHeader("Authorization", token.getToken_type()+" "+token.getAccess_token()));
         headers.add(new BasicHeader("Content-Type", "application/json"));
+        //headers.add(new BasicHeader("charset", "utf-8"));
         //headers.add(new BasicHeader("Content-Type", "application/x-www-form-urlencoded"));
         return headers;
     }

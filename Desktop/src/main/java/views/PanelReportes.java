@@ -17,6 +17,7 @@ import entities.Carga;
 import static entities.Constantes.*;
 import entities.Entrada;
 import entities.Reporte;
+import java.awt.Cursor;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -68,6 +69,8 @@ public class PanelReportes extends javax.swing.JPanel {
     
     
     public void setTableEntradas() {
+        setCursor(new Cursor(Cursor.WAIT_CURSOR));
+        MainView.tbMain.setCursor(new Cursor(Cursor.WAIT_CURSOR));
         
         DefaultTableModel model = new DefaultTableModel() {
             @Override
@@ -126,9 +129,15 @@ public class PanelReportes extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "No se encontrarón entradas");
         }
         
+        setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        MainView.tbMain.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        
+        
     }
     
     public void setTableCargasYTotales(String id) {
+        setCursor(new Cursor(Cursor.WAIT_CURSOR));
+        MainView.tbMain.setCursor(new Cursor(Cursor.WAIT_CURSOR));
         
         DefaultTableModel model = new DefaultTableModel() {
             @Override
@@ -160,10 +169,7 @@ public class PanelReportes extends javax.swing.JPanel {
             
             for (int i = 0; i < cargasEntrada.size(); i++) {
                 
-                String barco = p.get(MODIFY_BARCOS, String.valueOf(cargasEntrada.get(i).getBarcoId()), Token.getToken());
-                Barco b = new Barco().jsonToBarco(barco);
-                        
-                filas[0] = b.getNombre();
+                filas[0] = cargasEntrada.get(i).getBarco().getNombre();
                 filas[1] = cargasEntrada.get(i).getCantidad();
                 filas[2] = cargasEntrada.get(i).getEspecie();
                 filas[3] = cargasEntrada.get(i).getTalla();
@@ -201,6 +207,10 @@ public class PanelReportes extends javax.swing.JPanel {
         lblPorcCrinuda.setText(String.valueOf(formatPorc.format(reporte.getPorcentajeCrinuda())));
         
         lblTotal.setText(String.valueOf(formatTotal.format(reporte.getTotales())));
+        
+        
+        setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        MainView.tbMain.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         
     }
     

@@ -85,7 +85,6 @@ public class MainView extends javax.swing.JFrame {
         btnLogout.setBackground(new java.awt.Color(255, 255, 255));
         btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/exit20x20Black.png"))); // NOI18N
         btnLogout.setBorderPainted(false);
-        btnLogout.setOpaque(true);
         btnLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLogoutActionPerformed(evt);
@@ -162,7 +161,7 @@ public class MainView extends javax.swing.JFrame {
             case 0:
                 tbMain.remove(0);
                 tbMain.insertTab("Reportes", 
-                        new ImageIcon(this.getClass().getResource("/images/reports50x50Black.png")), 
+                        new ImageIcon(this.getClass().getResource("/images/reports20x20Black.png")), 
                         new PanelReportes(true), null, 
                         0);
                 tbMain.setSelectedIndex(0);
@@ -170,7 +169,7 @@ public class MainView extends javax.swing.JFrame {
             case 1:
                 tbMain.remove(1);
                 tbMain.insertTab("Entradas", 
-                        new ImageIcon(this.getClass().getResource("/images/entries50x50Black.png")), 
+                        new ImageIcon(this.getClass().getResource("/images/entries20x20Black.png")), 
                         new PanelEntradas(true), null, 
                         1);
                 tbMain.setSelectedIndex(1);
@@ -178,7 +177,7 @@ public class MainView extends javax.swing.JFrame {
             case 2:
                 tbMain.remove(2);
                 tbMain.insertTab("Barcos", 
-                        new ImageIcon(this.getClass().getResource("/images/boat50x50Black.png")), 
+                        new ImageIcon(this.getClass().getResource("/images/boat20x20Black.png")), 
                         new PanelBarcos(true), null, 
                         2);
                 tbMain.setSelectedIndex(2);
@@ -186,7 +185,7 @@ public class MainView extends javax.swing.JFrame {
             case 3:
                 tbMain.remove(3);
                 tbMain.insertTab("Usuarios", 
-                        new ImageIcon(this.getClass().getResource("/images/people50x50Black.png")), 
+                        new ImageIcon(this.getClass().getResource("/images/people20x20Black.png")), 
                         new PanelUsuarios(true), null, 
                         3);
                 tbMain.setSelectedIndex(3);

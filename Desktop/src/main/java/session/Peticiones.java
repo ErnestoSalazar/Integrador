@@ -130,8 +130,9 @@ public class Peticiones {
             CloseableHttpClient httpClient = Client.getHttpClient(token);
             HttpPost httpPost = new HttpPost(uri);
             
-            StringEntity entity = new StringEntity(json);
+            StringEntity entity = new StringEntity(json, "UTF-8");
             httpPost.setEntity(entity);
+            
             
             CloseableHttpResponse httpResponse = httpClient.execute(httpPost);
             
@@ -157,7 +158,7 @@ public class Peticiones {
             
             HttpPut httpPut = new HttpPut(uri + number);
             
-            StringEntity entity = new StringEntity(json);
+            StringEntity entity = new StringEntity(json, "UTF-8");
             httpPut.setEntity(entity);
             
             CloseableHttpResponse httpResponse = httpClient.execute(httpPut);
@@ -244,7 +245,7 @@ public class Peticiones {
             CloseableHttpClient httpClient = HttpClients.createDefault();
             
             String json = "{\"mailTo\" : \""+correo+"\"}";
-            StringEntity entity = new StringEntity(json);
+            StringEntity entity = new StringEntity(json, "UTF-8");
             
             HttpUriRequest httpPost = RequestBuilder.post()
                     .setUri(uri)

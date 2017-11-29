@@ -9,6 +9,7 @@ import entities.Barco;
 import entities.Carga;
 import static entities.Constantes.*;
 import entities.Entrada;
+import java.awt.Cursor;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -46,9 +47,11 @@ public class PanelEntradas extends javax.swing.JPanel {
         
         formEntrada.setSize(500, 530);
         formEntrada.setLocationRelativeTo(null);
+        formEntrada.setResizable(false);
         
         formCarga.setSize(500, 300);
         formCarga.setLocationRelativeTo(null);
+        formCarga.setResizable(false);
     }
     
     Peticiones p = new Peticiones();
@@ -65,9 +68,12 @@ public class PanelEntradas extends javax.swing.JPanel {
     List<Barco> barcos = new ArrayList<>();
     
     //guardar las cargas al agregar
-    List<Carga> cargasTemporales = new ArrayList<>();;
+    List<Carga> cargasTemporales = new ArrayList<>();
+    
     
     public void setTableEntradas() {
+        setCursor(new Cursor(Cursor.WAIT_CURSOR));
+        MainView.tbMain.setCursor(new Cursor(Cursor.WAIT_CURSOR));
         
         DefaultTableModel model = new DefaultTableModel() {
             @Override
@@ -127,9 +133,15 @@ public class PanelEntradas extends javax.swing.JPanel {
             btnBuscarEntrada.setEnabled(false);
         }
         
+        
+        setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        MainView.tbMain.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        
     }
     
     public void setTableCargas() {
+        setCursor(new Cursor(Cursor.WAIT_CURSOR));
+        MainView.tbMain.setCursor(new Cursor(Cursor.WAIT_CURSOR));
         
         DefaultTableModel model = new DefaultTableModel() {
             @Override
@@ -178,11 +190,6 @@ public class PanelEntradas extends javax.swing.JPanel {
             for (int i = 0; i < cargasEntrada.size(); i++) {
                 filas[0] = "-";
                 
-                int barcoId = cargasEntrada.get(i).getBarcoId();
-                String json = p.get(MODIFY_BARCOS, String.valueOf(barcoId), Token.getToken());
-                Barco barco = new Barco().jsonToBarco(json);
-                cargasEntrada.get(i).setBarco(barco);
-                
                 filas[1] = cargasEntrada.get(i).getBarco().getNombre();
                 
                 filas[2] = cargasEntrada.get(i).getCantidad();
@@ -219,6 +226,10 @@ public class PanelEntradas extends javax.swing.JPanel {
                 model.addRow(filas);
             }
         }
+        
+        setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        MainView.tbMain.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        
         
     }
     
@@ -381,7 +392,6 @@ public class PanelEntradas extends javax.swing.JPanel {
         btnAgregarCarga.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add20x20White.png"))); // NOI18N
         btnAgregarCarga.setText("AGREGAR CARGA");
         btnAgregarCarga.setBorderPainted(false);
-        btnAgregarCarga.setOpaque(true);
         btnAgregarCarga.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregarCargaActionPerformed(evt);
@@ -412,7 +422,6 @@ public class PanelEntradas extends javax.swing.JPanel {
         btnAceptarEntrada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/accept20x20White.png"))); // NOI18N
         btnAceptarEntrada.setText("ACEPTAR");
         btnAceptarEntrada.setBorderPainted(false);
-        btnAceptarEntrada.setOpaque(true);
         btnAceptarEntrada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAceptarEntradaActionPerformed(evt);
@@ -425,7 +434,6 @@ public class PanelEntradas extends javax.swing.JPanel {
         btnCancelarEntrada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cancel20x20White.png"))); // NOI18N
         btnCancelarEntrada.setText("CANCELAR");
         btnCancelarEntrada.setBorderPainted(false);
-        btnCancelarEntrada.setOpaque(true);
         btnCancelarEntrada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarEntradaActionPerformed(evt);
@@ -466,7 +474,6 @@ public class PanelEntradas extends javax.swing.JPanel {
         btnEditarCarga.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit20x20White.png"))); // NOI18N
         btnEditarCarga.setText("EDITAR CARGA");
         btnEditarCarga.setBorderPainted(false);
-        btnEditarCarga.setOpaque(true);
         btnEditarCarga.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditarCargaActionPerformed(evt);
@@ -479,7 +486,6 @@ public class PanelEntradas extends javax.swing.JPanel {
         btnEliminarCarga.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/delete20x20White.png"))); // NOI18N
         btnEliminarCarga.setText("ELIMINAR CARGA");
         btnEliminarCarga.setBorderPainted(false);
-        btnEliminarCarga.setOpaque(true);
         btnEliminarCarga.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarCargaActionPerformed(evt);
@@ -672,7 +678,6 @@ public class PanelEntradas extends javax.swing.JPanel {
         btnAceptarCarga.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/accept20x20White.png"))); // NOI18N
         btnAceptarCarga.setText("ACEPTAR");
         btnAceptarCarga.setBorderPainted(false);
-        btnAceptarCarga.setOpaque(true);
         btnAceptarCarga.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAceptarCargaActionPerformed(evt);
@@ -685,7 +690,6 @@ public class PanelEntradas extends javax.swing.JPanel {
         btnCancelarCarga.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cancel20x20White.png"))); // NOI18N
         btnCancelarCarga.setText("CANCELAR");
         btnCancelarCarga.setBorderPainted(false);
-        btnCancelarCarga.setOpaque(true);
         btnCancelarCarga.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarCargaActionPerformed(evt);
@@ -819,7 +823,6 @@ public class PanelEntradas extends javax.swing.JPanel {
         btnBuscarEntrada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search20x20White.png"))); // NOI18N
         btnBuscarEntrada.setText("BUSCAR");
         btnBuscarEntrada.setBorderPainted(false);
-        btnBuscarEntrada.setOpaque(true);
         btnBuscarEntrada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarEntradaActionPerformed(evt);
@@ -832,7 +835,6 @@ public class PanelEntradas extends javax.swing.JPanel {
         btnAgregarEntrada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add20x20White.png"))); // NOI18N
         btnAgregarEntrada.setText("AGREGAR");
         btnAgregarEntrada.setBorderPainted(false);
-        btnAgregarEntrada.setOpaque(true);
         btnAgregarEntrada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregarEntradaActionPerformed(evt);
@@ -855,7 +857,6 @@ public class PanelEntradas extends javax.swing.JPanel {
         btnEditarEntrada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit20x20White.png"))); // NOI18N
         btnEditarEntrada.setText("EDITAR");
         btnEditarEntrada.setBorderPainted(false);
-        btnEditarEntrada.setOpaque(true);
         btnEditarEntrada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditarEntradaActionPerformed(evt);
@@ -868,7 +869,6 @@ public class PanelEntradas extends javax.swing.JPanel {
         btnEliminarEntrada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/delete20x20White.png"))); // NOI18N
         btnEliminarEntrada.setText("ELIMINAR");
         btnEliminarEntrada.setBorderPainted(false);
-        btnEliminarEntrada.setOpaque(true);
         btnEliminarEntrada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarEntradaActionPerformed(evt);
@@ -884,7 +884,6 @@ public class PanelEntradas extends javax.swing.JPanel {
         btnActualizarEntrada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/update20x20White.png"))); // NOI18N
         btnActualizarEntrada.setText("ACTUALIZAR");
         btnActualizarEntrada.setBorderPainted(false);
-        btnActualizarEntrada.setOpaque(true);
         btnActualizarEntrada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnActualizarEntradaActionPerformed(evt);
@@ -1003,6 +1002,8 @@ public class PanelEntradas extends javax.swing.JPanel {
     }//GEN-LAST:event_btnAgregarEntradaActionPerformed
 
     private void btnAceptarEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarEntradaActionPerformed
+        formEntrada.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+        
         //primero agregar cargas al servicio
         List<Integer> cargasId = new ArrayList<>();
 
@@ -1068,6 +1069,8 @@ public class PanelEntradas extends javax.swing.JPanel {
             }
         }
         
+        formEntrada.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        
     }//GEN-LAST:event_btnAceptarEntradaActionPerformed
 
     private void btnCancelarEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarEntradaActionPerformed
@@ -1105,7 +1108,6 @@ public class PanelEntradas extends javax.swing.JPanel {
     }//GEN-LAST:event_formEntradasClose
 
     private void btnEditarCargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarCargaActionPerformed
-        togServicio.setSelected(true);
         
         int seleccionado = tblCargas.getSelectedRow();
         
@@ -1286,8 +1288,10 @@ public class PanelEntradas extends javax.swing.JPanel {
                         barco.getId()
                 );
                 
+                System.out.println("c"+carga);
                 System.out.println("id Carga"+getIdCargaSeleccionada());
                 boolean edit = p.put(MODIFY_CARGAS, getIdCargaSeleccionada(), Token.getToken(), carga.cargaToJson());
+                System.out.println(carga.cargaToJson());
                 
                 if (edit) {
                     JOptionPane.showMessageDialog(formCarga, "Carga editada");
@@ -1296,7 +1300,7 @@ public class PanelEntradas extends javax.swing.JPanel {
                     //setTableEntradas();
                     
                     setTableCargas();
-                    System.out.println("id"+entrada.getId());
+                    //System.out.println("id"+entrada.getId());
                     
                     tblCargas.setEnabled(true);
                 }
@@ -1326,27 +1330,31 @@ public class PanelEntradas extends javax.swing.JPanel {
     }//GEN-LAST:event_formCargasClose
 
     private void btnEditarEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarEntradaActionPerformed
-        int seleccionado = tblEntradas.getSelectedRow();
-        
-        if (seleccionado != -1) {
-            if (obtenerBarcos()) {
-                
-                //obtener entrada
-                limpiarFormEntradas();
-                togEditar.setSelected(true);
-                
-                cargasTemporales.clear();
-                
-                //guardar id de la entrada seleccionada
-                getIdEntradaSeleccionada();
-                
-                setTableCargas();
-                System.out.println("editando entrada id"+entrada.getId());
-                
-                formEntrada.setVisible(true);
+        try {
+            int seleccionado = tblEntradas.getSelectedRow();
+
+            if (seleccionado != -1) {
+                if (obtenerBarcos()) {
+
+                    //obtener entrada
+                    limpiarFormEntradas();
+                    togEditar.setSelected(true);
+
+                    cargasTemporales.clear();
+
+                    //guardar id de la entrada seleccionada
+                    getIdEntradaSeleccionada();
+
+                    setTableCargas();
+                    System.out.println("editando entrada id"+entrada.getId());
+
+                    formEntrada.setVisible(true);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Debes seleccionar una entrada");
             }
-        } else {
-            JOptionPane.showMessageDialog(this, "Debes seleccionar una entrada");
+        } catch (NullPointerException npe) {
+            JOptionPane.showMessageDialog(this, "Imposible editar");
         }
         
     }//GEN-LAST:event_btnEditarEntradaActionPerformed
@@ -1453,11 +1461,11 @@ public class PanelEntradas extends javax.swing.JPanel {
             }
         }
         for (int i = 0; i < datos.length; i++) {
-            if (!datos[1].matches("^[0-9]+[.]?[0-9]*") || !datos[4].matches("^[0-9]+[.]?[0-9]*")) {
+            if (!datos[1].matches("^[0-9]+[.]?[0-9]*") || !datos[4].matches("^[-]?[0-9]+[.]?[0-9]*")) {
                 JOptionPane.showMessageDialog(form, "Introducir un número válido");
                 return false;
             }
-            else if (Double.parseDouble(datos[1]) <= 0 || Double.parseDouble(datos[4]) <= 0) {
+            else if (Double.parseDouble(datos[1]) <= 0) {
                 JOptionPane.showMessageDialog(form, "Introducir números positivos");
                 return false;
             }

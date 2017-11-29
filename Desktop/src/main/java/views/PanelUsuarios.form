@@ -183,7 +183,6 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="ACEPTAR"/>
                 <Property name="borderPainted" type="boolean" value="false"/>
-                <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAceptarUsuarioActionPerformed"/>
@@ -205,7 +204,6 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="CANCELAR"/>
                 <Property name="borderPainted" type="boolean" value="false"/>
-                <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelarUsuarioActionPerformed"/>
@@ -381,7 +379,6 @@
         </Property>
         <Property name="text" type="java.lang.String" value="AGREGAR"/>
         <Property name="borderPainted" type="boolean" value="false"/>
-        <Property name="opaque" type="boolean" value="true"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAgregarUsuarioActionPerformed"/>
@@ -403,7 +400,6 @@
         </Property>
         <Property name="text" type="java.lang.String" value="BUSCAR"/>
         <Property name="borderPainted" type="boolean" value="false"/>
-        <Property name="opaque" type="boolean" value="true"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBuscarUsuarioActionPerformed"/>
@@ -465,7 +461,6 @@
         </Property>
         <Property name="text" type="java.lang.String" value="EDITAR"/>
         <Property name="borderPainted" type="boolean" value="false"/>
-        <Property name="opaque" type="boolean" value="true"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditarUsuarioActionPerformed"/>
@@ -487,7 +482,6 @@
         </Property>
         <Property name="text" type="java.lang.String" value="ELIMINAR"/>
         <Property name="borderPainted" type="boolean" value="false"/>
-        <Property name="opaque" type="boolean" value="true"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEliminarUsuarioActionPerformed"/>
@@ -509,7 +503,6 @@
         </Property>
         <Property name="text" type="java.lang.String" value="ACTUALIZAR"/>
         <Property name="borderPainted" type="boolean" value="false"/>
-        <Property name="opaque" type="boolean" value="true"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnActualizarUsuarioActionPerformed"/>

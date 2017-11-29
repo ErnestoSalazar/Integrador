@@ -7,6 +7,7 @@ package views;
 
 import static entities.Constantes.*;
 import entities.Usuario;
+import java.awt.Cursor;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -35,7 +36,7 @@ public class PanelUsuarios extends javax.swing.JPanel {
         //inicializar forms
         formUsuario.setSize(500, 280);
         formUsuario.setLocationRelativeTo(null);
-        
+        formUsuario.setResizable(false);
     }
     
     Peticiones p = new Peticiones();
@@ -43,6 +44,8 @@ public class PanelUsuarios extends javax.swing.JPanel {
     
     //llenar tabla de usuarios
     public void setTableUsuarios() {
+        setCursor(new Cursor(Cursor.WAIT_CURSOR));
+        MainView.tbMain.setCursor(new Cursor(Cursor.WAIT_CURSOR));
         
         DefaultTableModel model = new DefaultTableModel() {
             @Override
@@ -89,6 +92,10 @@ public class PanelUsuarios extends javax.swing.JPanel {
         } else {
             btnBuscarUsuario.setEnabled(false);
         }
+        
+        setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        MainView.tbMain.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        
         
     }
     
@@ -571,30 +578,36 @@ public class PanelUsuarios extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCancelarUsuarioActionPerformed
 
     private void btnEditarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarUsuarioActionPerformed
-        int seleccionado = tblUsuarios.getSelectedRow();
-        
-        if(seleccionado != -1) {
-            limpiarFormUsuario();
-            togEditar.setSelected(true);
+        try {
             
-            String idSeleccionado = getIdUsuarioSeleccionado();
-            
-            System.out.println(idSeleccionado);
-            
-            String json = p.get(MODIFY_USERS, idSeleccionado, Token.getToken());
-            Usuario edit = new Usuario().jsonToUser(json);
-            
-            txtNombre.setText(edit.getNombre());
-            txtApellido.setText(edit.getApellido());
-            txtRfc.setText(edit.getRfc());
-            cbRol.setSelectedItem(edit.getRol());
-            txtCorreo.setText(edit.getCorreo());
-            
-            formUsuario.setVisible(true);
-            
-        } else {
-            JOptionPane.showMessageDialog(formUsuario, "Debes seleccionar un usuario");
+            int seleccionado = tblUsuarios.getSelectedRow();
+
+            if(seleccionado != -1) {
+                limpiarFormUsuario();
+                togEditar.setSelected(true);
+
+                String idSeleccionado = getIdUsuarioSeleccionado();
+
+                System.out.println(idSeleccionado);
+
+                String json = p.get(MODIFY_USERS, idSeleccionado, Token.getToken());
+                Usuario edit = new Usuario().jsonToUser(json);
+
+                txtNombre.setText(edit.getNombre());
+                txtApellido.setText(edit.getApellido());
+                txtRfc.setText(edit.getRfc());
+                cbRol.setSelectedItem(edit.getRol());
+                txtCorreo.setText(edit.getCorreo());
+
+                formUsuario.setVisible(true);
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Debes seleccionar un usuario");
+            }
+        } catch (NullPointerException npe) {
+            JOptionPane.showMessageDialog(this, "Imposible editar");
         }
+        
         
     }//GEN-LAST:event_btnEditarUsuarioActionPerformed
 

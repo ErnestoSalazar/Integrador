@@ -39,21 +39,21 @@ public class Login extends javax.swing.JFrame {
         
         //establecer prioridades
         MainView.tbMain.insertTab("Reportes", 
-                        new ImageIcon(this.getClass().getResource("/images/reports50x50Black.png")), 
+                        new ImageIcon(this.getClass().getResource("/images/reports20x20Black.png")), 
                         new PanelReportes(true), null, 
                         0);
         MainView.tbMain.insertTab("Entradas", 
-                        new ImageIcon(this.getClass().getResource("/images/entries50x50Black.png")), 
+                        new ImageIcon(this.getClass().getResource("/images/entries20x20Black.png")), 
                         new PanelEntradas(), null, 
                         1);
 
         if(token.getRol().contains("Administrador")) {
             MainView.tbMain.insertTab("Barcos", 
-                        new ImageIcon(this.getClass().getResource("/images/boat50x50Black.png")), 
+                        new ImageIcon(this.getClass().getResource("/images/boat20x20Black.png")), 
                         new PanelBarcos(), null, 
                         2);
             MainView.tbMain.insertTab("Usuarios", 
-                        new ImageIcon(this.getClass().getResource("/images/people50x50Black.png")), 
+                        new ImageIcon(this.getClass().getResource("/images/people20x20Black.png")), 
                         new PanelUsuarios(), null, 
                         3);
         }
@@ -113,20 +113,17 @@ public class Login extends javax.swing.JFrame {
         jLabel3.setText("Login");
         jLabel3.setOpaque(true);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel1.setText("Usuario:");
 
-        txtUser.setText("fernando.marenco10@gmail.com");
-
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel2.setText("Contraseña:");
-
-        txtPassword.setText("7255");
 
         btnIngresar.setBackground(new java.awt.Color(237, 28, 36));
         btnIngresar.setFont(new java.awt.Font("Lucida Grande", 1, 12)); // NOI18N
         btnIngresar.setForeground(new java.awt.Color(255, 255, 255));
         btnIngresar.setText("INGRESAR");
         btnIngresar.setBorderPainted(false);
-        btnIngresar.setOpaque(true);
         btnIngresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnIngresarActionPerformed(evt);
@@ -138,7 +135,6 @@ public class Login extends javax.swing.JFrame {
         btnOlvidar.setForeground(new java.awt.Color(255, 255, 255));
         btnOlvidar.setText("OLVIDE MI CONTRASEÑA");
         btnOlvidar.setBorderPainted(false);
-        btnOlvidar.setOpaque(true);
         btnOlvidar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOlvidarActionPerformed(evt);
@@ -152,21 +148,20 @@ public class Login extends javax.swing.JFrame {
             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(138, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnIngresar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnOlvidar))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel2)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtPassword))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
+                    .addComponent(txtUser))
                 .addGap(141, 141, 141))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(156, 156, 156)
+                .addComponent(btnIngresar)
+                .addGap(18, 18, 18)
+                .addComponent(btnOlvidar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -177,15 +172,15 @@ public class Login extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(67, 67, 67)
+                    .addComponent(jLabel2)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(93, 93, 93)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnOlvidar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(115, Short.MAX_VALUE))
+                .addContainerGap(94, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -203,6 +198,7 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
+        
         StringBuilder pass = new StringBuilder();
         for (char c : txtPassword.getPassword()) {
             pass.append(c);
@@ -216,7 +212,7 @@ public class Login extends javax.swing.JFrame {
         } else {
             evaluarSesion(user, pass);
         }
-
+        
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     private void btnOlvidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOlvidarActionPerformed

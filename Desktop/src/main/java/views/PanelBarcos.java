@@ -8,6 +8,7 @@ package views;
 import entities.Barco;
 import static entities.Constantes.*;
 import entities.Usuario;
+import java.awt.Cursor;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -36,7 +37,7 @@ public class PanelBarcos extends javax.swing.JPanel {
         //inicializar forms
         formBarco.setSize(500, 310);
         formBarco.setLocationRelativeTo(null);
-        
+        formBarco.setResizable(false);
         
     }
     
@@ -47,6 +48,8 @@ public class PanelBarcos extends javax.swing.JPanel {
     List<Usuario> pescadores = new ArrayList<>();
     
     public void setTableBarcos() {
+        setCursor(new Cursor(Cursor.WAIT_CURSOR));
+        MainView.tbMain.setCursor(new Cursor(Cursor.WAIT_CURSOR));
         
         DefaultTableModel model = new DefaultTableModel() {
             @Override
@@ -99,6 +102,10 @@ public class PanelBarcos extends javax.swing.JPanel {
         } else {
             btnBuscarBarco.setEnabled(false);
         }
+        
+        setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        MainView.tbMain.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        
         
     }
     
@@ -512,7 +519,9 @@ public class PanelBarcos extends javax.swing.JPanel {
                 
                 //agregar usuario
                 String json = p.post(BARCOS, Token.getToken(), barco.barcoToJson());
+                System.out.println(barco.barcoToJson());
                 barco = barco.jsonToBarco(json);
+                System.out.println(barco);
                 
                 if (barco.getMessage() == null) {
                     setTableBarcos();
@@ -530,6 +539,7 @@ public class PanelBarcos extends javax.swing.JPanel {
                 
                 //editar barco
                 boolean edit = p.put(MODIFY_BARCOS, getIdBarcoSeleccionado(), Token.getToken(), barco.barcoToJson());
+                
                 
                 if(edit) {
                     JOptionPane.showMessageDialog(formBarco, "Barco editado");
@@ -558,31 +568,32 @@ public class PanelBarcos extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCancelarBarcoActionPerformed
 
     private void btnEditarBarcoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarBarcoActionPerformed
-        int seleccionado = tblBarcos.getSelectedRow();
-        
-        if (seleccionado != -1) {
-            
-            if(obtenerPescadores()) {
-                limpiarFormBarco();
-                togEditar.setSelected(true);
-                
-                String idSeleccionado = getIdBarcoSeleccionado();
+        try {
+            int seleccionado = tblBarcos.getSelectedRow();
 
-                String json = p.get(MODIFY_BARCOS, idSeleccionado, Token.getToken());
-                Barco barco = new Barco().jsonToBarco(json);
+            if (seleccionado != -1) {
 
-                String json2 = p.get(MODIFY_USERS, getIdPescadorSeleccionado(), Token.getToken());
-                Usuario usuario = new Usuario().jsonToUser(json2);
+                if(obtenerPescadores()) {
+                    limpiarFormBarco();
+                    togEditar.setSelected(true);
 
-                txtNombre.setText(barco.getNombre());
-                cbPescador.setSelectedItem(usuario.getNombre() + " " + usuario.getApellido());
-                txtDescripcion.setText(barco.getDescripcion());
+                    String idSeleccionado = getIdBarcoSeleccionado();
 
-                formBarco.setVisible(true);
+                    String json = p.get(MODIFY_BARCOS, idSeleccionado, Token.getToken());
+                    Barco barco = new Barco().jsonToBarco(json);
+
+                    txtNombre.setText(barco.getNombre());
+                    cbPescador.setSelectedItem(barco.getUsuario().getNombre() + " " + barco.getUsuario().getApellido());
+                    txtDescripcion.setText(barco.getDescripcion());
+
+                    formBarco.setVisible(true);
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Debes seleccionar un barco");
             }
-            
-        } else {
-            JOptionPane.showMessageDialog(formBarco, "Debes seleccionar un barco");
+        } catch (NullPointerException npe) {
+            JOptionPane.showMessageDialog(this, "Imposible editar");
         }
         
     }//GEN-LAST:event_btnEditarBarcoActionPerformed
