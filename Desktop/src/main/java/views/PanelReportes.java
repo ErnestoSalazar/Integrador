@@ -609,20 +609,19 @@ public class PanelReportes extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.CENTER, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.CENTER, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 869, Short.MAX_VALUE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel4)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(datFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jLabel6)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(datFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(12, 12, 12)
-                                    .addComponent(btnBuscarReporte)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(btnGenerarReporte)))
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, 869, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.CENTER, layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(datFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(datFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(12, 12, 12)
+                                .addComponent(btnBuscarReporte)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnGenerarReporte))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.CENTER)
                             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 645, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(6, 6, 6))
@@ -662,14 +661,18 @@ public class PanelReportes extends javax.swing.JPanel {
     
     
     private void btnGenerarReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarReporteActionPerformed
-        JFileChooser chosenFile = new JFileChooser();
+        if(tblEntradasReporte.getSelectedRow() < 0){
+            JOptionPane.showMessageDialog(null, "Debes seleccionar una de las entradas de la tabla para generar el reporte");
+        }
+        else{
+            JFileChooser chosenFile = new JFileChooser();
 //        DefaultTableModel dtmEntradas = new DefaultTableModel();
 //        DefaultTableModel dtmCargas = new DefaultTableModel();
         
         int columnEntradas = tblEntradasReporte.getModel().getColumnCount();
         int columnCargas = tblCargasReporte.getModel().getColumnCount();
         
-        int rowEntradas = tblEntradasReporte.getModel().getRowCount();
+        //int rowEntradas = tblEntradasReporte.getModel().getRowCount();
         int rowCargas = tblCargasReporte.getModel().getRowCount();
         
         int opcion = chosenFile.showSaveDialog(this);
@@ -790,6 +793,8 @@ public class PanelReportes extends javax.swing.JPanel {
                 Logger.getLogger(PanelReportes.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        }
+        
         
         
     }//GEN-LAST:event_btnGenerarReporteActionPerformed

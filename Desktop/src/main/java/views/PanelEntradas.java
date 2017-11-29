@@ -392,6 +392,7 @@ public class PanelEntradas extends javax.swing.JPanel {
         btnAgregarCarga.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add20x20White.png"))); // NOI18N
         btnAgregarCarga.setText("AGREGAR CARGA");
         btnAgregarCarga.setBorderPainted(false);
+        btnAgregarCarga.setOpaque(true);
         btnAgregarCarga.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregarCargaActionPerformed(evt);
@@ -422,6 +423,7 @@ public class PanelEntradas extends javax.swing.JPanel {
         btnAceptarEntrada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/accept20x20White.png"))); // NOI18N
         btnAceptarEntrada.setText("ACEPTAR");
         btnAceptarEntrada.setBorderPainted(false);
+        btnAceptarEntrada.setOpaque(true);
         btnAceptarEntrada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAceptarEntradaActionPerformed(evt);
@@ -434,6 +436,7 @@ public class PanelEntradas extends javax.swing.JPanel {
         btnCancelarEntrada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cancel20x20White.png"))); // NOI18N
         btnCancelarEntrada.setText("CANCELAR");
         btnCancelarEntrada.setBorderPainted(false);
+        btnCancelarEntrada.setOpaque(true);
         btnCancelarEntrada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarEntradaActionPerformed(evt);
@@ -474,6 +477,7 @@ public class PanelEntradas extends javax.swing.JPanel {
         btnEditarCarga.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit20x20White.png"))); // NOI18N
         btnEditarCarga.setText("EDITAR CARGA");
         btnEditarCarga.setBorderPainted(false);
+        btnEditarCarga.setOpaque(true);
         btnEditarCarga.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditarCargaActionPerformed(evt);
@@ -486,6 +490,7 @@ public class PanelEntradas extends javax.swing.JPanel {
         btnEliminarCarga.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/delete20x20White.png"))); // NOI18N
         btnEliminarCarga.setText("ELIMINAR CARGA");
         btnEliminarCarga.setBorderPainted(false);
+        btnEliminarCarga.setOpaque(true);
         btnEliminarCarga.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarCargaActionPerformed(evt);
@@ -678,6 +683,7 @@ public class PanelEntradas extends javax.swing.JPanel {
         btnAceptarCarga.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/accept20x20White.png"))); // NOI18N
         btnAceptarCarga.setText("ACEPTAR");
         btnAceptarCarga.setBorderPainted(false);
+        btnAceptarCarga.setOpaque(true);
         btnAceptarCarga.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAceptarCargaActionPerformed(evt);
@@ -690,6 +696,7 @@ public class PanelEntradas extends javax.swing.JPanel {
         btnCancelarCarga.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cancel20x20White.png"))); // NOI18N
         btnCancelarCarga.setText("CANCELAR");
         btnCancelarCarga.setBorderPainted(false);
+        btnCancelarCarga.setOpaque(true);
         btnCancelarCarga.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarCargaActionPerformed(evt);
@@ -823,6 +830,7 @@ public class PanelEntradas extends javax.swing.JPanel {
         btnBuscarEntrada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search20x20White.png"))); // NOI18N
         btnBuscarEntrada.setText("BUSCAR");
         btnBuscarEntrada.setBorderPainted(false);
+        btnBuscarEntrada.setOpaque(true);
         btnBuscarEntrada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarEntradaActionPerformed(evt);
@@ -835,6 +843,7 @@ public class PanelEntradas extends javax.swing.JPanel {
         btnAgregarEntrada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add20x20White.png"))); // NOI18N
         btnAgregarEntrada.setText("AGREGAR");
         btnAgregarEntrada.setBorderPainted(false);
+        btnAgregarEntrada.setOpaque(true);
         btnAgregarEntrada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregarEntradaActionPerformed(evt);
@@ -857,6 +866,7 @@ public class PanelEntradas extends javax.swing.JPanel {
         btnEditarEntrada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit20x20White.png"))); // NOI18N
         btnEditarEntrada.setText("EDITAR");
         btnEditarEntrada.setBorderPainted(false);
+        btnEditarEntrada.setOpaque(true);
         btnEditarEntrada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditarEntradaActionPerformed(evt);
@@ -869,6 +879,7 @@ public class PanelEntradas extends javax.swing.JPanel {
         btnEliminarEntrada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/delete20x20White.png"))); // NOI18N
         btnEliminarEntrada.setText("ELIMINAR");
         btnEliminarEntrada.setBorderPainted(false);
+        btnEliminarEntrada.setOpaque(true);
         btnEliminarEntrada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarEntradaActionPerformed(evt);
@@ -884,6 +895,7 @@ public class PanelEntradas extends javax.swing.JPanel {
         btnActualizarEntrada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/update20x20White.png"))); // NOI18N
         btnActualizarEntrada.setText("ACTUALIZAR");
         btnActualizarEntrada.setBorderPainted(false);
+        btnActualizarEntrada.setOpaque(true);
         btnActualizarEntrada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnActualizarEntradaActionPerformed(evt);

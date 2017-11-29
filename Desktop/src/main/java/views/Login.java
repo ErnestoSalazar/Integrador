@@ -124,6 +124,7 @@ public class Login extends javax.swing.JFrame {
         btnIngresar.setForeground(new java.awt.Color(255, 255, 255));
         btnIngresar.setText("INGRESAR");
         btnIngresar.setBorderPainted(false);
+        btnIngresar.setOpaque(true);
         btnIngresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnIngresarActionPerformed(evt);
@@ -135,6 +136,7 @@ public class Login extends javax.swing.JFrame {
         btnOlvidar.setForeground(new java.awt.Color(255, 255, 255));
         btnOlvidar.setText("OLVIDE MI CONTRASEÑA");
         btnOlvidar.setBorderPainted(false);
+        btnOlvidar.setOpaque(true);
         btnOlvidar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOlvidarActionPerformed(evt);

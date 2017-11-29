@@ -151,7 +151,6 @@ public class PanelBarcos extends javax.swing.JPanel {
         formBarco.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         formBarco.setTitle("Barco");
         formBarco.setAlwaysOnTop(true);
-        formBarco.setPreferredSize(new java.awt.Dimension(500, 305));
         formBarco.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formBarcosClose(evt);

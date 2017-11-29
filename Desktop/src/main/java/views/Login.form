@@ -145,6 +145,7 @@
             </Property>
             <Property name="text" type="java.lang.String" value="INGRESAR"/>
             <Property name="borderPainted" type="boolean" value="false"/>
+            <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnIngresarActionPerformed"/>
@@ -163,6 +164,7 @@
             </Property>
             <Property name="text" type="java.lang.String" value="OLVIDE MI CONTRASE&#xd1;A"/>
             <Property name="borderPainted" type="boolean" value="false"/>
+            <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOlvidarActionPerformed"/>

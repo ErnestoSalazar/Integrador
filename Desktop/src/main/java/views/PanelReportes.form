@@ -119,6 +119,7 @@
         </Property>
         <Property name="text" type="java.lang.String" value="GENERAR REPORTE"/>
         <Property name="borderPainted" type="boolean" value="false"/>
+        <Property name="opaque" type="boolean" value="true"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGenerarReporteActionPerformed"/>
@@ -271,6 +272,7 @@
         </Property>
         <Property name="text" type="java.lang.String" value="BUSCAR"/>
         <Property name="borderPainted" type="boolean" value="false"/>
+        <Property name="opaque" type="boolean" value="true"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBuscarReporteActionPerformed"/>
