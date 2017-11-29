@@ -1,5 +1,8 @@
 $(document).ready(function(){
 
+    $('[data-toggle="tooltip"]').tooltip();
+
+    
     $('button.btn-option-editar').click(function(){
         var entradaId = $(this).children(0).val();
 

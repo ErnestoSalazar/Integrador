@@ -6788,6 +6788,11 @@ button.close {
   font-size: 25px;
 }
 
+.btn-agregar {
+  height: 34px;
+  padding-top: 3px;
+}
+
 @media only screen and (max-width: 768px) {
     
     [class*="navbar3"] {

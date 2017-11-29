@@ -14,7 +14,7 @@
             <input type="text" placeholder="Folio" name="folio" class="form-control" id="folio">
         </div>
         <button type="submit" name="sent" value="sent" class="btn btn-default">Buscar</button>
-        <button type="button" class="btn btn-lg btn-success" id="my-btn" data-toggle="modal" data-target="#my-modal">Agregar</button>
+        <button type="button" class="btn btn-lg btn-success btn-agregar" id="my-btn" data-toggle="modal" data-target="#my-modal">Agregar</button>
     </form>
     </div>
     <div class="col-xs-6">
@@ -58,13 +58,13 @@
                             <td>
                                 <button type="button" class="btn bckg-transparent btn-option-editar" data-toggle="modal" data-target="#modal-edit-entrada">
                                     <input type="text" value="{{{$entrada->id}}}" hidden>
-                                    <i class="material-icons">create</i>
+                                    <i class="material-icons" data-toggle="tooltip" title="Editar">create</i>
                                 </button>
                                 {{Form::open([ 'method'  => 'delete', 'route' => [ 'entradas.destroy', $entrada->id ], 'class'=>'form-gatito' ])}}
-                                    <button type="submit" name="sent" value="sent" class="btn bckg-transparent" ><i class="material-icons">close</i></button>
+                                    <button type="submit" name="sent" value="sent" class="btn bckg-transparent" ><i class="material-icons" data-toggle="tooltip" title="Eliminar">close</i></button>
                                 {{Form::close()}}
                                 <button type="submit" name="sent" value="sent" class="btn bckg-transparent" >
-                                    <a href="{{route('entradas.show',$entrada->id)}}"><i class="material-icons"  style="color:black;">remove_red_eye</i></a>
+                                    <a href="{{route('entradas.show',$entrada->id)}}"><i class="material-icons" data-toggle="tooltip" title="Ver Reporte" style="color:black;">remove_red_eye</i></a>
                                 </button>
                             </td>
                         </tr>

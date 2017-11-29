@@ -12,7 +12,7 @@
             <input type="search" name="nombre" placeholder="Barco" class="form-control">
         </div>
         <button type="submit" name="sent" value="sent" class="btn btn-default">Buscar</button>
-        <button type="button" class="btn btn-lg btn-success" id="my-btn" data-toggle="modal" data-target="#my-modal">Agregar</button>
+        <button type="button" class="btn btn-lg btn-success btn-agregar" id="my-btn" data-toggle="modal" data-target="#my-modal">Agregar</button>
     </form>
     <!--Targetas Barcos-->
     <div class="container">
