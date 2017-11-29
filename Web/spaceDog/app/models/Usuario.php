@@ -10,11 +10,37 @@ class Usuario
 {
 
     static function checkIfUserIsLoged(){
-
         if(Session::get('userId') != null){
             return true;
         }
         return false;
+    }
+
+    static function checkIfUserIsAdmin(){
+        if(Session::get('rol') == 'Administrador'){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    static function checkIfUserIsSupervisor(){
+        if(Session::get('rol') == 'Supervisor'){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    static function checkIfUserIsPescador(){
+        if(Session::get('rol') == 'Pescador'){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
 

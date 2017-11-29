@@ -10,7 +10,9 @@ class UsuarioController extends \BaseController {
 	public function index()
 	{
 
-	    if(!Usuario::checkIfUserIsLoged()) return Redirect::route('login.index');
+		if(!Usuario::checkIfUserIsLoged()) return Redirect::route('login.index');
+		if(Usuario::checkIfUserIsSupervisor()) return Redirect::route('entradas.index');
+		
 
 	    $usuarios = Usuario::getUsuarios();
 

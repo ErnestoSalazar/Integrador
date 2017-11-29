@@ -155,7 +155,7 @@
             <div class="modal-content">
                 <div class="modal-header" style="padding:35px 50px;">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4>Seguro quiere eliminar este Usuario?</h4>
+                    <h4>¿Seguro quiere eliminar este Barco?</h4>
                 </div>
                 <div class="modal-body" style="padding:40px 50px;">
                     <button type="submit" name="sent" value="sent" class="btn btn-success btn-block btn-option-eliminar-confirm">Eliminar</button>

@@ -9,7 +9,8 @@ class BarcoController extends \BaseController {
 	 */
 	public function index()
 	{
-        if(!Usuario::checkIfUserIsLoged()) return Redirect::route('login.index');
+		if(!Usuario::checkIfUserIsLoged()) return Redirect::route('login.index');
+		if(Usuario::checkIfUserIsSupervisor()) return Redirect::route('entradas.index');
 
 		$barcos = Barco::getBarcos();
 		$usuarios = Usuario::getUsuarios();
@@ -132,6 +133,8 @@ class BarcoController extends \BaseController {
     }
 
     public function findByNombre(){
+		if(Usuario::checkIfUserIsSupervisor()) return Redirect::route('entradas.index');
+
 	    $button = Input::get('sent');
 	    if($button == 'sent'){
             $nombre = Input::get('nombre');
