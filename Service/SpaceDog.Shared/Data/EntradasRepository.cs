@@ -164,6 +164,8 @@ namespace SpaceDog.Shared.Data
         public Entrada GetEntradasByFolio(string folio)
         {
             return Context.Entradas
+                .Include(e => e.Usuario)
+                .Include(e => e.Cargas)
                 .Where(e => e.Folio == folio)
                 .SingleOrDefault();
         }
