@@ -8,7 +8,6 @@ package views;
 
 import javax.swing.table.DefaultTableModel;
 import com.itextpdf.text.*;
-import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.pdf.draw.LineSeparator;
@@ -21,15 +20,21 @@ import java.awt.Cursor;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+//<<<<<<< HEAD
+//=======
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+//>>>>>>> 6eeadb8c8e8f68db154faafc66f842c18f5b5749
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+//<<<<<<< HEAD
+//=======
 import java.util.List;
 import java.util.ArrayList;
+//>>>>>>> 6eeadb8c8e8f68db154faafc66f842c18f5b5749
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
@@ -658,21 +663,8 @@ public class PanelReportes extends javax.swing.JPanel {
     
     private void btnGenerarReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarReporteActionPerformed
         JFileChooser chosenFile = new JFileChooser();
-        DefaultTableModel dtmEntradas = new DefaultTableModel();
-        DefaultTableModel dtmCargas = new DefaultTableModel();
-        
-        tblEntradasReporte.setModel(dtmEntradas);
-        tblCargasReporte.setModel(dtmCargas);
-        
-        String[] colsEntradas = {"Folio", "Generado por", "Turno", "Fecha", "Hora"};
-        for(String col : colsEntradas){
-            dtmEntradas.addColumn(col);
-        }
-        
-        String[] colsCargas = {"Barco", "Especie", "Cantidad", "Talla", "Temperatura", "Condición"};
-        for(String col : colsCargas){
-            dtmCargas.addColumn(col);
-        }
+//        DefaultTableModel dtmEntradas = new DefaultTableModel();
+//        DefaultTableModel dtmCargas = new DefaultTableModel();
         
         int columnEntradas = tblEntradasReporte.getModel().getColumnCount();
         int columnCargas = tblCargasReporte.getModel().getColumnCount();
@@ -709,11 +701,18 @@ public class PanelReportes extends javax.swing.JPanel {
                 
                 PdfPTable tablaEntradas = new PdfPTable(columnEntradas);
                 
-                for(int i = 0; i < columnEntradas; i++){
-                    String contentEntradas = tblEntradasReporte.getColumnName(i);
-                    tablaEntradas.addCell(contentEntradas);
+                
+                
+                for(int j = 0; j < columnEntradas; j++){
+                    String contenido = tblEntradasReporte.getColumnName(j);
+                    tablaEntradas.addCell(contenido);
                 }
                 
+                for(int i = 0; i < columnEntradas; i++){
+                    int filaSeleccionada = tblEntradasReporte.getSelectedRow();
+                    String contentEntradas = tblEntradasReporte.getValueAt(filaSeleccionada, i).toString();
+                    tablaEntradas.addCell(contentEntradas);
+                }
                 tablaEntradas.setWidthPercentage(100);
                 
                 document.add(tablaEntradas);
@@ -729,6 +728,13 @@ public class PanelReportes extends javax.swing.JPanel {
                 for(int i = 0; i < columnCargas; i++){
                     String contentCargas = tblCargasReporte.getColumnName(i);
                     tablaCargas.addCell(contentCargas);
+                }
+                
+                for (int i = 0; i < rowCargas; i++) {
+                    for (int j = 0; j < columnCargas; j++) {
+                        String contenidoCargas = tblCargasReporte.getValueAt(i, j).toString();
+                        tablaCargas.addCell(contenidoCargas);
+                    }
                 }
                 
                 tablaCargas.setWidthPercentage(100);
@@ -776,16 +782,13 @@ public class PanelReportes extends javax.swing.JPanel {
                 
                 document.close();
                 
-                JOptionPane.showMessageDialog(null, "Se guardó con éxito el PDF");
+                JOptionPane.showMessageDialog(this, "Se guardó con éxito el PDF");
                 
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(PanelReportes.class.getName()).log(Level.SEVERE, null, ex);
             } catch (DocumentException ex) {
                 Logger.getLogger(PanelReportes.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "No se ha guardado nada");
         }
         
         
