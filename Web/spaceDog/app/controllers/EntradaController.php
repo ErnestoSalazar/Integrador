@@ -162,6 +162,7 @@ class EntradaController extends \BaseController {
     public function findByDate(){
         $button = Input::get('sent');
         if($button == 'sent'){
+            if(!Usuario::checkIfUserIsLoged()) return Redirect::route('login.index');
             $fechaInicio = Input::get('fechaInicio');
             $fechaFin = Input::get('fechaFin');
 

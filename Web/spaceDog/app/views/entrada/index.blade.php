@@ -6,7 +6,7 @@
 
 
 @section('content')
-    <h1>Entregas: </h1>
+    <h1>Entradas: </h1>
     <div class="col-xs-6">
     <form action="/entradas/folio" method="POST" class="form-inline" style="margin-bottom: 20px;">
         <div class="form-group">
@@ -18,15 +18,15 @@
     </form>
     </div>
     <div class="col-xs-6">
-    <form class="form-inline">
+    <form action="/entradas/search_results" method="POST" class="form-inline">
             <div class="form-group">
                 <label for="email">Ingresar fecha:</label>
-                <input type="search" placeholder="Inicio" class="form-control">
+                <input type="search" name="fechaInicio" placeholder="Inicio año/mes/dia" class="form-control">
             </div>
             <div class="form-group">
-                <input type="search" placeholder="Fin" class="form-control" id="pwd">
+                <input type="search" name="fechaFin" placeholder="Fin año/mes/dia" class="form-control" id="pwd">
             </div>
-            <button type="submit" class="btn btn-default">Buscar</button>
+            <button type="submit" name="sent" value="sent" class="btn btn-default">Buscar</button>
         </form>
     </div>
 </div>

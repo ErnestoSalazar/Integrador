@@ -55,7 +55,7 @@ class Entrada
 
 
     static function getEntradaByDate($fechaInicio, $fechaFin){
-        $service_url = Strings::SERVICE_URL."/api/entradas?fechaInicio=13/11/2017&fechaFin=23/11/2017";
+        $service_url = Strings::SERVICE_URL."/api/entradas?fechaInicio=$fechaInicio&fechaFin=$fechaFin";
         $curl = curl_init($service_url);
 
         curl_setopt($curl, CURLOPT_HTTPHEADER, array(Strings::CONTENT_JSON, Strings::AUTH_TOKEN." ".Session::get('token')) );
@@ -68,7 +68,7 @@ class Entrada
         curl_close($curl);
 
         if($httpcode === 200){
-            return $curl_response;
+            return json_decode($curl_response);
         }
         else{
             return null;
