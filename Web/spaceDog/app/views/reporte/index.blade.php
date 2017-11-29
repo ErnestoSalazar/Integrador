@@ -7,18 +7,7 @@
 @section('content')
 
     <h1>Reportes</h1>
-    <div>
-        <form class="form-inline">
-            <div class="form-group">
-                <label for="email">Ingresar fecha:</label>
-                <input type="search" placeholder="Inicio" class="form-control">
-            </div>
-            <div class="form-group">
-                <input type="search" placeholder="Fin" class="form-control" id="pwd">
-            </div>
-            <button type="submit" class="btn btn-default">Buscar</button>
-        </form>
-    </div>
+    
     <h2>Entradas</h2>
     <div class="table-responsive">
         <table class="table">
