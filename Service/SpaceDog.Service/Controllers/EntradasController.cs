@@ -177,7 +177,26 @@ namespace SpaceDog.Service.Controllers
             return Ok(entrada);
         }
 
+        [Route("api/entradas/reportes")]
+        public IHttpActionResult PostReportesByDate(FechasDto Fecha)
+        {
 
+            DateTime dateInicio;
+            DateTime dateFin;
+            if (DateTime.TryParse(Fecha.FechaInicio, out dateInicio) && DateTime.TryParse(Fecha.FechaFin, out dateFin))
+            {
+                var entradas = _entradasRepository.GetReportesByDate(dateInicio, dateFin);
+                if (entradas.Count <= 0)
+                {
+                    return NotFound();
+                }
+                return Ok(entradas);
+            }
+            else
+            {
+                return BadRequest(Strings.FECHA_INVALIDA);
+            }
+        }
 
     }
 }

@@ -70,12 +70,13 @@ namespace SpaceDog.Service.Controllers
                 return BadRequest("Carga inexistente");
             }
 
-            carga.BarcoId = (cargaDto.BarcoId == 0) ? cargaDto.BarcoId : carga.BarcoId;
-            carga.Cantidad = (cargaDto.Cantidad <= 0) ? cargaDto.Cantidad.Value : carga.Cantidad;
-            carga.Especie = (cargaDto.Especie != null && cargaDto.Especie.ToString().Length > 0) ? cargaDto.Especie.Value : carga.Especie;
-            carga.Talla = (cargaDto.Talla != null && cargaDto.Talla.ToString().Length > 0) ? cargaDto.Talla.Value : carga.Talla;
-            carga.Temperatura = (cargaDto.Temperatura != null) ? cargaDto.Temperatura.Value : carga.Temperatura;
-            carga.Condicion = (cargaDto.Condicion != null) ? cargaDto.Condicion.Value : carga.Condicion;
+            carga.BarcoId       = (cargaDto.BarcoId == 0) ? cargaDto.BarcoId : carga.BarcoId;
+            carga.Cantidad      = (cargaDto.Cantidad != null && cargaDto.Cantidad > 0) ? cargaDto.Cantidad.Value : carga.Cantidad;
+            carga.Especie       = (cargaDto.Especie != null && cargaDto.Especie.ToString().Length > 0) ? cargaDto.Especie.Value : carga.Especie;
+            carga.Talla         = (cargaDto.Talla != null && cargaDto.Talla.ToString().Length > 0) ? cargaDto.Talla.Value : carga.Talla;
+            carga.Temperatura   = (cargaDto.Temperatura != null) ? cargaDto.Temperatura.Value : carga.Temperatura;
+            carga.Condicion     = (cargaDto.Condicion != null) ? cargaDto.Condicion.Value : carga.Condicion;
+            
 
             _cargasRepository.Update(carga);
             return StatusCode(System.Net.HttpStatusCode.NoContent);
