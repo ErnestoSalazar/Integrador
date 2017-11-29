@@ -26,6 +26,7 @@ Route::post('/usuarios/search_results','UsuarioController@findByName');
 
 Route::put('/barcos/edit/{id}','BarcoController@updateBarco');
 Route::post('/barcos/nombre', 'BarcoController@findByNombre');
+Route::post('/barcos/delete/{id}','BarcoController@deleteBarco');
 
 Route::put('/entradas/edit/{id}','EntradaController@updateEntrada');
 Route::post('/entradas/folio', 'EntradaController@findByFolio');

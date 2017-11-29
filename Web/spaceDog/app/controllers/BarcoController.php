@@ -149,4 +149,9 @@ class BarcoController extends \BaseController {
 
     }
 
+
+    public function deleteBarco($id){
+        return Barco::deleteBarco($id);
+    }
+
 }

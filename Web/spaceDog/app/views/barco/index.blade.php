@@ -42,11 +42,12 @@
                                         <input type="text" value="{{{$barco->id}}}" hidden>
                                         Editar
                                     </button>
-                                    {{Form::open([ 'method'  => 'delete', 'route' => [ 'barcos.destroy', $barco->id ] ])}}
-                                    <button type="submit" name="sent" value="sent" class="btn-option-eliminar" data-toggle="modal" data-target="modal-eliminar-barco" style="padding: 15px;">
+
+                                    <button type="button" name="sent" value="sent" class="btn-option-eliminar" data-toggle="modal" data-target="#modal-eliminar-barco" style="padding: 15px;">
+                                        <input type="text" value="{{{$barco->id}}}" hidden>
                                         Eliminar
                                     </button>
-                                    {{Form::close()}}
+
                                 </div>
                             </div>
                         </div>
@@ -157,7 +158,7 @@
                     <h4>Seguro quiere eliminar este Usuario?</h4>
                 </div>
                 <div class="modal-body" style="padding:40px 50px;">
-                    <button type="submit" name="sent" value="sent" class="btn btn-success btn-block">Eliminar</button>
+                    <button type="submit" name="sent" value="sent" class="btn btn-success btn-block btn-option-eliminar-confirm">Eliminar</button>
                     <button type="button" class="btn btn-danger btn-block" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>

@@ -111,7 +111,7 @@ class Usuario
 
         curl_setopt($curl, CURLOPT_POSTFIELDS, $usuario);
         curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type:application/json') );
-// return response instead of printing
+        // return response instead of printing
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'PUT');
 

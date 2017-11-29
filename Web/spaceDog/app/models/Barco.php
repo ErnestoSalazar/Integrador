@@ -119,10 +119,10 @@ class Barco
         curl_close($curl);
 
         if($httpcode === 204){
-            return true;
+            return "true";
         }
         else{
-            return false;
+            return "false";
         }
     }
 

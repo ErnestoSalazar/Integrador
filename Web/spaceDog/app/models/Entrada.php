@@ -45,7 +45,7 @@ class Entrada
         curl_close($curl);
 
         if($httpcode === 200){
-            return $curl_response;
+            return json_decode($curl_response);
         }
         else{
             return null;
