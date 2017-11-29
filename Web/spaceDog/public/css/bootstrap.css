@@ -6784,6 +6784,9 @@ button.close {
   font-size: 30px;
 }
 
+.nav-options {
+  font-size: 25px;
+}
 
 @media only screen and (max-width: 768px) {
     

@@ -9,9 +9,18 @@ class EntradaController extends \BaseController {
 	 */
 	public function index()
 	{
+	    $especies = ['Macarela', 'Japonesa', 'Monterrey', 'Rayadillo', 'Bocona', 'Anchoveta', 'Crinuda'];
+	    $tallas = ['s', 'm', 'l', 'xl'];
+	    $condiciones = ['Mala', 'Regular', 'Buena'];
+
+	    $entradas = Entrada::getEntradas();
 	    $barcos = Barco::getBarcos();
 		return View::make('entrada.index')->with([
-		    "listBarcos" => $barcos
+		    "listBarcos" => $barcos,
+            "listEntradas" => $entradas,
+            "listEspecies" => $especies,
+            "listTallas" => $tallas,
+            "listCondiciones" => $condiciones
         ]);
 	}
 
@@ -34,7 +43,21 @@ class EntradaController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+	    $button = Input::get('sent');
+	    if($button === 'sent'){
+
+	        $usuarioId = Session::get('userId');
+	        $cargasId = Input::get('cargasId');
+
+	        $bool = Entrada::postEntrada($usuarioId, $cargasId);
+
+	        if($bool){
+	            return Redirect::route('entradas.index')->withMessage(Strings::R_AGREGADO);
+            }
+            else{
+                return Redirect::route('entradas.index')->withMessage(Strings::ERROR);
+            }
+        }
 	}
 
 
@@ -46,7 +69,7 @@ class EntradaController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+	    return Entrada::getEntrada($id);
 	}
 
 
@@ -82,8 +105,36 @@ class EntradaController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+	    $button = Input::get('sent');
+	    if($button === "sent"){
+            $bool = Entrada::deleteEntrada($id);
+            if($bool){
+                return Redirect::route('entradas.index')->withMessage(Strings::R_ELIMINADO);
+            }
+            else{
+                return Redirect::route('entradas.index')->withMessage(Strings::ERROR);
+            }
+        }
+        else{
+            return Redirect::route('entradas.index')->withMessage(Strings::ERROR);
+        }
 	}
+
+	public function updateEntrada($id){
+	    $button = Input::get('sent');
+	    if($button == 'sent'){
+            $cargasId = Input::get('cargasIdUpdate');
+
+            $bool = Entrada::updateEntrada($id,$cargasId);
+
+            if($bool){
+                return Redirect::route('entradas.index')->withMessage(Strings::R_ACTUALIZADO);
+            }
+            else{
+                return Redirect::route('entradas.index')->withMessage(Strings::ERROR);
+            }
+        }
+    }
 
 
 }

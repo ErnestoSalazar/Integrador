@@ -63,6 +63,7 @@ class LoginController extends \BaseController {
                 Session::put("token",$curl_response->access_token);
                 Session::put("userId", (int)$curl_response->userId);
                 Session::put('rol', $curl_response->rol);
+                Session::put('userName',$curl_response->userName);
 
                 return Redirect::route('usuarios.index');
             }

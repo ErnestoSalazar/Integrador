@@ -24,7 +24,11 @@ Route::post('/usuarios/delete/{id}','UsuarioController@deleteUsuario');
 
 Route::put('/barcos/edit/{id}','BarcoController@updateBarco');
 
+Route::put('/entradas/edit/{id}','EntradaController@updateEntrada');
+
+
 Route::resource('login','LoginController');
 Route::resource('usuarios','UsuarioController');
 Route::resource('barcos', 'BarcoController');
+Route::resource('cargas', 'CargaController');
 Route::resource('entradas','EntradaController');

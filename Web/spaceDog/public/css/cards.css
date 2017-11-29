@@ -7,9 +7,9 @@ html, body {
 	--btn: #FDFFFC;
 }
 .user__card {
-	min-width: 25em; /* 400px */
-	height: 32em; /* 600px */
-    border-radius: 10px; /* 20px */
+	min-width: 25em; 
+	height: 32em; 
+    border-radius: 10px; 
     margin-bottom: 10px;
 }
 .bg {
@@ -145,8 +145,4 @@ html, body {
 	background-color: #ed1c24;
 	border-width: 0;
 	float: left;
-}
-
-.card-options form {
-	display: inline;
 }

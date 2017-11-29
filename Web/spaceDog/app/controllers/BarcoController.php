@@ -120,10 +120,10 @@ class BarcoController extends \BaseController {
 	        $bool = Barco::updateBarco($id, $nombre, $descripcion, $usuarioId);
 
 	        if($bool[0]){
-	            return Redirect::route('barcos.index')->withMessage('Información actualizada');
+	            return Redirect::route('barcos.index')->withMessage(Strings::R_ACTUALIZADO);
             }
             else{
-                return Redirect::route('barcos.index')->withMessage($bool[1]);
+                return Redirect::route('barcos.index')->withMessage(Strings::ERROR);
             }
 
         }

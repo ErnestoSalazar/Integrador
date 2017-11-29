@@ -16,14 +16,14 @@
                 </div>
                 <div class="navbar3 navbar-collapse collapse">
                     <ul class="nav navbar-nav  visible-xs">
-                    <li><a href="/reporte">Reporte</a></li>
-                    <li><a href="/usuarios">Usuario</a></li>
-                    <li><a href="/entradas">Entregas</a></li>
-                    <li><a href="/barcos">Barcos</a></li>
+                    <li><a href="/reporte" class="nav-options"><i class="material-icons">description</i>  Reporte</a></li>
+                    <li><a href="/usuarios" class="nav-options"><i class="material-icons">supervisor_account</i>  Usuario</a></li>
+                    <li><a href="/entradas" class="nav-options"><i class="material-icons">system_update_alt</i>  Entradas</a></li>
+                    <li><a href="/barcos" class="nav-options"><i class="material-icons">directions_boat</i>  Barcos</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="hidden-xs    "><a href="#">Nombre usuario</a></li>
-                        <li><a href="#"> <i class="material-icons">power_settings_new</i></a></li>
+                        <li class="hidden-xs"><a href="#">{{{Session::get('userName')}}}</a></li>
+                        <li><a href="#"class=""><i class="material-icons">power_settings_new</i></a></li>
                     </ul>
                 </div>
                 <!--/.nav-collapse -->
