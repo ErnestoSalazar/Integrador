@@ -31,29 +31,55 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     //MARK: TableView Delegate And DataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return menuTitles.count
+        if isAdmin {
+            return menuTitles.count
+        }else {
+            return 2
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = Bundle.main.loadNibNamed("MenuTableViewCell", owner: self, options: nil)?.first as! MenuTableViewCell
+        if isAdmin {
+            let cell = Bundle.main.loadNibNamed("MenuTableViewCell", owner: self, options: nil)?.first as! MenuTableViewCell
             cell.labelTitle.text = menuTitles[indexPath.row]
             cell.imageIcon.image = menuIcons[indexPath.row]
-        return cell
+            return cell
+        }else {
+            let cell = Bundle.main.loadNibNamed("MenuTableViewCell", owner: self, options: nil)?.first as! MenuTableViewCell
+            if indexPath.row == 0 {
+                cell.labelTitle.text = "Entradas"
+                cell.imageIcon.image = #imageLiteral(resourceName: "entregas")
+            }else {
+                cell.labelTitle.text = "Cerrar Sesión"
+                cell.imageIcon.image = #imageLiteral(resourceName: "logout")
+            }
+            
+            return cell
+        }
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 0 {
-            self.performSegue(withIdentifier: self.segueToReports, sender: self)
-        }
-        if indexPath.row == 1 {
-            self.performSegue(withIdentifier: self.segueToUsers, sender: self)
-        }else if indexPath.row == 2 {
-            self.performSegue(withIdentifier: self.segueToBoats, sender: self)
-        }else if indexPath.row == 3 {
-            self.performSegue(withIdentifier: self.segueToDeliveries, sender: self)
+        if isAdmin {
+            if indexPath.row == 0 {
+                self.performSegue(withIdentifier: self.segueToReports, sender: self)
+            }
+            if indexPath.row == 1 {
+                self.performSegue(withIdentifier: self.segueToUsers, sender: self)
+            }else if indexPath.row == 2 {
+                self.performSegue(withIdentifier: self.segueToBoats, sender: self)
+            }else if indexPath.row == 3 {
+                self.performSegue(withIdentifier: self.segueToDeliveries, sender: self)
+            }else {
+                DataGlobal.cleanSavedValues()
+                self.performSegue(withIdentifier: self.segueToLogin, sender: self)
+            }
         }else {
-            DataGlobal.cleanSavedValues()
-            self.performSegue(withIdentifier: self.segueToLogin, sender: self)
+            if indexPath.row == 0 {
+                self.performSegue(withIdentifier: self.segueToDeliveries, sender: self)
+            }else {
+                DataGlobal.cleanSavedValues()
+                self.performSegue(withIdentifier: self.segueToLogin, sender: self)
+            }
         }
     }
     

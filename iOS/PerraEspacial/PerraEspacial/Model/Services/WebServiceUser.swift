@@ -44,6 +44,9 @@ struct WebServiceUser {
                             
                             if let roleUser = JSON["rol"] {
                                 roleName = roleUser as? String ?? ""
+                                if roleName == "Administrador" {
+                                    isAdmin = true
+                                }
                             }
                             
                             print("\(id), \(email) \(roleName)")
