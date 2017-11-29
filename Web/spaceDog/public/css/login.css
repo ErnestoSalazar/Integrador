@@ -14,7 +14,8 @@ body {
     padding: 20px 20px 20px;
     width: 310px;
     background: #FAFAFA;
-    border-radius: 3px; }
+    border-radius: 3px;
+    margin-top: 25px; }
     .login:before {
       content: '';
       position: absolute;
@@ -118,4 +119,18 @@ body {
       background-color: transparent;
       color: white;
       border: hidden;
+      padding: 4px 60px;
     }
+
+    .login-btns .regresar {
+      width: 100%;
+    }
+
+    .btn-confirmar {
+      margin: 13px 0 0 94px;
+      background-color: #1f648b;
+      border: hidden;
+      color: #fff;
+      height: 24px 
+    }
+

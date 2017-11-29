@@ -24,6 +24,19 @@
 
             {{Form::close()}}
         </div>
+
+        <div class="login" id="recuperar">
+            <h1 class="login-header">Space Dog</h1>
+
+            {{Form::open(array('route'=>'login.store'))}}
+                <p style="margin-top: 45px">{{Form::text('login',null,['placeholder'=> 'Email'])}}</p>
+                <button type="button" class="btn-confirmar">Confirmar cambio</button>
+                <div class="login-btns">
+                    <button type="button" class="btn-login regresar" id="regresar">Regresar</button>
+                </div>
+
+            {{Form::close()}}
+        </div>
     </section>
 
 @stop

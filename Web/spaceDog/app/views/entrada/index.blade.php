@@ -58,11 +58,14 @@
                             <td>
                                 <button type="button" class="btn bckg-transparent btn-option-editar" data-toggle="modal" data-target="#modal-edit-entrada">
                                     <input type="text" value="{{{$entrada->id}}}" hidden>
-                                    <i class="material-icons">check</i>
+                                    <i class="material-icons">create</i>
                                 </button>
                                 {{Form::open([ 'method'  => 'delete', 'route' => [ 'entradas.destroy', $entrada->id ], 'class'=>'form-gatito' ])}}
-                                    <button type="submit" name="sent" value="sent" class="btn bckg-transparent"><i class="material-icons">close</i></button>
+                                    <button type="submit" name="sent" value="sent" class="btn bckg-transparent" ><i class="material-icons">close</i></button>
                                 {{Form::close()}}
+                                <button type="submit" name="sent" value="sent" class="btn bckg-transparent" >
+                                    <a href="/reporte"><i class="material-icons"  style="color:black;">remove_red_eye</i></a>
+                                </button>
                             </td>
                         </tr>
                     @endforeach
