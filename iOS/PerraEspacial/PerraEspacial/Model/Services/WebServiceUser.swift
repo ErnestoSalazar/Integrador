@@ -49,7 +49,7 @@ struct WebServiceUser {
                             print("\(id), \(email) \(roleName)")
 
                             let role = Role(id: 0, name: roleName)
-                            loggedUser = User(id: 1, email: email, name: "", lastName: "", password: "", rfc: "", role: role)
+                            loggedUser = User(id: id, email: email, name: "", lastName: "", password: "", rfc: "", role: role)
                             
                             WebLinks.headers["Authorization"] = "bearer \(token)"
                             dataGlobal.set(token, forKey: DataGlobal.keyToken)

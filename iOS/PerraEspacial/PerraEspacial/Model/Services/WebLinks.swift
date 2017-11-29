@@ -14,6 +14,7 @@ struct WebLinks {
     
     static var headers: HTTPHeaders = [
         "Authorization": "bearer \(dataGlobal.value(forKey: DataGlobal.keyToken) as? String ?? "")"
+        
     ]
     
     struct Service {

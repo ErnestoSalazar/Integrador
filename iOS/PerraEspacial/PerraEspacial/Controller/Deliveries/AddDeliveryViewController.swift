@@ -72,7 +72,7 @@ class AddDeliveryViewController: UIViewController, UITableViewDelegate, UITableV
     
     //MARK: - Actions
     @IBAction func createDeliveryButtonPressed(_ sender: Any) {
-        self.view.hideToastActivity()
+        self.view.makeToastActivity(.center)
         if cargas.count > 0 {
             self.createCargas()
         }else {

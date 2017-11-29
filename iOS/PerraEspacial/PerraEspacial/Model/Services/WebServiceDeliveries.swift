@@ -170,29 +170,29 @@ struct WebServiceDeliveries {
     }
     
     static func createDelivery(idCargas : [Int], completionHandler :@escaping (_ status: Bool, _ message: String)->()) {
-        
         let parameters : Parameters = [
             "usuarioId" : loggedUser?.id ?? 0,
             "cargasId" : idCargas
         ]
         
         print("\(parameters)")
+
         
-        Alamofire.request(WebLinks.Service.urlDeliveries, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: WebLinks.headers).responseJSON { response in
+        Alamofire.request(WebLinks.Service.urlDeliveries+"", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: WebLinks.headers).responseJSON { response in
+            print("\(response)")
             switch(response.result)
             {
                 
             case .success( _):
                 let JSON = response.result.value as! NSDictionary
-                print("JSON: \(JSON)")
                 
                 if let httpStatusCode = response.response?.statusCode
                 {
                     var message = ""
                     switch(httpStatusCode){
                     case 201:
-                        if let _ = JSON["id"] {
-                            completionHandler(true, message)
+                        if let _ = JSON["id"] as? Int {
+                            completionHandler(true, "Entrega creada")
                         }
                         
                     default:
