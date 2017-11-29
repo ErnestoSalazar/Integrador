@@ -15,6 +15,7 @@ protocol BoatCellDelegate {
 class BoatTableViewCell: UITableViewCell {
     //MARK: - IBOutlets
     @IBOutlet weak var labelName: UILabel!
+    @IBOutlet weak var labelUser: UILabel!
     @IBOutlet weak var labelDescription: UILabel!
     
     //MARK: - Varailables And Constants

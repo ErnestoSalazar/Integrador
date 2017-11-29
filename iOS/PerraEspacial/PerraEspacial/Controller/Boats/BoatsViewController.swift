@@ -71,6 +71,7 @@ class BoatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
             let boat = boats[indexPath.row]
                 cell.labelName.text = boat.name
                 cell.labelDescription.text = boat.description
+                cell.labelUser.text = "\(boat.user?.name ?? "") \(boat.user?.lastName ?? "")"
             cell.delegate = self
             return cell
         }else {

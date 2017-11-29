@@ -72,6 +72,9 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
         if users.count > 0 {
             let cell = Bundle.main.loadNibNamed("UserCardTableViewCell", owner: self, options: nil)?.first as! UserCardTableViewCell
                 let user = users[indexPath.row]
+                    let nameFirstCharacter = user.name.prefix(1)
+                    let lastNameFirstCharacter = user.lastName.prefix(1)
+                    cell.labeTitle.text = "\(nameFirstCharacter.capitalized)\(lastNameFirstCharacter.capitalized)"
                     cell.labelName.text = "\(user.name) \(user.lastName)"
                     cell.labelEmail.text = user.email
                     cell.labelRfc.text = user.rfc

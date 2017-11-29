@@ -639,7 +639,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = LYX85X3W4B;
+				DEVELOPMENT_TEAM = WV9YBKM4R8;
 				INFOPLIST_FILE = PerraEspacial/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.saulurias.PerraEspacial;
@@ -655,7 +655,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = LYX85X3W4B;
+				DEVELOPMENT_TEAM = WV9YBKM4R8;
 				INFOPLIST_FILE = PerraEspacial/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.saulurias.PerraEspacial;

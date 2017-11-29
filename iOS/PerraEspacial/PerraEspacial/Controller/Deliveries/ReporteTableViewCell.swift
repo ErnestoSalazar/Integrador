@@ -10,15 +10,24 @@ import UIKit
 
 class ReporteTableViewCell: UITableViewCell {
     //MARK: - IBOutlets
-    @IBOutlet weak var labelTitle: UILabel!
-    @IBOutlet weak var labelFolio: UILabel!
+    @IBOutlet weak var labelTitle: UILabel!    
     @IBOutlet weak var labelAnchoveta: UILabel!
+    @IBOutlet weak var labelAnchovetaPercent: UILabel!
     @IBOutlet weak var labelBacona: UILabel!
+    @IBOutlet weak var labelBaconaPercent: UILabel!
     @IBOutlet weak var labelCrinuda: UILabel!
+    @IBOutlet weak var labelCrinudaPercent: UILabel!
     @IBOutlet weak var labelJaponesa: UILabel!
+    @IBOutlet weak var labelJaponesaPercent: UILabel!
     @IBOutlet weak var labelMacarela: UILabel!
+    @IBOutlet weak var labelMacarelaPercent: UILabel!
     @IBOutlet weak var labelMonterrey: UILabel!
+    @IBOutlet weak var labelMonterreyPercent: UILabel!
+    
     @IBOutlet weak var labelTotal: UILabel!
+    
+    
+    
     
     //MARK: - View Life
     override func awakeFromNib() {

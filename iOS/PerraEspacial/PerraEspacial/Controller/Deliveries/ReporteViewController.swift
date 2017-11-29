@@ -40,14 +40,20 @@ class ReporteViewController: UIViewController, UITableViewDelegate, UITableViewD
         if reports.count > 0 {
             let cell = Bundle.main.loadNibNamed("ReporteTableViewCell", owner: self, options: nil)?.first as! ReporteTableViewCell
             let report = reports[indexPath.row]
-                cell.labelFolio.text = report.folio
+                cell.labelTitle.text = "\(report.folio)"
                 cell.labelBacona.text = "\(report.totalBocona)"
                 cell.labelCrinuda.text = "\(report.totalCrinuda)"
                 cell.labelJaponesa.text = "\(report.totalJaponesa)"
                 cell.labelMacarela.text = "\(report.totalMacarela)"
                 cell.labelAnchoveta.text = "\(report.totalAnchoveta)"
                 cell.labelMonterrey.text = "\(report.totalMonterrey)"
-                cell.labelTotal.text = "\(report.totals)"
+                cell.labelBaconaPercent.text = "\(Double(round(1000*report.percentBocana)/1000)) %"
+                cell.labelCrinudaPercent.text = "\(Double(round(1000*report.percentCrinuda)/1000)) %"
+                cell.labelJaponesaPercent.text = "\(Double(round(1000*report.percentJaponesa)/1000)) %"
+                cell.labelMacarelaPercent.text = "\(Double(round(1000*report.percentMacarela)/1000)) %"
+                cell.labelAnchovetaPercent.text = "\(Double(round(1000*report.percentAnchoveta)/1000)) %"
+                cell.labelMonterreyPercent.text = "\(Double(round(1000*report.percentMonterrey)/1000)) %"
+                cell.labelTotal.text = "\(report.totals) Toneladas"
             return cell
         }else {
             let cell = Bundle.main.loadNibNamed("NotFoundTableViewCell", owner: self, options: nil)?.first as! NotFoundTableViewCell
@@ -123,14 +129,17 @@ class ReporteViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func getReports(){
+        self.view.makeToastActivity(.center)
         WebServiceReport.getReport(dateBegin: self.dateBegin, dateEnd: self.dateEnd) { (status : Bool, reportsArray : [Report]) in
-            if status {
+            if status && reportsArray.count > 0 {
                 reports = reportsArray
                 self.totalRows = reports.count
                 self.tableView.reloadData()
+                self.view.hideToastActivity()
             }else {
                 self.totalRows = 1
                 self.tableView.reloadData()
+                self.view.hideToastActivity()
             }
         }
     }

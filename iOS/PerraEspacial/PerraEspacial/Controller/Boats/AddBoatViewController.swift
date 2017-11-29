@@ -62,11 +62,11 @@ class AddBoatViewController: UIViewController, UITextFieldDelegate, UIPickerView
         return fishers.count
     }
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return fishers[row].name
+        return "\(fishers[row].name) \(fishers[row].lastName)"
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        self.textFieldFisher.text = fishers[row].name
+        self.textFieldFisher.text = "\(fishers[row].name) \(fishers[row].lastName)"
         self.selectedFisher = row
     }
     

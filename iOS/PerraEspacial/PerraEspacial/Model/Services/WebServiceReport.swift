@@ -12,8 +12,23 @@ import SwiftyJSON
 
 struct WebServiceReport {
     static func getReport(dateBegin : String, dateEnd : String, completionHandler:@escaping (_ status : Bool,_ reports : [Report])->()){
+        let parameters : Parameters = [
+            "fechaInicio" : dateBegin,
+            "fechaFin" : dateEnd
+        ]
+        
+        print("\(parameters)")
+                
         //Alamofire Get Request        
-        Alamofire.request("\(WebLinks.Service.urlDeliveries)?fechaInicio=\(dateBegin)&fechaFin=\(dateEnd)", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: WebLinks.headers).responseJSON { (response:DataResponse<Any>) in
+        Alamofire.request(WebLinks.Service.urlReports, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: WebLinks.headers).responseJSON { (response:DataResponse<Any>) in
+            
+            print("\(response)")
+            
+            if let httpStatusCode = response.response?.statusCode {
+                print("Error \(httpStatusCode)")
+            }
+            
+            
             switch response.result {
             case .success(let value):
                 let jsonResponse = JSON(value)
@@ -21,7 +36,7 @@ struct WebServiceReport {
                 var reports : [Report] = []
                 for report in reportsArray {
                     let id = report["id"].int ?? 0
-                    let folio = report["folop"].string ?? ""
+                    let folio = report["folio"].string ?? ""
                     let userId = report["usuarioId"].int ?? 0
                     let totals = report["totales"].double ?? 0.0
                     let date = report["fecha"].string ?? ""
