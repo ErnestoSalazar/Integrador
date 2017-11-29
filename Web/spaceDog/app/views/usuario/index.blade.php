@@ -9,14 +9,17 @@
 
     <link rel="stylesheet" href="{{asset('css/cards.css')}}">
     <h1>USUARIO</h1>
-    <form class="form-inline" style="margin-bottom: 20px;">
+
+    <form action="/usuarios/search_results" method="POST" class="form-inline" style="margin-bottom: 20px;">
         <div class="form-group">
             <label for="email">Buscar:</label>
-            <input type="search" placeholder="Nombre" class="form-control">
+            <input type="text" name="nombre" placeholder="Nombre" class="form-control">
+            <input type="text" name="apellido" placeholder="Apellido" class="form-control">
         </div>
-        <button type="submit" class="btn btn-default">Buscar</button>
+        <button type="submit" name="sent" value="sent" class="btn btn-default">Buscar</button>
         <button type="button" class="btn btn-lg btn-success" id="my-btn" data-toggle="modal" data-target="#my-modal">Agregar</button>
     </form>
+
     <!--Targetas de usuario-->
     <div class="container">
         @if(Session::has('message'))

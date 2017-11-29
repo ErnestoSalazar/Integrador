@@ -128,5 +128,22 @@ class UsuarioController extends \BaseController {
 	    return Usuario::deleteUsuario($id);
     }
 
+    public function findByName(){
+        $button = Input::get('sent');
+        if($button == 'sent'){
+            $nombre = Input::get('nombre');
+            $apellido = Input::get('apellido');
+
+            $usuarios = Usuario::findByName($nombre,$apellido);
+
+            if(!Usuario::checkIfUserIsLoged()) return Redirect::route('login.index');
+            return View::make('usuario.index')->with([
+                "listUsuarios" => $usuarios
+            ]);
+
+        }
+
+    }
+
 
 }
