@@ -64,7 +64,7 @@
                                     <button type="submit" name="sent" value="sent" class="btn bckg-transparent" ><i class="material-icons">close</i></button>
                                 {{Form::close()}}
                                 <button type="submit" name="sent" value="sent" class="btn bckg-transparent" >
-                                    <a href="/reporte"><i class="material-icons"  style="color:black;">remove_red_eye</i></a>
+                                    <a href="{{route('entradas.show',$entrada->id)}}"><i class="material-icons"  style="color:black;">remove_red_eye</i></a>
                                 </button>
                             </td>
                         </tr>

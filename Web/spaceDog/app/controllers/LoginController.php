@@ -126,4 +126,9 @@ class LoginController extends \BaseController {
 	}
 
 
+	public function recoverPassword(){
+	    return Login::passwordRecover($_POST['mailTo']);
+    }
+
+
 }

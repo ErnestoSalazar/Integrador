@@ -71,7 +71,12 @@ class EntradaController extends \BaseController {
 	 */
 	public function show($id)
 	{
-	    return Entrada::getEntrada($id);
+	    $reporte = Entrada::getEntrada($id);
+
+	    if($reporte != null){
+	        return View::make('reporte.index')->with('reporte', $reporte);
+        }
+
 	}
 
 

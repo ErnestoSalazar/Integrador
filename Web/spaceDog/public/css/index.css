@@ -16,3 +16,7 @@ body {
 .form-gatito{
     display: inline-block;
 }
+
+.testt label {
+    display: block;
+}

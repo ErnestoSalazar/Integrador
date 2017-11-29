@@ -18,6 +18,8 @@ Route::get('/entradas', 'EntradaController@index');
 Route::get('/reporte','ReporteController@index');
 
 
+Route::post('/login/recover', 'LoginController@recoverPassword');
+
 Route::post('/usuarios/edit/{id}', 'UsuarioController@editUsuario');
 Route::post('/usuarios/delete/{id}','UsuarioController@deleteUsuario');
 
