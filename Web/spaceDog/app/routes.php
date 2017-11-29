@@ -10,7 +10,7 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
-
+Route::get('/','UsuarioController@index');
 Route::get('/usuarios','UsuarioController@index');
 Route::get('login', 'LoginController@index');
 Route::get('/barcos','BarcoController@index');
@@ -21,6 +21,8 @@ Route::get('/reporte','ReporteController@index');
 Route::post('/usuarios/edit/{id}', 'UsuarioController@editUsuario');
 Route::post('/usuarios/delete/{id}','UsuarioController@deleteUsuario');
 
+
+Route::post('/usuarios/search_results','UsuarioController@findByName');
 
 Route::put('/barcos/edit/{id}','BarcoController@updateBarco');
 Route::post('/barcos/nombre', 'BarcoController@findByNombre');

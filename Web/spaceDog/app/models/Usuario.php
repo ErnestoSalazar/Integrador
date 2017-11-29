@@ -9,6 +9,15 @@
 class Usuario
 {
 
+    static function checkIfUserIsLoged(){
+
+        if(Session::get('userId') != null){
+            return true;
+        }
+        return false;
+    }
+
+
     static function getUsuarios(){
 
         $service_url = Strings::SERVICE_URL."/api/users";
@@ -30,6 +39,27 @@ class Usuario
             return null;
         }
 
+    }
+
+    static function findByName($nombre, $apellido){
+        $service_url = Strings::SERVICE_URL."/api/users?nombre=$nombre&apellido=$apellido";
+        $curl = curl_init($service_url);
+
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array(Strings::CONTENT_JSON, Strings::AUTH_TOKEN." ".Session::get('token')) );
+        // return response instead of printing
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_HTTPGET, true);
+
+        $curl_response = curl_exec($curl);
+        $httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+        curl_close($curl);
+
+        if($httpcode === 200){
+            return json_decode($curl_response);
+        }
+        else{
+            return null;
+        }
     }
 
     static function postUsuario($nombre, $apellido, $rfc, $rol,$correo){

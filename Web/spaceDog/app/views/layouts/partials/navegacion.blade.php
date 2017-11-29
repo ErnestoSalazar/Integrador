@@ -22,8 +22,8 @@
                     <li><a href="/barcos" class="nav-options"><i class="material-icons">directions_boat</i>  Barcos</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="hidden-xs"><a href="#">{{{Session::get('userName')}}}</a></li>
-                        <li><a href="#"class=""><i class="material-icons">power_settings_new</i></a></li>
+                        <li class="hidden-xs"><a href="#">{{{Session::get('nombre')}}} {{{Session::get('apellido')}}} - {{{Session::get('rol')}}}</a></li>
+                        <li><a href="{{route('login.show',Session::get('userId'))}}"class=""><i class="material-icons">power_settings_new</i></a></li>
                     </ul>
                 </div>
                 <!--/.nav-collapse -->

@@ -10,6 +10,8 @@ class UsuarioController extends \BaseController {
 	public function index()
 	{
 
+	    if(!Usuario::checkIfUserIsLoged()) return Redirect::route('login.index');
+
 	    $usuarios = Usuario::getUsuarios();
 
 	    return View::make('usuario.index')->with('listUsuarios', $usuarios);
@@ -124,6 +126,23 @@ class UsuarioController extends \BaseController {
 
     public function deleteUsuario($id){
 	    return Usuario::deleteUsuario($id);
+    }
+
+    public function findByName(){
+        $button = Input::get('sent');
+        if($button == 'sent'){
+            $nombre = Input::get('nombre');
+            $apellido = Input::get('apellido');
+
+            $usuarios = Usuario::findByName($nombre,$apellido);
+
+            if(!Usuario::checkIfUserIsLoged()) return Redirect::route('login.index');
+            return View::make('usuario.index')->with([
+                "listUsuarios" => $usuarios
+            ]);
+
+        }
+
     }
 
 
