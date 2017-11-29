@@ -9,6 +9,15 @@
 class Usuario
 {
 
+    static function checkIfUserIsLoged(){
+
+        if(Session::get('userId') != null){
+            return true;
+        }
+        return false;
+    }
+
+
     static function getUsuarios(){
 
         $service_url = Strings::SERVICE_URL."/api/users";

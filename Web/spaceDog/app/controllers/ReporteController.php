@@ -9,6 +9,8 @@ class ReporteController extends \BaseController {
 	 */
 	public function index()
 	{
+        if(!Usuario::checkIfUserIsLoged()) return Redirect::route('login.index');
+
 		return View::make('reporte.index');
 	}
 

@@ -175,7 +175,7 @@
                     <h4>Seguro quiere eliminar este Usuario?</h4>
                 </div>
                 <div class="modal-body" style="padding:40px 50px;">
-                    <button type="submit" name="sent" value="sent" class="btn btn-success btn-block">Eliminar</button>
+                    <button type="submit" name="sent" value="sent" class="btn btn-success btn-block btn-option-eliminar-confirm">Eliminar</button>
                     <button type="button" class="btn btn-danger btn-block" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>

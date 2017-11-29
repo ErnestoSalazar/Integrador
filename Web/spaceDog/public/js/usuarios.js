@@ -1,21 +1,23 @@
+var userId;
+var baseUrl;
 $(document).ready(function(){
 
+    baseUrl = $('#update-usuario').prop('action');
 
     $('button.btn-option-editar').click(function(){
         var userId = $(this).children(0).val();
 
-        var url = $('#update-usuario').prop('action');
-        url = url+"/edit/"+userId;
-
-        $('#update-usuario').prop('action', url);
+        $('#update-usuario').prop('action', baseUrl+"/edit/"+userId);
 
     });// end click
 
 
     $('button.btn-option-eliminar').click(function(){
-        var userId = $(this).children(0).val();
-        var url = $('#update-usuario').prop('action')+"/delete/"+userId;
+        userId = $(this).children(0).val();
+    });// end click
 
+    $('button.btn-option-eliminar-confirm').click(function(){
+        var url = baseUrl+"/delete/"+userId;
         $.ajax({
             url: url,
             type: "POST",
@@ -26,7 +28,6 @@ $(document).ready(function(){
                 }
             }
         });// end ajax
-
     });// end click
 
 

@@ -9,6 +9,8 @@ class EntradaController extends \BaseController {
 	 */
 	public function index()
 	{
+        if(!Usuario::checkIfUserIsLoged()) return Redirect::route('login.index');
+
 	    $especies = ['Macarela', 'Japonesa', 'Monterrey', 'Rayadillo', 'Bocona', 'Anchoveta', 'Crinuda'];
 	    $tallas = ['S', 'M', 'L', 'XL'];
 	    $condiciones = ['Mala', 'Regular', 'Buena'];

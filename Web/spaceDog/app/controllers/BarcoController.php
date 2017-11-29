@@ -9,6 +9,8 @@ class BarcoController extends \BaseController {
 	 */
 	public function index()
 	{
+        if(!Usuario::checkIfUserIsLoged()) return Redirect::route('login.index');
+
 		$barcos = Barco::getBarcos();
 		$usuarios = Usuario::getUsuarios();
 		return View::make('barco.index')->with([

@@ -64,7 +64,8 @@ class LoginController extends \BaseController {
                 Session::put("userId", (int)$curl_response->userId);
                 Session::put('rol', $curl_response->rol);
                 Session::put('userName',$curl_response->userName);
-
+                Session::put('nombre', $curl_response->nombre);
+                Session::put('apellido', $curl_response->apellido);
                 return Redirect::route('usuarios.index');
             }
             else{
@@ -84,7 +85,8 @@ class LoginController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+        Session::flush();
+        return Redirect::route('login.index');
 	}
 
 
