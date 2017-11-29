@@ -159,5 +159,29 @@ class EntradaController extends \BaseController {
         }
     }
 
+    public function findByDate(){
+        $button = Input::get('sent');
+        if($button == 'sent'){
+            $fechaInicio = Input::get('fechaInicio');
+            $fechaFin = Input::get('fechaFin');
+
+
+            $especies = ['Macarela', 'Japonesa', 'Monterrey', 'Rayadillo', 'Bocona', 'Anchoveta', 'Crinuda'];
+            $tallas = ['S', 'M', 'L', 'XL'];
+            $condiciones = ['Mala', 'Regular', 'Buena'];
+
+            $entradas = Entrada::getEntradaByDate($fechaInicio, $fechaFin);
+            $barcos = Barco::getBarcos();
+            return View::make('entrada.index')->with([
+                "listBarcos" => $barcos,
+                "listEntradas" => $entradas,
+                "listEspecies" => $especies,
+                "listTallas" => $tallas,
+                "listCondiciones" => $condiciones
+            ]);
+
+        }
+    }
+
 
 }

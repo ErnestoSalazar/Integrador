@@ -29,6 +29,8 @@ Route::post('/barcos/nombre', 'BarcoController@findByNombre');
 
 Route::put('/entradas/edit/{id}','EntradaController@updateEntrada');
 Route::post('/entradas/folio', 'EntradaController@findByFolio');
+Route::post('/entradas/search_results','EntradaController@findByDate');
+
 
 
 Route::resource('login','LoginController');
