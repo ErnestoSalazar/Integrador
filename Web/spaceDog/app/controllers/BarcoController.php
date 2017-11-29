@@ -119,7 +119,7 @@ class BarcoController extends \BaseController {
 
 	        $bool = Barco::updateBarco($id, $nombre, $descripcion, $usuarioId);
 
-	        if($bool[0]){
+	        if($bool){
 	            return Redirect::route('barcos.index')->withMessage(Strings::R_ACTUALIZADO);
             }
             else{
@@ -127,6 +127,24 @@ class BarcoController extends \BaseController {
             }
 
         }
+    }
+
+    public function findByNombre(){
+	    $button = Input::get('sent');
+	    if($button == 'sent'){
+            $nombre = Input::get('nombre');
+
+            $nombre = str_ireplace(" ","%20", $nombre);
+
+	        $barcos = Barco::getBarcosByName($nombre);
+            $usuarios = Usuario::getUsuarios();
+	        return View::make('barco.index')->with([
+	           "listBarcos" => $barcos,
+                "listUsuarios" => $usuarios
+            ]);
+
+        }
+
     }
 
 }

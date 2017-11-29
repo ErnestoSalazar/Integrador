@@ -7,12 +7,12 @@
 
 @section('content')
     <h1>Entregas: </h1>
-    <form class="form-inline" style="margin-bottom: 20px;">
+    <form action="/entradas/folio" method="POST" class="form-inline" style="margin-bottom: 20px;">
         <div class="form-group">
-            <label for="email">Buscar:</label>
-            <input type="search" placeholder="Folio" class="form-control">
+            <label for="folio">Buscar:</label>
+            <input type="text" placeholder="Folio" name="folio" class="form-control" id="folio">
         </div>
-        <button type="submit" class="btn btn-default">Buscar</button>
+        <button type="submit" name="sent" value="sent" class="btn btn-default">Buscar</button>
         <button type="button" class="btn btn-lg btn-success" id="my-btn" data-toggle="modal" data-target="#my-modal">Agregar</button>
     </form>
     <div class="container">

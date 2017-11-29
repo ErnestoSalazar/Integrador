@@ -10,7 +10,7 @@ class EntradaController extends \BaseController {
 	public function index()
 	{
 	    $especies = ['Macarela', 'Japonesa', 'Monterrey', 'Rayadillo', 'Bocona', 'Anchoveta', 'Crinuda'];
-	    $tallas = ['s', 'm', 'l', 'xl'];
+	    $tallas = ['S', 'M', 'L', 'XL'];
 	    $condiciones = ['Mala', 'Regular', 'Buena'];
 
 	    $entradas = Entrada::getEntradas();
@@ -133,6 +133,27 @@ class EntradaController extends \BaseController {
             else{
                 return Redirect::route('entradas.index')->withMessage(Strings::ERROR);
             }
+        }
+    }
+
+    public function findByFolio(){
+	    $button = Input::get('sent');
+	    if($button == 'sent'){
+
+            $especies = ['Macarela', 'Japonesa', 'Monterrey', 'Rayadillo', 'Bocona', 'Anchoveta', 'Crinuda'];
+            $tallas = ['S', 'M', 'L', 'XL'];
+            $condiciones = ['Mala', 'Regular', 'Buena'];
+
+	        $folio = Input::get('folio');
+	        $entrada = Entrada::getEntradaByFolio($folio);
+            $barcos = Barco::getBarcos();
+	        return View::make('entrada.index')->with([
+                "listBarcos" => $barcos,
+                "listEntradas" => $entrada,
+                "listEspecies" => $especies,
+                "listTallas" => $tallas,
+                "listCondiciones" => $condiciones
+            ]);
         }
     }
 
