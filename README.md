@@ -11,6 +11,7 @@ __/api/users__        | __POST/GET__            | __{nombre, apellido, correo, r
 __/api/users?__       | __GET__                 | __rol=rol__ *or* __nombre=nombre&apellido=apellido__
 __/api/users/{id}__   | __GET/PUT/DELETE__      | __{nombre, apellido, correo, rfc, rol, password}__
 __/api/barcos__       | __POST/GET__            | __{nombre, descripcion, usuarioId}__
+__/api/barcos?__      | __GET__                 | __nombre=nombre__
 __/api/barcos/{id}__  | __GET/PUT/DELETE__      | __{nombre, descripcion, usuarioId}__
 __/api/cargas__       | __POST/GET__            | __{cantidad, especie, talla, temperatura, condicion, barcoId}__
 __/api/cargas/{id}__  | __GET/PUT/DELETE__      | __{cantidad, especie, talla, temperatura, condicion, barcoId}__
