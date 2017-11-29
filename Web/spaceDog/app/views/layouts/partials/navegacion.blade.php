@@ -37,7 +37,7 @@
                 <ul class="nav navbar-nav">
                     <li><a href="/reporte">Reporte</a></li>
                     <li><a href="/usuarios">Usuario</a></li>
-                    <li><a href="/entradas">Entregas</a></li>
+                    <li><a href="/entradas">Entradas</a></li>
                     <li><a href="/barcos">Barcos</a></li>
                 </ul>
             </div>

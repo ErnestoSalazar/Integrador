@@ -7,6 +7,7 @@
 
 @section('content')
     <h1>Entregas: </h1>
+    <div class="col-xs-6">
     <form action="/entradas/folio" method="POST" class="form-inline" style="margin-bottom: 20px;">
         <div class="form-group">
             <label for="folio">Buscar:</label>
@@ -15,6 +16,20 @@
         <button type="submit" name="sent" value="sent" class="btn btn-default">Buscar</button>
         <button type="button" class="btn btn-lg btn-success" id="my-btn" data-toggle="modal" data-target="#my-modal">Agregar</button>
     </form>
+    </div>
+    <div class="col-xs-6">
+    <form class="form-inline">
+            <div class="form-group">
+                <label for="email">Ingresar fecha:</label>
+                <input type="search" placeholder="Inicio" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="search" placeholder="Fin" class="form-control" id="pwd">
+            </div>
+            <button type="submit" class="btn btn-default">Buscar</button>
+        </form>
+    </div>
+</div>
     <div class="container">
         @if(Session::has('message'))
             <blockquote>
