@@ -112,13 +112,14 @@ class AddCargaViewController: UIViewController, UITextFieldDelegate, UIPickerVie
                 }else {
                     self.view.hideToastActivity()
                     cargas[self.indexToEdit] = carga
+                    self.navigationController?.popViewController(animated: true)
                 }
             }else {
                 self.view.hideToastActivity()
                 cargas.append(carga)
+                self.navigationController?.popViewController(animated: true)
             }
             
-            self.navigationController?.popViewController(animated: true)
         }else {
             self.view.hideToastActivity()
         }
@@ -223,7 +224,7 @@ class AddCargaViewController: UIViewController, UITextFieldDelegate, UIPickerVie
             boat = boats[self.selectedBoatIndex]
         }
         
-        if isEditing {
+        if isEditingCarga {
             id = cargas[self.indexToEdit].id
             
             if self.selectedBoatIndex == -1 {

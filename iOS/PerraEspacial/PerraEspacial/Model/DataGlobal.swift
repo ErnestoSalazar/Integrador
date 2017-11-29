@@ -26,6 +26,7 @@ struct DataGlobal {
     static let keyIndexToEditUser = "indexToEditUser"
     static let keyIndexToEditBoat = "indexToEditBoat"
     static let keyIndexToEditCarga = "indexToEditCarga"
+    static let keyIndexToEditDelivery = "indexToEditDelivery"
     
     static func cleanSavedValues(){
         let keys = [keyToken, keyIndexToEditUser, keyIndexToEditBoat]

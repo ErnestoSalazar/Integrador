@@ -96,6 +96,7 @@
                         <outlet property="tableView" destination="VrZ-A9-NTX" id="P3w-bq-L2U"/>
                         <outlet property="textFieldDateBegin" destination="zvQ-1f-AbI" id="gmu-q4-NXT"/>
                         <outlet property="textFieldDateEnd" destination="6WO-u7-lbP" id="LG7-Ld-qu7"/>
+                        <segue destination="Xky-na-VvD" kind="show" identifier="segueToEditDelivery" id="lCw-4o-y3b"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5yt-QI-XiP" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -126,7 +127,7 @@
                 <viewControllerPlaceholder storyboardName="AddDeliverie" referencedIdentifier="addDeliverie" id="Xky-na-VvD" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v6X-rT-0bk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1381" y="-302"/>
+            <point key="canvasLocation" x="1491" y="-224"/>
         </scene>
         <!--menuView-->
         <scene sceneID="aoZ-5t-LZN">
@@ -140,4 +141,7 @@
     <resources>
         <image name="menu" width="20" height="14"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="lCw-4o-y3b"/>
+    </inferredMetricsTieBreakers>
 </document>

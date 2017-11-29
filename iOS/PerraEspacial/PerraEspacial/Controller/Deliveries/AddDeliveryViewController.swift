@@ -11,9 +11,13 @@ import UIKit
 class AddDeliveryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CargaCellDelegate {
     //MARK: - IBOutlets
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var buttonCreateDelivery: UIButton!
     
     //MARK: - Varailabels And Constants
     var totalRows = 1
+    var isEditingDelivery : Bool = false
+    var indexToEdit = 0
+    var idDelivery = 0
     let segueToEditCarga = "segueToEditCarga"
     
     //MARK: - View Life
@@ -23,6 +27,7 @@ class AddDeliveryViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.verifyIfIsEditing()
         if cargas.count > 0 {
             self.totalRows = cargas.count
         }else {
@@ -74,7 +79,11 @@ class AddDeliveryViewController: UIViewController, UITableViewDelegate, UITableV
     @IBAction func createDeliveryButtonPressed(_ sender: Any) {
         self.view.makeToastActivity(.center)
         if cargas.count > 0 {
-            self.createCargas()
+            if isEditingDelivery {
+                self.addNewCargasForDelivery()
+            }else {
+                self.createCargas()
+            }
         }else {
             self.view.hideToastActivity()
             self.alert(title: "Valores Requeridos", message: "Es necesario agregar al menos una carga")
@@ -170,6 +179,66 @@ class AddDeliveryViewController: UIViewController, UITableViewDelegate, UITableV
                 self.view.hideToastActivity()
                 self.alert(title: "Error", message: message)
             }
+        }
+    }
+    
+    func verifyIfIsEditing(){
+        if let index = dataGlobal.value(forKey: DataGlobal.keyIndexToEditDelivery) as? Int {
+            self.indexToEdit = index
+            self.isEditingDelivery = true
+            cargas = deliveries[self.indexToEdit].cargas
+            self.title = "Editar Entrada"
+            self.buttonCreateDelivery.setTitle("EDITAR ENTRADA", for: .normal)
+            self.idDelivery = deliveries[self.indexToEdit].id
+            self.totalRows = cargas.count
+            self.tableView.reloadData()
+            dataGlobal.removeObject(forKey: DataGlobal.keyIndexToEditDelivery)
+            dataGlobal.synchronize()
+        }
+    }
+    
+    func editDelivery(idCargas : [Int]){
+        WebServiceDeliveries.editDelivery(idDelivery: self.idDelivery, idCargas : idCargas) { (status : Bool, message : String) in
+            if status {
+                self.view.hideToast()
+                self.navigationController?.popViewController(animated: true)
+            }else {
+                self.view.hideToast()
+                self.alert(title: "Error", message: message)
+            }
+        }
+    }
+    
+    
+    func addNewCargasForDelivery(){
+        var idCargas : [Int] = []
+        var newIdCargas : [Int] = []
+        
+        for carga in cargas {
+            if carga.id == 0 {
+                newIdCargas.append(carga.id)
+            }else {
+                idCargas.append(carga.id)
+            }
+        }
+        if newIdCargas.count > 0 {
+            for i in 0...newIdCargas.count-1 {
+                if newIdCargas[i] == 0 {
+                    WebServiceDeliveries.createCarga(carga: cargas[i], completionHandler: { (idCarga : Int, status : Bool, message : String) in
+                        if status {
+                            newIdCargas[i] = idCarga
+                            if i == newIdCargas.count-1 {
+                                idCargas += newIdCargas
+                                self.editDelivery(idCargas: idCargas)
+                            }
+                        }else {
+                            self.alert(title: "Error", message: "Ocurrio un error mientra se añadian las nuevas cargas")
+                        }
+                    })
+                }
+            }
+        }else {
+            self.editDelivery(idCargas: idCargas)
         }
     }
     

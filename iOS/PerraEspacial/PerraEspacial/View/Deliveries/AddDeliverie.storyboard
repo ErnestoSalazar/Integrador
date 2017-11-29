@@ -64,6 +64,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="buttonCreateDelivery" destination="bpm-vJ-gbV" id="pXG-Ed-Tqj"/>
                         <outlet property="tableView" destination="bMV-nN-FKE" id="srK-KB-VvS"/>
                         <segue destination="MLb-QX-2SP" kind="show" identifier="segueToEditCarga" id="XEO-Xu-XWW"/>
                     </connections>

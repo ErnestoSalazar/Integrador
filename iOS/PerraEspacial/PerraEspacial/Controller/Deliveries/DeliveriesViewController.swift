@@ -19,17 +19,22 @@ class DeliveriesViewController: UIViewController, UITableViewDelegate, UITableVi
     //MARK: - Varailabels And Constants    
     let datePicker = UIDatePicker()
     let dateFormatter = DateFormatter()
+    let segueToEditDelivery = "segueToEditDelivery"
     var totalRows = 1
     var dateBegin = ""
     var dateEnd = ""
     
     //MARK: - View Life
     override func viewDidLoad() {
-        super.viewDidLoad()
-        self.getDeliveries()
+        super.viewDidLoad()        
         self.setDelegates()
         self.setDatePicker()
         self.setDateFormat()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        cargas.removeAll()
+        self.getDeliveries()
     }
     
     //MARK: TableView Delegate And DataSource
@@ -62,7 +67,9 @@ class DeliveriesViewController: UIViewController, UITableViewDelegate, UITableVi
     //MARK: - Cell Delegates
     func editDelivery(cell: DeliveriesTableViewCell) {
         if let index = self.tableView.indexPath(for: cell)?.row {
-            
+            dataGlobal.set(index, forKey: DataGlobal.keyIndexToEditDelivery)
+            dataGlobal.synchronize()
+            self.performSegue(withIdentifier: self.segueToEditDelivery, sender: self)
         }
     }
     

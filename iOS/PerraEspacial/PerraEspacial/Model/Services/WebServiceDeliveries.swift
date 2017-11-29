@@ -214,7 +214,44 @@ struct WebServiceDeliveries {
                 }
             }
         }
+    }
+    
+    static func editDelivery(idDelivery : Int, idCargas : [Int], completionHandler :@escaping (_ status: Bool, _ message: String)->()) {
+        
+        let parameters : Parameters = [
+            "cargasId" : idCargas
+        ]
+        
+        print("\(parameters)")        
+        
+        Alamofire.request(WebLinks.Service.urlDeliveries+"/\(idDelivery)", method: .put, parameters: parameters, encoding: JSONEncoding.default, headers: WebLinks.headers).responseJSON { response in
+            print("\(response)")
+            switch(response.result)
+            {
+                
+            case .success( _):
+                if let httpStatusCode = response.response?.statusCode
+                {
 
+                    switch(httpStatusCode){
+                    case 204:
+                        completionHandler(true, "Entrega creada")
+                    default:
+                            completionHandler(false, "Ha ocurrido un error (\(httpStatusCode)), por favor intente mas tarde!")
+                    }
+                }
+            case .failure(let error):
+                if let httpStatusCode = response.response?.statusCode {
+                    completionHandler(false, "Ha ocurrido un error (\(httpStatusCode)), por favor intente mas tarde!")
+                    print("Error \(httpStatusCode)")
+                }
+                else {
+                    completionHandler(false, "Ha ocurrido un error, por favor intente mas tarde!")
+                    print(error.localizedDescription)
+                }
+            }
+        }
+        
     }
     
     
@@ -230,7 +267,12 @@ struct WebServiceDeliveries {
             "barcoId" : carga.boat.id
         ]
         
-        Alamofire.request("\(WebLinks.Service.urlCargas)\(idCarga)", method: .put, parameters: parameters, encoding: JSONEncoding.default, headers: WebLinks.headers).responseJSON { (response:DataResponse<Any>) in
+        print("\(parameters)")
+        
+        Alamofire.request("\(WebLinks.Service.urlCargas)/\(idCarga)", method: .put, parameters: parameters, encoding: JSONEncoding.default, headers: WebLinks.headers).responseJSON { (response:DataResponse<Any>) in
+            
+            print("\(response)")
+            
             switch response.result {
             case .success( _):
                 if let httpStatusCode = response.response?.statusCode {
