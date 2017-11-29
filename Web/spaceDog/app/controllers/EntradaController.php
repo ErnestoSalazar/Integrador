@@ -10,7 +10,7 @@ class EntradaController extends \BaseController {
 	public function index()
 	{
 	    $especies = ['Macarela', 'Japonesa', 'Monterrey', 'Rayadillo', 'Bocona', 'Anchoveta', 'Crinuda'];
-	    $tallas = ['s', 'm', 'l', 'xl'];
+	    $tallas = ['S', 'M', 'L', 'XL'];
 	    $condiciones = ['Mala', 'Regular', 'Buena'];
 
 	    $entradas = Entrada::getEntradas();
@@ -141,7 +141,7 @@ class EntradaController extends \BaseController {
 	    if($button == 'sent'){
 
             $especies = ['Macarela', 'Japonesa', 'Monterrey', 'Rayadillo', 'Bocona', 'Anchoveta', 'Crinuda'];
-            $tallas = ['s', 'm', 'l', 'xl'];
+            $tallas = ['S', 'M', 'L', 'XL'];
             $condiciones = ['Mala', 'Regular', 'Buena'];
 
 	        $folio = Input::get('folio');

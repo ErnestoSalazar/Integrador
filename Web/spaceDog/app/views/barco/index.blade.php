@@ -5,14 +5,13 @@
 @extends('barco.partials.header')
 
 @section('content')
-    <link rel="stylesheet" href="css/cards.css">
     <h1>BARCO</h1>
-    <form class="form-inline" style="margin-bottom: 20px;">
+    <form action="/barcos/nombre" method="POST" class="form-inline" style="margin-bottom: 20px;">
         <div class="form-group">
             <label for="">Buscar:</label>
-            <input type="search" placeholder="Barco" class="form-control">
+            <input type="search" name="nombre" placeholder="Barco" class="form-control">
         </div>
-        <button type="submit" class="btn btn-default">Buscar</button>
+        <button type="submit" name="sent" value="sent" class="btn btn-default">Buscar</button>
         <button type="button" class="btn btn-lg btn-success" id="my-btn" data-toggle="modal" data-target="#my-modal">Agregar</button>
     </form>
     <!--Targetas Barcos-->
@@ -28,7 +27,7 @@
                     <div class="col-md-4">
                         <div class="user__card">
                             <div class="bg">
-                                <div class="perfil"><img src="img/boatProfile.png" alt=""></div>
+                                <div class="perfil"><img src="{{asset('img/boatProfile.png')}}" alt=""></div>
                             </div>
                             <div class="main__content">
                                 <div class="upper__card">
