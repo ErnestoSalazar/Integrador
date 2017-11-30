@@ -8,9 +8,35 @@
 
 import Foundation
 
+
 let dataGlobal = UserDefaults.standard
 var isAdmin : Bool = false
+var loggedUser : User?
+var users : [User] = []
+var boats : [Boat] = []
+var reports : [Report] = []
+var deliveries : [Delivery] = []
+var cargas : [Carga] = []
+let especies : [String] = ["Macarela", "Japonesa", "Monterrey", "Rayadillo", "Bocona", "Anchoveta", "Crinuda"]
+let sizes : [String] = ["S","M","L","XL"]
+let conditions : [String] = ["Mala", "Regular", "Buena"]
 
 struct DataGlobal {
     static let keyToken = "token"
+    static let keyIndexToEditUser = "indexToEditUser"
+    static let keyIndexToEditBoat = "indexToEditBoat"
+    static let keyIndexToEditCarga = "indexToEditCarga"
+    static let keyIndexToEditDelivery = "indexToEditDelivery"
+    
+    static func cleanSavedValues(){
+        let keys = [keyToken, keyIndexToEditUser, keyIndexToEditBoat]
+        
+        for key in keys {
+            dataGlobal.removeObject(forKey: key)
+        }
+        
+        dataGlobal.synchronize()
+        
+    }
+    
 }

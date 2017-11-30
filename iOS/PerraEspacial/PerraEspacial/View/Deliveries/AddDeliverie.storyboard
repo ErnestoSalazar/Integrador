@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="l5Z-lG-8BW">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Verdana.ttf">
+            <string>Verdana</string>
+        </array>
+        <array key="VerdanaBold.ttf">
+            <string>Verdana-Bold</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Agregar Entrada-->
+        <scene sceneID="N31-sC-nSx">
+            <objects>
+                <viewController restorationIdentifier="addDeliverie" storyboardIdentifier="addDeliverie" id="1YO-0V-WbW" customClass="AddDeliveryViewController" customModule="PerraEspacial" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="XNR-Z7-d9Q">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bpm-vJ-gbV">
+                                <rect key="frame" x="0.0" y="622" width="375" height="45"/>
+                                <color key="backgroundColor" red="0.22544112801551819" green="0.59453314542770386" blue="0.13182488083839417" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="gH9-mJ-RSy"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="15"/>
+                                <state key="normal" title="CREAR ENTRADA">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="createDeliveryButtonPressed:" destination="1YO-0V-WbW" eventType="touchUpInside" id="Qn3-me-Xc8"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bMV-nN-FKE">
+                                <rect key="frame" x="0.0" y="64" width="375" height="558"/>
+                                <color key="backgroundColor" red="0.8462313414" green="0.83144730330000005" blue="0.83544796710000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="bMV-nN-FKE" firstAttribute="top" secondItem="ZAq-FI-SiW" secondAttribute="top" id="Aa6-Y0-0bD"/>
+                            <constraint firstItem="bpm-vJ-gbV" firstAttribute="leading" secondItem="ZAq-FI-SiW" secondAttribute="leading" id="ST4-cF-fZB"/>
+                            <constraint firstItem="bpm-vJ-gbV" firstAttribute="top" secondItem="bMV-nN-FKE" secondAttribute="bottom" id="Wc8-Tz-hI5"/>
+                            <constraint firstItem="bpm-vJ-gbV" firstAttribute="trailing" secondItem="ZAq-FI-SiW" secondAttribute="trailing" id="fkN-cl-isP"/>
+                            <constraint firstItem="ZAq-FI-SiW" firstAttribute="trailing" secondItem="bMV-nN-FKE" secondAttribute="trailing" id="lkx-jr-TDZ"/>
+                            <constraint firstItem="bMV-nN-FKE" firstAttribute="leading" secondItem="ZAq-FI-SiW" secondAttribute="leading" id="v0E-6C-ctG"/>
+                            <constraint firstItem="bpm-vJ-gbV" firstAttribute="bottom" secondItem="ZAq-FI-SiW" secondAttribute="bottom" id="yH5-I3-lzM"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ZAq-FI-SiW"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Agregar Entrada" id="93l-ry-by7">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="OTF-EU-XU6">
+                            <connections>
+                                <segue destination="MLb-QX-2SP" kind="show" id="IDu-Gw-0KL"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="buttonCreateDelivery" destination="bpm-vJ-gbV" id="pXG-Ed-Tqj"/>
+                        <outlet property="tableView" destination="bMV-nN-FKE" id="srK-KB-VvS"/>
+                        <segue destination="MLb-QX-2SP" kind="show" identifier="segueToEditCarga" id="XEO-Xu-XWW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BQ1-gc-Vpg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="703.20000000000005" y="199.25037481259372"/>
+        </scene>
+        <!--Add Carga View Controller-->
+        <scene sceneID="8pe-S5-Ikv">
+            <objects>
+                <viewController id="MLb-QX-2SP" customClass="AddCargaViewController" customModule="PerraEspacial" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Zwi-Wz-c4Q">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WQC-tv-p5i">
+                                <rect key="frame" x="0.0" y="622" width="375" height="45"/>
+                                <color key="backgroundColor" red="0.22544112799999999" green="0.59453314540000002" blue="0.13182488079999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="MaM-GB-dTt"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="15"/>
+                                <state key="normal" title="GUARDAR">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="saveButtonPressed:" destination="MLb-QX-2SP" eventType="touchUpInside" id="S1y-Km-exR"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Barco" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="T2q-Lq-hr5">
+                                <rect key="frame" x="17.5" y="89" width="340" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="17"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Toneladas" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AdE-e3-aaf">
+                                <rect key="frame" x="17.5" y="144" width="340" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Especie" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pLc-mx-GcT">
+                                <rect key="frame" x="17.5" y="199" width="340" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Talla" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="55p-yD-tRx">
+                                <rect key="frame" x="17.5" y="254" width="340" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="17"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Temperatura" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7Rr-kJ-7R4">
+                                <rect key="frame" x="17.5" y="309" width="340" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Condición" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="blC-ev-ovj">
+                                <rect key="frame" x="17.5" y="364" width="340" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="17"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Dpm-1W-RZV" firstAttribute="trailing" secondItem="55p-yD-tRx" secondAttribute="trailing" constant="17.5" id="1ZM-Hn-r8C"/>
+                            <constraint firstItem="AdE-e3-aaf" firstAttribute="top" secondItem="T2q-Lq-hr5" secondAttribute="bottom" constant="25" id="7fb-GT-WBp"/>
+                            <constraint firstItem="WQC-tv-p5i" firstAttribute="bottom" secondItem="Dpm-1W-RZV" secondAttribute="bottom" id="D49-A5-IIL"/>
+                            <constraint firstItem="7Rr-kJ-7R4" firstAttribute="top" secondItem="55p-yD-tRx" secondAttribute="bottom" constant="25" id="FuH-gD-w5t"/>
+                            <constraint firstItem="WQC-tv-p5i" firstAttribute="trailing" secondItem="Dpm-1W-RZV" secondAttribute="trailing" id="Qb5-Op-68Q"/>
+                            <constraint firstItem="pLc-mx-GcT" firstAttribute="leading" secondItem="Dpm-1W-RZV" secondAttribute="leading" constant="17.5" id="SB9-22-JSp"/>
+                            <constraint firstItem="7Rr-kJ-7R4" firstAttribute="leading" secondItem="Dpm-1W-RZV" secondAttribute="leading" constant="17.5" id="SBz-7A-AKw"/>
+                            <constraint firstItem="Dpm-1W-RZV" firstAttribute="trailing" secondItem="T2q-Lq-hr5" secondAttribute="trailing" constant="17.5" id="ViU-3H-6SV"/>
+                            <constraint firstItem="WQC-tv-p5i" firstAttribute="leading" secondItem="Dpm-1W-RZV" secondAttribute="leading" id="Wqt-lD-yOR"/>
+                            <constraint firstItem="Dpm-1W-RZV" firstAttribute="trailing" secondItem="7Rr-kJ-7R4" secondAttribute="trailing" constant="17.5" id="YGs-Ep-2Sy"/>
+                            <constraint firstItem="AdE-e3-aaf" firstAttribute="leading" secondItem="Dpm-1W-RZV" secondAttribute="leading" constant="17.5" id="Ylz-2A-smK"/>
+                            <constraint firstItem="T2q-Lq-hr5" firstAttribute="top" secondItem="Dpm-1W-RZV" secondAttribute="top" constant="25" id="afF-tt-UJQ"/>
+                            <constraint firstItem="Dpm-1W-RZV" firstAttribute="trailing" secondItem="pLc-mx-GcT" secondAttribute="trailing" constant="17.5" id="bZa-tg-k17"/>
+                            <constraint firstItem="blC-ev-ovj" firstAttribute="leading" secondItem="Dpm-1W-RZV" secondAttribute="leading" constant="17.5" id="cw4-G9-fdM"/>
+                            <constraint firstItem="Dpm-1W-RZV" firstAttribute="trailing" secondItem="AdE-e3-aaf" secondAttribute="trailing" constant="17.5" id="fCn-yj-4cr"/>
+                            <constraint firstItem="55p-yD-tRx" firstAttribute="leading" secondItem="Dpm-1W-RZV" secondAttribute="leading" constant="17.5" id="guZ-y9-d1y"/>
+                            <constraint firstItem="T2q-Lq-hr5" firstAttribute="leading" secondItem="Dpm-1W-RZV" secondAttribute="leading" constant="17.5" id="hmh-I8-fRS"/>
+                            <constraint firstItem="55p-yD-tRx" firstAttribute="top" secondItem="pLc-mx-GcT" secondAttribute="bottom" constant="25" id="kxN-Un-4kV"/>
+                            <constraint firstItem="Dpm-1W-RZV" firstAttribute="trailing" secondItem="blC-ev-ovj" secondAttribute="trailing" constant="17.5" id="mGq-8b-sh5"/>
+                            <constraint firstItem="blC-ev-ovj" firstAttribute="top" secondItem="7Rr-kJ-7R4" secondAttribute="bottom" constant="25" id="tdB-FK-EPG"/>
+                            <constraint firstItem="pLc-mx-GcT" firstAttribute="top" secondItem="AdE-e3-aaf" secondAttribute="bottom" constant="25" id="xMK-39-VrH"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Dpm-1W-RZV"/>
+                    </view>
+                    <connections>
+                        <outlet property="buttonSave" destination="WQC-tv-p5i" id="XBD-qz-ziY"/>
+                        <outlet property="textFieldBoat" destination="T2q-Lq-hr5" id="rT5-pZ-AxP"/>
+                        <outlet property="textFieldCondition" destination="blC-ev-ovj" id="cOD-oy-Egl"/>
+                        <outlet property="textFieldEspecie" destination="pLc-mx-GcT" id="iKk-UL-tWe"/>
+                        <outlet property="textFieldQuantity" destination="AdE-e3-aaf" id="9x0-Gt-0wx"/>
+                        <outlet property="textFieldSize" destination="55p-yD-tRx" id="xEr-R6-jzq"/>
+                        <outlet property="textFieldTemperature" destination="7Rr-kJ-7R4" id="Aqn-bt-1WQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PHA-bH-0Kj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1455" y="198"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="TDU-uD-jDa">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="l5Z-lG-8BW" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="8kb-5N-05Y">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="1YO-0V-WbW" kind="relationship" relationship="rootViewController" id="v4Q-dP-c3h"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eSO-ws-I5B" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-129" y="199"/>
+        </scene>
+    </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="XEO-Xu-XWW"/>
+    </inferredMetricsTieBreakers>
+</document>
