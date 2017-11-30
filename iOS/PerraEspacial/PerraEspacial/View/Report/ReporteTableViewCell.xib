@@ -23,7 +23,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="390"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="390"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="389.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a0V-X1-5he">
@@ -162,20 +162,42 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TOTAL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QZO-MC-Jzh">
-                                <rect key="frame" x="17.5" y="290" width="54" height="21"/>
+                                <rect key="frame" x="17.5" y="316" width="54" height="21"/>
                                 <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uk7-xV-gqa">
-                                <rect key="frame" x="251.5" y="290.5" width="51.5" height="21"/>
+                                <rect key="frame" x="251.5" y="316.5" width="51.5" height="21"/>
                                 <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rayadillo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h0r-FG-Ae4">
+                                <rect key="frame" x="17" y="277.5" width="77" height="21"/>
+                                <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IB2-wN-5Wg">
+                                <rect key="frame" x="179" y="277.5" width="45.5" height="21"/>
+                                <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Yil-Gi-QCT">
+                                <rect key="frame" x="242" y="277.5" width="60" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="8NA-1F-mFv"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="IB2-wN-5Wg" firstAttribute="centerY" secondItem="h0r-FG-Ae4" secondAttribute="centerY" id="0wX-KE-yKd"/>
                             <constraint firstItem="1cW-RL-9P5" firstAttribute="leading" secondItem="CoE-lH-jBx" secondAttribute="trailing" constant="17.5" id="2pD-Jw-R6X"/>
                             <constraint firstItem="QZO-MC-Jzh" firstAttribute="leading" secondItem="a0V-X1-5he" secondAttribute="leading" constant="17.5" id="3i8-QW-PO4"/>
                             <constraint firstItem="tne-LE-ZnP" firstAttribute="centerY" secondItem="Er9-Cf-um7" secondAttribute="centerY" id="4G2-t8-c7c"/>
@@ -196,16 +218,19 @@
                             <constraint firstItem="avm-mJ-yil" firstAttribute="centerY" secondItem="Jk2-bQ-Z58" secondAttribute="centerY" id="JYk-7k-QhV"/>
                             <constraint firstItem="Y8g-u0-Fbp" firstAttribute="centerY" secondItem="dgN-Qb-cfC" secondAttribute="centerY" id="KNw-iM-6uy"/>
                             <constraint firstItem="xZi-Ga-hcf" firstAttribute="leading" secondItem="EDR-H4-GG9" secondAttribute="trailing" constant="17.5" id="KPr-ki-grE"/>
+                            <constraint firstItem="h0r-FG-Ae4" firstAttribute="top" secondItem="Jk2-bQ-Z58" secondAttribute="bottom" constant="17.5" id="L7i-JA-cIU"/>
                             <constraint firstItem="5E6-Dm-850" firstAttribute="centerY" secondItem="avm-mJ-yil" secondAttribute="centerY" id="MUL-wr-0FH"/>
+                            <constraint firstItem="Yil-Gi-QCT" firstAttribute="centerY" secondItem="IB2-wN-5Wg" secondAttribute="centerY" id="OaZ-Kc-Qih"/>
                             <constraint firstItem="oVe-Ac-mMM" firstAttribute="top" secondItem="ASY-Sq-sZa" secondAttribute="bottom" constant="17.5" id="Pcf-hI-Jfw"/>
+                            <constraint firstItem="h0r-FG-Ae4" firstAttribute="leading" secondItem="a0V-X1-5he" secondAttribute="leading" constant="17.5" id="TDu-R4-UWz"/>
                             <constraint firstItem="5ec-ie-oUz" firstAttribute="top" secondItem="a0V-X1-5he" secondAttribute="top" constant="8" id="Tr9-rQ-ZRI"/>
                             <constraint firstAttribute="trailing" secondItem="uk7-xV-gqa" secondAttribute="trailing" constant="17.5" id="TuY-g5-3Vl"/>
                             <constraint firstItem="oVe-Ac-mMM" firstAttribute="leading" secondItem="a0V-X1-5he" secondAttribute="leading" constant="17.5" id="VnW-si-veQ"/>
                             <constraint firstItem="ZPs-Fq-eQa" firstAttribute="centerY" secondItem="ro5-gn-JAO" secondAttribute="centerY" id="YGj-hv-9ic"/>
                             <constraint firstItem="ASY-Sq-sZa" firstAttribute="top" secondItem="5ec-ie-oUz" secondAttribute="bottom" constant="17.5" id="YNF-CQ-O4b"/>
                             <constraint firstAttribute="trailing" secondItem="tne-LE-ZnP" secondAttribute="trailing" constant="18" id="aW6-ik-QRv"/>
-                            <constraint firstItem="QZO-MC-Jzh" firstAttribute="top" secondItem="Jk2-bQ-Z58" secondAttribute="bottom" constant="30" id="b1x-Wu-DSw"/>
                             <constraint firstAttribute="height" constant="370" id="cBU-T1-VFS"/>
+                            <constraint firstAttribute="trailing" secondItem="Yil-Gi-QCT" secondAttribute="trailing" constant="17.5" id="cSq-mW-0RA"/>
                             <constraint firstItem="Jk2-bQ-Z58" firstAttribute="top" secondItem="vf2-K1-NPH" secondAttribute="bottom" constant="17.5" id="edZ-mY-SS8"/>
                             <constraint firstAttribute="trailing" secondItem="Dl6-aA-VRu" secondAttribute="trailing" constant="18" id="f2f-AG-VVm"/>
                             <constraint firstItem="hMU-na-czR" firstAttribute="leading" secondItem="a0V-X1-5he" secondAttribute="leading" constant="17.5" id="k1J-z5-u1F"/>
@@ -213,7 +238,9 @@
                             <constraint firstItem="CoE-lH-jBx" firstAttribute="centerY" secondItem="hMU-na-czR" secondAttribute="centerY" id="nkD-B5-Q9B"/>
                             <constraint firstItem="ro5-gn-JAO" firstAttribute="leading" secondItem="a0V-X1-5he" secondAttribute="leading" constant="17.5" id="oRi-2e-FvN"/>
                             <constraint firstItem="CoE-lH-jBx" firstAttribute="centerY" secondItem="1cW-RL-9P5" secondAttribute="centerY" id="ocp-6u-5wx"/>
+                            <constraint firstItem="QZO-MC-Jzh" firstAttribute="top" secondItem="h0r-FG-Ae4" secondAttribute="bottom" constant="17.5" id="oty-iA-n07"/>
                             <constraint firstItem="vf2-K1-NPH" firstAttribute="leading" secondItem="a0V-X1-5he" secondAttribute="leading" constant="17.5" id="p3n-jM-1nR"/>
+                            <constraint firstItem="Yil-Gi-QCT" firstAttribute="leading" secondItem="IB2-wN-5Wg" secondAttribute="trailing" constant="17.5" id="pNU-Ig-vIY"/>
                             <constraint firstItem="Jk2-bQ-Z58" firstAttribute="leading" secondItem="a0V-X1-5he" secondAttribute="leading" constant="17.5" id="ryo-hy-Sz1"/>
                             <constraint firstItem="dgN-Qb-cfC" firstAttribute="centerY" secondItem="ASY-Sq-sZa" secondAttribute="centerY" id="tHb-Pv-uRM"/>
                             <constraint firstItem="ro5-gn-JAO" firstAttribute="top" secondItem="hMU-na-czR" secondAttribute="bottom" constant="17.5" id="ubf-em-AT6"/>
@@ -246,6 +273,8 @@
                 <outlet property="labelMacarelaPercent" destination="xZi-Ga-hcf" id="WJ9-qx-cnx"/>
                 <outlet property="labelMonterrey" destination="avm-mJ-yil" id="6eu-bB-u46"/>
                 <outlet property="labelMonterreyPercent" destination="5E6-Dm-850" id="dYu-gf-bcy"/>
+                <outlet property="labelRayadillo" destination="IB2-wN-5Wg" id="eYz-dX-hUu"/>
+                <outlet property="labelRayadilloPercent" destination="Yil-Gi-QCT" id="IHh-NR-jaS"/>
                 <outlet property="labelTitle" destination="5ec-ie-oUz" id="jJR-tt-0Kw"/>
                 <outlet property="labelTotal" destination="uk7-xV-gqa" id="bKH-wj-MGd"/>
             </connections>

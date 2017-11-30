@@ -47,12 +47,14 @@ class ReporteViewController: UIViewController, UITableViewDelegate, UITableViewD
                 cell.labelMacarela.text = "\(report.totalMacarela)"
                 cell.labelAnchoveta.text = "\(report.totalAnchoveta)"
                 cell.labelMonterrey.text = "\(report.totalMonterrey)"
+                cell.labelRayadillo.text = "\(report.totalRayadillo)"
                 cell.labelBaconaPercent.text = "\(Double(round(1000*report.percentBocana)/1000)) %"
                 cell.labelCrinudaPercent.text = "\(Double(round(1000*report.percentCrinuda)/1000)) %"
                 cell.labelJaponesaPercent.text = "\(Double(round(1000*report.percentJaponesa)/1000)) %"
                 cell.labelMacarelaPercent.text = "\(Double(round(1000*report.percentMacarela)/1000)) %"
                 cell.labelAnchovetaPercent.text = "\(Double(round(1000*report.percentAnchoveta)/1000)) %"
                 cell.labelMonterreyPercent.text = "\(Double(round(1000*report.percentMonterrey)/1000)) %"
+                cell.labelRayadilloPercent.text = "\(Double(round(1000*report.percentRayadillo)/1000)) %"
                 cell.labelTotal.text = "\(report.totals) Toneladas"
             return cell
         }else {

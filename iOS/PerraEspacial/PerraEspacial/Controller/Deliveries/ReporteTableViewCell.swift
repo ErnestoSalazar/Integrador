@@ -23,7 +23,8 @@ class ReporteTableViewCell: UITableViewCell {
     @IBOutlet weak var labelMacarelaPercent: UILabel!
     @IBOutlet weak var labelMonterrey: UILabel!
     @IBOutlet weak var labelMonterreyPercent: UILabel!
-    
+    @IBOutlet weak var labelRayadillo: UILabel!
+    @IBOutlet weak var labelRayadilloPercent: UILabel!    
     @IBOutlet weak var labelTotal: UILabel!
     
     
