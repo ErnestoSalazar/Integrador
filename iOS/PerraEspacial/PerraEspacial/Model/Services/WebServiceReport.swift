@@ -26,7 +26,8 @@ struct WebServiceReport {
             
             if let httpStatusCode = response.response?.statusCode {
                 print("Error \(httpStatusCode)")
-            }            
+            }
+            
             
             switch response.result {
             case .success(let value):
