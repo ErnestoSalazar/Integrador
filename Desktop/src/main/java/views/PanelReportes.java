@@ -754,7 +754,7 @@ public class PanelReportes extends javax.swing.JPanel {
                 
                 PdfPTable tablaTotales = new PdfPTable(8);
                 
-                String[] colsTotales = {"", "Macarela", "Japonesa", "Monterrey", "Rayadillo", "Bocona", "Anchoveta", "Crinuda"};
+                String[] colsTotales = {"", "Macarela", "Japonesa", "Monterrey", "Rayadillo", "Bocona", "Anchoveta", "Crinuda", "Total"};
                 
                 for (String colNamesTotales : colsTotales) {
                     tablaTotales.addCell(colNamesTotales);
@@ -763,7 +763,7 @@ public class PanelReportes extends javax.swing.JPanel {
                 
                 tablaTotales.addCell("Total");
                 
-                String[] contenidoTotales = {lblTotalMacarela.getText(), lblTotalJaponesa.getText(), lblTotalMonterrey.getText(), lblTotalRayadillo.getText(), lblTotalBocona.getText(), lblTotalAnchoveta.getText(), lblTotalCrinuda.getText()};
+                String[] contenidoTotales = {lblTotalMacarela.getText(), lblTotalJaponesa.getText(), lblTotalMonterrey.getText(), lblTotalRayadillo.getText(), lblTotalBocona.getText(), lblTotalAnchoveta.getText(), lblTotalCrinuda.getText(), lblTotal.getText()};
                 
                 for(String totales : contenidoTotales){
                     tablaTotales.addCell(totales);
