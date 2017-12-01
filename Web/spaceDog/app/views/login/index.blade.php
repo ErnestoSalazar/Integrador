@@ -4,11 +4,6 @@
 @section('content')
 
     <section class="container">
-        @if(Session::has('message'))
-            <blockquote>
-                {{{Session::get('message')}}}
-            </blockquote>
-        @endif
         <div class="login">
             <h1 class="login-header">Space Dog</h1>
 
