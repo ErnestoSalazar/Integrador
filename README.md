@@ -8,9 +8,10 @@ Endpoints    | HTTP verbs   | Examples
 __/login__            | __POST__                | form: __grant_type: password, username: correo, password: myPassword__
 __/login/recover__    | __POST__                | __{mailTo: correo}__
 __/api/users__        | __POST/GET__            | __{nombre, apellido, correo, rfc, rol}__
-__/api/users?__       | __GET__                 | __rol=rol__
+__/api/users?__       | __GET__                 | __rol=rol__ *or* __nombre=nombre&apellido=apellido__
 __/api/users/{id}__   | __GET/PUT/DELETE__      | __{nombre, apellido, correo, rfc, rol, password}__
 __/api/barcos__       | __POST/GET__            | __{nombre, descripcion, usuarioId}__
+__/api/barcos?__      | __GET__                 | __nombre=nombre__
 __/api/barcos/{id}__  | __GET/PUT/DELETE__      | __{nombre, descripcion, usuarioId}__
 __/api/cargas__       | __POST/GET__            | __{cantidad, especie, talla, temperatura, condicion, barcoId}__
 __/api/cargas/{id}__  | __GET/PUT/DELETE__      | __{cantidad, especie, talla, temperatura, condicion, barcoId}__
@@ -29,6 +30,8 @@ after Login you will recieve a response like this :
     "userName": "correo@example.com",
     "rol": "Admin",
     "userId": "1",
+    "nombre": "Ernesto",
+    "apellido": "Salazar",
     ".issued": "Fri, 24 Nov 2017 22:24:27 GMT",
     ".expires": "Sat, 25 Nov 2017 22:24:27 GMT"
 }
@@ -43,11 +46,13 @@ __Authorization : bearer *access_token*__
 
 ### Status
 #### Ok
-* *When updating any entity you will get a status code of __204__*
-
 * *When creating any new entity you will get a status code of __201__* and a json response with inserted data
 
-* *when retrieving any entity you will get a status code of __200__* and json response or an array of jsons if retrieving a list of entities
+* *When retrieving any entity you will get a status code of __200__* and json response or an array of jsons if retrieving a list of entities
+
+* *When updating any entity you will get a status code of __204__*
+
+* *When deleting any entity you will get a status code of __204__*
 
 #### Error
 * *When retrieving any entity or list of entities that does not exist you will get a status of __404__*
@@ -86,10 +91,36 @@ When retrieving __multiple__ usuarios you will recieve the following data
 ]
 ```
 
+When making a GET call to __/api/users?nombre=example&apellido=example__ you will recieve the following data that matches the user nombre and apellido
+```json
+[
+    {
+        "id": 32,
+        "nombre": "Ernesto",
+        "apellido": "Salazar",
+        "rfc": "sdsdfsd",
+        "correo": "ernestoalbertosalazar@gmail.com",
+        "rol": "Admin"
+    }
+]
+```
 
+When making a GET call to __/api/users?rol=example__ you will recieve the following data that matches the user role
+```json
+[
+    {
+        "id": 35,
+        "nombre": "Isael",
+        "apellido": "Atondo",
+        "rfc": "isael",
+        "correo": "isaelatondo@gmail.com",
+        "rol": "Pescador"
+    }
+]
+```
 
 Accepted values for the following properties are:
-* __Rol__: *Admin, Supervisor, Pescador*
+* __Rol__: *Administrador, Supervisor, Pescador*
 
 </details>
 
@@ -200,7 +231,7 @@ When retrieving __multiple__ cargas you will recieve the following data
 
 Accepted values for the following properties are:
 * __Especie__: *Macarela, Japonesa, Monterrey, Rayadillo, Bocona, Anchoveta, Crinuda*
-* __Talla__: *s, m, l, xl*
+* __Talla__: *S, M, L, XL*
 * __Condicion__: *Mala, Regular, Buena*
 
 </details>
@@ -304,7 +335,7 @@ Accepted values for the following properties are:
 ### Entradas by date
 <details>
 <summary>Detalles</summary>
-When searching an entrada by a date you will receive a json array with the following data
+When searching an entrada by a date you will receive a json array with the following data that matches with those dates parameters
 
 ```json
 [

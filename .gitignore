@@ -286,25 +286,22 @@ __pycache__/
 *.btm.cs
 *.odx.cs
 *.xsd.cs
-<<<<<<< HEAD
+
 .vscode
-=======
-<<<<<<< HEAD
+
+
 
 # Desktop Java
 
 .DS_Store
-=======
+
 /Desktop/build/
-<<<<<<< HEAD
-/Desktop/.DS_Store
-=======
-<<<<<<< HEAD
-/Desktop/.DS_Store
->>>>>>> 46be8b679edeebbe3baa34746c31fcf4b963e7ed
-=======
+
+
+
+
 Desktop/.DS_Store
->>>>>>> f4cf5eaff61cb5c1bcc63fdb984eadfcd8e70459
->>>>>>> dfc46f0ff11bae203f439a8797cac4e5730a8700
+
 Desktop/nbproject/
->>>>>>> Desktop
+
+

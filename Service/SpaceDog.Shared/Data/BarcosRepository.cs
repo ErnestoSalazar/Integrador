@@ -37,6 +37,14 @@ namespace SpaceDog.Shared.Data
                 .ToList();
         }
 
+        public IList<Barco> GetBarcosByName(string nombre)
+        {
+            return Context.Barcos
+                .Include(b => b.Usuario)
+                .Where(b => b.Nombre.ToLower().Contains(nombre.ToLower()) && b.IsDeleted != true)
+                .ToList();
+        }
+
         public void DeleteD(int id)
         {
             var barco = Context.Barcos.Find(id);

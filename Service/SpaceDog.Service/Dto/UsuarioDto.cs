@@ -14,6 +14,7 @@ namespace SpaceDog.Service.Dto
         public string Nombre { get; set; }
         [Required]
         public string Apellido { get; set; }
+
         [Required]
         public string Rfc { get; set; }
 

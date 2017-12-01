@@ -32,6 +32,36 @@ namespace SpaceDog.Shared.Data
                 .ToList();
         }
 
+        public IList<Usuario> GetUsuariosByName(string nombre, string apellido)
+        {
+            if (nombre != null && nombre.Length > 0 && apellido != null && apellido.Length > 0)
+            {
+                return Context.Usuarios
+                .OrderBy(u => u.Nombre)
+                .Where(u => u.Nombre.ToLower().Contains(nombre.ToLower()) && u.Apellido.ToLower().Contains(apellido.ToLower()) && u.IsDeleted != true)
+                .ToList();
+            }
+            else if (nombre != null && nombre.Length > 0)
+            {
+                return Context.Usuarios
+                .OrderBy(u => u.Nombre)
+                .Where(u => u.Nombre.ToLower().Contains(nombre.ToLower()) && u.IsDeleted != true)
+                .ToList();
+            }
+            else if (apellido != null && apellido.Length > 0)
+            {
+                return Context.Usuarios
+                .OrderBy(u => u.Nombre)
+                .Where(u => u.Apellido.ToLower().Contains(apellido.ToLower()) && u.IsDeleted != true)
+                .ToList();
+            }
+            else
+            {
+                return null;
+            }
+            
+        }
+
         public IList<Usuario> GetUsersByRol(string rol)
         {
             return Context.Usuarios
