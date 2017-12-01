@@ -11,13 +11,13 @@ namespace SpaceDog.Service.Dto
     {
         public int Id { get; set; }
         [Required]
-        public Double Cantidad { get; set; }
+        public Double? Cantidad { get; set; }
         [Required]
         public Especie? Especie { get; set; }
         [Required]
         public Talla? Talla { get; set; }
         [Required]
-        public Double Temperatura { get; set; }
+        public Double? Temperatura { get; set; }
         [Required]
         public Condicion? Condicion { get; set; }
 
@@ -29,10 +29,10 @@ namespace SpaceDog.Service.Dto
             return new Carga()
             {
                 Id = Id,
-                Cantidad = Cantidad,
+                Cantidad = Cantidad.Value,
                 Especie = Especie.Value,
                 Talla = Talla.Value,
-                Temperatura = Temperatura,
+                Temperatura = Temperatura.Value,
                 Condicion = Condicion.Value,
                 BarcoId = BarcoId
             };

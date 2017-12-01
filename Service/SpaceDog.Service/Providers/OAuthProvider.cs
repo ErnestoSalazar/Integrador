@@ -36,7 +36,7 @@ namespace SpaceDog.Service.Providers
                             ClaimsIdentity oAuthIdentity = new ClaimsIdentity(claims,
                                         Startup.OAuthOptions.AuthenticationType);
 
-                            var properties = CreateProperties(user.Correo, user.Rol.ToString(), user.Id.ToString());
+                            var properties = CreateProperties(user.Correo, user.Rol.ToString(), user.Id.ToString(), user.Nombre, user.Apellido);
                             var ticket = new AuthenticationTicket(oAuthIdentity, properties);
                             context.Validated(ticket);
                         }
@@ -81,13 +81,15 @@ namespace SpaceDog.Service.Providers
         #endregion
 
         #region[CreateProperties]
-        public static AuthenticationProperties CreateProperties(string userName, string rol, string id)
+        public static AuthenticationProperties CreateProperties(string userName, string rol, string id, string name, string apellido)
         {
             IDictionary<string, string> data = new Dictionary<string, string>
             {
                 { "userName", userName },
                 { "rol", rol },
-                { "userId", id }
+                { "userId", id },
+                { "nombre",  name},
+                { "apellido", apellido }
             };
             return new AuthenticationProperties(data);
         }

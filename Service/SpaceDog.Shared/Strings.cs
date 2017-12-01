@@ -23,5 +23,7 @@ namespace SpaceDog.Shared
         public const string ENTIDAD_INVALIDA = "información erronea";
         public const string USUARIO_ELIMINADO = "Este usuario ha sido eliminado y no tiene acceso al sistema";
 
+        public const string ELIMINACION_INVALIDA_ULTIMO_USUARIO = "NO PUEDES ELIMINAR AL ULTIMO USUARIO";
+
     }
 }

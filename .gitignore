@@ -286,3 +286,22 @@ __pycache__/
 *.btm.cs
 *.odx.cs
 *.xsd.cs
+
+.vscode
+
+
+
+# Desktop Java
+
+.DS_Store
+
+/Desktop/build/
+
+
+
+
+Desktop/.DS_Store
+
+Desktop/nbproject/
+
+

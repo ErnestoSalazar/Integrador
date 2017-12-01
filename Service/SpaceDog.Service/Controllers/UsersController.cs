@@ -62,7 +62,7 @@ namespace SpaceDog.Service.Controllers
             var userModel = usuarioDto.ToModel();
             _usersRepository.Add(userModel);
 
-            EmailService.SendPasswordForNewUser(userModel.Correo, $"Bienvenido nuevo usuario, aquí tienes tu contraseña de acceso: {password}");
+            EmailService.SendPasswordForNewUser(userModel.Correo, $"Bienvenido {userModel.Nombre} {userModel.Apellido}, aquí tienes tu contraseña de acceso: {password}");
 
             usuarioDto.Id = userModel.Id;
             return Created(
@@ -87,12 +87,12 @@ namespace SpaceDog.Service.Controllers
             }
 
 
-            usuario.Nombre      = (usuarioDto.Nombre != null)   ? usuarioDto.Nombre     :  usuario.Nombre;
-            usuario.Apellido    = (usuarioDto.Apellido != null) ? usuarioDto.Apellido   : usuario.Apellido;
-            usuario.Rfc         = (usuarioDto.Rfc != null)      ? usuarioDto.Rfc        : usuario.Rfc;
-            usuario.Correo      = (usuarioDto.Correo != null)   ? usuarioDto.Correo     : usuario.Correo;
-            usuario.Password    = (usuarioDto.Password != null) ? PasswordEncryptService.passwordEncrypt(usuarioDto.Password) : usuario.Password;
-            usuario.Rol         = (usuarioDto.Rol != null)      ? usuarioDto.Rol.Value  : usuario.Rol;
+            usuario.Nombre      = (usuarioDto.Nombre != null    && usuarioDto.Nombre.Length > 0)        ? usuarioDto.Nombre     :  usuario.Nombre;
+            usuario.Apellido    = (usuarioDto.Apellido != null  && usuarioDto.Apellido.Length > 0)      ? usuarioDto.Apellido   : usuario.Apellido;
+            usuario.Rfc         = (usuarioDto.Rfc != null       && usuarioDto.Rfc.Length > 0)           ? usuarioDto.Rfc        : usuario.Rfc;
+            usuario.Correo      = (usuarioDto.Correo != null    && usuarioDto.Correo.Length> 0)         ? usuarioDto.Correo     : usuario.Correo;
+            usuario.Password    = (usuarioDto.Password != null  && usuarioDto.Password.Length > 0 )     ? PasswordEncryptService.passwordEncrypt(usuarioDto.Password) : usuario.Password;
+            usuario.Rol         = (usuarioDto.Rol != null       && usuarioDto.Rol.ToString().Length > 0)? usuarioDto.Rol.Value  : usuario.Rol;
             
 
             _usersRepository.Update(usuario);
@@ -100,15 +100,37 @@ namespace SpaceDog.Service.Controllers
             return StatusCode(System.Net.HttpStatusCode.NoContent);
         }
 
-        public void Delete(int id)
+        public IHttpActionResult Delete(int id)
         {
+            var users = _usersRepository.GetList();
+
+            if(users.Count > 0 && users.Count < 2)
+            {
+                return Content(System.Net.HttpStatusCode.BadRequest, Strings.ELIMINACION_INVALIDA_ULTIMO_USUARIO);
+            }
             _usersRepository.DeleteD(id);
+
+            return Content(System.Net.HttpStatusCode.NoContent, "usuario eliminado");
         }
 
 
         public IHttpActionResult GetUsersByRol(string rol)
         {
             var users = _usersRepository.GetUsersByRol(rol);
+            if(users.Count <= 0)
+            {
+                return NotFound();
+            }
+            return Ok(users);
+        }
+
+        public IHttpActionResult GetUsersByName(string nombre,string apellido)
+        {
+            var users = _usersRepository.GetUsuariosByName(nombre,apellido);
+            if(users == null)
+            {
+                return NotFound();
+            }
             if(users.Count <= 0)
             {
                 return NotFound();

@@ -1,0 +1,22 @@
+body {
+    #background-color: red;
+}
+
+.bckg-transparent{
+    background-color: transparent;
+}
+
+.delete-option{
+}
+
+.modify-option{
+
+}
+
+.form-gatito{
+    display: inline-block;
+}
+
+.testt label {
+    display: block;
+}
