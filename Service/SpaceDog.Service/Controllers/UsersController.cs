@@ -62,7 +62,7 @@ namespace SpaceDog.Service.Controllers
             var userModel = usuarioDto.ToModel();
             _usersRepository.Add(userModel);
 
-            EmailService.SendPasswordForNewUser(userModel.Correo, $"Bienvenido {userModel.Nombre} {userModel.Apellido}, aquí tienes tu contraseña de acceso: {password} (No olvides cambiarlo)");
+            EmailService.SendPasswordForNewUser(userModel.Correo, $"Bienvenido {userModel.Nombre} {userModel.Apellido}, aquí tienes tu contraseña de acceso: {password}");
 
             usuarioDto.Id = userModel.Id;
             return Created(

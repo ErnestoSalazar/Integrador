@@ -29,7 +29,7 @@ namespace SpaceDog.Service.Controllers
                 var password = UserService.GenerateRandomPassword();
                 user.Password = PasswordEncryptService.passwordEncrypt(password);
                 _usersRepository.Update(user);
-                EmailService.SendPasswordRecoveryMail(email.mailTo, $"Se ha generado una nueva contraseña: {password} (recuerde cambiarla al ingresar!)");
+                EmailService.SendPasswordRecoveryMail(email.mailTo, $"Se ha generado una nueva contraseña: {password}");
                 return Ok();
             }
             return NotFound();
