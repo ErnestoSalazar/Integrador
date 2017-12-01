@@ -27,7 +27,7 @@ namespace SpaceDog.Shared.Data
             }
 
             return entrada
-                .Where(e => e.Id == id)
+                .Where(e => e.Id == id && e.IsDeleted != true)
                 .SingleOrDefault();
         }
 
@@ -36,12 +36,78 @@ namespace SpaceDog.Shared.Data
             return Context.Entradas
                 .Include(e => e.Usuario)
                 .Include(e => e.Cargas)
+                .Where(e => e.IsDeleted != true)
                 .ToList();
         }
 
-        public dynamic GetListByDate(DateTime dateInicio, DateTime dateFin, string especie)
+        public void DeleteD(int id)
         {
-            
+            var entrada = Context.Entradas.Find(id);
+            entrada.IsDeleted = true;
+            Context.Entry(entrada).State = EntityState.Modified;
+            Context.SaveChanges();
+        }
+
+        public ReporteDto GetReporte(int id)
+        {
+            var entrada = Context.Entradas
+                .Select(en => new ReporteDto
+                {
+                    Id = en.Id,
+                    Folio = en.Folio,
+                    Fecha = en.Fecha,
+                    Hora = en.Hora,
+                    Turno = en.Turno,
+                    UsuarioId = en.UsuarioId,
+                    Usuario = en.Usuario,
+                    Cargas = en.Cargas.ToList(),
+                    IsDeleted = en.IsDeleted
+                })
+                .Where(e => e.Id == id && e.IsDeleted != true) //e.Cargas.Any(c => c.Especie.ToString() == especie) &&
+                .SingleOrDefault();
+
+            if (entrada != null  && entrada.Cargas.Count > 0)
+            {
+                var cargasMacarela = entrada.Cargas.Where(c => c.Especie == Especie.Macarela).ToList();
+                var cargasJaponesa = entrada.Cargas.Where(c => c.Especie == Especie.Japonesa).ToList();
+                var cargasMonterrey = entrada.Cargas.Where(c => c.Especie == Especie.Monterrey).ToList();
+                var cargasRayadillo = entrada.Cargas.Where(c => c.Especie == Especie.Rayadillo).ToList();
+                var cargasBocona = entrada.Cargas.Where(c => c.Especie == Especie.Bocona).ToList();
+                var cargasAnchoveta = entrada.Cargas.Where(c => c.Especie == Especie.Anchoveta).ToList();
+                var cargasCrinuda = entrada.Cargas.Where(c => c.Especie == Especie.Crinuda).ToList();
+
+
+                if (cargasMacarela.Count > 0) { entrada.TotalMacarela = GetTotalPesaje(cargasMacarela); }
+                if (cargasJaponesa.Count > 0) { entrada.TotalJaponesa = GetTotalPesaje(cargasJaponesa); }
+                if (cargasMonterrey.Count > 0) { entrada.TotalMonterrey = GetTotalPesaje(cargasMonterrey); }
+                if (cargasRayadillo.Count > 0) { entrada.TotalRayadillo = GetTotalPesaje(cargasRayadillo); }
+                if (cargasBocona.Count > 0) { entrada.TotalBocona = GetTotalPesaje(cargasBocona); }
+                if (cargasAnchoveta.Count > 0) { entrada.TotalAnchoveta = GetTotalPesaje(cargasAnchoveta); }
+                if (cargasCrinuda.Count > 0) { entrada.TotalCrinuda = GetTotalPesaje(cargasCrinuda); }
+
+                entrada.Totales =
+                    entrada.TotalMacarela +
+                    entrada.TotalJaponesa +
+                    entrada.TotalMonterrey +
+                    entrada.TotalRayadillo +
+                    entrada.TotalBocona +
+                    entrada.TotalAnchoveta +
+                    entrada.TotalCrinuda;
+
+                entrada.PorcentajeMacarela = (entrada.TotalMacarela * 100) / entrada.Totales;
+                entrada.PorcentajeJaponesa = (entrada.TotalJaponesa * 100) / entrada.Totales;
+                entrada.PorcentajeMonterrey = (entrada.TotalMonterrey * 100) / entrada.Totales;
+                entrada.PorcentajeRayadillo = (entrada.TotalRayadillo * 100) / entrada.Totales;
+                entrada.PorcentajeBocona = (entrada.TotalBocona * 100) / entrada.Totales;
+                entrada.PorcentajeAnchoveta = (entrada.TotalAnchoveta * 100) / entrada.Totales;
+                entrada.PorcentajeCrinuda = (entrada.TotalCrinuda * 100) / entrada.Totales;
+            }
+
+            return entrada;
+        }
+
+        public List<EntradaDto> GetListByDate(DateTime dateInicio, DateTime dateFin)
+        {
             var entradas = Context.Entradas
                 .Select(en => new EntradaDto
                 {
@@ -51,47 +117,25 @@ namespace SpaceDog.Shared.Data
                     Hora = en.Hora,
                     Turno = en.Turno,
                     UsuarioId = en.UsuarioId,
-                    Cargas = en.Cargas.Where(c=> c.Especie.ToString() == especie).ToList()
+                    Usuario = en.Usuario,
+                    Cargas = en.Cargas.ToList(),
+                    IsDeleted = en.IsDeleted
                 })
-                .Where(e => e.Fecha >= dateInicio && e.Fecha <= dateFin && e.Cargas.Any(c => c.Especie.ToString() == especie))
+                .Where(en => en.Fecha >= dateInicio && en.Fecha <= dateFin && en.IsDeleted != true) //e.Cargas.Any(c => c.Especie.ToString() == especie) &&
                 .ToList();
 
-            var totalPesaje = 0.0;
-
-            foreach(var entrada in entradas)
-            {
-                totalPesaje += entrada.Cargas.Sum(c=> c.Cantidad);
-                entrada.TotalPesaje = totalPesaje;
-                totalPesaje = 0.0;
-            }
             return entradas;
         }
 
-        /*
-         
 
-            SELECT * ,
-            (SELECT SUM(cantidad) FROM Cargas c RIGHT JOIN Entradas e
-            ON c.Entrada_Id = 1 
-            WHERE c.Especie = 1 AND e.Fecha BETWEEN 
-            CONVERT(datetime,'14/11/2017 12:00:00 am',103)
-            AND 
-            CONVERT(datetime,'14/11/2017 12:00:00 am',103)) as total
-            FROM Cargas c INNER JOIN Entradas e
-            ON c.Entrada_Id = 1 
-            WHERE c.Especie = 1
-
-         */
-        public List<double> GetTotalDePesoDePescados(DateTime dateInicio, DateTime dateFin)
+        public Entrada GetEntradasByFolio(string folio)
         {
-            var sql = Context.Database.SqlQuery<double>(
-                "SELECT SUM(cantidad) FROM Cargas c INNER JOIN Entradas e " +
-                "ON c.Entrada_Id = 1 " +
-                "WHERE c.Especie = 1 AND e.Fecha BETWEEN  CONVERT(datetime,'"+dateInicio+"',103)  AND CONVERT(datetime,'"+dateFin+"',103) ;").ToList();
-            return sql;
-
-            
+            return Context.Entradas
+                .Where(e => e.Folio == folio)
+                .SingleOrDefault();
         }
+
+        
 
         public List<Carga> GetListOfCargasInEntrada(ICollection<Carga> cargas)
         {
@@ -132,6 +176,12 @@ namespace SpaceDog.Shared.Data
             entrada.Cargas = cargas;
             Context.Entradas.Add(entrada);
         }
-        
+
+
+        private double GetTotalPesaje(List<Carga> cargas)
+        {
+            return cargas.Sum(c => c.Cantidad);
+        }
+
     }
 }

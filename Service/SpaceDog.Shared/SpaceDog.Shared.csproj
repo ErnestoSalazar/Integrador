@@ -59,7 +59,9 @@
     <Compile Include="Data\DatabaseInitializer.cs" />
     <Compile Include="Data\EntradasRepository.cs" />
     <Compile Include="Data\UsuariosRepository.cs" />
+    <Compile Include="Dto\CargaDto.cs" />
     <Compile Include="Dto\EntradaDto.cs" />
+    <Compile Include="Dto\ReporteDto.cs" />
     <Compile Include="Models\Barco.cs" />
     <Compile Include="Models\Carga.cs" />
     <Compile Include="Models\Entrada.cs" />
@@ -67,6 +69,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\PasswordEncryptService.cs" />
+    <Compile Include="Strings.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

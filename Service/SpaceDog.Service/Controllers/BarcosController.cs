@@ -1,4 +1,5 @@
 ﻿using SpaceDog.Service.Dto;
+using SpaceDog.Shared;
 using SpaceDog.Shared.Data;
 using SpaceDog.Shared.Models;
 using System;
@@ -25,19 +26,29 @@ namespace SpaceDog.Service.Controllers
 
         public IHttpActionResult Get()
         {
-            return Ok(_barcosRepository.GetList());
+            var barcos = _barcosRepository.GetList();
+            if(barcos.Count <= 0)
+            {
+                return NotFound();
+            }
+            return Ok(barcos);
         }
 
         public IHttpActionResult Get(int id)
         {
-            return Ok(_barcosRepository.Get(id));
+            var barco = _barcosRepository.Get(id);
+            if (barco == null)
+            {
+                return NotFound();
+            }
+            return Ok(barco);
         }
 
         public IHttpActionResult Post(BarcoDto barcoDto)
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                return BadRequest(Strings.ENTIDAD_INVALIDA);
             }
             var barcoModel = barcoDto.ToModel();
 
@@ -64,7 +75,7 @@ namespace SpaceDog.Service.Controllers
 
         public void Delete(int id)
         {
-            _barcosRepository.Delete(id);
+            _barcosRepository.DeleteD(id);
         }
     }
 }

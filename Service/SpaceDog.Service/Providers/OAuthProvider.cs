@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using Microsoft.Owin.Security.OAuth;
 using SpaceDog.Service.Services;
+using SpaceDog.Shared;
 
 namespace SpaceDog.Service.Providers
 {
@@ -21,23 +22,37 @@ namespace SpaceDog.Service.Providers
                 var user = userService.ValidateUser(userName, password);
                 if (user != null)
                 {
-                    var claims = new List<Claim>()
+                    if(user.Rol != Shared.Models.Rol.Pescador)
                     {
-                        new Claim(ClaimTypes.Sid, Convert.ToString(user.Id)),
-                        new Claim(ClaimTypes.Name, user.Nombre),
-                        new Claim(ClaimTypes.Email, user.Correo),
-                        new Claim(ClaimTypes.Role, user.Rol.ToString())
-                    };
-                    ClaimsIdentity oAuthIdentity = new ClaimsIdentity(claims,
-                                Startup.OAuthOptions.AuthenticationType);
+                        if(user.IsDeleted != true)
+                        {
+                            var claims = new List<Claim>()
+                            {
+                                new Claim(ClaimTypes.Sid, Convert.ToString(user.Id)),
+                                new Claim(ClaimTypes.Name, user.Nombre),
+                                new Claim(ClaimTypes.Email, user.Correo),
+                                new Claim(ClaimTypes.Role, user.Rol.ToString())
+                            };
+                            ClaimsIdentity oAuthIdentity = new ClaimsIdentity(claims,
+                                        Startup.OAuthOptions.AuthenticationType);
 
-                    var properties = CreateProperties(user.Correo);
-                    var ticket = new AuthenticationTicket(oAuthIdentity, properties);
-                    context.Validated(ticket);
+                            var properties = CreateProperties(user.Correo, user.Rol.ToString(), user.Id.ToString());
+                            var ticket = new AuthenticationTicket(oAuthIdentity, properties);
+                            context.Validated(ticket);
+                        }
+                        else
+                        {
+                            context.SetError("invalid_grant", Strings.USUARIO_ELIMINADO);
+                        }
+                    }
+                    else
+                    {
+                        context.SetError("invalid_grant", Strings.NO_AUTORIZADO);
+                    }
                 }
                 else
                 {
-                    context.SetError("invalid_grant", "The user name or password is incorrect");
+                    context.SetError("invalid_grant", Strings.LOGIN_INVALIDO);
                 }
             });
         }
@@ -66,11 +81,13 @@ namespace SpaceDog.Service.Providers
         #endregion
 
         #region[CreateProperties]
-        public static AuthenticationProperties CreateProperties(string userName)
+        public static AuthenticationProperties CreateProperties(string userName, string rol, string id)
         {
             IDictionary<string, string> data = new Dictionary<string, string>
             {
-                { "userName", userName }
+                { "userName", userName },
+                { "rol", rol },
+                { "userId", id }
             };
             return new AuthenticationProperties(data);
         }

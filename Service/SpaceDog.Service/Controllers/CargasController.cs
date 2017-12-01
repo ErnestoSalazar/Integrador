@@ -1,4 +1,5 @@
 ﻿using SpaceDog.Service.Dto;
+using SpaceDog.Shared;
 using SpaceDog.Shared.Data;
 using SpaceDog.Shared.Models;
 using System;
@@ -22,12 +23,22 @@ namespace SpaceDog.Service.Controllers
 
         public IHttpActionResult Get()
         {
-            return Ok(_cargasRepository.GetList());
+            var cargas = _cargasRepository.GetList();
+            if (cargas.Count <= 0)
+            {
+                return NotFound();
+            }
+            return Ok(cargas);
         }
 
         public IHttpActionResult Get(int id)
         {
-            return Ok(_cargasRepository.Get(id));
+            var carga = _cargasRepository.Get(id);
+            if(carga == null)
+            {
+                return NotFound();
+            }
+            return Ok(carga);
         }
 
 
@@ -35,7 +46,7 @@ namespace SpaceDog.Service.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                return BadRequest(Strings.ENTIDAD_INVALIDA);
             }
 
             var cargaModel = cargaDto.ToModel();

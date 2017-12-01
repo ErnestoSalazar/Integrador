@@ -1,4 +1,6 @@
 ﻿using SpaceDog.Service.Dto;
+using SpaceDog.Service.Services;
+using SpaceDog.Shared;
 using SpaceDog.Shared.Data;
 using SpaceDog.Shared.Models;
 using System;
@@ -22,23 +24,33 @@ namespace SpaceDog.Service.Controllers
 
         public IHttpActionResult Get()
         {
-            return Ok(_entradasRepository.GetList());
+            var entradas = _entradasRepository.GetList();
+            if(entradas.Count <= 0)
+            {
+                return NotFound();
+            }
+            return Ok(entradas);
         }
 
         public IHttpActionResult Get(int id)
         {
-            return Ok(_entradasRepository.Get(id));
+            var entrada = _entradasRepository.GetReporte(id);
+            if(entrada == null)
+            {
+                return NotFound();
+            }
+            return Ok(entrada);
         }
 
 
         public IHttpActionResult Post(EntradaDto entradaDto)
         {
-            
+
+
             var cargas = _entradasRepository.GetListOfCargasInEntrada(entradaDto.CargasId);
             entradaDto.Cargas = cargas;
+            entradaDto.Turno = (DateTimeService.GetTimeNow() < new TimeSpan(12, 0, 0)) ? Turno.Matutino : Turno.Vespertino;
 
-
-            entradaDto.Fecha = DateTime.Now.ToShortDateString();
             var entradaModel = entradaDto.ToModel();
 
             _entradasRepository.Add(entradaModel);
@@ -50,24 +62,22 @@ namespace SpaceDog.Service.Controllers
                 entradaModel
                 );
 
-            
-
         }
 
         public IHttpActionResult Put(int id, EntradaDto entradaDto)
         {
             var entrada = _entradasRepository.Get(id);
-            var cargas = _entradasRepository.GetListOfCargasInEntrada(entradaDto.CargasId);
+            List<Carga> cargas = null;
+            if(entradaDto.CargasId != null)
+            {
+                cargas = _entradasRepository.GetListOfCargasInEntrada(entradaDto.CargasId);
+            }
+            entradaDto.Cargas = cargas;
 
-            entrada.Folio = entrada.Folio;
-            entrada.Turno = entradaDto.Turno.Value;
-            entrada.Cargas = cargas;
-            entrada.UsuarioId = entradaDto.UsuarioId;
-
+            entrada.Cargas = (entradaDto.Cargas.Count <= 0) ? entrada.Cargas : cargas;
             
             _entradasRepository.Update(entrada);
             
-
             return StatusCode(System.Net.HttpStatusCode.NoContent);
 
         }
@@ -75,22 +85,37 @@ namespace SpaceDog.Service.Controllers
 
         public void Delete(int id)
         {
-            _entradasRepository.Delete(id);
+            _entradasRepository.DeleteD(id);
         }
 
         
-        public IHttpActionResult Get(string fechaInicio, string fechaFin, string especie)
+        public IHttpActionResult Get(string fechaInicio, string fechaFin)
         {
             DateTime dateInicio;
             DateTime dateFin;
             if (DateTime.TryParse(fechaInicio, out dateInicio) && DateTime.TryParse(fechaFin, out dateFin))
             {
-                return Ok(_entradasRepository.GetListByDate(dateInicio, dateFin, especie));
+                var entradas = _entradasRepository.GetListByDate(dateInicio, dateFin);
+                if(entradas.Count <= 0)
+                {
+                    return NotFound();
+                }
+                return Ok(entradas);
             }
             else
             {
-                return BadRequest("ingresa una fecha valida yyyy/MM/dd");
+                return BadRequest(Strings.FECHA_INVALIDA);
             }
+        }
+
+        public IHttpActionResult Get(string folio)
+        {
+            var entrada = _entradasRepository.GetEntradasByFolio(folio);
+            if(entrada == null)
+            {
+                return NotFound();
+            }
+            return Ok(entrada);
         }
 
 
